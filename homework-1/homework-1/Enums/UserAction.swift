@@ -26,4 +26,25 @@ enum UserAction: Int, CaseIterable {
             return num + "Завершение работы"
         }
     }
+    
+    static func callAction(id: Int) {
+        let chosen = UserAction(rawValue: id)
+        switch chosen {
+        case .addNew:
+            Actions.addNewCar()
+        case .printAll:
+            Actions.printAllCars()
+        case .printWithFilterByBody:
+            let bodyId = Actions.askForAction(output: InterfaceMessage.carBodies.representedValue, upperBound: CarBodyType.allCases.count)
+            guard let bodyId = bodyId, let body = CarBodyType(rawValue: bodyId) else {
+                return
+            }
+            Actions.printCarsByBody(bodyType: body)
+        case .exit:
+            print("Выключение...")
+            Darwin.exit(0)
+        case .none:
+            return
+        }
+    }
 }
