@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0E3D00BB29E66D10006F7AAE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00BA29E66D10006F7AAE /* main.swift */; };
+		0E3D00C429E66E2F006F7AAE /* UserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00C329E66E2F006F7AAE /* UserAction.swift */; };
+		0E3D00C629E66FA3006F7AAE /* CarBodyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00C529E66FA3006F7AAE /* CarBodyType.swift */; };
+		0E3D00C829E672D7006F7AAE /* InterfaceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00C729E672D7006F7AAE /* InterfaceMessage.swift */; };
+		0E3D00CC29E6807B006F7AAE /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00CB29E6807B006F7AAE /* Actions.swift */; };
+		0E3D00CE29E68DC8006F7AAE /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00CD29E68DC8006F7AAE /* Car.swift */; };
+		0E3D00D029E7A0EF006F7AAE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00CF29E7A0EF006F7AAE /* Data.swift */; };
+		0E3D00D229E7BA2A006F7AAE /* NewCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00D129E7BA2A006F7AAE /* NewCar.swift */; };
+		0E3D00D429E7C0BB006F7AAE /* CarsNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +33,14 @@
 /* Begin PBXFileReference section */
 		0E3D00B729E66D10006F7AAE /* homework-1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "homework-1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E3D00BA29E66D10006F7AAE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0E3D00C329E66E2F006F7AAE /* UserAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAction.swift; sourceTree = "<group>"; };
+		0E3D00C529E66FA3006F7AAE /* CarBodyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarBodyType.swift; sourceTree = "<group>"; };
+		0E3D00C729E672D7006F7AAE /* InterfaceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceMessage.swift; sourceTree = "<group>"; };
+		0E3D00CB29E6807B006F7AAE /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		0E3D00CD29E68DC8006F7AAE /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		0E3D00CF29E7A0EF006F7AAE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		0E3D00D129E7BA2A006F7AAE /* NewCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCar.swift; sourceTree = "<group>"; };
+		0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsNotFound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +73,33 @@
 		0E3D00B929E66D10006F7AAE /* homework-1 */ = {
 			isa = PBXGroup;
 			children = (
+				0E3D00C229E66DB8006F7AAE /* Structs */,
+				0E3D00C129E66D9F006F7AAE /* Enums */,
 				0E3D00BA29E66D10006F7AAE /* main.swift */,
+				0E3D00CB29E6807B006F7AAE /* Actions.swift */,
+				0E3D00CF29E7A0EF006F7AAE /* Data.swift */,
 			);
 			path = "homework-1";
+			sourceTree = "<group>";
+		};
+		0E3D00C129E66D9F006F7AAE /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				0E3D00C329E66E2F006F7AAE /* UserAction.swift */,
+				0E3D00C529E66FA3006F7AAE /* CarBodyType.swift */,
+				0E3D00C729E672D7006F7AAE /* InterfaceMessage.swift */,
+				0E3D00D129E7BA2A006F7AAE /* NewCar.swift */,
+				0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		0E3D00C229E66DB8006F7AAE /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				0E3D00CD29E68DC8006F7AAE /* Car.swift */,
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +160,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3D00D029E7A0EF006F7AAE /* Data.swift in Sources */,
+				0E3D00CC29E6807B006F7AAE /* Actions.swift in Sources */,
+				0E3D00D429E7C0BB006F7AAE /* CarsNotFound.swift in Sources */,
 				0E3D00BB29E66D10006F7AAE /* main.swift in Sources */,
+				0E3D00CE29E68DC8006F7AAE /* Car.swift in Sources */,
+				0E3D00C429E66E2F006F7AAE /* UserAction.swift in Sources */,
+				0E3D00C629E66FA3006F7AAE /* CarBodyType.swift in Sources */,
+				0E3D00C829E672D7006F7AAE /* InterfaceMessage.swift in Sources */,
+				0E3D00D229E7BA2A006F7AAE /* NewCar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
