@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Data {
+final class Data {
     static var cars : [Car] = [Car]()
     
     static func generateFakeCars() {

@@ -126,11 +126,9 @@ class Actions {
     static func printCarsByBody(bodyType: CarBodyType) {
         let cars = Data.cars
         var founded = false
-        for car in cars {
-            if car.body == bodyType {
-                car.printCar()
-                founded = true
-            }
+        for car in cars where car.body == bodyType {
+            car.printCar()
+            founded = true
         }
         if !founded {
             print(CarsNotFound.noCarWithBodyFilter.rawValue)
