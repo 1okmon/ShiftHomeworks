@@ -8,13 +8,13 @@
 import Foundation
 
 enum UserAction: Int, CaseIterable {
-    case addNew
+    case addNew = 1
     case printAll
     case printWithFilterByBody
     case exit
     
     var representedValue: String {
-        let num = "\n\t" + String(self.rawValue + 1) + ".\t"
+        let num = "\n\t" + String(self.rawValue) + ".\t"
         switch self {
         case .addNew:
             return num + "Добавление нового автомобиля"
@@ -29,17 +29,18 @@ enum UserAction: Int, CaseIterable {
     
     static func callAction(id: Int) {
         let chosen = UserAction(rawValue: id)
+        let action = Actions.action
         switch chosen {
         case .addNew:
-            Actions.addNewCar()
+            action.addNewCar()
         case .printAll:
-            Actions.printAllCars()
+            action.printAllCars()
         case .printWithFilterByBody:
-            let bodyId = Actions.askForAction(output: InterfaceMessage.carBodies.representedValue, upperBound: CarBodyType.allCases.count)
+            let bodyId = action.askForAction(output: InterfaceMessage.carBodies.representedValue, upperBound: CarBodyType.allCases.count)
             guard let bodyId = bodyId, let body = CarBodyType(rawValue: bodyId) else {
                 return
             }
-            Actions.printCarsByBody(bodyType: body)
+            action.printCarsByBody(bodyType: body)
         case .exit:
             print("Выключение...")
             Darwin.exit(0)

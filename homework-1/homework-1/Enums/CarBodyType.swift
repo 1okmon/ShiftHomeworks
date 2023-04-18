@@ -8,7 +8,7 @@
 import Foundation
 
 enum CarBodyType: Int, CaseIterable {
-    case hatchback
+    case hatchback = 1
     case stationWagon
     case pickup
     case van
@@ -24,7 +24,7 @@ enum CarBodyType: Int, CaseIterable {
     case crossover
     
     var representedValue: String {
-        let num = "\n\t" + String(self.rawValue + 1) + ".\t"
+        let num = "\n\t" + String(self.rawValue) + ".\t"
         switch self {
         case .hatchback:
             return num + "Хэтчбек"

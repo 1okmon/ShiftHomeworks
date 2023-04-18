@@ -7,12 +7,27 @@
 
 import Foundation
 
-enum NewCar: String {
-    case manufacturer = "Введите название марки автомобиля:"
-    case model = "Введите название модели автомобиля:"
-    case body = "Выберете кузов автомобиля:"
-    case yearOfIssue = "Введите год выпуска автомобиля или нажмите Enter, чтобы пропустить это поле:"
-    case carNumber = "Введите гос. номер автомобиля или нажмите Enter, чтобы пропустить это поле:"
+enum NewCar {
+    case manufacturer
+    case model
+    case body
+    case yearOfIssue
+    case carNumber
+    
+    var carPartEnterCommand: String {
+        switch self {
+        case .manufacturer:
+            return "Введите название марки автомобиля:"
+        case .model:
+            return "Введите название модели автомобиля:"
+        case .body:
+            return "Выберете кузов автомобиля:"
+        case .yearOfIssue:
+            return "Введите год выпуска автомобиля или нажмите Enter, чтобы пропустить это поле:"
+        case .carNumber:
+            return "Введите гос. номер автомобиля или нажмите Enter, чтобы пропустить это поле:"
+        }
+    }
     
     var wrongInput: String {
         switch self {
@@ -23,7 +38,7 @@ enum NewCar: String {
         case .yearOfIssue:
             return "Вы введеном вами году еще не было произведено машин, пожалуйста, повторите попытку:"
         default:
-            return ""
+            return String()
         }
     }
 }

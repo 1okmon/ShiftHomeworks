@@ -7,4 +7,5 @@
 
 import Foundation
 
-Actions.start()
+let action = Actions.action
+action.start()

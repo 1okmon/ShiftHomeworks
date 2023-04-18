@@ -15,7 +15,7 @@
 		0E3D00CE29E68DC8006F7AAE /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00CD29E68DC8006F7AAE /* Car.swift */; };
 		0E3D00D029E7A0EF006F7AAE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00CF29E7A0EF006F7AAE /* Data.swift */; };
 		0E3D00D229E7BA2A006F7AAE /* NewCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00D129E7BA2A006F7AAE /* NewCar.swift */; };
-		0E3D00D429E7C0BB006F7AAE /* CarsNotFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */; };
+		0E3D00D429E7C0BB006F7AAE /* CarsNotFoundError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3D00D329E7C0BB006F7AAE /* CarsNotFoundError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +40,7 @@
 		0E3D00CD29E68DC8006F7AAE /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		0E3D00CF29E7A0EF006F7AAE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		0E3D00D129E7BA2A006F7AAE /* NewCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCar.swift; sourceTree = "<group>"; };
-		0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsNotFound.swift; sourceTree = "<group>"; };
+		0E3D00D329E7C0BB006F7AAE /* CarsNotFoundError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsNotFoundError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 				0E3D00C529E66FA3006F7AAE /* CarBodyType.swift */,
 				0E3D00C729E672D7006F7AAE /* InterfaceMessage.swift */,
 				0E3D00D129E7BA2A006F7AAE /* NewCar.swift */,
-				0E3D00D329E7C0BB006F7AAE /* CarsNotFound.swift */,
+				0E3D00D329E7C0BB006F7AAE /* CarsNotFoundError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 			files = (
 				0E3D00D029E7A0EF006F7AAE /* Data.swift in Sources */,
 				0E3D00CC29E6807B006F7AAE /* Actions.swift in Sources */,
-				0E3D00D429E7C0BB006F7AAE /* CarsNotFound.swift in Sources */,
+				0E3D00D429E7C0BB006F7AAE /* CarsNotFoundError.swift in Sources */,
 				0E3D00BB29E66D10006F7AAE /* main.swift in Sources */,
 				0E3D00CE29E68DC8006F7AAE /* Car.swift in Sources */,
 				0E3D00C429E66E2F006F7AAE /* UserAction.swift in Sources */,

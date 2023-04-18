@@ -8,11 +8,11 @@
 import Foundation
 
 struct Car {
-    var manufacturer: String
-    var model: String
-    var body: CarBodyType
+    let manufacturer: String
+    let model: String
+    let body: CarBodyType
     var yearOfIssue: Int?
-    var carNumber: String
+    let carNumber: String
     
     func printCar() {
         var info =  "<manufacturer>: <\(manufacturer)>\n" +
@@ -23,7 +23,7 @@ struct Car {
         } else {
             info = info + "<yearOfIssue>: <->\n"
         }
-        if carNumber != "" {
+        if !carNumber.isEmpty {
             info = info + "<carNumber>: <\(carNumber)>\n"
         }
         print(info)
