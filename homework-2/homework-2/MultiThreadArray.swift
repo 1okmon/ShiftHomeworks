@@ -47,6 +47,9 @@ final class MultiThreadArray: ArrayMetods, ArrayProperties {
     }
     
     private func equals(_ x : Any, _ y : Any) -> Bool {
+        if let x = x as? any AbleToCheckEquality, let y = y as? any AbleToCheckEquality {
+            return x.equals(to: y)
+        }
         guard let x = x as? AnyHashable, let y = y as? AnyHashable else {
             return false
         }

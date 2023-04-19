@@ -29,3 +29,17 @@ DispatchQueue.global(qos: .default).async {
 }
 group.wait()
 print(multiThreadArray.count)
+
+//MARK: test equatable
+let a = TestClassToCheckEquality()
+let b = a
+let c = TestClassToCheckEquality()
+multiThreadArray.append(a)
+multiThreadArray.append(4)
+multiThreadArray.append("string")
+print(multiThreadArray.contains(a))
+print(multiThreadArray.contains(b))
+print(multiThreadArray.contains(c))
+print(multiThreadArray.contains(4))
+print(multiThreadArray.contains("string"))
+print(multiThreadArray.count)
