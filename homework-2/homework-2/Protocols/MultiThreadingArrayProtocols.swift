@@ -8,11 +8,12 @@
 import Foundation
 
 protocol ArrayMetods {
-    func append(_ item: Any)
+    associatedtype T: Equatable
+    func append(_ item: T)
     func remove(at index: Int)
-    func element(at index: Int) -> Any
-    func contains(_ element: Any) -> Bool
-    func append(array: [Any])
+    func element(at index: Int) -> T?
+    func contains(_ element: T) -> Bool
+    func append(array: [T])
 }
 
 protocol ArrayProperties {

@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		0E286DB629EF882B00677A64 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DB529EF882B00677A64 /* main.swift */; };
 		0E286DBE29EF893C00677A64 /* MultiThreadingArrayProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DBD29EF893C00677A64 /* MultiThreadingArrayProtocols.swift */; };
-		0E286DC029EF957A00677A64 /* MultiThreadArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DBF29EF957A00677A64 /* MultiThreadArray.swift */; };
-		0E286DC529EFCF9F00677A64 /* AbleToCheckEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DC429EFCF9F00677A64 /* AbleToCheckEquality.swift */; };
+		0E286DC029EF957A00677A64 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DBF29EF957A00677A64 /* ThreadSafeArray.swift */; };
 		0E286DC829EFD05900677A64 /* TestClassToCheckEquality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DC729EFD05900677A64 /* TestClassToCheckEquality.swift */; };
+		0E286DCD29F243C200677A64 /* IndexError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E286DCC29F243C200677A64 /* IndexError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,9 +30,9 @@
 		0E286DB229EF882B00677A64 /* homework-2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "homework-2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E286DB529EF882B00677A64 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0E286DBD29EF893C00677A64 /* MultiThreadingArrayProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiThreadingArrayProtocols.swift; sourceTree = "<group>"; };
-		0E286DBF29EF957A00677A64 /* MultiThreadArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiThreadArray.swift; sourceTree = "<group>"; };
-		0E286DC429EFCF9F00677A64 /* AbleToCheckEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbleToCheckEquality.swift; sourceTree = "<group>"; };
+		0E286DBF29EF957A00677A64 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		0E286DC729EFD05900677A64 /* TestClassToCheckEquality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClassToCheckEquality.swift; sourceTree = "<group>"; };
+		0E286DCC29F243C200677A64 /* IndexError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +65,10 @@
 		0E286DB429EF882B00677A64 /* homework-2 */ = {
 			isa = PBXGroup;
 			children = (
+				0E286DCB29F23F9B00677A64 /* Enums */,
 				0E286DBC29EF891300677A64 /* Protocols */,
 				0E286DB529EF882B00677A64 /* main.swift */,
-				0E286DBF29EF957A00677A64 /* MultiThreadArray.swift */,
+				0E286DBF29EF957A00677A64 /* ThreadSafeArray.swift */,
 				0E286DC729EFD05900677A64 /* TestClassToCheckEquality.swift */,
 			);
 			path = "homework-2";
@@ -77,9 +78,16 @@
 			isa = PBXGroup;
 			children = (
 				0E286DBD29EF893C00677A64 /* MultiThreadingArrayProtocols.swift */,
-				0E286DC429EFCF9F00677A64 /* AbleToCheckEquality.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		0E286DCB29F23F9B00677A64 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				0E286DCC29F243C200677A64 /* IndexError.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,8 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E286DBE29EF893C00677A64 /* MultiThreadingArrayProtocols.swift in Sources */,
-				0E286DC529EFCF9F00677A64 /* AbleToCheckEquality.swift in Sources */,
-				0E286DC029EF957A00677A64 /* MultiThreadArray.swift in Sources */,
+				0E286DCD29F243C200677A64 /* IndexError.swift in Sources */,
+				0E286DC029EF957A00677A64 /* ThreadSafeArray.swift in Sources */,
 				0E286DC829EFD05900677A64 /* TestClassToCheckEquality.swift in Sources */,
 				0E286DB629EF882B00677A64 /* main.swift in Sources */,
 			);
