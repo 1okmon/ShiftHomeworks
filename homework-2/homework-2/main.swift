@@ -7,7 +7,8 @@
 
 import Foundation
 
-let multiThreadArray = MultiThreadArray()
+let threadSafeArrayOfClasses = ThreadSafeArray<TestClassToCheckEquality>()
+let threadSafeArrayOfInts = ThreadSafeArray<Int>()
 var arrayOfInt = [Int]()
 var arrayOfIntX100 = [Int]()
 for i in 0 ..< 100 {
@@ -16,30 +17,42 @@ for i in 0 ..< 100 {
 }
 
 //MARK: 2 async tasks
+print("2 async tasks test")
 let group = DispatchGroup()
 group.enter()
 DispatchQueue.global(qos: .default).async {
-    multiThreadArray.append(array: arrayOfIntX100)
+    threadSafeArrayOfInts.append(array: arrayOfIntX100)
     group.leave()
 }
 group.enter()
 DispatchQueue.global(qos: .default).async {
-    multiThreadArray.append(array: arrayOfInt)
+    threadSafeArrayOfInts.append(array: arrayOfInt)
     group.leave()
 }
 group.wait()
-print(multiThreadArray.count)
+for i in 0 ..< threadSafeArrayOfInts.count {
+    print(threadSafeArrayOfInts.element(at: i))
+}
+print(threadSafeArrayOfInts.count)
 
 //MARK: test equatable
+print("\ntest equatable")
 let a = TestClassToCheckEquality()
 let b = a
 let c = TestClassToCheckEquality()
-multiThreadArray.append(a)
-multiThreadArray.append(4)
-multiThreadArray.append("string")
-print(multiThreadArray.contains(a))
-print(multiThreadArray.contains(b))
-print(multiThreadArray.contains(c))
-print(multiThreadArray.contains(4))
-print(multiThreadArray.contains("string"))
-print(multiThreadArray.count)
+threadSafeArrayOfClasses.append(a)
+print(threadSafeArrayOfClasses.contains(a))
+print(threadSafeArrayOfClasses.contains(b))
+print(threadSafeArrayOfClasses.contains(c))
+print(threadSafeArrayOfInts.contains(4))
+
+
+//MARK: test index error
+print("\ntest index error")
+threadSafeArrayOfInts.remove(at: -1)
+threadSafeArrayOfInts.remove(at: 0)
+threadSafeArrayOfInts.remove(at: threadSafeArrayOfInts.count)
+
+threadSafeArrayOfClasses.remove(at: -1)
+threadSafeArrayOfClasses.remove(at: 0)
+threadSafeArrayOfClasses.remove(at: threadSafeArrayOfInts.count)
