@@ -25,12 +25,6 @@ final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
         }
     }
     
-    private func doInSemaphore(action:() -> ()) {
-        semaphore.wait()
-        action()
-        semaphore.signal()
-    }
-    
     func append(_ item: T) {
         doInSemaphore { self.array.append(item) }
     }
@@ -53,10 +47,6 @@ final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
         return result
     }
     
-    private func equals(_ x : T, _ y : T) -> Bool {
-        return x == y
-    }
-    
     func contains(_ element: T) -> Bool {
         var result = false
         doInSemaphore {
@@ -67,5 +57,18 @@ final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
     
     func append(array: [T]) {
         array.forEach{ append($0) }
+    }
+}
+
+//MARK: private methods
+private extension ThreadSafeArray {
+    func doInSemaphore(action:() -> ()) {
+        semaphore.wait()
+        action()
+        semaphore.signal()
+    }
+    
+    func equals(_ x : T, _ y : T) -> Bool {
+        return x == y
     }
 }
