@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ThreadSafeArray<T: Equatable>: ArrayMetods, ArrayProperties {
+final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
     private var array: [T] = []
     private var semaphore = DispatchSemaphore(value: 1)
     var isEmpty: Bool {

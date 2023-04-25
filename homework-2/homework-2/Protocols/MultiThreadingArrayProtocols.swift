@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ArrayMetods {
+protocol ArrayMethods {
     associatedtype T: Equatable
     func append(_ item: T)
     func remove(at index: Int)
