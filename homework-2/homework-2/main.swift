@@ -20,12 +20,12 @@ for i in 0 ..< 100 {
 print("2 async tasks test")
 let group = DispatchGroup()
 group.enter()
-DispatchQueue.global(qos: .default).async {
+DispatchQueue.global().async {
     threadSafeArrayOfInts.append(array: arrayOfIntX100)
     group.leave()
 }
 group.enter()
-DispatchQueue.global(qos: .default).async {
+DispatchQueue.global().async {
     threadSafeArrayOfInts.append(array: arrayOfInt)
     group.leave()
 }
