@@ -69,7 +69,7 @@ private extension ThreadSafeArray {
     }
     
     func equals(_ x : T, _ y : T) -> Bool {
-        return x == y
+        x == y
     }
     
     func isExistElement(at index: Int) -> Bool {
