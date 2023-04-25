@@ -30,7 +30,7 @@ final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
     }
     
     func remove(at index: Int) {
-        guard (0 ..< self.count).contains(index) else {
+        guard isExistElement(at: index) else {
             IndexError.indexOutOfBound.printError()
             return
         }
@@ -38,7 +38,7 @@ final class ThreadSafeArray<T: Equatable>: ArrayMethods, ArrayProperties {
     }
     
     func element(at index: Int) -> T? {
-        guard (0..<self.array.count).contains(index) else {
+        guard isExistElement(at: index) else {
             IndexError.indexOutOfBound.printError()
             return nil
         }
@@ -70,5 +70,9 @@ private extension ThreadSafeArray {
     
     func equals(_ x : T, _ y : T) -> Bool {
         return x == y
+    }
+    
+    func isExistElement(at index: Int) -> Bool {
+        !self.array.isEmpty && index >= 0 && index < self.array.count
     }
 }

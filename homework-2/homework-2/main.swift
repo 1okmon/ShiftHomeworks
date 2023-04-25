@@ -49,6 +49,11 @@ print(threadSafeArrayOfInts.contains(4))
 
 //MARK: test index error
 print("\ntest index error")
+let threadSafeArrayOfString = ThreadSafeArray<String>()
+threadSafeArrayOfString.remove(at: -1)
+threadSafeArrayOfString.remove(at: 0)
+threadSafeArrayOfString.remove(at: 1)
+
 threadSafeArrayOfInts.remove(at: -1)
 threadSafeArrayOfInts.remove(at: 0)
 threadSafeArrayOfInts.remove(at: threadSafeArrayOfInts.count)
