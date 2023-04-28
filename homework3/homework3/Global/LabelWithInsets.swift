@@ -25,7 +25,10 @@ class LabelWithInsets: UILabel {
         self.sizeToFit()
         self.numberOfLines = 0
         let doubleInset = 2 * inset
-        let label: LabelWithInsets = LabelWithInsets(frame: CGRect(x: 0, y: 0, width: self.frame.size.width - doubleInset, height: CGFloat.greatestFiniteMagnitude))
+        let label: LabelWithInsets = LabelWithInsets(frame: CGRect(x: 0,
+                                                                   y: 0,
+                                                                   width: self.frame.size.width - doubleInset,
+                                                                   height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = self.font

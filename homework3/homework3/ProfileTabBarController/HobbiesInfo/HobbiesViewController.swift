@@ -136,11 +136,7 @@ class HobbiesViewController: UIViewController, DefaultMainViewPresentation {
             self.view.layoutIfNeeded()
         }
     }
-    
-//    private func configureMainViewPresentation() {
-//        self.view.backgroundColor = .white
-//    }
-//    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMainViewPresentation()
@@ -151,4 +147,3 @@ class HobbiesViewController: UIViewController, DefaultMainViewPresentation {
         setActionsToButtons()
     }
 }
-
