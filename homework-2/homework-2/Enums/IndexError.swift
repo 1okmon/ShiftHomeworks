@@ -11,11 +11,11 @@ enum IndexError: Error {
     case indexOutOfBound
 }
 
-extension IndexError: LocalizedError {
+extension IndexError {
     private var errorDescription: String {
         switch self {
         case .indexOutOfBound:
-            return NSLocalizedString("Index out of range", comment: String())
+            return "Index out of range"
         }
     }
     
