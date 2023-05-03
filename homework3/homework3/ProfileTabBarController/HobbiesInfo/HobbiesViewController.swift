@@ -48,13 +48,22 @@ class HobbiesViewController: UIViewController, SelfViewConfigurator {
     private let hobbyInfo = HobbiesInfo.myInfo()
     private let showAllHobbiesButton = UIButton(type: .system)
     
-    private func addSubviews(to view: UIView) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureBackgroundColor()
+        addSubviews(to: view)
+        configureSubviews()
+    }
+}
+
+private extension HobbiesViewController {
+    func addSubviews(to view: UIView) {
         view.addSubview(hobbyInfoLabel)
         view.addSubview(chooseRandomHobbyButton)
         view.addSubview(showAllHobbiesButton)
     }
     
-    private func configureConstraints(at label: LabelWithInsets) {
+    func configureConstraints(at label: LabelWithInsets) {
         label.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LabelMetrics.verticalOffset)
             make.leading.trailing.equalToSuperview().inset(LabelMetrics.horizontalOffset)
@@ -62,7 +71,7 @@ class HobbiesViewController: UIViewController, SelfViewConfigurator {
         label.applyHeightToPresentAllText()
     }
     
-    private func configureConstraints(at button: UIButton, upperView: UIView) {
+    func configureConstraints(at button: UIButton, upperView: UIView) {
         button.snp.makeConstraints { make in
             make.top.equalTo(upperView.snp.bottom).offset(LabelMetrics.verticalOffset)
             make.leading.trailing.equalToSuperview().inset(ButtonMetrics.horizontalOffset)
@@ -70,13 +79,13 @@ class HobbiesViewController: UIViewController, SelfViewConfigurator {
         }
     }
     
-    private func configureConstraints() {
+    func configureConstraints() {
         configureConstraints(at: hobbyInfoLabel)
         configureConstraints(at: chooseRandomHobbyButton, upperView: hobbyInfoLabel)
         configureConstraints(at: showAllHobbiesButton, upperView: chooseRandomHobbyButton)
     }
     
-    private func configureSubviews() {
+    func configureSubviews() {
         hobbyInfoLabel.font = Fonts.standard
         configure(view: hobbyInfoLabel, with: LabelMetrics.viewConfig)
         
@@ -91,59 +100,52 @@ class HobbiesViewController: UIViewController, SelfViewConfigurator {
         configureActions()
     }
     
-    private func configure(view: UIView, with config: ViewConfig) {
+    func configure(view: UIView, with config: ViewConfig) {
         view.backgroundColor = config.backgroundColor
         view.layer.cornerRadius = config.cornerRadius
         view.layer.borderWidth = config.borderWidth
         view.layer.borderColor = config.borderColor.cgColor
     }
     
-    private func configureContents() {
+    func configureContents() {
         configureContent(at: hobbyInfoLabel)
         configureContent(at: chooseRandomHobbyButton, with: ButtonMetrics.randomHobbyButtonTitle)
         configureContent(at: showAllHobbiesButton, with: ButtonMetrics.allHobbiesButtonTitle)
     }
     
-    private func configureContent(at label: UILabel) {
+    func configureContent(at label: UILabel) {
         label.text = LabelMetrics.defaultText
         label.textColor = LabelMetrics.defaultTextColor
     }
     
-    private func configureContent(at button: UIButton, with title: String) {
+    func configureContent(at button: UIButton, with title: String) {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.setTitleColor(ButtonMetrics.titleColor, for: .normal)
         button.setTitle(title, for: .normal)
     }
     
-    private func configureActions() {
+    func configureActions() {
         chooseRandomHobbyButton.addTarget(self, action: #selector(showRandomHobby), for: .touchUpInside)
         showAllHobbiesButton.addTarget(self, action: #selector(showAllHobbies), for: .touchUpInside)
     }
     
-    @objc private func showRandomHobby(sender: UIButton!) {
+    @objc func showRandomHobby(sender: UIButton!) {
         hobbyInfoLabel.text = hobbyInfo.randomHobbyDescription
         hobbyInfoLabel.textColor = LabelMetrics.normalTextColor
         animateChanges()
     }
     
-    @objc private func showAllHobbies(sender: UIButton!) {
+    @objc func showAllHobbies(sender: UIButton!) {
         hobbyInfoLabel.text = hobbyInfo.allHobbiesDescription
         hobbyInfoLabel.textColor = LabelMetrics.normalTextColor
         animateChanges()
     }
     
-    private func animateChanges() {
+    func animateChanges() {
         UIView.animate(withDuration: AnimationTimeMetrics.withDuration, delay: AnimationTimeMetrics.delay, options: .curveEaseOut) {
             self.hobbyInfoLabel.applyHeightToPresentAllText()
             self.view.layoutIfNeeded()
         }
-    }
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureBackgroundColor()
-        addSubviews(to: view)
-        configureSubviews()
     }
 }

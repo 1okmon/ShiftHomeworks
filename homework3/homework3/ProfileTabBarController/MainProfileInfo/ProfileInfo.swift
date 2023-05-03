@@ -28,17 +28,6 @@ struct ProfileInfo: MyInfoGenerator {
     private var cityOfBirth: String
     private let cityOfResidence: String
     
-    static func myInfo() -> ProfileInfo {
-        let dateOfBirth = DateComponents(year: 2000, month: 4, day: 4)
-        return ProfileInfo(image: UIImage(named: "AlexProfilePhoto"),
-                           firstName: "Алексей",
-                           lastName: "Марьин",
-                           patronymic: "Даниилович",
-                           dateOfBirth: Calendar(identifier: .gregorian).date(from: dateOfBirth),
-                           cityOfBirth: "Новокузнецк",
-                           cityOfResidence: "Новосибирск")
-    }
-    
     var fullNameDescription: String {
         TitlePrefix.fio + "\(lastName) \(firstName) \(patronymic)"
     }
@@ -58,5 +47,16 @@ struct ProfileInfo: MyInfoGenerator {
             return String()
         }
         return TitlePrefix.dateOfBirth + df.string(from: dateOfBirth)
+    }
+    
+    static func myInfo() -> ProfileInfo {
+        let dateOfBirth = DateComponents(year: 2000, month: 4, day: 4)
+        return ProfileInfo(image: UIImage(named: "AlexProfilePhoto"),
+                           firstName: "Алексей",
+                           lastName: "Марьин",
+                           patronymic: "Даниилович",
+                           dateOfBirth: Calendar(identifier: .gregorian).date(from: dateOfBirth),
+                           cityOfBirth: "Новокузнецк",
+                           cityOfResidence: "Новосибирск")
     }
 }

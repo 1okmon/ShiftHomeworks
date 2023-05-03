@@ -23,13 +23,22 @@ final class DeveloperSkillsViewController: UIViewController, SelfViewConfigurato
     private var programmingLanguagesLabel = LabelWithInsets()
     private var expectationsLabel = LabelWithInsets()
     
-    private func appendLabels(to view: UIView) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        appendLabels(to: view)
+        configureLabels()
+        configureBackgroundColor()
+    }
+}
+
+private extension DeveloperSkillsViewController {
+    func appendLabels(to view: UIView) {
         view.addSubview(experienceAgeLabel)
         view.addSubview(programmingLanguagesLabel)
         view.addSubview(expectationsLabel)
     }
     
-    private func configureLabelsConstraints() {
+    func configureLabelsConstraints() {
         self.experienceAgeLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LabelMetrics.verticalOffset)
             make.leading.trailing.equalToSuperview().inset(LabelMetrics.horizontalOffset)
@@ -49,7 +58,7 @@ final class DeveloperSkillsViewController: UIViewController, SelfViewConfigurato
         expectationsLabel.applyHeightToPresentAllText()
     }
     
-    private func configureLabels() {
+    func configureLabels() {
         configure(label: experienceAgeLabel)
         configure(label: programmingLanguagesLabel)
         configure(label: expectationsLabel)
@@ -57,7 +66,7 @@ final class DeveloperSkillsViewController: UIViewController, SelfViewConfigurato
         configureLabelsConstraints()
     }
     
-    private func configure(label: UILabel) {
+    func configure(label: UILabel) {
         label.font = Fonts.standard
         label.backgroundColor = LabelMetrics.viewConfig.backgroundColor
         label.layer.cornerRadius = LabelMetrics.viewConfig.cornerRadius
@@ -65,16 +74,9 @@ final class DeveloperSkillsViewController: UIViewController, SelfViewConfigurato
         label.layer.borderColor = LabelMetrics.viewConfig.borderColor.cgColor
     }
     
-    private func configureLabelsContent() {
+    func configureLabelsContent() {
         experienceAgeLabel.text = devSkillsInfo.experienceAgeDescription
         programmingLanguagesLabel.text = devSkillsInfo.programmingLanguagesDescription
         expectationsLabel.text = devSkillsInfo.expectationsDescription
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        appendLabels(to: view)
-        configureLabels()
-        configureBackgroundColor()
     }
 }

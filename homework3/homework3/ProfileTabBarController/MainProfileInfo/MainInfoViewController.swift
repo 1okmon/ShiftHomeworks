@@ -16,7 +16,15 @@ class MainInfoViewController: UIViewController {
     @IBOutlet var profileInfoLabels: [UILabel]!
     private let profileInfo = ProfileInfo.myInfo()
     
-    private func configure(labels: [UILabel]) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure(imageView: profileImageView, with: profileInfo.image)
+        configure(labels: profileInfoLabels)
+    }
+}
+
+private extension MainInfoViewController {
+    func configure(labels: [UILabel]) {
         for label in labels {
             switch label.tag {
             case 0:
@@ -33,14 +41,8 @@ class MainInfoViewController: UIViewController {
         }
     }
     
-    private func configure(imageView: UIImageView, with image: UIImage?) {
+    func configure(imageView: UIImageView, with image: UIImage?) {
         imageView.layer.cornerRadius = ProfileImage.cornerRadius
         imageView.image = image
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configure(imageView: profileImageView, with: profileInfo.image)
-        configure(labels: profileInfoLabels)
     }
 }

@@ -10,10 +10,6 @@ import Foundation
 struct HobbiesInfo: MyInfoGenerator {
     private let hobbies: [String]
     
-    static func myInfo() -> HobbiesInfo {
-        return HobbiesInfo(hobbies: ["Cборка ПК 🖥️", "Горные лыжи ⛷️", "Видеоигры 🎮", "Музыка 🎧", "Монтаж Видео 🎥"])
-    }
-    
     var randomHobbyDescription: String {
         guard !hobbies.isEmpty else {
             return String()
@@ -28,5 +24,9 @@ struct HobbiesInfo: MyInfoGenerator {
             text += "\n\t" + $0
         }
         return text
+    }
+    
+    static func myInfo() -> HobbiesInfo {
+        return HobbiesInfo(hobbies: ["Cборка ПК 🖥️", "Горные лыжи ⛷️", "Видеоигры 🎮", "Музыка 🎧", "Монтаж Видео 🎥"])
     }
 }
