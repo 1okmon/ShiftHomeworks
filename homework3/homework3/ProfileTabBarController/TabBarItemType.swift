@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-enum TabBarItemEnum: Int {
+enum TabBarItemType: Int {
     case profileInfo
     case hardSkills
     case hobbies
     
-    var tabBarItem: UITabBarItem {
+    var item: UITabBarItem {
         switch self {
         case .profileInfo:
             return UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle"), tag: self.rawValue)

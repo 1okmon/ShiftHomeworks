@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-fileprivate enum Label {
+fileprivate enum LabelMetrics {
     static let horizontalOffset = 20
     static let verticalOffset = 15
     static let viewConfig = ViewConfig(backgroundColor: UIColor.white,
@@ -17,13 +17,13 @@ fileprivate enum Label {
                                        borderColor: UIColor.gray)
 }
 
-final class DeveloperSkillsViewController: UIViewController, DefaultMainViewPresentation {
-    private let devSkillsInfo = DevSkillsInfo.getAlexProfileInfo()
+final class DeveloperSkillsViewController: UIViewController, SelfViewConfigurator {
+    private let devSkillsInfo = DevSkillsInfo.myInfo()
     private var experienceAgeLabel = LabelWithInsets()
     private var programmingLanguagesLabel = LabelWithInsets()
     private var expectationsLabel = LabelWithInsets()
     
-    private func addLabelsToMainView() {
+    private func appendLabels(to view: UIView) {
         view.addSubview(experienceAgeLabel)
         view.addSubview(programmingLanguagesLabel)
         view.addSubview(expectationsLabel)
@@ -31,50 +31,50 @@ final class DeveloperSkillsViewController: UIViewController, DefaultMainViewPres
     
     private func configureLabelsConstraints() {
         self.experienceAgeLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Label.verticalOffset)
-            make.leading.trailing.equalToSuperview().inset(Label.horizontalOffset)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(LabelMetrics.verticalOffset)
+            make.leading.trailing.equalToSuperview().inset(LabelMetrics.horizontalOffset)
         }
         experienceAgeLabel.applyHeightToPresentAllText()
         
         self.programmingLanguagesLabel.snp.makeConstraints { make in
-            make.top.equalTo(experienceAgeLabel.snp.bottom).offset(Label.verticalOffset)
-            make.leading.trailing.equalToSuperview().inset(Label.horizontalOffset)
+            make.top.equalTo(experienceAgeLabel.snp.bottom).offset(LabelMetrics.verticalOffset)
+            make.leading.trailing.equalToSuperview().inset(LabelMetrics.horizontalOffset)
         }
         programmingLanguagesLabel.applyHeightToPresentAllText()
 
         expectationsLabel.snp.makeConstraints { make in
-            make.top.equalTo(programmingLanguagesLabel.snp.bottom).offset(Label.verticalOffset)
-            make.leading.trailing.equalToSuperview().inset(Label.horizontalOffset)
+            make.top.equalTo(programmingLanguagesLabel.snp.bottom).offset(LabelMetrics.verticalOffset)
+            make.leading.trailing.equalToSuperview().inset(LabelMetrics.horizontalOffset)
         }
         expectationsLabel.applyHeightToPresentAllText()
     }
     
-    private func configureLabelsView() {
-        configureLabelView(label: experienceAgeLabel)
-        configureLabelView(label: programmingLanguagesLabel)
-        configureLabelView(label: expectationsLabel)
+    private func configureLabels() {
+        configure(label: experienceAgeLabel)
+        configure(label: programmingLanguagesLabel)
+        configure(label: expectationsLabel)
+        configureLabelsContent()
+        configureLabelsConstraints()
     }
     
-    private func configureLabelView(label: UILabel) {
-        label.font = Fonts.standartFont
-        label.backgroundColor = Label.viewConfig.backgroundColor
-        label.layer.cornerRadius = Label.viewConfig.cornerRadius
-        label.layer.borderWidth = Label.viewConfig.borderWidth
-        label.layer.borderColor = Label.viewConfig.borderColor.cgColor
+    private func configure(label: UILabel) {
+        label.font = Fonts.standard
+        label.backgroundColor = LabelMetrics.viewConfig.backgroundColor
+        label.layer.cornerRadius = LabelMetrics.viewConfig.cornerRadius
+        label.layer.borderWidth = LabelMetrics.viewConfig.borderWidth
+        label.layer.borderColor = LabelMetrics.viewConfig.borderColor.cgColor
     }
     
     private func configureLabelsContent() {
-        experienceAgeLabel.text = devSkillsInfo.getExperienceAgeDescription()
-        programmingLanguagesLabel.text = devSkillsInfo.getProgrammingLanguagesDescription()
-        expectationsLabel.text = devSkillsInfo.getExpectationsDescription()
+        experienceAgeLabel.text = devSkillsInfo.experienceAgeDescription
+        programmingLanguagesLabel.text = devSkillsInfo.programmingLanguagesDescription
+        expectationsLabel.text = devSkillsInfo.expectationsDescription
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addLabelsToMainView()
-        configureLabelsView()
-        configureLabelsContent()
-        configureLabelsConstraints()
-        configureMainViewPresentation()
+        appendLabels(to: view)
+        configureLabels()
+        configureBackgroundColor()
     }
 }

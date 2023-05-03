@@ -12,7 +12,7 @@ fileprivate enum TitleInfo {
     case programmingLanguages
     case expectations
     
-    var begin: String {
+    var prefix: String {
         switch self {
         case .experienceAge:
             return "В программировании "
@@ -29,12 +29,12 @@ fileprivate enum ExperienceAgeLimit {
     static let max = 100
 }
 
-struct DevSkillsInfo: GetAlexInfoProtocol {
-    let experienceAge: Int
-    let programmingLanguages: [String]
-    let expectations: String
+struct DevSkillsInfo: MyInfoGenerator {
+    private let experienceAge: Int
+    private let programmingLanguages: [String]
+    private let expectations: String
     
-    private func endOfExperienceAge(experienceAge: Int) -> String {
+    private func postfixOfExperienceAge(experienceAge: Int) -> String {
         guard experienceAge > ExperienceAgeLimit.min,
               experienceAge < ExperienceAgeLimit.max else { return String() }
         let decadeDigit:Int = (experienceAge % 100) / 10
@@ -53,25 +53,25 @@ struct DevSkillsInfo: GetAlexInfoProtocol {
         }
     }
     
-    static func getAlexProfileInfo() -> DevSkillsInfo {
+    static func myInfo() -> DevSkillsInfo {
         return DevSkillsInfo(experienceAge: 21,
                              programmingLanguages: ["Swift", "C#", "Java", "PHP"],
                              expectations: "Приобрести/улучшить свои знания в iOS разработке. \nСтать частью команды ЦФТ😃")
     }
     
-    func getExperienceAgeDescription() -> String {
-        TitleInfo.experienceAge.begin + experienceAge.description + " " + endOfExperienceAge(experienceAge: experienceAge)
+    var experienceAgeDescription: String {
+        TitleInfo.experienceAge.prefix + experienceAge.description + " " + postfixOfExperienceAge(experienceAge: experienceAge)
     }
     
-    func getProgrammingLanguagesDescription() -> String {
-        var text = TitleInfo.programmingLanguages.begin
+    var programmingLanguagesDescription: String {
+        var text = TitleInfo.programmingLanguages.prefix
         programmingLanguages.forEach {
             text += "\n\t" + $0
         }
         return text
     }
     
-    func getExpectationsDescription() -> String {
-        TitleInfo.expectations.begin + expectations
+    var expectationsDescription: String {
+        TitleInfo.expectations.prefix + expectations
     }
 }

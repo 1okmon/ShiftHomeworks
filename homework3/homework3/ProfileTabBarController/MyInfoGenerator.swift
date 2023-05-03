@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GetAlexInfoProtocol {
+protocol MyInfoGenerator {
     associatedtype T
-    static func getAlexProfileInfo() -> T
+    static func myInfo() -> T
 }

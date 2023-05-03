@@ -12,35 +12,35 @@ fileprivate enum ProfileImage {
 }
 
 class MainInfoViewController: UIViewController {
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet var profileInfoLabels: [UILabel]!
-    private let profileInfo = ProfileInfo.getAlexProfileInfo()
+    private let profileInfo = ProfileInfo.myInfo()
     
-    private func configureLables() {
-        for label in profileInfoLabels {
+    private func configure(labels: [UILabel]) {
+        for label in labels {
             switch label.tag {
             case 0:
-                label.text = profileInfo.getFullName()
+                label.text = profileInfo.fullNameDescription
             case 1:
-                label.text = profileInfo.getDateOfBirth()
+                label.text = profileInfo.dateOfBirthDescription
             case 2:
-                label.text = profileInfo.getCityOfBirth()
+                label.text = profileInfo.cityOfBirthDescription
             case 3:
-                label.text = profileInfo.getCityOfResidence()
+                label.text = profileInfo.cityOfResidenceDescription
             default:
                 label.text = String()
             }
         }
     }
     
-    private func configureProfileImage() {
-        profileImage.layer.cornerRadius = ProfileImage.cornerRadius
-        profileImage.image = profileInfo.image
+    private func configure(imageView: UIImageView, with image: UIImage?) {
+        imageView.layer.cornerRadius = ProfileImage.cornerRadius
+        imageView.image = image
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureProfileImage()
-        configureLables()
+        configure(imageView: profileImageView, with: profileInfo.image)
+        configure(labels: profileInfoLabels)
     }
 }

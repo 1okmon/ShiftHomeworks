@@ -19,15 +19,15 @@
 		0EE1383A29F8D78300DD8745 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1383929F8D78300DD8745 /* TabBarController.swift */; };
 		0EE1383C29F8E0B100DD8745 /* StoryboardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1383B29F8E0B100DD8745 /* StoryboardNavigator.swift */; };
 		0EE1383E29F8E7F900DD8745 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1383D29F8E7F900DD8745 /* ProfileInfo.swift */; };
-		0EE1384029F9229F00DD8745 /* TabBarItemEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1383F29F9229F00DD8745 /* TabBarItemEnum.swift */; };
+		0EE1384029F9229F00DD8745 /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1383F29F9229F00DD8745 /* TabBarItemType.swift */; };
 		0EE1384329F926D600DD8745 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0EE1384229F926D600DD8745 /* SnapKit */; };
 		0EE1384529F9317E00DD8745 /* DevSkillsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1384429F9317E00DD8745 /* DevSkillsInfo.swift */; };
-		0EE1384729F9338800DD8745 /* GetAlexInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1384629F9338800DD8745 /* GetAlexInfoProtocol.swift */; };
+		0EE1384729F9338800DD8745 /* MyInfoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1384629F9338800DD8745 /* MyInfoGenerator.swift */; };
 		0EE1384929F975E300DD8745 /* LabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1384829F975E300DD8745 /* LabelWithInsets.swift */; };
 		0EE1384D29FA0E5A00DD8745 /* ViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1384C29FA0E5A00DD8745 /* ViewConfig.swift */; };
 		0EE1385329FA174D00DD8745 /* HobbiesInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1385229FA174D00DD8745 /* HobbiesInfo.swift */; };
 		0EE1385629FAC3C900DD8745 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1385529FAC3C900DD8745 /* Fonts.swift */; };
-		0EE1385829FB7AC500DD8745 /* DefaultMainViewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1385729FB7AC500DD8745 /* DefaultMainViewPresentation.swift */; };
+		0EE1385829FB7AC500DD8745 /* SelfViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1385729FB7AC500DD8745 /* SelfViewConfigurator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,14 +45,14 @@
 		0EE1383929F8D78300DD8745 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0EE1383B29F8E0B100DD8745 /* StoryboardNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardNavigator.swift; sourceTree = "<group>"; };
 		0EE1383D29F8E7F900DD8745 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
-		0EE1383F29F9229F00DD8745 /* TabBarItemEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemEnum.swift; sourceTree = "<group>"; };
+		0EE1383F29F9229F00DD8745 /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 		0EE1384429F9317E00DD8745 /* DevSkillsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSkillsInfo.swift; sourceTree = "<group>"; };
-		0EE1384629F9338800DD8745 /* GetAlexInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAlexInfoProtocol.swift; sourceTree = "<group>"; };
+		0EE1384629F9338800DD8745 /* MyInfoGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoGenerator.swift; sourceTree = "<group>"; };
 		0EE1384829F975E300DD8745 /* LabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInsets.swift; sourceTree = "<group>"; };
 		0EE1384C29FA0E5A00DD8745 /* ViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfig.swift; sourceTree = "<group>"; };
 		0EE1385229FA174D00DD8745 /* HobbiesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesInfo.swift; sourceTree = "<group>"; };
 		0EE1385529FAC3C900DD8745 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		0EE1385729FB7AC500DD8745 /* DefaultMainViewPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMainViewPresentation.swift; sourceTree = "<group>"; };
+		0EE1385729FB7AC500DD8745 /* SelfViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfViewConfigurator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +102,8 @@
 		0EE1382E29F8D53A00DD8745 /* ProfileTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				0EE1384629F9338800DD8745 /* GetAlexInfoProtocol.swift */,
-				0EE1383F29F9229F00DD8745 /* TabBarItemEnum.swift */,
+				0EE1384629F9338800DD8745 /* MyInfoGenerator.swift */,
+				0EE1383F29F9229F00DD8745 /* TabBarItemType.swift */,
 				0EE1383929F8D78300DD8745 /* TabBarController.swift */,
 				0EE1382F29F8D54D00DD8745 /* MainProfileInfo */,
 				0EE1383029F8D57300DD8745 /* DeveloperSkillsInfo */,
@@ -154,7 +154,7 @@
 				0EE1384829F975E300DD8745 /* LabelWithInsets.swift */,
 				0EE1384C29FA0E5A00DD8745 /* ViewConfig.swift */,
 				0EE1383B29F8E0B100DD8745 /* StoryboardNavigator.swift */,
-				0EE1385729FB7AC500DD8745 /* DefaultMainViewPresentation.swift */,
+				0EE1385729FB7AC500DD8745 /* SelfViewConfigurator.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -241,14 +241,14 @@
 				0EE1384929F975E300DD8745 /* LabelWithInsets.swift in Sources */,
 				0EE1383529F8D68F00DD8745 /* MainInfoViewController.swift in Sources */,
 				0EE1383829F8D71D00DD8745 /* NSObject+ClassName.swift in Sources */,
-				0EE1384029F9229F00DD8745 /* TabBarItemEnum.swift in Sources */,
+				0EE1384029F9229F00DD8745 /* TabBarItemType.swift in Sources */,
 				0EE1384D29FA0E5A00DD8745 /* ViewConfig.swift in Sources */,
 				0EE1383E29F8E7F900DD8745 /* ProfileInfo.swift in Sources */,
 				0EE1381F29F8D31700DD8745 /* HobbiesViewController.swift in Sources */,
 				0EE1384529F9317E00DD8745 /* DevSkillsInfo.swift in Sources */,
 				0EE1383329F8D60100DD8745 /* DeveloperSkillsViewController.swift in Sources */,
-				0EE1385829FB7AC500DD8745 /* DefaultMainViewPresentation.swift in Sources */,
-				0EE1384729F9338800DD8745 /* GetAlexInfoProtocol.swift in Sources */,
+				0EE1385829FB7AC500DD8745 /* SelfViewConfigurator.swift in Sources */,
+				0EE1384729F9338800DD8745 /* MyInfoGenerator.swift in Sources */,
 				0EE1383A29F8D78300DD8745 /* TabBarController.swift in Sources */,
 				0EE1381B29F8D31700DD8745 /* AppDelegate.swift in Sources */,
 				0EE1385629FAC3C900DD8745 /* Fonts.swift in Sources */,

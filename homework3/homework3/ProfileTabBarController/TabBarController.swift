@@ -7,7 +7,7 @@
 
 import UIKit
 
-fileprivate enum TabBarView {
+fileprivate enum TabBarMetrics {
     static let backgroundColor = UIColor.white.withAlphaComponent(0.8)
     static let tintColor = UIColor.black
 }
@@ -18,23 +18,23 @@ final class TabBarController: UITabBarController {
     private var hobbiesViewController: HobbiesViewController?
     
     private func initViewControllers() {
-        mainInfoViewController = StoryboardNavigator.getVCFromMain(withIdentifier: MainInfoViewController.className) as? MainInfoViewController
+        mainInfoViewController = StoryboardNavigator.viewController(from: nil, withIdentifier: MainInfoViewController.className) as? MainInfoViewController
         developerSkillsViewController = DeveloperSkillsViewController()
         hobbiesViewController = HobbiesViewController()
     }
     
     private func configureTabBarItems() {
-        mainInfoViewController?.tabBarItem = TabBarItemEnum.profileInfo.tabBarItem
-        developerSkillsViewController?.tabBarItem = TabBarItemEnum.hardSkills.tabBarItem
-        hobbiesViewController?.tabBarItem = TabBarItemEnum.hobbies.tabBarItem
+        mainInfoViewController?.tabBarItem = TabBarItemType.profileInfo.item
+        developerSkillsViewController?.tabBarItem = TabBarItemType.hardSkills.item
+        hobbiesViewController?.tabBarItem = TabBarItemType.hobbies.item
     }
     
-    private func configureTabBarView() {
-        tabBar.backgroundColor = TabBarView.backgroundColor
-        tabBar.tintColor = TabBarView.tintColor
+    private func configure(tabBar: UITabBar) {
+        tabBar.backgroundColor = TabBarMetrics.backgroundColor
+        tabBar.tintColor = TabBarMetrics.tintColor
     }
     
-    private func configureTabBarViewControllers() {
+    private func appendViewControllers() {
         guard let mainInfoViewController = mainInfoViewController,
               let developerSkillsViewController = developerSkillsViewController,
               let hobbiesViewController = hobbiesViewController else { return }
@@ -45,7 +45,7 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         initViewControllers()
         configureTabBarItems()
-        configureTabBarView()
-        configureTabBarViewControllers()
+        configure(tabBar: tabBar)
+        appendViewControllers()
     }
 }

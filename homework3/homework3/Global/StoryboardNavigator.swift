@@ -7,10 +7,14 @@
 
 import UIKit
 
+fileprivate enum StoryboardsNames {
+    static let main = "Main"
+}
+
 struct StoryboardNavigator {
-    static func getVCFromMain(withIdentifier: String) -> UIViewController {
+    static func viewController(from storyboardName: String?, withIdentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(
-            name: "Main",
+            name: storyboardName ?? StoryboardsNames.main,
             bundle: nil)
         let targetVC = storyboard.instantiateViewController(withIdentifier: withIdentifier)
         return targetVC

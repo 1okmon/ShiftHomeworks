@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 enum Fonts {
-    static let standartFont = UIFont.systemFont(ofSize: 20)
+    static let standard = UIFont.systemFont(ofSize: 20)
 }

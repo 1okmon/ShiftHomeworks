@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 import SnapKit
 
-fileprivate enum Inset {
+fileprivate enum Metrics {
     static let defaultEdgeInset: CGFloat = 10
 }
 
 class LabelWithInsets: UILabel {
-    var labelHeightConstraint: Constraint?
-    var inset: CGFloat = Inset.defaultEdgeInset
+    private var labelHeightConstraint: Constraint?
+    private var inset: CGFloat = Metrics.defaultEdgeInset
     
     override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)))
@@ -25,10 +25,11 @@ class LabelWithInsets: UILabel {
         self.sizeToFit()
         self.numberOfLines = 0
         let doubleInset = 2 * inset
-        let label: LabelWithInsets = LabelWithInsets(frame: CGRect(x: 0,
-                                                                   y: 0,
-                                                                   width: self.frame.size.width - doubleInset,
-                                                                   height: CGFloat.greatestFiniteMagnitude))
+        let label: LabelWithInsets = LabelWithInsets(
+            frame: CGRect(x: 0,
+                          y: 0,
+                          width: self.frame.size.width - doubleInset,
+                          height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.font = self.font
