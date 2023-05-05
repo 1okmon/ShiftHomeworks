@@ -14,9 +14,17 @@
 		0E2911AA2A03489E00C3421F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E2911A82A03489E00C3421F /* LaunchScreen.storyboard */; };
 		0E2911B22A0349D400C3421F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911B12A0349D400C3421F /* NavigationController.swift */; };
 		0E2911B52A034A4300C3421F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2911B42A034A4300C3421F /* SnapKit */; };
-		0E2911B72A034B8100C3421F /* CarsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911B62A034B8100C3421F /* CarsCollectionView.swift */; };
+		0E2911B72A034B8100C3421F /* CarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911B62A034B8100C3421F /* CarsView.swift */; };
 		0E2911BA2A034BE800C3421F /* CarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911B92A034BE800C3421F /* CarCollectionViewCell.swift */; };
 		0E2911BC2A034C2A00C3421F /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911BB2A034C2A00C3421F /* CarModel.swift */; };
+		0E2911BE2A03594D00C3421F /* NSObject+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911BD2A03594D00C3421F /* NSObject+ClassName.swift */; };
+		0E2911C02A03741F00C3421F /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911BF2A03741F00C3421F /* ColumnFlowLayout.swift */; };
+		0E2911C32A037B0A00C3421F /* CarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C22A037B0A00C3421F /* CarDetailsViewController.swift */; };
+		0E2911C52A037D2800C3421F /* CarDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C42A037D2800C3421F /* CarDetailsView.swift */; };
+		0E2911C72A03903200C3421F /* UIResponder+parentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */; };
+		0E2911CA2A039C1B00C3421F /* CarPhotoCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */; };
+		0E2911CC2A039C8B00C3421F /* CarPhotoCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */; };
+		0E2911CE2A03C35D00C3421F /* ScrollView+scrollTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +36,17 @@
 		0E2911A92A03489E00C3421F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E2911AB2A03489E00C3421F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E2911B12A0349D400C3421F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		0E2911B62A034B8100C3421F /* CarsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsCollectionView.swift; sourceTree = "<group>"; };
+		0E2911B62A034B8100C3421F /* CarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsView.swift; sourceTree = "<group>"; };
 		0E2911B92A034BE800C3421F /* CarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollectionViewCell.swift; sourceTree = "<group>"; };
 		0E2911BB2A034C2A00C3421F /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
+		0E2911BD2A03594D00C3421F /* NSObject+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ClassName.swift"; sourceTree = "<group>"; };
+		0E2911BF2A03741F00C3421F /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
+		0E2911C22A037B0A00C3421F /* CarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewController.swift; sourceTree = "<group>"; };
+		0E2911C42A037D2800C3421F /* CarDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsView.swift; sourceTree = "<group>"; };
+		0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+parentViewController.swift"; sourceTree = "<group>"; };
+		0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotoCarouselViewController.swift; sourceTree = "<group>"; };
+		0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotoCarouselView.swift; sourceTree = "<group>"; };
+		0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+scrollTo.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +80,8 @@
 		0E29119C2A03489D00C3421F /* CollectionApp */ = {
 			isa = PBXGroup;
 			children = (
+				0E2911BD2A03594D00C3421F /* NSObject+ClassName.swift */,
+				0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */,
 				0E2911B12A0349D400C3421F /* NavigationController.swift */,
 				0E2911B82A034B8700C3421F /* CarsCollection */,
 				0E29119D2A03489D00C3421F /* AppDelegate.swift */,
@@ -71,6 +89,7 @@
 				0E2911A62A03489E00C3421F /* Assets.xcassets */,
 				0E2911A82A03489E00C3421F /* LaunchScreen.storyboard */,
 				0E2911AB2A03489E00C3421F /* Info.plist */,
+				0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */,
 			);
 			path = CollectionApp;
 			sourceTree = "<group>";
@@ -79,11 +98,32 @@
 			isa = PBXGroup;
 			children = (
 				0E2911A12A03489D00C3421F /* CarsViewController.swift */,
-				0E2911B62A034B8100C3421F /* CarsCollectionView.swift */,
+				0E2911B62A034B8100C3421F /* CarsView.swift */,
 				0E2911B92A034BE800C3421F /* CarCollectionViewCell.swift */,
 				0E2911BB2A034C2A00C3421F /* CarModel.swift */,
+				0E2911BF2A03741F00C3421F /* ColumnFlowLayout.swift */,
+				0E2911C12A037ACB00C3421F /* CarDetails */,
 			);
 			path = CarsCollection;
+			sourceTree = "<group>";
+		};
+		0E2911C12A037ACB00C3421F /* CarDetails */ = {
+			isa = PBXGroup;
+			children = (
+				0E2911C22A037B0A00C3421F /* CarDetailsViewController.swift */,
+				0E2911C42A037D2800C3421F /* CarDetailsView.swift */,
+				0E2911C82A039BC900C3421F /* CarPhotoCarousel */,
+			);
+			path = CarDetails;
+			sourceTree = "<group>";
+		};
+		0E2911C82A039BC900C3421F /* CarPhotoCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */,
+				0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */,
+			);
+			path = CarPhotoCarousel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,10 +203,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E2911A22A03489D00C3421F /* CarsViewController.swift in Sources */,
+				0E2911C72A03903200C3421F /* UIResponder+parentViewController.swift in Sources */,
+				0E2911C02A03741F00C3421F /* ColumnFlowLayout.swift in Sources */,
+				0E2911CE2A03C35D00C3421F /* ScrollView+scrollTo.swift in Sources */,
 				0E2911BC2A034C2A00C3421F /* CarModel.swift in Sources */,
+				0E2911C52A037D2800C3421F /* CarDetailsView.swift in Sources */,
 				0E2911BA2A034BE800C3421F /* CarCollectionViewCell.swift in Sources */,
-				0E2911B72A034B8100C3421F /* CarsCollectionView.swift in Sources */,
+				0E2911CC2A039C8B00C3421F /* CarPhotoCarouselView.swift in Sources */,
+				0E2911CA2A039C1B00C3421F /* CarPhotoCarouselViewController.swift in Sources */,
+				0E2911B72A034B8100C3421F /* CarsView.swift in Sources */,
 				0E2911B22A0349D400C3421F /* NavigationController.swift in Sources */,
+				0E2911C32A037B0A00C3421F /* CarDetailsViewController.swift in Sources */,
+				0E2911BE2A03594D00C3421F /* NSObject+ClassName.swift in Sources */,
 				0E29119E2A03489D00C3421F /* AppDelegate.swift in Sources */,
 				0E2911A02A03489D00C3421F /* SceneDelegate.swift in Sources */,
 			);

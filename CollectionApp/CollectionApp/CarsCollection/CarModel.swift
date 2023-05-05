@@ -10,6 +10,18 @@ import UIKit
 struct CarModel {
     var manufacturer: String
     var model: String
-    var image: UIImage
-    var yearOfIssue: Int
+    var images: [UIImage?]?
+    var yearOfIssue: Int?
+    
+    var fullName: String {
+        manufacturer + String() + model
+    }
+    
+    var yearOfIssueDescription: String {
+        let result = "Year of issue:\t"
+        guard let yearOfIssue = yearOfIssue else {
+            return result + "unknown"
+        }
+        return result + String(describing: yearOfIssue)
+    }
 }
