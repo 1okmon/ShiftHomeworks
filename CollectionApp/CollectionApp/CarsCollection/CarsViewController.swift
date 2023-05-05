@@ -82,13 +82,48 @@ fileprivate enum Cars: CaseIterable {
     }
 }
 
-final class CarsViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-    }
-
-
+fileprivate enum ViewControllerMetrics {
+    static let title = "Cars list"
+    static let viewBackgroundColor = UIColor.white
 }
 
+final class CarsViewController: UIViewController {
+    private var configureLayout: ((UIDeviceOrientation)->()) = {_ in }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            configureLayout(UIDevice.current.orientation)
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+}
+
+private extension CarsViewController {
+    func configure() {
+        let carsView = CarsView(carModels: Cars.allCarModels)
+        title = ViewControllerMetrics.title
+        configure(view: view)
+        configure(carsView: carsView)
+    }
+    
+    func configure(carsView: CarsView) {
+        view.addSubview(carsView)
+        configureConstraints(at: carsView)
+        configureLayout = { orient in
+            carsView.updateLayout(orient: orient)
+        }
+    }
+    
+    func configureConstraints(at carsView: CarsView) {
+        carsView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+        }
+    }
+    
+    func configure(view: UIView) {
+        view.backgroundColor = ViewControllerMetrics.viewBackgroundColor
+    }
+}
