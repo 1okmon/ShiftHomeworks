@@ -84,7 +84,7 @@ private extension CarDetailsView {
         configureConstraints(at: scrollView)
         configureDelegates(at: scrollView)
     }
-
+    
     func configureConstraints(at scrollView: UIScrollView) {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

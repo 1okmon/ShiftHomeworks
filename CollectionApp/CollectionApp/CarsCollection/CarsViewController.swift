@@ -96,7 +96,7 @@ final class CarsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            configureLayout()
+        configureLayout()
         super.viewWillTransition(to: size, with: coordinator)
     }
 }

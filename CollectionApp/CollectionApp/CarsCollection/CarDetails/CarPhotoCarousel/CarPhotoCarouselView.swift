@@ -75,7 +75,7 @@ private extension CarPhotoCarouselView {
         let imageView = UIImageView()
         configure(imageView: imageView, for: viewForCarousel, with: image)
     }
-
+    
     func configure(imageView: UIImageView, for viewForCarousel: UIView, with image: UIImage) {
         viewForCarousel.addSubview(imageView)
         configureUI(at: imageView, with: image)

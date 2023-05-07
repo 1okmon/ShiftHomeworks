@@ -14,7 +14,7 @@ fileprivate enum ViewControllerMetrics {
 
 final class CarDetailsViewController: UIViewController {
     var carModel: CarDetailModel?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()

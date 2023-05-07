@@ -43,13 +43,13 @@ final class CarsView: UIView {
     private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, indexPath, carModel) in
         cell.carModel = carModel
     }
-
+    
     required init(carModels: [CarModel]) {
         self.carModels = carModels
         super.init(frame: .zero)
         configure()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

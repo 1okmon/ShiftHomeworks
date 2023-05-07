@@ -8,7 +8,7 @@
 import UIKit
 
 fileprivate enum NavigationControllerMetrics {
-   static let leftBarButtonItemTitle = "Close"
+    static let leftBarButtonItemTitle = "Close"
 }
 
 final class CarPhotoCarouselViewController: UIViewController {
@@ -24,7 +24,6 @@ final class CarPhotoCarouselViewController: UIViewController {
             target: self,
             action: #selector(dismissPhotoCarousel))
     }
-
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         updateLayout()
