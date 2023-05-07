@@ -88,7 +88,7 @@ fileprivate enum ViewControllerMetrics {
 }
 
 final class CarsViewController: UIViewController {
-    private var configureLayout: ((UIDeviceOrientation)->()) = {_ in }
+    private var configureLayout: (()->()) = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +96,7 @@ final class CarsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            configureLayout(UIDevice.current.orientation)
+            configureLayout()
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
@@ -112,8 +112,8 @@ private extension CarsViewController {
     func configure(carsView: CarsView) {
         view.addSubview(carsView)
         configureConstraints(at: carsView)
-        configureLayout = { orient in
-            carsView.updateLayout(orient: orient)
+        configureLayout = {
+            carsView.updateLayout()
         }
     }
     

@@ -21,10 +21,12 @@ fileprivate enum CollectionLayout {
     
     static var layout: ColumnFlowLayout {
         switch UIDevice.current.orientation {
-        case .portrait:
+        case .portrait, .portraitUpsideDown:
             return portrait
-        default:
+        case .landscapeLeft, .landscapeRight:
             return landscape
+        default:
+            return portrait
         }
     }
 }
@@ -52,8 +54,8 @@ final class CarsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateLayout(orient: UIDeviceOrientation) {
-        configureLayout(at: collectionView, with: UIDevice.current.orientation)
+    func updateLayout() {
+        configureLayout(at: collectionView)
     }
 }
 
@@ -65,9 +67,9 @@ private extension CarsView {
     
     func configure(collectionView: UICollectionView) {
         self.addSubview(collectionView)
-        configureLayout(at: collectionView, with: UIDevice.current.orientation)
-        configureCells(at: collectionView)
         configureConstraints(at: collectionView)
+        configureLayout(at: collectionView)
+        configureCells(at: collectionView)
         configureDelegates(at: collectionView)
     }
     
@@ -86,7 +88,7 @@ private extension CarsView {
         }
     }
     
-    func configureLayout(at collectionView: UICollectionView, with orient: UIDeviceOrientation) {
+    func configureLayout(at collectionView: UICollectionView) {
         collectionView.collectionViewLayout = CollectionLayout.layout
         collectionView.reloadData()
     }
@@ -107,7 +109,13 @@ extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let carDetailsViewController = CarDetailsViewController()
-        carDetailsViewController.carModel = carModels[indexPath.row]
+        let model = carModels[indexPath.row]
+        let carDetailModel = CarDetailModel(fullName: model.fullName,
+                                            yearOfIssue: model.yearOfIssueDescription,
+                                            carPhoto: model.images?.first ?? Images.defaultForCar,
+                                            carPhotosForCarouselModel:
+                                                CarPhotosForCarouselModel(images: model.images))
+        carDetailsViewController.carModel = carDetailModel
         let parentViewController = self.parentViewController
         parentViewController?.navigationController?.pushViewController(carDetailsViewController, animated: true)
     }

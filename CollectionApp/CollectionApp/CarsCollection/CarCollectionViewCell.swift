@@ -14,7 +14,7 @@ fileprivate enum ImageViewMetrics {
     static let height = 90
     static let backgroundColor = UIColor.gray.withAlphaComponent(0.4)
     static let cornerRadius: CGFloat = 15
-    static let defaultImage = UIImage(systemName: "car")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
+    static let defaultImage = Images.defaultForCar
 }
 
 fileprivate enum LabelMetrics {
@@ -54,13 +54,13 @@ private extension CarCollectionViewCell {
     func configure(carNameLabel: UILabel) {
         self.addSubview(carNameLabel)
         configureConstraint(at: carNameLabel, under: carImageView)
-        configureView(at: carNameLabel)
+        configureUI(at: carNameLabel)
     }
     
     func configure(carImageView: UIImageView) {
         self.addSubview(carImageView)
         configureConstraints(at: carImageView)
-        configureView(at: carImageView)
+        configureUI(at: carImageView)
     }
     
     func configureConstraints(at carImageView: UIImageView) {
@@ -72,13 +72,13 @@ private extension CarCollectionViewCell {
         }
     }
     
-    func configureView(at carImageView: UIImageView) {
+    func configureUI(at carImageView: UIImageView) {
         carImageView.layer.masksToBounds = true
         carImageView.backgroundColor = ImageViewMetrics.backgroundColor
         carImageView.layer.cornerRadius = ImageViewMetrics.cornerRadius
     }
     
-    func configureView(at carNameLabel: UILabel) {
+    func configureUI(at carNameLabel: UILabel) {
         carNameLabel.numberOfLines = 0
         carNameLabel.textAlignment = LabelMetrics.textAlignment
     }
@@ -92,9 +92,9 @@ private extension CarCollectionViewCell {
         }
     }
     
-    func configureContent(with carModel: CarModel) {
-        configureContent(at: carImageView, with: carModel)
-        configureContent(at: carNameLabel, with: carModel)
+    func configureContent(with model: CarModel) {
+        configureContent(at: carImageView, with: model)
+        configureContent(at: carNameLabel, with: model)
     }
     
     func configureContent(at carImageView: UIImageView, with model: CarModel) {
@@ -107,6 +107,6 @@ private extension CarCollectionViewCell {
     }
     
     func configureContent(at carNameLabel: UILabel, with model: CarModel) {
-        carNameLabel.text = model.manufacturer + " " + model.model
+        carNameLabel.text = model.fullName
     }
 }

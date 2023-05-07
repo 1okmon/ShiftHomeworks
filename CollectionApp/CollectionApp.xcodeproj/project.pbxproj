@@ -24,7 +24,10 @@
 		0E2911C72A03903200C3421F /* UIResponder+parentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */; };
 		0E2911CA2A039C1B00C3421F /* CarPhotoCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */; };
 		0E2911CC2A039C8B00C3421F /* CarPhotoCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */; };
-		0E2911CE2A03C35D00C3421F /* ScrollView+scrollTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */; };
+		0E2911D72A06F82300C3421F /* CarDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911D62A06F82300C3421F /* CarDetailModel.swift */; };
+		0E2911D92A075EF600C3421F /* CarPhotosForCarouselModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911D82A075EF600C3421F /* CarPhotosForCarouselModel.swift */; };
+		0E2911DB2A07693400C3421F /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911DA2A07693400C3421F /* Images.swift */; };
+		0E2911DD2A076F0E00C3421F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2911DC2A076F0E00C3421F /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +49,10 @@
 		0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+parentViewController.swift"; sourceTree = "<group>"; };
 		0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotoCarouselViewController.swift; sourceTree = "<group>"; };
 		0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotoCarouselView.swift; sourceTree = "<group>"; };
-		0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+scrollTo.swift"; sourceTree = "<group>"; };
+		0E2911D62A06F82300C3421F /* CarDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailModel.swift; sourceTree = "<group>"; };
+		0E2911D82A075EF600C3421F /* CarPhotosForCarouselModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPhotosForCarouselModel.swift; sourceTree = "<group>"; };
+		0E2911DA2A07693400C3421F /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		0E2911DC2A076F0E00C3421F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,13 +89,14 @@
 				0E2911BD2A03594D00C3421F /* NSObject+ClassName.swift */,
 				0E2911C62A03903100C3421F /* UIResponder+parentViewController.swift */,
 				0E2911B12A0349D400C3421F /* NavigationController.swift */,
+				0E2911DA2A07693400C3421F /* Images.swift */,
+				0E2911DC2A076F0E00C3421F /* Fonts.swift */,
 				0E2911B82A034B8700C3421F /* CarsCollection */,
 				0E29119D2A03489D00C3421F /* AppDelegate.swift */,
 				0E29119F2A03489D00C3421F /* SceneDelegate.swift */,
 				0E2911A62A03489E00C3421F /* Assets.xcassets */,
 				0E2911A82A03489E00C3421F /* LaunchScreen.storyboard */,
 				0E2911AB2A03489E00C3421F /* Info.plist */,
-				0E2911CD2A03C35D00C3421F /* ScrollView+scrollTo.swift */,
 			);
 			path = CollectionApp;
 			sourceTree = "<group>";
@@ -97,10 +104,10 @@
 		0E2911B82A034B8700C3421F /* CarsCollection */ = {
 			isa = PBXGroup;
 			children = (
+				0E2911BB2A034C2A00C3421F /* CarModel.swift */,
 				0E2911A12A03489D00C3421F /* CarsViewController.swift */,
 				0E2911B62A034B8100C3421F /* CarsView.swift */,
 				0E2911B92A034BE800C3421F /* CarCollectionViewCell.swift */,
-				0E2911BB2A034C2A00C3421F /* CarModel.swift */,
 				0E2911BF2A03741F00C3421F /* ColumnFlowLayout.swift */,
 				0E2911C12A037ACB00C3421F /* CarDetails */,
 			);
@@ -110,6 +117,7 @@
 		0E2911C12A037ACB00C3421F /* CarDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0E2911D62A06F82300C3421F /* CarDetailModel.swift */,
 				0E2911C22A037B0A00C3421F /* CarDetailsViewController.swift */,
 				0E2911C42A037D2800C3421F /* CarDetailsView.swift */,
 				0E2911C82A039BC900C3421F /* CarPhotoCarousel */,
@@ -120,8 +128,9 @@
 		0E2911C82A039BC900C3421F /* CarPhotoCarousel */ = {
 			isa = PBXGroup;
 			children = (
-				0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */,
+				0E2911D82A075EF600C3421F /* CarPhotosForCarouselModel.swift */,
 				0E2911CB2A039C8B00C3421F /* CarPhotoCarouselView.swift */,
+				0E2911C92A039C1B00C3421F /* CarPhotoCarouselViewController.swift */,
 			);
 			path = CarPhotoCarousel;
 			sourceTree = "<group>";
@@ -205,7 +214,8 @@
 				0E2911A22A03489D00C3421F /* CarsViewController.swift in Sources */,
 				0E2911C72A03903200C3421F /* UIResponder+parentViewController.swift in Sources */,
 				0E2911C02A03741F00C3421F /* ColumnFlowLayout.swift in Sources */,
-				0E2911CE2A03C35D00C3421F /* ScrollView+scrollTo.swift in Sources */,
+				0E2911DB2A07693400C3421F /* Images.swift in Sources */,
+				0E2911D92A075EF600C3421F /* CarPhotosForCarouselModel.swift in Sources */,
 				0E2911BC2A034C2A00C3421F /* CarModel.swift in Sources */,
 				0E2911C52A037D2800C3421F /* CarDetailsView.swift in Sources */,
 				0E2911BA2A034BE800C3421F /* CarCollectionViewCell.swift in Sources */,
@@ -213,9 +223,11 @@
 				0E2911CA2A039C1B00C3421F /* CarPhotoCarouselViewController.swift in Sources */,
 				0E2911B72A034B8100C3421F /* CarsView.swift in Sources */,
 				0E2911B22A0349D400C3421F /* NavigationController.swift in Sources */,
+				0E2911D72A06F82300C3421F /* CarDetailModel.swift in Sources */,
 				0E2911C32A037B0A00C3421F /* CarDetailsViewController.swift in Sources */,
 				0E2911BE2A03594D00C3421F /* NSObject+ClassName.swift in Sources */,
 				0E29119E2A03489D00C3421F /* AppDelegate.swift in Sources */,
+				0E2911DD2A076F0E00C3421F /* Fonts.swift in Sources */,
 				0E2911A02A03489D00C3421F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
