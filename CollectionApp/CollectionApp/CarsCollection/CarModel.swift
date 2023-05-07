@@ -14,7 +14,7 @@ struct CarModel {
     var yearOfIssue: Int?
     
     var fullName: String {
-        manufacturer + String() + model
+        manufacturer + " " + model
     }
     
     var yearOfIssueDescription: String {
