@@ -25,29 +25,21 @@ fileprivate enum LabelMetrics {
 }
 
 final class CarCollectionViewCell: UICollectionViewCell {
-    var carModel: CarModel? {
+    var viewModel: ICarViewModel? {
         didSet {
             configure()
         }
     }
     private var carImageView = UIImageView()
     private var carNameLabel = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 private extension CarCollectionViewCell {
     func configure() {
         configure(carImageView: carImageView)
         configure(carNameLabel: carNameLabel)
-        guard let carModel = carModel else { return }
-        configureContent(with: carModel)
+        guard let viewModel = viewModel else { return }
+        configureContent(with: viewModel)
     }
     
     
@@ -92,21 +84,21 @@ private extension CarCollectionViewCell {
         }
     }
     
-    func configureContent(with model: CarModel) {
-        configureContent(at: carImageView, with: model)
-        configureContent(at: carNameLabel, with: model)
+    func configureContent(with viewModel: ICarViewModel) {
+        configureContent(at: carImageView, with: viewModel)
+        configureContent(at: carNameLabel, with: viewModel)
     }
     
-    func configureContent(at carImageView: UIImageView, with model: CarModel) {
+    func configureContent(at carImageView: UIImageView, with viewModel: ICarViewModel) {
         carImageView.contentMode = .scaleAspectFill
-        guard let image = model.images?.first else {
+        guard let image = viewModel.images?.first else {
             carImageView.image = ImageViewMetrics.defaultImage
             return
         }
         carImageView.image = image
     }
     
-    func configureContent(at carNameLabel: UILabel, with model: CarModel) {
-        carNameLabel.text = model.fullName
+    func configureContent(at carNameLabel: UILabel, with viewModel: ICarViewModel) {
+        carNameLabel.text = viewModel.fullName
     }
 }
