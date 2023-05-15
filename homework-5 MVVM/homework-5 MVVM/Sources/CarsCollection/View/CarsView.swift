@@ -7,7 +7,7 @@
 
 import UIKit
 
-fileprivate enum CollectionLayout {
+private enum CollectionLayout {
     static let portrait = ColumnFlowLayout(
         cellsPerRow: 2,
         minimumInteritemSpacing: 8,
@@ -31,21 +31,20 @@ fileprivate enum CollectionLayout {
     }
 }
 
-fileprivate enum ViewMetrics {
-    static let backgroundColor = UIColor.white
+private enum Metrics {
+    static let viewBackgroundColor = UIColor.white
 }
 
 final class CarsView: UIView {
-    private var carModels: [CarModel]
-    private var collectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: CollectionLayout.layout)
-    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, indexPath, carModel) in
-        cell.carModel = carModel
+    private var viewModel: ICarsViewModel
+    private var collectionView: UICollectionView
+    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, ICarViewModel> { (cell, indexPath, carViewModel) in
+        cell.viewModel = carViewModel
     }
     
-    required init(carModels: [CarModel]) {
-        self.carModels = carModels
+    required init(carsViewModel: ICarsViewModel) {
+        self.viewModel = carsViewModel
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionLayout.layout)
         super.init(frame: .zero)
         configure()
     }
@@ -61,7 +60,7 @@ final class CarsView: UIView {
 
 private extension CarsView {
     func configure() {
-        self.backgroundColor = ViewMetrics.backgroundColor
+        self.backgroundColor = Metrics.viewBackgroundColor
         configure(collectionView: collectionView)
     }
     
@@ -96,27 +95,18 @@ private extension CarsView {
 
 extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        carModels.count
+        viewModel.allCarsViewModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueConfiguredReusableCell(
             using: cellDequeueConfig,
             for: indexPath,
-            item: carModels[indexPath.row])
+            item: viewModel.allCarsViewModel[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let carDetailsViewController = CarDetailsViewController()
-        let model = carModels[indexPath.row]
-        let carDetailModel = CarDetailModel(fullName: model.fullName,
-                                            yearOfIssue: model.yearOfIssueDescription,
-                                            carPhoto: model.images?.first ?? Images.defaultForCar,
-                                            carPhotosForCarouselModel:
-                                                CarPhotosForCarouselModel(images: model.images))
-        carDetailsViewController.carModel = carDetailModel
-        let parentViewController = self.parentViewController
-        parentViewController?.navigationController?.pushViewController(carDetailsViewController, animated: true)
+        viewModel.goToCarDetails(with: viewModel.allCarsViewModel[indexPath.row].car)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ImageViewMetrics {
+private enum ImageViewMetrics {
     static let topOffset = 10
     static let width = 160
     static let height = 90
@@ -17,7 +17,7 @@ fileprivate enum ImageViewMetrics {
     static let defaultImage = Images.defaultForCar
 }
 
-fileprivate enum LabelMetrics {
+private enum LabelMetrics {
     static let topOffset = 5
     static let width = 160
     static let height = 40
