@@ -18,14 +18,14 @@ class AppCoordinator {
         let viewModel = CarsViewModel()
         viewModel.coordinator = self
         let carsViewController = CarsViewController(viewModel: viewModel)
-        navigationController.viewControllers = [carsViewController]
+        self.navigationController.viewControllers = [carsViewController]
     }
     
     func goToCarDetails(with car: Car) {
         let viewModel = CarDetailsViewModel(car: car)
         viewModel.coordinator = self
         let carDetailsViewController = CarDetailsViewController(viewModel: viewModel)
-        navigationController.pushViewController(carDetailsViewController, animated: true)
+        self.navigationController.pushViewController(carDetailsViewController, animated: true)
     }
     
     func goToCarPhotoCarousel(with car: Car) {
@@ -34,10 +34,10 @@ class AppCoordinator {
         let carPhotoCarouselViewController = CarPhotoCarouselViewController(viewModel: viewModel)
         let navController = UINavigationController(rootViewController: carPhotoCarouselViewController)
         navController.modalPresentationStyle = .fullScreen
-        navigationController.present(navController, animated: true)
+        self.navigationController.present(navController, animated: true)
     }
     
     func dismiss() {
-        navigationController.dismiss(animated: true)
+        self.navigationController.dismiss(animated: true)
     }
 }

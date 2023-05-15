@@ -18,12 +18,12 @@ final class CarPhotoCarouselViewModel {
 
 extension CarPhotoCarouselViewModel: ICarPhotoCarouselViewModelData {
     var images: [UIImage?]? {
-        carPhotoCarouselModel.images
+        self.carPhotoCarouselModel.images
     }
 }
 
 extension CarPhotoCarouselViewModel: ICarPhotoCarouselViewModelCoordinator {
     func dismiss() {
-        coordinator?.dismiss()
+        self.coordinator?.dismiss()
     }
 }

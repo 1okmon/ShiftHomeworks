@@ -5,8 +5,6 @@
 //  Created by 1okmon on 12.05.2023.
 //
 
-import Foundation
-
 final class CarsViewModel {
     weak var coordinator : AppCoordinator?
 }
@@ -27,6 +25,6 @@ extension CarsViewModel: ICarsViewModelsData {
 
 extension CarsViewModel: ICarsViewModelCoordinator {
     func goToCarDetails(with car: Car) {
-        coordinator?.goToCarDetails(with: car)
+        self.coordinator?.goToCarDetails(with: car)
     }
 }

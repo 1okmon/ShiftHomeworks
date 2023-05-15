@@ -13,7 +13,7 @@ private enum Metrics {
 }
 
 final class CarDetailsViewController: UIViewController {
-    var viewModel: ICarDetailsViewModel
+    private var viewModel: ICarDetailsViewModel
     
     init(viewModel: ICarDetailsViewModel) {
         self.viewModel = viewModel
@@ -33,13 +33,9 @@ final class CarDetailsViewController: UIViewController {
 private extension CarDetailsViewController {
     func configure() {
         view.backgroundColor = Metrics.viewBackgroundColor
-        //guard let carDetailsViewModel = viewModel else { return }
-        let carDetailsView = CarDetailsView(viewModel: viewModel)
+        title = self.viewModel.fullName
+        let carDetailsView = CarDetailsView(viewModel: self.viewModel)
         configure(carDetailsView: carDetailsView)
-    }
-    
-    func configureContent(with model: CarModel) {
-        title = model.fullName
     }
     
     func configure(carDetailsView: CarDetailsView) {

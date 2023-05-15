@@ -23,22 +23,22 @@ extension CarViewModel: ICarViewModel {
     }
     
     var manufacturer: String {
-        carModel.manufacturer
+        self.carModel.manufacturer
     }
     
     var model: String {
-        carModel.model
+        self.carModel.model
     }
     
     var images: [UIImage?]? {
-        carModel.images
+        self.carModel.images
     }
     
     var yearOfIssue: Int? {
-        carModel.yearOfIssue
+        self.carModel.yearOfIssue
     }
     
     var fullName: String {
-        return carModel.manufacturer + " " + carModel.model
+        return self.carModel.manufacturer + " " + self.carModel.model
     }
 }

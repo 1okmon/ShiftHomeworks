@@ -24,19 +24,19 @@ extension CarDetailsViewModel: ICarDetailsViewModelData {
     }
     
     var fullName: String {
-        carModel.fullName
+        self.carModel.manufacturer + " " + self.carModel.model
     }
     
     var yearOfIssue: String {
         let result = "Year of issue:\t"
-        guard let yearOfIssue = carModel.yearOfIssue else {
+        guard let yearOfIssue = self.carModel.yearOfIssue else {
             return result + "unknown"
         }
         return result + String(describing: yearOfIssue)
     }
     
     var carPhoto: UIImage? {
-        guard let carPhoto = carModel.images?.first else {
+        guard let carPhoto = self.carModel.images?.first else {
             return Images.defaultForCar
         }
         return carPhoto
@@ -45,6 +45,6 @@ extension CarDetailsViewModel: ICarDetailsViewModelData {
 
 extension CarDetailsViewModel: ICarDetailsViewModelCoordinator {
     func goToCarPhotoCarousel(with car: Car) {
-        coordinator?.goToCarPhotoCarousel(with: car)
+        self.coordinator?.goToCarPhotoCarousel(with: car)
     }
 }

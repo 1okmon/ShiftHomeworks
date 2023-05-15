@@ -46,12 +46,12 @@ final class CarDetailsView: UIView, UIScrollViewDelegate {
 private extension CarDetailsView {
     func configure() {
         self.backgroundColor = ViewMetrics.backgroundColor
-        configure(scrollView: scrollView)
-        configure(carImageView: carImageView)
-        configure(label: carNameLabel, upperView: carImageView, textAlignment: .center)
-        configure(label: carYearOfIssueLabel, upperView: carNameLabel)
-        configureContent(with: viewModel)
-        configureContentViewBottomConstraint(at: scrollView, bottomView: carYearOfIssueLabel)
+        configure(scrollView: self.scrollView)
+        configure(carImageView: self.carImageView)
+        configure(label: self.carNameLabel, upperView: self.carImageView, textAlignment: .center)
+        configure(label: self.carYearOfIssueLabel, upperView: self.carNameLabel)
+        configureContent(with: self.viewModel)
+        configureContentViewBottomConstraint(at: self.scrollView, bottomView: self.carYearOfIssueLabel)
     }
     
     func configureContentViewBottomConstraint(at scrollView: UIScrollView, bottomView: UIView) {
@@ -61,9 +61,9 @@ private extension CarDetailsView {
     }
     
     func configureContent(with viewModel: ICarDetailsViewModel) {
-        configureContent(at: carImageView, with: viewModel.carPhoto)
-        configureContent(at: carNameLabel, with: viewModel.fullName)
-        configureContent(at: carYearOfIssueLabel, with: viewModel.yearOfIssue)
+        configureContent(at: self.carImageView, with: viewModel.carPhoto)
+        configureContent(at: self.carNameLabel, with: viewModel.fullName)
+        configureContent(at: self.carYearOfIssueLabel, with: viewModel.yearOfIssue)
     }
     
     func configureContent(at carImageView: UIImageView, with image: UIImage?) {
@@ -95,7 +95,7 @@ private extension CarDetailsView {
     }
     
     func configure(carImageView: UIImageView) {
-        scrollView.addSubview(carImageView)
+        self.scrollView.addSubview(carImageView)
         configureConstraints(at: carImageView)
         configureUI(at: carImageView)
         configureGestureRecognizer(at: carImageView)
@@ -103,7 +103,7 @@ private extension CarDetailsView {
     
     func configureConstraints(at carImageView: UIImageView) {
         carImageView.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.top).offset(ImageViewMetrics.topOffset)
+            make.top.equalTo(self.scrollView.snp.top).offset(ImageViewMetrics.topOffset)
             make.leading.trailing.equalTo(self)
             make.height.equalTo(ImageViewMetrics.height)
         }
@@ -124,7 +124,7 @@ private extension CarDetailsView {
     }
     
     func configure(label: UILabel, upperView: UIView, textAlignment: NSTextAlignment = .left) {
-        scrollView.addSubview(label)
+        self.scrollView.addSubview(label)
         configureConstraints(at: label, upperView: upperView)
         configureUI(at: label, textAlignment: textAlignment)
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias ICarDetailsViewModel = ICarDetailsViewModelData & ICarDetailsViewModelCoordinator
+
 protocol ICarDetailsViewModelData {
     var fullName:String { get }
     var yearOfIssue: String { get }
@@ -17,5 +19,3 @@ protocol ICarDetailsViewModelData {
 protocol ICarDetailsViewModelCoordinator {
     func goToCarPhotoCarousel(with car: Car)
 }
-
-typealias ICarDetailsViewModel = ICarDetailsViewModelData & ICarDetailsViewModelCoordinator

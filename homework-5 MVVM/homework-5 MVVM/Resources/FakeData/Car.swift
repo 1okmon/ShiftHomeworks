@@ -7,8 +7,8 @@
 
 import UIKit
 
-enum Car: Int, CaseIterable {
-    case skylineR34 = 0
+enum Car: CaseIterable {
+    case skylineR34
     case skylineR35
     case supraA80
     case supraA90

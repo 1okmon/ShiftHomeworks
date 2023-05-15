@@ -36,16 +36,15 @@ final class CarCollectionViewCell: UICollectionViewCell {
 
 private extension CarCollectionViewCell {
     func configure() {
-        configure(carImageView: carImageView)
-        configure(carNameLabel: carNameLabel)
-        guard let viewModel = viewModel else { return }
+        configure(carImageView: self.carImageView)
+        configure(carNameLabel: self.carNameLabel)
+        guard let viewModel = self.viewModel else { return }
         configureContent(with: viewModel)
     }
     
-    
     func configure(carNameLabel: UILabel) {
         self.addSubview(carNameLabel)
-        configureConstraint(at: carNameLabel, under: carImageView)
+        configureConstraint(at: carNameLabel, under: self.carImageView)
         configureUI(at: carNameLabel)
     }
     
@@ -85,8 +84,8 @@ private extension CarCollectionViewCell {
     }
     
     func configureContent(with viewModel: ICarViewModel) {
-        configureContent(at: carImageView, with: viewModel)
-        configureContent(at: carNameLabel, with: viewModel)
+        configureContent(at: self.carImageView, with: viewModel)
+        configureContent(at: self.carNameLabel, with: viewModel)
     }
     
     func configureContent(at carImageView: UIImageView, with viewModel: ICarViewModel) {

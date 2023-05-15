@@ -5,7 +5,7 @@
 //  Created by 1okmon on 12.05.2023.
 //
 
-import Foundation
+typealias ICarsViewModel = ICarsViewModelsData & ICarsViewModelCoordinator
 
 protocol ICarsViewModelsData {
     var allCarsViewModel: [ICarViewModel] { get }
@@ -15,5 +15,3 @@ protocol ICarsViewModelsData {
 protocol ICarsViewModelCoordinator {
     func goToCarDetails(with car: Car)
 }
-
-typealias ICarsViewModel = ICarsViewModelsData & ICarsViewModelCoordinator

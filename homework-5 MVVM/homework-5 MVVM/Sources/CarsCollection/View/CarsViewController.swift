@@ -14,6 +14,7 @@ private enum Metrics {
 
 final class CarsViewController: UIViewController {
     private var viewModel: ICarsViewModel
+    private var configureLayout: (()->Void) = {}
     
     init(viewModel: ICarsViewModel) {
         self.viewModel = viewModel
@@ -23,8 +24,6 @@ final class CarsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private var configureLayout: (()->Void) = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +31,14 @@ final class CarsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        configureLayout()
+        self.configureLayout()
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 private extension CarsViewController {
     func configure() {
-        let carsView = CarsView(carsViewModel: viewModel)
+        let carsView = CarsView(carsViewModel: self.viewModel)
         title = Metrics.viewTitle
         configure(view: view)
         configure(carsView: carsView)
@@ -48,7 +47,7 @@ private extension CarsViewController {
     func configure(carsView: CarsView) {
         view.addSubview(carsView)
         configureConstraints(at: carsView)
-        configureLayout = {
+        self.configureLayout = {
             carsView.updateLayout()
         }
     }

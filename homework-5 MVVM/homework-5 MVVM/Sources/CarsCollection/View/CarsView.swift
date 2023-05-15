@@ -44,7 +44,7 @@ final class CarsView: UIView {
     
     required init(carsViewModel: ICarsViewModel) {
         self.viewModel = carsViewModel
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionLayout.layout)
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionLayout.layout)
         super.init(frame: .zero)
         configure()
     }
@@ -54,14 +54,14 @@ final class CarsView: UIView {
     }
     
     func updateLayout() {
-        configureLayout(at: collectionView)
+        configureLayout(at: self.collectionView)
     }
 }
 
 private extension CarsView {
     func configure() {
         self.backgroundColor = Metrics.viewBackgroundColor
-        configure(collectionView: collectionView)
+        configure(collectionView: self.collectionView)
     }
     
     func configure(collectionView: UICollectionView) {
@@ -95,18 +95,18 @@ private extension CarsView {
 
 extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.allCarsViewModel.count
+        self.viewModel.allCarsViewModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueConfiguredReusableCell(
-            using: cellDequeueConfig,
+            using: self.cellDequeueConfig,
             for: indexPath,
-            item: viewModel.allCarsViewModel[indexPath.row])
+            item: self.viewModel.allCarsViewModel[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.goToCarDetails(with: viewModel.allCarsViewModel[indexPath.row].car)
+        self.viewModel.goToCarDetails(with: self.viewModel.allCarsViewModel[indexPath.row].car)
     }
 }

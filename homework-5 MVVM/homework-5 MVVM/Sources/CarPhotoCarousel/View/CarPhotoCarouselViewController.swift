@@ -7,7 +7,7 @@
 
 import UIKit
 
-fileprivate enum NavigationControllerMetrics {
+private enum Metrics {
     static let leftBarButtonItemTitle = "Close"
 }
 
@@ -28,34 +28,32 @@ final class CarPhotoCarouselViewController: UIViewController {
         super.viewDidLoad()
         configure()
         self.navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(
-            title: NavigationControllerMetrics.leftBarButtonItemTitle,
+            title: Metrics.leftBarButtonItemTitle,
             style: .done,
             target: self,
             action: #selector(dismissPhotoCarousel))
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        updateLayout()
+        self.updateLayout()
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 extension CarPhotoCarouselViewController {
     @objc func dismissPhotoCarousel() {
-        viewModel.dismiss()
-        //self.dismiss(animated: true, completion: nil)
+        self.viewModel.dismiss()
     }
     
     func configure() {
-        //guard let viewModel = viewModel else { return }
-        let carPhotoCarouselView = CarPhotoCarouselView(viewModel: viewModel)
+        let carPhotoCarouselView = CarPhotoCarouselView(viewModel: self.viewModel)
         configure(carPhotoCarouselView: carPhotoCarouselView)
     }
     
     func configure(carPhotoCarouselView: CarPhotoCarouselView) {
         view.addSubview(carPhotoCarouselView)
         configureConstrains(at: carPhotoCarouselView)
-        updateLayout = { carPhotoCarouselView.reloadContent() }
+        self.updateLayout = { carPhotoCarouselView.reloadContent() }
     }
     
     func configureConstrains(at carPhotoCarouselView: CarPhotoCarouselView) {

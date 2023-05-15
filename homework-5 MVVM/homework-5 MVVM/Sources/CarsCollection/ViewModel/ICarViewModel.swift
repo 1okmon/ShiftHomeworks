@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol ICarViewModel {
     var manufacturer: String { get }
     var model: String { get }

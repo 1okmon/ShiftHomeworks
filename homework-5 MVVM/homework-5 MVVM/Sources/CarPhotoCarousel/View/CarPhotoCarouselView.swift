@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-fileprivate enum PhotoViewMetrics {
+private enum PhotoViewMetrics {
     static let imageViewContentMode = UIView.ContentMode.scaleAspectFit
     static var prevViewWidth = UIScreen.main.bounds.width
     static var photoViewSize: (width: CGFloat, height: CGFloat) {
@@ -21,7 +21,7 @@ fileprivate enum PhotoViewMetrics {
     }
 }
 
-fileprivate enum ViewMetrics {
+private enum ViewMetrics {
     static let backgroundColor = UIColor.black
 }
 
@@ -32,10 +32,10 @@ final class CarPhotoCarouselView: UIView {
     private var scrollViewContentSize: (width: CGFloat, height: CGFloat) {
         switch UIDevice.current.orientation {
         case .portrait:
-            return (UIScreen.main.bounds.width * CGFloat(carPhotoViews.count),
+            return (UIScreen.main.bounds.width * CGFloat(self.carPhotoViews.count),
                     UIScreen.main.bounds.width)
         default:
-            return (UIScreen.main.bounds.width * CGFloat(carPhotoViews.count),
+            return (UIScreen.main.bounds.width * CGFloat(self.carPhotoViews.count),
                     UIScreen.main.bounds.height)
         }
     }
@@ -52,8 +52,8 @@ final class CarPhotoCarouselView: UIView {
     }
     
     func reloadContent() {
-        configure(carPhotoViews: &carPhotoViews)
-        updateContent(at: scrollView)
+        configure(carPhotoViews: &self.carPhotoViews)
+        updateContent(at: self.scrollView)
     }
 }
 
@@ -61,7 +61,7 @@ private extension CarPhotoCarouselView {
     func configure() {
         self.layoutIfNeeded()
         self.backgroundColor = ViewMetrics.backgroundColor
-        configure(scrollView: scrollView)
+        configure(scrollView: self.scrollView)
     }
     
     func viewForCarousel(image: UIImage) -> UIView {
@@ -98,7 +98,7 @@ private extension CarPhotoCarouselView {
             PhotoViewMetrics.prevViewWidth = view.frame.width
         }
         carPhotoViews.removeAll()
-        viewModel.images?.forEach {
+        self.viewModel.images?.forEach {
             if let image = $0 {
                 carPhotoViews.append(viewForCarousel(image: image))
             }
@@ -115,15 +115,15 @@ private extension CarPhotoCarouselView {
     
     func configureContent(at scrollView: UIScrollView) {
         scrollView.contentSize = CGSize(
-            width: scrollViewContentSize.width,
-            height: scrollViewContentSize.height)
-        for i in 0 ..< carPhotoViews.count {
-            carPhotoViews[i].frame = CGRect(
+            width: self.scrollViewContentSize.width,
+            height: self.scrollViewContentSize.height)
+        for i in 0 ..< self.carPhotoViews.count {
+            self.carPhotoViews[i].frame = CGRect(
                 x: PhotoViewMetrics.photoViewSize.width * CGFloat(i),
                 y: 0,
                 width: PhotoViewMetrics.photoViewSize.width,
                 height: PhotoViewMetrics.photoViewSize.height)
-            scrollView.addSubview(carPhotoViews[i])
+            scrollView.addSubview(self.carPhotoViews[i])
         }
     }
     
