@@ -7,6 +7,6 @@
 
 import UIKit
 
-struct CarPhotosForCarouselModel {
+struct CarPhotoCarouselModel {
     var images: [UIImage?]?
 }
