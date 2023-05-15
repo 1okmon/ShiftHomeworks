@@ -26,7 +26,7 @@ fileprivate enum ViewMetrics {
 }
 
 final class CarPhotoCarouselView: UIView {
-    var model: CarPhotosForCarouselModel?
+    private var viewModel: ICarPhotoCarouselViewModel
     private var carPhotoViews = [UIView]()
     private var scrollView = UIScrollView()
     private var scrollViewContentSize: (width: CGFloat, height: CGFloat) {
@@ -40,8 +40,8 @@ final class CarPhotoCarouselView: UIView {
         }
     }
     
-    required init(model: CarPhotosForCarouselModel) {
-        self.model = model
+    required init(viewModel: ICarPhotoCarouselViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         configure()
         reloadContent()
@@ -98,7 +98,7 @@ private extension CarPhotoCarouselView {
             PhotoViewMetrics.prevViewWidth = view.frame.width
         }
         carPhotoViews.removeAll()
-        model?.images?.forEach {
+        viewModel.images?.forEach {
             if let image = $0 {
                 carPhotoViews.append(viewForCarousel(image: image))
             }

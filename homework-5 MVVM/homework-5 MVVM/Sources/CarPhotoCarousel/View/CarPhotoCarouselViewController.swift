@@ -12,8 +12,17 @@ fileprivate enum NavigationControllerMetrics {
 }
 
 final class CarPhotoCarouselViewController: UIViewController {
-    var model: CarPhotosForCarouselModel?
+    private var viewModel: ICarPhotoCarouselViewModel
     private var updateLayout: (()->()) = {}
+    
+    init(viewModel: ICarPhotoCarouselViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +42,13 @@ final class CarPhotoCarouselViewController: UIViewController {
 
 extension CarPhotoCarouselViewController {
     @objc func dismissPhotoCarousel() {
-        self.dismiss(animated: true, completion: nil)
+        viewModel.dismiss()
+        //self.dismiss(animated: true, completion: nil)
     }
     
     func configure() {
-        guard let model = model else { return }
-        let carPhotoCarouselView = CarPhotoCarouselView(model: model)
+        //guard let viewModel = viewModel else { return }
+        let carPhotoCarouselView = CarPhotoCarouselView(viewModel: viewModel)
         configure(carPhotoCarouselView: carPhotoCarouselView)
     }
     
