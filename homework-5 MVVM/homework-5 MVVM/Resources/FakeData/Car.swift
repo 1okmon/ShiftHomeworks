@@ -1,0 +1,75 @@
+//
+//  Cars.swift
+//  CollectionApp
+//
+//  Created by 1okmon on 12.05.2023.
+//
+
+import UIKit
+
+enum Car: Int, CaseIterable {
+    case skylineR34 = 0
+    case skylineR35
+    case supraA80
+    case supraA90
+    case silviaS13
+    case silviaS14
+    case silviaS15
+    case silviaS15Boss
+    case z370BadAssVRZ
+    case miata
+    
+    var carModel: CarModel {
+        switch self {
+        case .skylineR34:
+            return CarModel(manufacturer: "Nissan",
+                            model: "GT-R r34",
+                            images: [UIImage(named: "skylineR34-1"),
+                                     UIImage(named: "skylineR34-2"),
+                                     UIImage(named: "skylineR34-3")])
+        case .skylineR35:
+            return CarModel(manufacturer: "Nissan",
+                            model: "GT-R",
+                            images: [UIImage(named: "skylineR35-1"),
+                                     UIImage(named: "skylineR35-2")])
+        case .supraA80:
+            return CarModel(manufacturer: "Toyota",
+                            model: "Supra A80",
+                            images: [UIImage(named: "supraA80-1")])
+        case .supraA90:
+            return CarModel(manufacturer: "Toyota",
+                            model: "Supra A90",
+                            images: [UIImage(named: "supraA90-1")])
+        case .silviaS13:
+            return CarModel(manufacturer: "Nissan",
+                            model: "Silvia S13",
+                            images: [UIImage(named: "silviaS13-1"),
+                                     UIImage(named: "silviaS13-2")])
+        case .silviaS14:
+            return CarModel(manufacturer: "Nissan",
+                            model: "Silvia S14",
+                            images: [UIImage(named: "silviaS14-1")])
+        case .silviaS15:
+            return CarModel(manufacturer: "Nissan",
+                            model: "Silvia S15",
+                            images: [UIImage(named: "silviaS15-1"),
+                                     UIImage(named: "silviaS15-2")])
+        case .silviaS15Boss:
+            return CarModel(manufacturer: "Nissan",
+                            model: "Silvia S15 rocket bunny boss",
+                            images: [UIImage(named: "silviaS15Boss-1"),
+                                     UIImage(named: "silviaS15Boss-2")])
+        case .z370BadAssVRZ:
+            return CarModel(manufacturer: "Nissan",
+                            model: "370Z BadAss VR-Z",
+                            images: [UIImage(named: "z370BadAssVRZ-1"),
+                                     UIImage(named: "z370BadAssVRZ-2")])
+        case .miata:
+            return CarModel(manufacturer: "Mazda",
+                            model: "MX-5 miata",
+                            images: [UIImage(named: "miata-1"),
+                                     UIImage(named: "miata-2"),
+                                     UIImage(named: "miata-3")])
+        }
+    }
+}
