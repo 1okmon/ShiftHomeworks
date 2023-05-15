@@ -11,5 +11,4 @@ struct CarDetailModel {
     let fullName:String
     let yearOfIssue: String
     let carPhoto: UIImage?
-    let carPhotosForCarouselModel: CarPhotosForCarouselModel?
 }
