@@ -7,12 +7,12 @@
 
 import UIKit
 
-fileprivate enum ImageViewMetrics {
+private enum ImageViewMetrics {
     static let topOffset = 15
     static let height = 200
 }
 
-fileprivate enum LabelMetrics {
+private enum LabelMetrics {
     static let topOffset = 30
     static let leadingOffset = 20
     static let trailingInset = 20
@@ -20,19 +20,20 @@ fileprivate enum LabelMetrics {
     static let bottomInset = 15
 }
 
-fileprivate enum ViewMetrics {
+private enum ViewMetrics {
     static let backgroundColor = UIColor.white
 }
 
 final class CarDetailsView: UIView, UIScrollViewDelegate {
-    var carModel: CarDetailModel?
+    var imageTapHandler: (()->Void) = {}
+    private var viewModel: ICarDetailsViewModel
     private let carImageView = UIImageView()
     private let carNameLabel = UILabel()
     private let carYearOfIssueLabel = UILabel()
     private let scrollView = UIScrollView()
     
-    required init(model: CarDetailModel) {
-        self.carModel = model
+    required init(viewModel: ICarDetailsViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         configure()
     }
@@ -40,7 +41,6 @@ final class CarDetailsView: UIView, UIScrollViewDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 private extension CarDetailsView {
@@ -50,8 +50,7 @@ private extension CarDetailsView {
         configure(carImageView: carImageView)
         configure(label: carNameLabel, upperView: carImageView, textAlignment: .center)
         configure(label: carYearOfIssueLabel, upperView: carNameLabel)
-        guard let carModel = carModel else { return }
-        configureContent(with: carModel)
+        configureContent(with: viewModel)
         configureContentViewBottomConstraint(at: scrollView, bottomView: carYearOfIssueLabel)
     }
     
@@ -61,10 +60,10 @@ private extension CarDetailsView {
         }
     }
     
-    func configureContent(with model: CarDetailModel) {
-        configureContent(at: carImageView, with: model.carPhoto)
-        configureContent(at: carNameLabel, with: model.fullName)
-        configureContent(at: carYearOfIssueLabel, with: model.yearOfIssue)
+    func configureContent(with viewModel: ICarDetailsViewModel) {
+        configureContent(at: carImageView, with: viewModel.carPhoto)
+        configureContent(at: carNameLabel, with: viewModel.fullName)
+        configureContent(at: carYearOfIssueLabel, with: viewModel.yearOfIssue)
     }
     
     func configureContent(at carImageView: UIImageView, with image: UIImage?) {
@@ -121,12 +120,7 @@ private extension CarDetailsView {
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let parentViewController = self.parentViewController
-        let carPhotoCarouselViewController = CarPhotoCarouselViewController()
-        let navController = UINavigationController(rootViewController: carPhotoCarouselViewController)
-        carPhotoCarouselViewController.model = carModel?.carPhotosForCarouselModel
-        navController.modalPresentationStyle = .fullScreen
-        parentViewController?.present(navController, animated: true)
+        self.imageTapHandler()
     }
     
     func configure(label: UILabel, upperView: UIView, textAlignment: NSTextAlignment = .left) {

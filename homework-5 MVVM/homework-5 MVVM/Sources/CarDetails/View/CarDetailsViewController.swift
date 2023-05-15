@@ -8,12 +8,21 @@
 import UIKit
 import SnapKit
 
-fileprivate enum ViewControllerMetrics {
+private enum Metrics {
     static let viewBackgroundColor = UIColor.white
 }
 
 final class CarDetailsViewController: UIViewController {
-    var carModel: CarDetailModel?
+    var viewModel: ICarDetailsViewModel
+    
+    init(viewModel: ICarDetailsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +32,9 @@ final class CarDetailsViewController: UIViewController {
 
 private extension CarDetailsViewController {
     func configure() {
-        view.backgroundColor = ViewControllerMetrics.viewBackgroundColor
-        guard let carModel = carModel else { return }
-        let carDetailsView = CarDetailsView(model: carModel)
+        view.backgroundColor = Metrics.viewBackgroundColor
+        //guard let carDetailsViewModel = viewModel else { return }
+        let carDetailsView = CarDetailsView(viewModel: viewModel)
         configure(carDetailsView: carDetailsView)
     }
     
@@ -35,6 +44,10 @@ private extension CarDetailsViewController {
     
     func configure(carDetailsView: CarDetailsView) {
         view.addSubview(carDetailsView)
+        carDetailsView.imageTapHandler = { [weak self] in
+            guard let car = self?.viewModel.car else { return }
+            self?.viewModel.goToCarPhotoCarousel(with: car)
+        }
         configureConstraints(at: carDetailsView)
     }
     
