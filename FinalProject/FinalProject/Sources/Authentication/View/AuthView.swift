@@ -37,6 +37,12 @@ final class AuthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func keyboardWillShow(keyboardHeight: CGFloat) {
+        UIView.animate(withDuration: Metrics.animateDuration) {
+            self.scrollView.contentOffset.y = self.verticalOffset(with: keyboardHeight)
+        }
+        scrollView.contentInset.bottom = keyboardHeight
+    }
     
     func verticalOffset(with keyboardHeight: CGFloat) -> CGFloat {
         let viewHeight = self.frame.height
@@ -52,6 +58,10 @@ final class AuthView: UIView {
         return CGFloat(offset)
     }
     
+    func keyboardWillHide() {
+        scrollView.contentInset = .zero
+        scrollView.contentOffset = .zero
+    }
 }
 
 private extension AuthView {
@@ -98,9 +108,13 @@ private extension AuthView {
             let topOffset = i == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
             let upperView = i == 0 ? titleLabel : textFields[i - 1]
             configure(view: textFields[i], upperView: upperView, height: Metrics.height, topOffset: topOffset, horizontalInset: Metrics.horizontalInset)
+            configureDelegate(at: textFields[i])
         }
     }
     
+    func configureDelegate(at textField: UITextField) {
+        textField.delegate = self
+    }
     
     func configure(buttons: [UIButton]) {
         for i in 0..<buttons.count {
@@ -129,3 +143,18 @@ private extension AuthView {
     }
 }
 
+extension AuthView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(textFields.last == textField) {
+            textField.resignFirstResponder()
+            keyboardWillHide()
+            return true
+        }
+        if let index = textFields.firstIndex(where: { field in
+            field == textField
+        }) {
+            textFields[index+1].becomeFirstResponder()
+        }
+        return true
+    }
+}
