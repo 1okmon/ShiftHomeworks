@@ -49,6 +49,7 @@ private extension AuthViewController {
     func configure(authView: AuthView) {
         self.view.addSubview(authView)
         configureHandlers(at: authView)
+        addGestureRecognizer(to: authView)
         configureConstraints(at: authView)
     }
     
@@ -65,7 +66,11 @@ private extension AuthViewController {
         keyboardWillHideHandler = {
             authView.keyboardWillHide()
         }
-        
+    }
+    
+    func addGestureRecognizer(to authView: UIView) {
+        authView.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
+                                                             action: #selector(UIView.endEditing(_:))))
     }
     
     @objc func keyboardWillShow(sender: Notification) {
@@ -78,5 +83,7 @@ private extension AuthViewController {
     }
 
     @objc func keyboardWillHide(sender: NSNotification) {
+        guard let keyboardWillHideHandler = keyboardWillHideHandler else { return }
+        keyboardWillHideHandler()
     }
 }

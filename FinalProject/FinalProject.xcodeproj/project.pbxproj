@@ -131,11 +131,11 @@
 		0EEA03E82A17261100B1EA9C /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				0EEA03E92A17261100B1EA9C /* ViewModel */,
 				0EEA03EC2A17261100B1EA9C /* Coordinator */,
-				0EEA03EF2A17261100B1EA9C /* Model */,
-				0EEA03F02A17261100B1EA9C /* View */,
 				0EEA04042A17261100B1EA9C /* Builder */,
+				0EEA03F02A17261100B1EA9C /* View */,
+				0EEA03EF2A17261100B1EA9C /* Model */,
+				0EEA03E92A17261100B1EA9C /* ViewModel */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -168,11 +168,10 @@
 		0EEA03F02A17261100B1EA9C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0EEA03F12A17261100B1EA9C /* AuthViewController.swift */,
 				0EEA03F22A17261100B1EA9C /* AuthDesignSystem */,
-				0EEA03F72A17261100B1EA9C /* AuthView.swift */,
 				0EEA03F82A17261100B1EA9C /* AuthButton */,
-				0EEA04032A17261100B1EA9C /* AuthType.swift */,
+				0EEA03F12A17261100B1EA9C /* AuthViewController.swift */,
+				0EEA03F72A17261100B1EA9C /* AuthView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +221,7 @@
 		0EEA04042A17261100B1EA9C /* Builder */ = {
 			isa = PBXGroup;
 			children = (
+				0EEA04032A17261100B1EA9C /* AuthType.swift */,
 				0EEA04052A17261100B1EA9C /* AuthViewControllerBuilder.swift */,
 			);
 			path = Builder;
