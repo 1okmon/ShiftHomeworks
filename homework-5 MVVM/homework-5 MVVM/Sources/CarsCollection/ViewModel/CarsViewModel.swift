@@ -6,21 +6,23 @@
 //
 
 final class CarsViewModel {
-    weak var coordinator : AppCoordinator?
+    weak var coordinator: AppCoordinator?
     private var cars = Observable<[CarModel]>()
     
     func subscribe(observer: IObserver) {
         self.cars.subscribe(observer: observer)
         self.loadCars()
     }
-    
-    private func loadCars() {
-        cars.value = CarsLoader.shared.cars()
-    }
 }
 
 extension CarsViewModel: ICarsViewModel{
-    func goToCarDetails(with id: Int) {
-        self.coordinator?.goToCarDetails(with: id)
+    func goToCarDetails(with carId: Int) {
+        self.coordinator?.goToCarDetails(with: carId)
+    }
+}
+
+private extension CarsViewModel {
+    func loadCars() {
+        cars.value = CarsLoader.shared.cars()
     }
 }

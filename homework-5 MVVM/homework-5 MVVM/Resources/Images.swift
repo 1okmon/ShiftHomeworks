@@ -8,5 +8,7 @@
 import UIKit
 
 enum Images {
-    static let defaultForCar = UIImage(systemName: "car")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
+    static let defaultForCar = UIImage(systemName: "car")?
+                                .withTintColor(.black)
+                                .withRenderingMode(.alwaysOriginal)
 }

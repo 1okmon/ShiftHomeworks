@@ -29,7 +29,7 @@ private enum Metrics {
 }
 
 final class CarsView: UIView {
-    var cellTapHandler: ((Int)->Void)?
+    var cellTapHandler: ((Int) -> Void)?
     private var carsData: [CarModel]?
     private var collectionView: UICollectionView
     private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, indexPath, car) in
@@ -40,7 +40,6 @@ final class CarsView: UIView {
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionLayout.layout)
         super.init(frame: .zero)
         configure()
-        updateLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -49,57 +48,57 @@ final class CarsView: UIView {
     
     func updateContent(with cars: [CarModel]) {
         self.carsData = cars
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
     
     func updateLayout() {
-        configureLayout(at: self.collectionView)
+        self.configureCollectionViewLayout()
     }
 }
 
 private extension CarsView {
     func configure() {
         self.backgroundColor = Metrics.viewBackgroundColor
-        configure(collectionView: self.collectionView)
+        self.configureCollectionView()
     }
     
-    func configure(collectionView: UICollectionView) {
-        self.addSubview(collectionView)
-        configureConstraints(at: collectionView)
-        configureLayout(at: collectionView)
-        configureCells(at: collectionView)
-        configureDelegates(at: collectionView)
+    func configureCollectionView() {
+        self.addSubview(self.collectionView)
+        self.configureCollectionViewConstraints()
+        self.configureCollectionViewLayout()
+        self.configureCollectionViewCells()
+        self.configureCollectionViewDelegates()
     }
     
-    func configureCells(at collectionView: UICollectionView) {
-        collectionView.register(CarCollectionViewCell.self, forCellWithReuseIdentifier: CarCollectionViewCell.className)
+    func configureCollectionViewCells() {
+        self.collectionView.register(CarCollectionViewCell.self, forCellWithReuseIdentifier: CarCollectionViewCell.className)
     }
     
-    func configureDelegates(at collectionView: UICollectionView) {
-        collectionView.delegate = self
-        collectionView.dataSource = self
+    func configureCollectionViewDelegates() {
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
     }
     
-    func configureConstraints(at collectionView: UICollectionView) {
-        collectionView.snp.makeConstraints { make in
+    func configureCollectionViewConstraints() {
+        self.collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func configureLayout(at collectionView: UICollectionView) {
-        collectionView.collectionViewLayout = CollectionLayout.layout
-        collectionView.reloadData()
+    func configureCollectionViewLayout() {
+        self.collectionView.collectionViewLayout = CollectionLayout.layout
+        self.collectionView.reloadData()
     }
 }
 
 extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let cars = carsData else { return 0 }
+        guard let cars = self.carsData else { return 0 }
         return cars.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cars = carsData else { return UICollectionViewCell() }
+        guard let cars = self.carsData else { return UICollectionViewCell() }
         let cell = collectionView.dequeueConfiguredReusableCell(
             using: self.cellDequeueConfig,
             for: indexPath,
@@ -108,9 +107,9 @@ extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cellTapHandler = cellTapHandler else { return }
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CarCollectionViewCell else { return }
-        guard let carId = cell.car?.id else { return }
+        guard let cellTapHandler = self.cellTapHandler,
+              let cell = collectionView.cellForItem(at: indexPath) as? CarCollectionViewCell,
+              let carId = cell.car?.id else { return }
         cellTapHandler(carId)
     }
 }

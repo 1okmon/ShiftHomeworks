@@ -25,7 +25,7 @@ private enum ViewMetrics {
 }
 
 final class CarDetailsView: UIView, UIScrollViewDelegate {
-    var imageTapHandler: ((Int)->Void)?
+    var imageTapHandler: ((Int) -> Void)?
     private var car: CarDetailModel?
     private let carImageView = UIImageView()
     private let carNameLabel = UILabel()
@@ -42,100 +42,96 @@ final class CarDetailsView: UIView, UIScrollViewDelegate {
     }
     func updateContent(with car: CarDetailModel) {
         self.car = car
-        configureContent(with: car)
+        self.configureContent(with: car)
     }
 }
 
 private extension CarDetailsView {
     func configure() {
         self.backgroundColor = ViewMetrics.backgroundColor
-        configure(scrollView: self.scrollView)
-        configure(carImageView: self.carImageView)
-        configure(label: self.carNameLabel, upperView: self.carImageView, textAlignment: .center)
-        configure(label: self.carYearOfIssueLabel, upperView: self.carNameLabel)
-        configureContentViewBottomConstraint(at: self.scrollView, bottomView: self.carYearOfIssueLabel)
+        self.configureScrollView()
+        self.configureCarImageView()
+        self.configure(self.carNameLabel, under: self.carImageView, textAlignment: .center)
+        self.configure(self.carYearOfIssueLabel, under: self.carNameLabel)
+        self.configureScrollViewContentBottomConstraint()
     }
     
-    func configureContentViewBottomConstraint(at scrollView: UIScrollView, bottomView: UIView) {
-        bottomView.snp.makeConstraints { make in
+    func configureScrollViewContentBottomConstraint() {
+        self.carYearOfIssueLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(LabelMetrics.bottomInset)
         }
     }
     
     func configureContent(with car: CarDetailModel) {
-        configureContent(at: self.carImageView, with: car.carPhoto)
-        configureContent(at: self.carNameLabel, with: car.fullName)
-        configureContent(at: self.carYearOfIssueLabel, with: car.yearOfIssueDescription)
+        self.configureCarImageViewContent(with: car.carPhoto)
+        self.configureContent(at: self.carNameLabel, with: car.fullName)
+        self.configureContent(at: self.carYearOfIssueLabel, with: car.yearOfIssueDescription)
     }
     
-    func configureContent(at carImageView: UIImageView, with image: UIImage?) {
+    func configureCarImageViewContent(with image: UIImage?) {
         guard let image = image else {
-            carImageView.image = Images.defaultForCar
+            self.carImageView.image = Images.defaultForCar
             return
         }
-        carImageView.image = image
+        self.carImageView.image = image
     }
     
     func configureContent(at label: UILabel, with text: String) {
         label.text = text
     }
     
-    func configure(scrollView: UIScrollView) {
-        self.addSubview(scrollView)
-        configureConstraints(at: scrollView)
-        configureDelegates(at: scrollView)
+    func configureScrollView() {
+        self.addSubview(self.scrollView)
+        self.configureScrollViewConstraints()
+        self.scrollView.delegate = self
     }
     
-    func configureConstraints(at scrollView: UIScrollView) {
-        scrollView.snp.makeConstraints { make in
+    func configureScrollViewConstraints() {
+        self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func configureDelegates(at scrollView: UIScrollView) {
-        scrollView.delegate = self
+    func configureCarImageView() {
+        self.scrollView.addSubview(self.carImageView)
+        self.configureCarImageViewConstraints()
+        self.configureCarImageViewUI()
+        self.configureCarImageViewGestureRecognizer()
     }
     
-    func configure(carImageView: UIImageView) {
-        self.scrollView.addSubview(carImageView)
-        configureConstraints(at: carImageView)
-        configureUI(at: carImageView)
-        configureGestureRecognizer(at: carImageView)
-    }
-    
-    func configureConstraints(at carImageView: UIImageView) {
-        carImageView.snp.makeConstraints { make in
+    func configureCarImageViewConstraints() {
+        self.carImageView.snp.makeConstraints { make in
             make.top.equalTo(self.scrollView.snp.top).offset(ImageViewMetrics.topOffset)
             make.leading.trailing.equalTo(self)
             make.height.equalTo(ImageViewMetrics.height)
         }
     }
     
-    func configureUI(at carImageView: UIImageView) {
-        carImageView.contentMode = .scaleAspectFit
+    func configureCarImageViewUI() {
+        self.carImageView.contentMode = .scaleAspectFit
     }
     
-    func configureGestureRecognizer(at carImageView: UIImageView) {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        carImageView.isUserInteractionEnabled = true
-        carImageView.addGestureRecognizer(tapGestureRecognizer)
+    func configureCarImageViewGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped(tapGestureRecognizer:)))
+        self.carImageView.isUserInteractionEnabled = true
+        self.carImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        guard let imageTapHandler = self.imageTapHandler else { return }
-        guard let carId = self.car?.id else { return }
+        guard let imageTapHandler = self.imageTapHandler,
+              let carId = self.car?.id else { return }
         imageTapHandler(carId)
     }
     
-    func configure(label: UILabel, upperView: UIView, textAlignment: NSTextAlignment = .left) {
+    func configure(_ label: UILabel, under: UIView, textAlignment: NSTextAlignment = .left) {
         self.scrollView.addSubview(label)
-        configureConstraints(at: label, upperView: upperView)
-        configureUI(at: label, textAlignment: textAlignment)
+        self.configureConstraints(at: label, under: under)
+        self.configureUI(at: label, textAlignment: textAlignment)
     }
     
-    func configureConstraints(at label: UILabel, upperView: UIView) {
+    func configureConstraints(at label: UILabel, under view: UIView) {
         label.snp.makeConstraints { make in
-            make.top.equalTo(upperView.snp.bottom).offset(LabelMetrics.topOffset)
+            make.top.equalTo(view.snp.bottom).offset(LabelMetrics.topOffset)
             make.leading.equalTo(self).offset(LabelMetrics.leadingOffset)
             make.trailing.equalTo(self).inset(LabelMetrics.trailingInset)
             make.height.equalTo(LabelMetrics.height)

@@ -16,7 +16,7 @@ final class CarsViewController: UIViewController, IObserver {
     var id: UUID
     private var viewModel: ICarsViewModel
     private let carsView: CarsView
-    private var configureLayout: (()->Void)?
+    private var configureLayout: (() -> Void)?
     
     init(viewModel: ICarsViewModel) {
         self.id = UUID()
@@ -48,29 +48,25 @@ final class CarsViewController: UIViewController, IObserver {
 
 private extension CarsViewController {
     func configure() {
-        title = Metrics.viewTitle
-        configure(view: view)
-        configure(carsView: carsView)
+        self.title = Metrics.viewTitle
+        self.view.backgroundColor = Metrics.viewBackgroundColor
+        self.configureCarsView()
     }
     
-    func configure(carsView: CarsView) {
-        view.addSubview(carsView)
-        carsView.cellTapHandler = { [weak self] carId in
+    func configureCarsView() {
+        self.view.addSubview(self.carsView)
+        self.carsView.cellTapHandler = { [weak self] carId in
             self?.viewModel.goToCarDetails(with: carId)
         }
-        configureConstraints(at: carsView)
-        self.configureLayout = {
-            carsView.updateLayout()
+        self.configureCarsViewConstraints()
+        self.configureLayout = { [weak self] in
+            self?.carsView.updateLayout()
         }
     }
     
-    func configureConstraints(at carsView: CarsView) {
-        carsView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+    func configureCarsViewConstraints() {
+        self.carsView.snp.makeConstraints { make in
+            make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-    }
-    
-    func configure(view: UIView) {
-        view.backgroundColor = Metrics.viewBackgroundColor
     }
 }

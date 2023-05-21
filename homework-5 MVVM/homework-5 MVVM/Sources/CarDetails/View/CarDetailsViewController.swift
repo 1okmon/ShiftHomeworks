@@ -36,27 +36,27 @@ final class CarDetailsViewController: UIViewController, IObserver {
     func update<T>(with value: T) {
         guard let car = value as? CarDetailModel else { return }
         self.title = car.fullName
-        carDetailsView.updateContent(with: car)
+        self.carDetailsView.updateContent(with: car)
     }
 }
 
 private extension CarDetailsViewController {
     func configure() {
         view.backgroundColor = Metrics.viewBackgroundColor
-        configure(carDetailsView: self.carDetailsView)
+        configureCarDetailsView()
     }
     
-    func configure(carDetailsView: CarDetailsView) {
-        view.addSubview(carDetailsView)
-        carDetailsView.imageTapHandler = { [weak self] carId in
+    func configureCarDetailsView() {
+        self.view.addSubview(self.carDetailsView)
+        self.carDetailsView.imageTapHandler = { [weak self] carId in
             self?.viewModel.goToCarPhotoCarousel(with: carId)
         }
-        configureConstraints(at: carDetailsView)
+        self.configureCarDetailsViewConstraints()
     }
     
-    func configureConstraints(at carDetailsView: CarDetailsView) {
-        carDetailsView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+    func configureCarDetailsViewConstraints() {
+        self.carDetailsView.snp.makeConstraints { make in
+            make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
     }
 }

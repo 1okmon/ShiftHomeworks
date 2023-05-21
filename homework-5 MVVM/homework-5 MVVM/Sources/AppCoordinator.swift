@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppCoordinator {
+final class AppCoordinator {
     private var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -22,16 +22,16 @@ class AppCoordinator {
         self.navigationController.viewControllers = [carsViewController]
     }
     
-    func goToCarDetails(with id: Int) {
-        let viewModel = CarDetailsViewModel(carId: id)
+    func goToCarDetails(with carId: Int) {
+        let viewModel = CarDetailsViewModel(carId: carId)
         viewModel.coordinator = self
         let carDetailsViewController = CarDetailsViewController(viewModel: viewModel)
         viewModel.subscribe(observer: carDetailsViewController)
         self.navigationController.pushViewController(carDetailsViewController, animated: true)
     }
     
-    func goToCarPhotoCarousel(with id: Int) {
-        let viewModel = CarPhotoCarouselViewModel(carId: id)
+    func goToCarPhotoCarousel(with carId: Int) {
+        let viewModel = CarPhotoCarouselViewModel(carId: carId)
         viewModel.coordinator = self
         let carPhotoCarouselViewController = CarPhotoCarouselViewController(viewModel: viewModel)
         viewModel.subscribe(observer: carPhotoCarouselViewController)

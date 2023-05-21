@@ -14,6 +14,6 @@ struct CarModel {
     var images: [UIImage?]?
     var yearOfIssue: Int?
     var fullName: String {
-        return manufacturer + " " + model
+        return self.manufacturer + " " + self.model
     }
 }

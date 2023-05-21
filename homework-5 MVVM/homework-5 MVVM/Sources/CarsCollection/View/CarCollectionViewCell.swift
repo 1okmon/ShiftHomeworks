@@ -36,26 +36,40 @@ final class CarCollectionViewCell: UICollectionViewCell {
 
 private extension CarCollectionViewCell {
     func configure() {
-        configure(carImageView: self.carImageView)
-        configure(carNameLabel: self.carNameLabel)
+        self.configureCarImageView()
+        self.configureCarNameLabel()
         guard let car = self.car else { return }
-        configureContent(with: car)
+        self.configureContent(with: car)
     }
     
-    func configure(carNameLabel: UILabel) {
-        self.addSubview(carNameLabel)
-        configureConstraint(at: carNameLabel, under: self.carImageView)
-        configureUI(at: carNameLabel)
+    func configureCarNameLabel() {
+        self.addSubview(self.carNameLabel)
+        self.configureCarNameLabelConstraints()
+        self.configureCarNameLabelUI()
     }
     
-    func configure(carImageView: UIImageView) {
-        self.addSubview(carImageView)
-        configureConstraints(at: carImageView)
-        configureUI(at: carImageView)
+    func configureCarNameLabelConstraints() {
+        self.carNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.carImageView.snp.bottom).offset(LabelMetrics.topOffset)
+            make.width.equalTo(LabelMetrics.width)
+            make.height.greaterThanOrEqualTo(LabelMetrics.height)
+            make.centerX.equalTo(self.carImageView)
+        }
     }
     
-    func configureConstraints(at carImageView: UIImageView) {
-        carImageView.snp.makeConstraints {make in
+    func configureCarNameLabelUI() {
+        self.carNameLabel.numberOfLines = 0
+        self.carNameLabel.textAlignment = LabelMetrics.textAlignment
+    }
+    
+    func configureCarImageView() {
+        self.addSubview(self.carImageView)
+        self.configureCarImageViewConstraints()
+        self.configureCarImageViewUI()
+    }
+    
+    func configureCarImageViewConstraints() {
+        self.carImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(ImageViewMetrics.topOffset)
             make.width.equalTo(ImageViewMetrics.width)
             make.height.equalTo(ImageViewMetrics.height)
@@ -63,41 +77,27 @@ private extension CarCollectionViewCell {
         }
     }
     
-    func configureUI(at carImageView: UIImageView) {
-        carImageView.layer.masksToBounds = true
-        carImageView.backgroundColor = ImageViewMetrics.backgroundColor
-        carImageView.layer.cornerRadius = ImageViewMetrics.cornerRadius
-    }
-    
-    func configureUI(at carNameLabel: UILabel) {
-        carNameLabel.numberOfLines = 0
-        carNameLabel.textAlignment = LabelMetrics.textAlignment
-    }
-    
-    func configureConstraint(at carNameLabel: UILabel, under upperView: UIView) {
-        carNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(upperView.snp.bottom).offset(LabelMetrics.topOffset)
-            make.width.equalTo(LabelMetrics.width)
-            make.height.greaterThanOrEqualTo(LabelMetrics.height)
-            make.centerX.equalTo(upperView)
-        }
+    func configureCarImageViewUI() {
+        self.carImageView.layer.masksToBounds = true
+        self.carImageView.backgroundColor = ImageViewMetrics.backgroundColor
+        self.carImageView.layer.cornerRadius = ImageViewMetrics.cornerRadius
     }
     
     func configureContent(with car: CarModel) {
-        configureContent(at: self.carImageView, with: car)
-        configureContent(at: self.carNameLabel, with: car)
+        self.configureCarImageViewContent(with: car)
+        self.configureCarNameLabelContent(with: car)
     }
     
-    func configureContent(at carImageView: UIImageView, with car: CarModel) {
-        carImageView.contentMode = .scaleAspectFill
+    func configureCarImageViewContent(with car: CarModel) {
+        self.carImageView.contentMode = .scaleAspectFill
         guard let image = car.images?.first else {
-            carImageView.image = ImageViewMetrics.defaultImage
+            self.carImageView.image = ImageViewMetrics.defaultImage
             return
         }
-        carImageView.image = image
+        self.carImageView.image = image
     }
     
-    func configureContent(at carNameLabel: UILabel, with car: CarModel) {
-        carNameLabel.text = car.fullName//.fullName
+    func configureCarNameLabelContent(with car: CarModel) {
+        self.carNameLabel.text = car.fullName
     }
 }

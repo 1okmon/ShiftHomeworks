@@ -14,7 +14,7 @@ private enum Metrics {
 final class CarPhotoCarouselViewController: UIViewController, IObserver {
     var id: UUID
     private var viewModel: ICarPhotoCarouselViewModel
-    private var updateLayout: (()->())?
+    private var updateLayout: (() -> Void)?
     let carPhotoCarouselView: CarPhotoCarouselView
     
     init(viewModel: ICarPhotoCarouselViewModel) {
@@ -56,19 +56,19 @@ extension CarPhotoCarouselViewController {
     }
     
     func configure() {
-        configure(carPhotoCarouselView: carPhotoCarouselView)
+        self.configureCarPhotoCarouselView()
     }
     
-    func configure(carPhotoCarouselView: CarPhotoCarouselView) {
-        view.addSubview(carPhotoCarouselView)
-        configureConstrains(at: carPhotoCarouselView)
+    func configureCarPhotoCarouselView() {
+        self.view.addSubview(self.carPhotoCarouselView)
+        self.configureCarPhotoCarouselViewConstrains()
         self.updateLayout = { [weak self] in
             self?.carPhotoCarouselView.reloadLayout()
         }
     }
     
-    func configureConstrains(at carPhotoCarouselView: CarPhotoCarouselView) {
-        carPhotoCarouselView.snp.makeConstraints { make in
+    func configureCarPhotoCarouselViewConstrains() {
+        self.carPhotoCarouselView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.edges.equalToSuperview()
         }

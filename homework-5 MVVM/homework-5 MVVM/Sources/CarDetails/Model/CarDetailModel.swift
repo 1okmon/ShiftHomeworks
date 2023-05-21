@@ -18,7 +18,7 @@ struct CarDetailModel {
     let yearOfIssue: Int?
     let carPhoto: UIImage?
     var yearOfIssueDescription: String {
-        guard let yearOfIssue = yearOfIssue else {
+        guard let yearOfIssue = self.yearOfIssue else {
             return Metrics.yearOfIssueUnknown
         }
         return Metrics.yearOfIssuePrefix + yearOfIssue.description

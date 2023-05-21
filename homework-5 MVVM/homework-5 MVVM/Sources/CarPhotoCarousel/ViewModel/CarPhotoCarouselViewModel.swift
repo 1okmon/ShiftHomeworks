@@ -8,7 +8,7 @@
 import UIKit
 
 final class CarPhotoCarouselViewModel {
-    weak var coordinator : AppCoordinator?
+    weak var coordinator: AppCoordinator?
     private var car: Observable<CarPhotoCarouselModel>
     private var carPhotoCarouselModel: CarPhotoCarouselModel?
     private var carId: Int
@@ -22,15 +22,17 @@ final class CarPhotoCarouselViewModel {
         self.car.subscribe(observer: observer)
         self.loadCar()
     }
-    
-    private func loadCar() {
-        guard let car = CarsLoader.shared.car(with: carId) else { return }
-        self.car.value = CarPhotoCarouselModel(images: car.images)
-    }
 }
 
 extension CarPhotoCarouselViewModel: ICarPhotoCarouselViewModel {
     func dismiss() {
         self.coordinator?.dismiss()
+    }
+}
+
+private extension CarPhotoCarouselViewModel {
+    func loadCar() {
+        guard let car = CarsLoader.shared.car(with: carId) else { return }
+        self.car.value = CarPhotoCarouselModel(images: car.images)
     }
 }

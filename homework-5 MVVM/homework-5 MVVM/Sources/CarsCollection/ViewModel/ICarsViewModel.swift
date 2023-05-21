@@ -6,5 +6,5 @@
 //
 
 protocol ICarsViewModel {
-    func goToCarDetails(with id: Int)
+    func goToCarDetails(with carId: Int)
 }

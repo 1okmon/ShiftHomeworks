@@ -53,7 +53,7 @@ private extension CarsLoader {
         return cars.first { $0.id == id }
     }
     
-    func loadCarsImages(_ imageNames: [String]?) -> [UIImage?]? {
+    func loadCarImages(_ imageNames: [String]?) -> [UIImage?]? {
         var images = [UIImage?]()
         imageNames?.forEach {
             images.append(UIImage(named: $0))
@@ -65,7 +65,7 @@ private extension CarsLoader {
         CarModel(id: carJson.id,
                  manufacturer: carJson.manufacturer,
                  model: carJson.model,
-                 images: self.loadCarsImages(carJson.images),
+                 images: self.loadCarImages(carJson.images),
                  yearOfIssue: carJson.yearOfIssue)
     }
 }
