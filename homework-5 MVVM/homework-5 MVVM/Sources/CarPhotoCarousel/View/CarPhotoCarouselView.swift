@@ -26,7 +26,7 @@ private enum ViewMetrics {
 }
 
 final class CarPhotoCarouselView: UIView {
-    private var viewModel: ICarPhotoCarouselViewModel
+    private var carImages: [UIImage?]?
     private var carPhotoViews = [UIView]()
     private var scrollView = UIScrollView()
     private var scrollViewContentSize: (width: CGFloat, height: CGFloat) {
@@ -40,18 +40,21 @@ final class CarPhotoCarouselView: UIView {
         }
     }
     
-    required init(viewModel: ICarPhotoCarouselViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(frame: .zero)
         configure()
-        reloadContent()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadContent() {
+    func updateContent(with carImages: [UIImage?]?) {
+        self.carImages = carImages
+        self.reloadLayout()
+    }
+    
+    func reloadLayout() {
         configure(carPhotoViews: &self.carPhotoViews)
         updateContent(at: self.scrollView)
     }
@@ -98,7 +101,7 @@ private extension CarPhotoCarouselView {
             PhotoViewMetrics.prevViewWidth = view.frame.width
         }
         carPhotoViews.removeAll()
-        self.viewModel.images?.forEach {
+        self.carImages?.forEach {
             if let image = $0 {
                 carPhotoViews.append(viewForCarousel(image: image))
             }

@@ -12,11 +12,15 @@ private enum Metrics {
     static let viewBackgroundColor = UIColor.white
 }
 
-final class CarDetailsViewController: UIViewController {
+final class CarDetailsViewController: UIViewController, IObserver {
+    var id: UUID
     private var viewModel: ICarDetailsViewModel
+    private let carDetailsView: CarDetailsView
     
     init(viewModel: ICarDetailsViewModel) {
+        self.id = UUID()
         self.viewModel = viewModel
+        self.carDetailsView = CarDetailsView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,21 +32,24 @@ final class CarDetailsViewController: UIViewController {
         super.viewDidLoad()
         configure()
     }
+    
+    func update<T>(with value: T) {
+        guard let car = value as? CarDetailModel else { return }
+        self.title = car.fullName
+        carDetailsView.updateContent(with: car)
+    }
 }
 
 private extension CarDetailsViewController {
     func configure() {
         view.backgroundColor = Metrics.viewBackgroundColor
-        title = self.viewModel.fullName
-        let carDetailsView = CarDetailsView(viewModel: self.viewModel)
-        configure(carDetailsView: carDetailsView)
+        configure(carDetailsView: self.carDetailsView)
     }
     
     func configure(carDetailsView: CarDetailsView) {
         view.addSubview(carDetailsView)
-        carDetailsView.imageTapHandler = { [weak self] in
-            guard let car = self?.viewModel.car else { return }
-            self?.viewModel.goToCarPhotoCarousel(with: car)
+        carDetailsView.imageTapHandler = { [weak self] carId in
+            self?.viewModel.goToCarPhotoCarousel(with: carId)
         }
         configureConstraints(at: carDetailsView)
     }

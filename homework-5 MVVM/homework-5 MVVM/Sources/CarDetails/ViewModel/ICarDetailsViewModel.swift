@@ -7,15 +7,6 @@
 
 import UIKit
 
-typealias ICarDetailsViewModel = ICarDetailsViewModelData & ICarDetailsViewModelCoordinator
-
-protocol ICarDetailsViewModelData {
-    var fullName:String { get }
-    var yearOfIssue: String { get }
-    var carPhoto: UIImage? { get }
-    var car: Car { get }
-}
-
-protocol ICarDetailsViewModelCoordinator {
-    func goToCarPhotoCarousel(with car: Car)
+protocol ICarDetailsViewModel {
+    func goToCarPhotoCarousel(with carId: Int)
 }

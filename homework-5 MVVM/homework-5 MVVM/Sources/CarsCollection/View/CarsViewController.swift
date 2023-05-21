@@ -12,12 +12,16 @@ private enum Metrics {
     static let viewBackgroundColor = UIColor.white
 }
 
-final class CarsViewController: UIViewController {
+final class CarsViewController: UIViewController, IObserver {
+    var id: UUID
     private var viewModel: ICarsViewModel
-    private var configureLayout: (()->Void) = {}
+    private let carsView: CarsView
+    private var configureLayout: (()->Void)?
     
     init(viewModel: ICarsViewModel) {
+        self.id = UUID()
         self.viewModel = viewModel
+        self.carsView = CarsView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,14 +35,19 @@ final class CarsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.configureLayout()
+        guard let configureLayout = self.configureLayout else { return }
+        configureLayout()
         super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    func update<T>(with value: T) {
+        guard let cars = value as? [CarModel] else { return }
+        self.carsView.updateContent(with: cars)
     }
 }
 
 private extension CarsViewController {
     func configure() {
-        let carsView = CarsView(carsViewModel: self.viewModel)
         title = Metrics.viewTitle
         configure(view: view)
         configure(carsView: carsView)
@@ -46,6 +55,9 @@ private extension CarsViewController {
     
     func configure(carsView: CarsView) {
         view.addSubview(carsView)
+        carsView.cellTapHandler = { [weak self] carId in
+            self?.viewModel.goToCarDetails(with: carId)
+        }
         configureConstraints(at: carsView)
         self.configureLayout = {
             carsView.updateLayout()

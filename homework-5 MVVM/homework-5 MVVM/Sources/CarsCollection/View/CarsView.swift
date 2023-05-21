@@ -20,14 +20,7 @@ private enum CollectionLayout {
         sectionInset: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     
     static var layout: ColumnFlowLayout {
-        switch UIDevice.current.orientation {
-        case .portrait, .portraitUpsideDown:
-            return portrait
-        case .landscapeLeft, .landscapeRight:
-            return landscape
-        default:
-            return portrait
-        }
+        return UIScreen.main.bounds.width > UIScreen.main.bounds.height ? landscape : portrait
     }
 }
 
@@ -36,21 +29,27 @@ private enum Metrics {
 }
 
 final class CarsView: UIView {
-    private var viewModel: ICarsViewModel
+    var cellTapHandler: ((Int)->Void)?
+    private var carsData: [CarModel]?
     private var collectionView: UICollectionView
-    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, ICarViewModel> { (cell, indexPath, carViewModel) in
-        cell.viewModel = carViewModel
+    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, indexPath, car) in
+        cell.car = car
     }
     
-    required init(carsViewModel: ICarsViewModel) {
-        self.viewModel = carsViewModel
+    required init() {
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionLayout.layout)
         super.init(frame: .zero)
         configure()
+        updateLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateContent(with cars: [CarModel]) {
+        self.carsData = cars
+        collectionView.reloadData()
     }
     
     func updateLayout() {
@@ -95,18 +94,23 @@ private extension CarsView {
 
 extension CarsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.viewModel.allCarsViewModel.count
+        guard let cars = carsData else { return 0 }
+        return cars.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cars = carsData else { return UICollectionViewCell() }
         let cell = collectionView.dequeueConfiguredReusableCell(
             using: self.cellDequeueConfig,
             for: indexPath,
-            item: self.viewModel.allCarsViewModel[indexPath.row])
+            item: cars[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewModel.goToCarDetails(with: self.viewModel.allCarsViewModel[indexPath.row].car)
+        guard let cellTapHandler = cellTapHandler else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CarCollectionViewCell else { return }
+        guard let carId = cell.car?.id else { return }
+        cellTapHandler(carId)
     }
 }

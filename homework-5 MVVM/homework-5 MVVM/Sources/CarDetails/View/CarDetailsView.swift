@@ -25,21 +25,24 @@ private enum ViewMetrics {
 }
 
 final class CarDetailsView: UIView, UIScrollViewDelegate {
-    var imageTapHandler: (()->Void) = {}
-    private var viewModel: ICarDetailsViewModel
+    var imageTapHandler: ((Int)->Void)?
+    private var car: CarDetailModel?
     private let carImageView = UIImageView()
     private let carNameLabel = UILabel()
     private let carYearOfIssueLabel = UILabel()
     private let scrollView = UIScrollView()
-    
-    required init(viewModel: ICarDetailsViewModel) {
-        self.viewModel = viewModel
+
+    required init() {
         super.init(frame: .zero)
         configure()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    func updateContent(with car: CarDetailModel) {
+        self.car = car
+        configureContent(with: car)
     }
 }
 
@@ -50,7 +53,6 @@ private extension CarDetailsView {
         configure(carImageView: self.carImageView)
         configure(label: self.carNameLabel, upperView: self.carImageView, textAlignment: .center)
         configure(label: self.carYearOfIssueLabel, upperView: self.carNameLabel)
-        configureContent(with: self.viewModel)
         configureContentViewBottomConstraint(at: self.scrollView, bottomView: self.carYearOfIssueLabel)
     }
     
@@ -60,10 +62,10 @@ private extension CarDetailsView {
         }
     }
     
-    func configureContent(with viewModel: ICarDetailsViewModel) {
-        configureContent(at: self.carImageView, with: viewModel.carPhoto)
-        configureContent(at: self.carNameLabel, with: viewModel.fullName)
-        configureContent(at: self.carYearOfIssueLabel, with: viewModel.yearOfIssue)
+    func configureContent(with car: CarDetailModel) {
+        configureContent(at: self.carImageView, with: car.carPhoto)
+        configureContent(at: self.carNameLabel, with: car.fullName)
+        configureContent(at: self.carYearOfIssueLabel, with: car.yearOfIssueDescription)
     }
     
     func configureContent(at carImageView: UIImageView, with image: UIImage?) {
@@ -120,7 +122,9 @@ private extension CarDetailsView {
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        self.imageTapHandler()
+        guard let imageTapHandler = self.imageTapHandler else { return }
+        guard let carId = self.car?.id else { return }
+        imageTapHandler(carId)
     }
     
     func configure(label: UILabel, upperView: UIView, textAlignment: NSTextAlignment = .left) {

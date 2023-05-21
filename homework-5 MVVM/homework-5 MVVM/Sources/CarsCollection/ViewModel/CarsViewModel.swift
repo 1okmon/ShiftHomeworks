@@ -7,24 +7,20 @@
 
 final class CarsViewModel {
     weak var coordinator : AppCoordinator?
-}
-
-extension CarsViewModel: ICarsViewModelsData {
-    var allCarsViewModel: [ICarViewModel] {
-        var carModels = [CarViewModel]()
-        for car in Car.allCases {
-            carModels.append(CarViewModel(car: car))
-        }
-        return carModels
+    private var cars = Observable<[CarModel]>()
+    
+    func subscribe(observer: IObserver) {
+        self.cars.subscribe(observer: observer)
+        self.loadCars()
     }
     
-    func carViewModel(car: Car) -> CarViewModel {
-        CarViewModel(car: car)
+    private func loadCars() {
+        cars.value = CarsLoader.shared.cars()
     }
 }
 
-extension CarsViewModel: ICarsViewModelCoordinator {
-    func goToCarDetails(with car: Car) {
-        self.coordinator?.goToCarDetails(with: car)
+extension CarsViewModel: ICarsViewModel{
+    func goToCarDetails(with id: Int) {
+        self.coordinator?.goToCarDetails(with: id)
     }
 }

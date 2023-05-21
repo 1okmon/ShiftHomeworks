@@ -7,12 +7,6 @@
 
 import UIKit
 
-typealias ICarPhotoCarouselViewModel = ICarPhotoCarouselViewModelData & ICarPhotoCarouselViewModelCoordinator
-
-protocol ICarPhotoCarouselViewModelData {
-    var images: [UIImage?]? { get }
-}
-
-protocol ICarPhotoCarouselViewModelCoordinator {
+protocol ICarPhotoCarouselViewModel {
     func dismiss()
 }

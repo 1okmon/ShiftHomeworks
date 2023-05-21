@@ -8,8 +8,12 @@
 import UIKit
 
 struct CarModel {
+    var id: Int
     var manufacturer: String
     var model: String
     var images: [UIImage?]?
     var yearOfIssue: Int?
+    var fullName: String {
+        return manufacturer + " " + model
+    }
 }

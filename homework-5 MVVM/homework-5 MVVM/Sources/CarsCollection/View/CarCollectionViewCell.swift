@@ -25,7 +25,7 @@ private enum LabelMetrics {
 }
 
 final class CarCollectionViewCell: UICollectionViewCell {
-    var viewModel: ICarViewModel? {
+    var car: CarModel? {
         didSet {
             configure()
         }
@@ -38,8 +38,8 @@ private extension CarCollectionViewCell {
     func configure() {
         configure(carImageView: self.carImageView)
         configure(carNameLabel: self.carNameLabel)
-        guard let viewModel = self.viewModel else { return }
-        configureContent(with: viewModel)
+        guard let car = self.car else { return }
+        configureContent(with: car)
     }
     
     func configure(carNameLabel: UILabel) {
@@ -83,21 +83,21 @@ private extension CarCollectionViewCell {
         }
     }
     
-    func configureContent(with viewModel: ICarViewModel) {
-        configureContent(at: self.carImageView, with: viewModel)
-        configureContent(at: self.carNameLabel, with: viewModel)
+    func configureContent(with car: CarModel) {
+        configureContent(at: self.carImageView, with: car)
+        configureContent(at: self.carNameLabel, with: car)
     }
     
-    func configureContent(at carImageView: UIImageView, with viewModel: ICarViewModel) {
+    func configureContent(at carImageView: UIImageView, with car: CarModel) {
         carImageView.contentMode = .scaleAspectFill
-        guard let image = viewModel.images?.first else {
+        guard let image = car.images?.first else {
             carImageView.image = ImageViewMetrics.defaultImage
             return
         }
         carImageView.image = image
     }
     
-    func configureContent(at carNameLabel: UILabel, with viewModel: ICarViewModel) {
-        carNameLabel.text = viewModel.fullName
+    func configureContent(at carNameLabel: UILabel, with car: CarModel) {
+        carNameLabel.text = car.fullName//.fullName
     }
 }

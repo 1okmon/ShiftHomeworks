@@ -7,8 +7,20 @@
 
 import UIKit
 
+private enum Metrics {
+    static let yearOfIssuePrefix = "Year of Issue: "
+    static let yearOfIssueUnknown = yearOfIssuePrefix + "Unknown"
+}
+
 struct CarDetailModel {
+    let id: Int
     let fullName:String
-    let yearOfIssue: String
+    let yearOfIssue: Int?
     let carPhoto: UIImage?
+    var yearOfIssueDescription: String {
+        guard let yearOfIssue = yearOfIssue else {
+            return Metrics.yearOfIssueUnknown
+        }
+        return Metrics.yearOfIssuePrefix + yearOfIssue.description
+    }
 }

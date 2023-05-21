@@ -11,12 +11,16 @@ private enum Metrics {
     static let leftBarButtonItemTitle = "Close"
 }
 
-final class CarPhotoCarouselViewController: UIViewController {
+final class CarPhotoCarouselViewController: UIViewController, IObserver {
+    var id: UUID
     private var viewModel: ICarPhotoCarouselViewModel
-    private var updateLayout: (()->()) = {}
+    private var updateLayout: (()->())?
+    let carPhotoCarouselView: CarPhotoCarouselView
     
     init(viewModel: ICarPhotoCarouselViewModel) {
+        self.id = UUID()
         self.viewModel = viewModel
+        self.carPhotoCarouselView = CarPhotoCarouselView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,8 +39,14 @@ final class CarPhotoCarouselViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.updateLayout()
+        guard let updateLayout = self.updateLayout else { return }
+        updateLayout()
         super.viewWillTransition(to: size, with: coordinator)
+    }
+    
+    func update<T>(with value: T) {
+        guard let car = value as? CarPhotoCarouselModel else { return }
+        self.carPhotoCarouselView.updateContent(with: car.images)
     }
 }
 
@@ -46,14 +56,15 @@ extension CarPhotoCarouselViewController {
     }
     
     func configure() {
-        let carPhotoCarouselView = CarPhotoCarouselView(viewModel: self.viewModel)
         configure(carPhotoCarouselView: carPhotoCarouselView)
     }
     
     func configure(carPhotoCarouselView: CarPhotoCarouselView) {
         view.addSubview(carPhotoCarouselView)
         configureConstrains(at: carPhotoCarouselView)
-        self.updateLayout = { carPhotoCarouselView.reloadContent() }
+        self.updateLayout = { [weak self] in
+            self?.carPhotoCarouselView.reloadLayout()
+        }
     }
     
     func configureConstrains(at carPhotoCarouselView: CarPhotoCarouselView) {
