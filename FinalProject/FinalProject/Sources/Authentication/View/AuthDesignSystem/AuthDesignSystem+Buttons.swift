@@ -15,7 +15,7 @@ extension AuthDesignSystem {
         case resetPassword
         case submitResetPassword
         
-        func button(with action:(()->Void)?) -> AuthButtonDecorator {
+        func button(with action:(() -> Void)?) -> AuthButtonDecorator {
             let designSystem = AuthDesignSystem()
             switch self {
             case .signIn:

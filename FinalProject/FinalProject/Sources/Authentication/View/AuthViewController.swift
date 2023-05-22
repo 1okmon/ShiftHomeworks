@@ -8,8 +8,8 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
-    private var keyboardWillShowHandler: ((CGFloat)->Void)?
-    private var keyboardWillHideHandler: (()->Void)?
+    private var keyboardWillShowHandler: ((CGFloat) -> Void)?
+    private var keyboardWillHideHandler: (() -> Void)?
     private var authViewModel: IAuthViewModel
     private var authView: AuthView
     

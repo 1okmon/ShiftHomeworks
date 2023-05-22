@@ -9,9 +9,9 @@ import UIKit
 
 class AuthButtonDecorator: UIButton, IAuthButton {
     private let decorator: IAuthButton
-    private var actionByTap: (()->Void)?
+    private var actionByTap: (() -> Void)?
     
-    required init(decorator: IAuthButton, action: (()->Void)?) {
+    required init(decorator: IAuthButton, action: (() -> Void)?) {
         self.decorator = decorator
         self.actionByTap = action
         super.init(frame: .zero)

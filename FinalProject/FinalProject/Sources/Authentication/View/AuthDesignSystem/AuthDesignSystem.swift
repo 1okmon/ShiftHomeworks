@@ -45,7 +45,7 @@ final class AuthDesignSystem {
         return textField
     }
     
-    func button(text: String, buttonType: AuthButtonType, with action: (()->Void)?) -> AuthButtonDecorator {
+    func button(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
         let button = AuthButton(type: .system)
         let buttonDecorator = buttonType.button(button: button, with: action)
         buttonDecorator.layer.cornerRadius = Metrics.cornerRadius
@@ -60,7 +60,7 @@ final class AuthDesignSystem {
         return buttonDecorator
     }
     
-    func forgotPasswordButton(text: String, buttonType: AuthButtonType, with action: (()->Void)?) -> AuthButtonDecorator {
+    func forgotPasswordButton(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
         let button = AuthButton(type: .system)
         let buttonDecorator = buttonType.button(button: button, with: action)
         let title = NSAttributedString(string: text, attributes:

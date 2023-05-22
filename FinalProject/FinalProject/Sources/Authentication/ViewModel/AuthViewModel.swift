@@ -6,7 +6,7 @@
 //
 
 final class AuthViewModel {
-    var coordinator : IAuthCoordinator
+    var coordinator: IAuthCoordinator
     init(coordinator: IAuthCoordinator) {
         self.coordinator = coordinator
     }
