@@ -16,27 +16,27 @@ final class AuthViewControllerBuilder {
     }
     
     func buildViewController(with viewModel: IAuthViewModel) -> AuthViewController {
-        return AuthViewController(authView: self.buildAuthView(viewModel: viewModel),
+        return AuthViewController(authView: self.buildAuthView(with: viewModel),
                                   authViewModel: viewModel)
     }
 }
 
 private extension AuthViewControllerBuilder {
-    func buildAuthView(viewModel: IAuthViewModel) -> AuthView {
+    func buildAuthView(with viewModel: IAuthViewModel) -> AuthView {
         guard let authType = authType else {
             fatalError("Authentication type is empty!")
         }
         switch authType {
         case .signUp:
-            return buildSignUpView(viewModel: viewModel)
+            return buildSignUpView(with: viewModel)
         case .singIn:
-            return buildSignInView(viewModel: viewModel)
+            return buildSignInView(with: viewModel)
         case .resetPassword:
-            return buildResetPasswordView(viewModel: viewModel)
+            return buildResetPasswordView(with: viewModel)
         }
     }
     
-    func buildSignUpView(viewModel: IAuthViewModel) -> AuthView {
+    func buildSignUpView(with viewModel: IAuthViewModel) -> AuthView {
         AuthView(titleLabel: AuthDesignSystem.Labels.signUp.label,
                  textFields: [AuthDesignSystem.TextFields.login.textField,
                               AuthDesignSystem.TextFields.password.textField,
@@ -46,7 +46,7 @@ private extension AuthViewControllerBuilder {
                  )])
     }
     
-    func buildSignInView(viewModel: IAuthViewModel) -> AuthView {
+    func buildSignInView(with viewModel: IAuthViewModel) -> AuthView {
         AuthView(titleLabel: AuthDesignSystem.Labels.signIn.label,
                  textFields: [AuthDesignSystem.TextFields.login.textField,
                               AuthDesignSystem.TextFields.password.textField],
@@ -58,7 +58,7 @@ private extension AuthViewControllerBuilder {
                             with: { viewModel.resetPassword() })])
     }
     
-    func buildResetPasswordView(viewModel: IAuthViewModel) -> AuthView {
+    func buildResetPasswordView(with viewModel: IAuthViewModel) -> AuthView {
         AuthView(titleLabel: AuthDesignSystem.Labels.resetPassword.label,
                  textFields: [AuthDesignSystem.TextFields.login.textField],
                  buttons: [AuthDesignSystem.Buttons.submitResetPassword.button(

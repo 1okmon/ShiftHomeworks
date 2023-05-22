@@ -47,7 +47,7 @@ final class AuthDesignSystem {
     
     func button(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
         let button = AuthButton(type: .system)
-        let buttonDecorator = buttonType.button(button: button, with: action)
+        let buttonDecorator = buttonType.add(to: button, action)
         buttonDecorator.layer.cornerRadius = Metrics.cornerRadius
         buttonDecorator.layer.borderWidth = Metrics.buttonBorderWidth
         buttonDecorator.layer.borderColor = Metrics.borderColor
@@ -62,7 +62,7 @@ final class AuthDesignSystem {
     
     func forgotPasswordButton(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
         let button = AuthButton(type: .system)
-        let buttonDecorator = buttonType.button(button: button, with: action)
+        let buttonDecorator = buttonType.add(to: button, action)
         let title = NSAttributedString(string: text, attributes:
                                         [NSAttributedString.Key.foregroundColor: Metrics.forgotPasswordFontColor,
                                          NSAttributedString.Key.font: Metrics.standardFont])

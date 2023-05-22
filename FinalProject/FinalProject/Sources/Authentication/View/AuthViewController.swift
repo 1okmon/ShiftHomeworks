@@ -43,32 +43,32 @@ final class AuthViewController: UIViewController {
 private extension AuthViewController {
     func configure() {
         self.view.backgroundColor = .white
-        configure(authView: authView)
+        configureAuthView()
     }
     
-    func configure(authView: AuthView) {
+    func configureAuthView() {
         self.view.addSubview(authView)
-        configureHandlers(at: authView)
-        addGestureRecognizer(to: authView)
-        configureConstraints(at: authView)
+        configureAuthViewHandlers()
+        addAuthViewGestureRecognizer()
+        configureAuthViewConstraints()
     }
     
-    func configureConstraints(at authView: UIView) {
+    func configureAuthViewConstraints() {
         authView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
     }
     
-    func configureHandlers(at authView: AuthView) {
-        keyboardWillShowHandler = { keyboardHeight in
-            authView.keyboardWillShow(keyboardHeight: keyboardHeight)
+    func configureAuthViewHandlers() {
+        keyboardWillShowHandler = { [weak self] keyboardHeight in
+            self?.authView.keyboardWillShow(keyboardHeight: keyboardHeight)
         }
-        keyboardWillHideHandler = {
-            authView.keyboardWillHide()
+        keyboardWillHideHandler = { [weak self] in
+            self?.authView.keyboardWillHide()
         }
     }
     
-    func addGestureRecognizer(to authView: UIView) {
+    func addAuthViewGestureRecognizer() {
         authView.addGestureRecognizer(UITapGestureRecognizer(target: self.view,
                                                              action: #selector(UIView.endEditing(_:))))
     }

@@ -66,19 +66,19 @@ final class AuthView: UIView {
 
 private extension AuthView {
     func configure() {
-        configure(scrollView: scrollView)
-        configure(titleLabel: titleLabel)
-        configure(textFields: textFields)
-        configure(buttons: buttons)
+        configureScrollView()
+        configureTitleLabel()
+        configureTextFields()
+        configureButtons()
         configureContentViewBottomConstraint(at: scrollView, bottomView: buttons.last)
     }
     
-    func configure(scrollView: UIScrollView) {
+    func configureScrollView() {
         self.addSubview(scrollView)
-        configureConstraints(at: scrollView)
+        configureScrollViewConstraints()
     }
     
-    func configureConstraints(at scrollView: UIScrollView) {
+    func configureScrollViewConstraints() {
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -91,23 +91,23 @@ private extension AuthView {
         }
     }
     
-    func configure(titleLabel: UILabel) {
+    func configureTitleLabel() {
         self.scrollView.addSubview(titleLabel)
-        configureConstraints(at: titleLabel)
+        configureTitleLabelConstraints()
     }
     
-    func configureConstraints(at titleLabel: UILabel) {
+    func configureTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(Metrics.titleTopOffset)
             make.horizontalEdges.equalTo(self)
         }
     }
     
-    func configure(textFields: [UITextField]) {
+    func configureTextFields() {
         for i in 0..<textFields.count {
             let topOffset = i == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
             let upperView = i == 0 ? titleLabel : textFields[i - 1]
-            configure(view: textFields[i], upperView: upperView, height: Metrics.height, topOffset: topOffset, horizontalInset: Metrics.horizontalInset)
+            configure(textFields[i], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
             configureDelegate(at: textFields[i])
         }
     }
@@ -116,25 +116,24 @@ private extension AuthView {
         textField.delegate = self
     }
     
-    func configure(buttons: [UIButton]) {
+    func configureButtons() {
         for i in 0..<buttons.count {
             let topOffset = i == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
             guard let upperView = i == 0 ? textFields.last : buttons[i - 1] else { return }
-            
-            configure(view: buttons[i], upperView: upperView, height: Metrics.height, topOffset: topOffset, horizontalInset: Metrics.horizontalInset)
+            configure(buttons[i], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
         }
     }
     
-    func configure(view: UIView, upperView: UIView, height: Int, topOffset: Int, horizontalInset:Int) {
+    func configure(_ view: UIView, under upperView: UIView, with height: Int, with topOffset: Int, with horizontalInset:Int) {
         self.scrollView.addSubview(view)
         configureConstraints(at: view,
                              under: upperView,
-                             height: height,
-                             topOffset: topOffset,
-                             horizontalInset: horizontalInset)
+                             with: height,
+                             with: topOffset,
+                             with: horizontalInset)
     }
     
-    func configureConstraints(at view: UIView, under upperView: UIView, height: Int, topOffset: Int, horizontalInset: Int) {
+    func configureConstraints(at view: UIView, under upperView: UIView, with height: Int, with topOffset: Int, with horizontalInset: Int) {
         view.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self).inset(horizontalInset)
             make.top.equalTo(upperView.snp.bottom).offset(topOffset)

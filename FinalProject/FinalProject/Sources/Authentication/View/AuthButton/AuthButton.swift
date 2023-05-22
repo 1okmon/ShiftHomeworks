@@ -14,7 +14,7 @@ enum AuthButtonType {
     case resetPassword
     case submitResetPassword
     
-    func button(button: AuthButton, with action:(() -> Void)?) -> AuthButtonDecorator {
+    func add(to button: AuthButton, _ action:(() -> Void)?) -> AuthButtonDecorator {
         switch self {
         case .signIn:
             return SignInButton(decorator: button, action: action)
