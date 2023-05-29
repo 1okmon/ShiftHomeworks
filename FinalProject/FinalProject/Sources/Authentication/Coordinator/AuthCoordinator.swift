@@ -20,19 +20,19 @@ final class AuthCoordinator: IAuthCoordinator {
     
     func goToSignIn() {
         let viewModel = AuthViewModel(coordinator: self)
-        let signInViewController = AuthViewControllerBuilder().setAuthType(.singIn).buildViewController(with: viewModel)
+        let signInViewController = AuthViewControllerBuilder().setAuthType(.singIn).setViewModel(viewModel).build()
         self.navigationController.viewControllers = [signInViewController]
     }
     
     func goToSignUp() {
         let viewModel = AuthViewModel(coordinator: self)
-        let signUpViewController = AuthViewControllerBuilder().setAuthType(.signUp).buildViewController(with: viewModel)
+        let signUpViewController = AuthViewControllerBuilder().setAuthType(.signUp).setViewModel(viewModel).build()
         self.navigationController.pushViewController(signUpViewController, animated: true)
     }
     
     func goToResetPassword() {
         let viewModel = AuthViewModel(coordinator: self)
-        let resetPasswordViewController = AuthViewControllerBuilder().setAuthType(.resetPassword).buildViewController(with: viewModel)
+        let resetPasswordViewController = AuthViewControllerBuilder().setAuthType(.resetPassword).setViewModel(viewModel).build()
         self.navigationController.pushViewController(resetPasswordViewController, animated: true)
     }
 }

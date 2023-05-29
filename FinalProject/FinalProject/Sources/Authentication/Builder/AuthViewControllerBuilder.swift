@@ -7,15 +7,31 @@
 
 import UIKit
 
+private enum Metrics {
+    enum FatalError{
+        static let emptyViewModelText = "ViewModel is empty!"
+        static let emptyAuthTypeText = "Authentication type is empty!"
+    }
+}
+
 final class AuthViewControllerBuilder {
     private var authType: AuthType?
+    private var viewModel: IAuthViewModel?
     
     func setAuthType(_ authType: AuthType) -> AuthViewControllerBuilder {
         self.authType = authType
         return self
     }
     
-    func buildViewController(with viewModel: IAuthViewModel) -> AuthViewController {
+    func setViewModel(_ viewModel: IAuthViewModel?) -> AuthViewControllerBuilder {
+        self.viewModel = viewModel
+        return self
+    }
+    
+    func build() -> AuthViewController {
+        guard let viewModel = self.viewModel else {
+            fatalError(Metrics.FatalError.emptyViewModelText)
+        }
         return AuthViewController(authView: self.buildAuthView(with: viewModel),
                                   authViewModel: viewModel)
     }
@@ -24,7 +40,7 @@ final class AuthViewControllerBuilder {
 private extension AuthViewControllerBuilder {
     func buildAuthView(with viewModel: IAuthViewModel) -> AuthView {
         guard let authType = authType else {
-            fatalError("Authentication type is empty!")
+            fatalError(Metrics.FatalError.emptyAuthTypeText)
         }
         switch authType {
         case .signUp:
