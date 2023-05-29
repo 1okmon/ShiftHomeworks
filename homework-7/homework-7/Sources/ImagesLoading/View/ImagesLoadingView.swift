@@ -43,13 +43,23 @@ private enum Metrics {
 }
 
 final class ImagesLoadingView: UIView {
+    var tableViewCellAlertHandler: (([UIAlertAction]) -> Void)?
+    var wrongUrlAlertHandler: (() -> Void)?
+    var loadButtonTapHandler: ((UUID, URL) -> Void)?
+    var pauseTapHandler: ((UUID) -> Void)?
+    var deleteTapHandler: ((UUID) -> Void)?
     private let urlTextField: UITextField
     private let addButton: UIButton
     private let tableView: UITableView
+    private var imageIds: [UUID]
+    private var cellsState: [UUID: LoadingState]
+    
     init() {
         self.urlTextField = UITextField()
         self.addButton = UIButton(type: .system)
         self.tableView = UITableView()
+        self.imageIds = [UUID]()
+        self.cellsState = [UUID: LoadingState]()
         super.init(frame: .zero)
         configure()
     }
@@ -58,6 +68,22 @@ final class ImagesLoadingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(to newImagesState: [UUID: LoadingState]) {
+        DispatchQueue.main.async {
+            for imageId in self.cellsState.keys {
+                self.updateCell(with: imageId, to: newImagesState[imageId])
+            }
+        }
+    }
+    
+    func delete(at imageId: UUID) {
+        let indexPath = self.indexPath(by: imageId)
+        self.cellsState[imageId] = nil
+        self.imageIds.removeAll { $0 == imageId }
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+
 // MARK: items configurations extension
 private extension ImagesLoadingView {
     func configure() {
@@ -110,6 +136,65 @@ private extension ImagesLoadingView {
         tableView.dataSource = self
     }
 }
+
+// MARK: methods extension
+private extension ImagesLoadingView {
+    @objc func loadButtonTapped() {
+        load()
+    }
+    
+    func indexPath(by imageId: UUID) -> IndexPath {
+        return IndexPath(row: imageIds.firstIndex(of: imageId) ?? 0, section: 0)
+    }
+    
+    func load() {
+        guard let text = urlTextField.text,
+              let url = URL(string: text) else {
+            wrongUrlAlertHandler?()
+            return
+        }
+        let imageId = UUID()
+        createNewCell(with: imageId)
+        loadButtonTapHandler?(imageId, url)
+    }
+    
+    func createNewCell(with imageId: UUID) {
+        self.imageIds.append(imageId)
+        tableView.reloadData()
+        self.cellsState.updateValue(.loading(progress: 0), forKey: imageId)
+    }
+    
+    func showAlert(_ imageId: UUID) {
+        let delete = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .destructive) { [weak self] _ in
+            self?.deleteTapHandler?(imageId)
+        }
+        let close = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .cancel)
+        tableViewCellAlertHandler?([delete, close])
+    }
+    
+    func updateCell(with imageId: UUID, to newState: LoadingState?) {
+        guard let newState = newState else {
+            self.delete(at: imageId)
+            return
+        }
+        guard let prevState = self.cellsState[imageId] else { return }
+        self.cellsState.updateValue(newState, forKey: imageId)
+        if prevState != newState {
+            if case .loading(let progress) = newState {
+                guard case .loading = prevState else {
+                    self.tableView.reloadRows(at: [self.indexPath(by: imageId)], with: .none)
+                    return
+                }
+                guard let cell = self.tableView.cellForRow(at: self.indexPath(by: imageId)) as? ImageLoadingTableViewCell else {
+                    return }
+                cell.setProgress(progress)
+                return
+            }
+            self.tableView.reloadRows(at: [self.indexPath(by: imageId)], with: .none)
+        }
+    }
+}
+
 // MARK: delegate extension
 extension ImagesLoadingView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -125,10 +210,27 @@ extension ImagesLoadingView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let state = cellsState[imageIds[indexPath.row]] else { return }
+        switch state {
+        case .loading, .paused:
+            pauseTapHandler?(imageIds[indexPath.row])
+        case .error:
+            let imageId = imageIds[indexPath.row]
+            showAlert(imageId)
+        default:
+            break
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageLoadingTableViewCell.className, for: indexPath) as? ImageLoadingTableViewCell else {
             return UITableViewCell()
         }
+        guard let cellState = cellsState[imageIds[indexPath.row]] else {
+            return cell
+        }
+        cell.state = cellState
         return cell
     }
 }

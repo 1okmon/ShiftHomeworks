@@ -61,5 +61,37 @@ private extension ImagesLoadingViewController {
         viewWithTable.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
+        viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions in
+            self?.showAlertSheetForTableViewCell(with: alertActions)
+        }
+        viewWithTable.wrongUrlAlertHandler = { [weak self] in
+            self?.showAlert()
+        }
+        viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
+            self?.viewModel?.load(from: url, imageId: imageId)
+        }
+        viewWithTable.pauseTapHandler = { [weak self] imageId in
+            self?.viewModel?.switchPause(with: imageId)
+        }
+        viewWithTable.deleteTapHandler = { [weak self] imageId in
+            self?.viewModel?.delete(with: imageId)
+        }
+    }
+    
+    func showAlertSheetForTableViewCell(with actions: [UIAlertAction]) {
+        let alert = UIAlertController(title: Metrics.TableViewCellAlert.title,
+                                      message: Metrics.TableViewCellAlert.message,
+                                      preferredStyle: .actionSheet)
+        actions.forEach { alert.addAction($0) }
+        self.present(alert, animated: true)
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: Metrics.WrongUrlAlert.title,
+                                      message: Metrics.WrongUrlAlert.message,
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: Metrics.WrongUrlAlert.buttonTitle, style: .cancel)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
 }
