@@ -32,7 +32,7 @@ final class CarsView: UIView {
     var cellTapHandler: ((Int) -> Void)?
     private var carsData: [CarModel]?
     private var collectionView: UICollectionView
-    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, indexPath, car) in
+    private let cellDequeueConfig = UICollectionView.CellRegistration<CarCollectionViewCell, CarModel> { (cell, _, car) in
         cell.car = car
     }
     

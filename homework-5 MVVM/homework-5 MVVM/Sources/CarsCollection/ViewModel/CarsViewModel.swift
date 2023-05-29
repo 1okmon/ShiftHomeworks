@@ -15,7 +15,7 @@ final class CarsViewModel {
     }
 }
 
-extension CarsViewModel: ICarsViewModel{
+extension CarsViewModel: ICarsViewModel {
     func goToCarDetails(with carId: Int) {
         self.coordinator?.goToCarDetails(with: carId)
     }

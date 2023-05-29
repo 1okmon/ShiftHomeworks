@@ -14,7 +14,7 @@ private enum Metrics {
 
 struct CarDetailModel {
     let id: Int
-    let fullName:String
+    let fullName: String
     let yearOfIssue: Int?
     let carPhoto: UIImage?
     var yearOfIssueDescription: String {

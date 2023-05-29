@@ -140,13 +140,13 @@ private extension CarPhotoCarouselView {
         self.scrollView.contentSize = CGSize(
             width: self.scrollViewContentSize.width,
             height: self.scrollViewContentSize.height)
-        for i in 0 ..< self.carPhotoViews.count {
-            self.carPhotoViews[i].frame = CGRect(
-                x: PhotoViewMetrics.photoViewSize.width * CGFloat(i),
+        for carPhotoIndex in 0 ..< self.carPhotoViews.count {
+            self.carPhotoViews[carPhotoIndex].frame = CGRect(
+                x: PhotoViewMetrics.photoViewSize.width * CGFloat(carPhotoIndex),
                 y: 0,
                 width: PhotoViewMetrics.photoViewSize.width,
                 height: PhotoViewMetrics.photoViewSize.height)
-            self.scrollView.addSubview(self.carPhotoViews[i])
+            self.scrollView.addSubview(self.carPhotoViews[carPhotoIndex])
         }
     }
     
