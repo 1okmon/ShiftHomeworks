@@ -1,0 +1,9 @@
+line_length:
+- 200 # warning
+- 300 # error
+large_tuple:
+- 3 # warning
+- 5 # error
+disabled_rules:
+- trailing_whitespace
+- type_name
