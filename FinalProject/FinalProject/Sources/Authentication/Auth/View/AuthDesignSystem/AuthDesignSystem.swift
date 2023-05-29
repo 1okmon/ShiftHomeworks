@@ -41,33 +41,47 @@ final class AuthDesignSystem {
         textField.layer.borderColor = Metrics.borderColor
         textField.placeholder = placeholder
         textField.isSecureTextEntry = isSecure
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        if isSecure {
+            textField.textContentType = .oneTimeCode
+        }
         textField.font = Metrics.standardFont
         return textField
     }
     
-    func button(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
-        let button = AuthButton(type: .system)
-        let buttonDecorator = buttonType.add(to: button, action)
-        buttonDecorator.layer.cornerRadius = Metrics.cornerRadius
-        buttonDecorator.layer.borderWidth = Metrics.buttonBorderWidth
-        buttonDecorator.layer.borderColor = Metrics.borderColor
-        buttonDecorator.backgroundColor = Metrics.backgroundColor
+    func button(with text: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = Metrics.cornerRadius
+        button.layer.borderWidth = Metrics.buttonBorderWidth
+        button.layer.borderColor = Metrics.borderColor
+        button.backgroundColor = Metrics.backgroundColor
         let title = NSAttributedString(string: text, attributes:
                                         [NSAttributedString.Key.foregroundColor: Metrics.fontColor,
                                          NSAttributedString.Key.font: Metrics.standardFont])
-        buttonDecorator.setAttributedTitle(title, for: .normal)
-        buttonDecorator.isUserInteractionEnabled = true
-        return buttonDecorator
+        button.setAttributedTitle(title, for: .normal)
+        button.isUserInteractionEnabled = true
+        return button
     }
     
-    func forgotPasswordButton(text: String, buttonType: AuthButtonType, with action: (() -> Void)?) -> AuthButtonDecorator {
-        let button = AuthButton(type: .system)
-        let buttonDecorator = buttonType.add(to: button, action)
+    func forgotPasswordButton(with text: String) -> UIButton {
+        let button = UIButton(type: .system)
         let title = NSAttributedString(string: text, attributes:
                                         [NSAttributedString.Key.foregroundColor: Metrics.forgotPasswordFontColor,
                                          NSAttributedString.Key.font: Metrics.standardFont])
-        buttonDecorator.setAttributedTitle(title, for: .normal)
-        buttonDecorator.isUserInteractionEnabled = true
-        return buttonDecorator
+        button.setAttributedTitle(title, for: .normal)
+        button.isUserInteractionEnabled = true
+        return button
+    }
+    
+    func alert(title: String, message: String, buttonTitles: [String], buttonActions: [((UIAlertAction) -> Void)?] = []) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        for buttonId in 0 ..< buttonTitles.count {
+            let buttonAction = buttonId < buttonActions.count ? buttonActions[buttonId] : nil
+            alert.addAction(UIAlertAction(title: buttonTitles[buttonId],
+                                          style: UIAlertAction.Style.default,
+                                          handler: buttonAction))
+        }
+        return alert
     }
 }
