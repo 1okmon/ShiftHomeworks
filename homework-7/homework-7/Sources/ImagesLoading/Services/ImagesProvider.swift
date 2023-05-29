@@ -7,6 +7,9 @@
 
 import Foundation
 
+private enum Metrics {
+    static let sessionIdentifier = "ImagesLoadingSession"
+}
 final class ImagesProvider: NSObject, IImagesProvider {
     static let shared: IImagesProvider = ImagesProvider()
     var onProgress: ((Float, UUID) -> Void)?
@@ -19,7 +22,7 @@ final class ImagesProvider: NSObject, IImagesProvider {
         self.tasks = [UUID: URLSessionDownloadTask]()
         self.tasksState = [UUID: (paused: Bool, url: URL, resumeData: Data)]()
         super.init()
-        let config = URLSessionConfiguration.background(withIdentifier: "imageId.description")
+        let config = URLSessionConfiguration.background(withIdentifier: Metrics.sessionIdentifier)
         self.session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }
     
