@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, IObserver {
+    var id: UUID
     private var keyboardWillShowHandler: ((CGFloat) -> Void)?
     private var keyboardWillHideHandler: (() -> Void)?
-    private var authViewModel: IAuthViewModel
     private var authView: AuthView
     
-    init(authView: AuthView, authViewModel: IAuthViewModel) {
+    init(authView: AuthView) {
+        self.id = UUID()
         self.authView = authView
-        self.authViewModel = authViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,6 +37,16 @@ final class AuthViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func update<T>(with value: T) {
+        guard let result = value as? AuthResult else { return }
+        authView.closeActivityIndicatory()
+        presentAlert(of: result)
+    }
+    
+    func presentAlert(of type: AuthResult) {
+        presentAlert(with: type.title, type.message, "ok")
     }
 }
 
@@ -60,12 +70,21 @@ private extension AuthViewController {
     }
     
     func configureAuthViewHandlers() {
+        authView.alertHandler = { [weak self] alertTitle, alertMessage, buttonTitle in
+            self?.presentAlert(with: alertTitle, alertMessage, buttonTitle)
+        }
         keyboardWillShowHandler = { [weak self] keyboardHeight in
             self?.authView.keyboardWillShow(keyboardHeight: keyboardHeight)
         }
         keyboardWillHideHandler = { [weak self] in
             self?.authView.keyboardWillHide()
         }
+    }
+    
+    func presentAlert(with alertTitle: String, _ alertMessage: String, _ buttonTitle: String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func addAuthViewGestureRecognizer() {
