@@ -23,12 +23,18 @@ private enum Metrics {
 final class ImagesLoadingViewController: UIViewController, IObserver {
     var id: UUID
     private let viewWithTable: ImagesLoadingView
+    private var viewModel: IImagesLoadingViewModel?
     
     init() {
         self.id = UUID()
         self.viewWithTable = ImagesLoadingView()
         super.init(nibName: nil, bundle: nil)
     }
+    
+    func setViewModel(viewModel: IImagesLoadingViewModel) {
+        self.viewModel = viewModel
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
