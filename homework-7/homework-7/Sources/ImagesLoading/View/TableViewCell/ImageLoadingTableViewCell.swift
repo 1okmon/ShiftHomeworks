@@ -36,6 +36,24 @@ private enum Metrics {
 }
 
 final class ImageLoadingTableViewCell: UITableViewCell {
+    var state: LoadingState {
+        didSet {
+            self.isUserInteractionEnabled = true
+            loadedImageView.image = nil
+            switch state {
+            case .loaded(let image):
+                setImage(image: image)
+            case .loading(let progress):
+                showActivityIndicator()
+                setProgress(progress)
+            case .paused:
+                showPause()
+            case .error:
+                errorView.isHidden = false
+                makeActivityAndProgressVisible(false)
+            }
+        }
+    }
     private var loadedImageView: UIImageView
     private var progressView: UIProgressView
     private var errorView: UIView
@@ -46,6 +64,7 @@ final class ImageLoadingTableViewCell: UITableViewCell {
         self.progressView = UIProgressView()
         self.errorView = UIView()
         self.activityView = UIView()
+        self.state = .loading(progress: 0)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
@@ -135,5 +154,30 @@ private extension ImageLoadingTableViewCell {
         }
         titleLabel.text = Metrics.Error.titleText
         titleLabel.textAlignment = Metrics.Error.titleTextAlignment
+    }
+}
+
+// MARK: methods extension
+private extension ImageLoadingTableViewCell {
+    func showPause() {
+        loadedImageView.image = Metrics.ImageView.pauseImage
+        makeActivityAndProgressVisible(false)
+    }
+    
+    func makeActivityAndProgressVisible(_ isVisible: Bool) {
+        progressView.isHidden = !isVisible
+        activityView.isHidden = !isVisible
+    }
+    
+    func setImage(image: UIImage) {
+        self.isUserInteractionEnabled = false
+        self.loadedImageView.image = image
+        makeActivityAndProgressVisible(false)
+    }
+    
+    func showActivityIndicator() {
+        if activityView.isHidden {
+            makeActivityAndProgressVisible(true)
+        }
     }
 }
