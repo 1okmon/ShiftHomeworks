@@ -8,6 +8,7 @@
 import UIKit
 
 private enum Metrics {
+    static let backgroundColor = UIColor.white
     enum TableViewCellAlert {
         static let title = "Не удалось загрузить картинку"
         static let message = "Выберете действие"
@@ -41,7 +42,7 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Metrics.backgroundColor
         configure()
     }
     
