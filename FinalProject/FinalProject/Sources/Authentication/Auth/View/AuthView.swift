@@ -15,8 +15,9 @@ private enum Metrics {
     static let inSectionTopOffset = 10
     static let horizontalInset = 50
     static let animateDuration = 0.2
-    static let activityViewBackgroundColor = UIColor.white.withAlphaComponent(0.8)
+    static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
     static let activityIndicatorVerticalOffset = -50
+    static let backgroundColor = Theme.backgroundColor
 }
 
 class AuthView: UIView {
@@ -34,6 +35,11 @@ class AuthView: UIView {
         self.buttons = buttons
         super.init(frame: .zero)
         configure()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.updateCgColors()
     }
     
     required init?(coder: NSCoder) {
@@ -75,6 +81,7 @@ class AuthView: UIView {
 
 private extension AuthView {
     func configure() {
+        self.backgroundColor = Metrics.backgroundColor
         configureScrollView()
         configureTitleLabel()
         configureTextFields()
@@ -162,6 +169,15 @@ private extension AuthView {
         let textFieldY = Int((firsResponderTextField.frame.origin.y))
         let offset = textFieldY > halfHeightOfVisibleView ? textFieldY - halfHeightOfVisibleView : halfHeightOfVisibleView - textFieldY
         return CGFloat(offset)
+    }
+    
+    func updateCgColors() {
+        for textField in textFields {
+            textField.layer.borderColor = Theme.borderCgColor
+        }
+        for button in buttons {
+            button.layer.borderColor = Theme.borderCgColor
+        }
     }
     
     func showAlert(with alertTitle: String, _ alertMessage: String, buttonTitle: String) {

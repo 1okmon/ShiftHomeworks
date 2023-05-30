@@ -7,6 +7,10 @@
 
 import UIKit
 
+private enum Metrics {
+    static let backgroundColor = Theme.backgroundColor
+}
+
 class AuthViewController: UIViewController, IObserver {
     var id: UUID
     private var keyboardWillShowHandler: ((CGFloat) -> Void)?
@@ -52,7 +56,7 @@ class AuthViewController: UIViewController, IObserver {
 
 private extension AuthViewController {
     func configure() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Metrics.backgroundColor
         configureAuthView()
     }
     

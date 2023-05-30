@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E27E6582A24BC9A0010C571 /* Theme.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E27E6582A24BC9A0010C571 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E27E6542A24BC3B0010C571 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6582A24BC9A0010C571 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		0EEA03C52A1724C300B1EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 		0EEA03E62A1725AE00B1EA9C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0E27E6542A24BC3B0010C571 /* Theme */,
 				0EF1604E2A1EFCD50026A628 /* Additions */,
 				0EEA043C2A1DAAF200B1EA9C /* AppCoordinator */,
 				0EEA04342A1DA74700B1EA9C /* UserProfile */,
@@ -490,6 +501,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/FinalProject/",
 			);
 			outputFileListPaths = (
 			);
@@ -561,6 +573,7 @@
 				0EEA04192A17261100B1EA9C /* AuthBuilder.swift in Sources */,
 				0EEA040E2A17261100B1EA9C /* AuthDesignSystem+Buttons.swift in Sources */,
 				0EEA04072A17261100B1EA9C /* AuthViewModel.swift in Sources */,
+				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* ResetPasswordViewModel.swift in Sources */,
@@ -715,6 +728,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NLAP4M3WXM;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					"PB_ENABLE_MALLOC=1",
+					"FIREBASE_ANALYTICS_SUPPRESS_WARNING=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -743,6 +765,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NLAP4M3WXM;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"PB_FIELD_32BIT=1",
+					"PB_NO_PACKED_STRUCTS=1",
+					"PB_ENABLE_MALLOC=1",
+					"FIREBASE_ANALYTICS_SUPPRESS_WARNING=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
