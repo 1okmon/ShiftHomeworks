@@ -9,7 +9,6 @@ import Firebase
 final class ErrorParser {
     func parse(error: Error) -> AuthResult {
         if let errCode = AuthErrorCode.Code(rawValue: error._code) {
-            print("in")
             switch errCode {
             case .wrongPassword:
                 return .wrongPassword

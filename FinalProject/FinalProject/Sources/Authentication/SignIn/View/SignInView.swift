@@ -6,6 +6,10 @@
 //
 
 import UIKit
+private enum Metrics {
+    static let animationDuration = 0.5
+}
+
 final class SignInView: AuthView {
     var signInTapHandler: ((String, String) -> Void)?
     var signUpTapHandler: (() -> Void)?
@@ -36,7 +40,7 @@ final class SignInView: AuthView {
     }
     
     func showResetPasswordButton() {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: Metrics.animationDuration) {
             self.resetPasswordButton.isHidden = false
         }
     }

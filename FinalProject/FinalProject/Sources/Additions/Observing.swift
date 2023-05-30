@@ -12,18 +12,6 @@ import Foundation
      func update<T>(with value: T)
  }
 
- final class Observer: IObserver {
-     var id: UUID
-
-     init(id: UUID) {
-         self.id = id
-     }
-
-     func update<T>(with value: T) {
-         print("Observer\(id): newValue: \(value)")
-     }
- }
-
  protocol IObservable: AnyObject {
      associatedtype ValueType
      var value: ValueType? { get set }
