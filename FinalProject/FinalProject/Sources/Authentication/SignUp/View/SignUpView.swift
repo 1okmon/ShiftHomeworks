@@ -41,8 +41,17 @@ private extension SignUpView {
         guard let handler = submitSignUpTapHandler else { return }
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
-              let repeatPassword = repeatPasswordTextField.text else { return }
-        guard repeatPassword == password else { return }
+              let repeatPassword = repeatPasswordTextField.text,
+              !email.isEmpty,
+              !password.isEmpty,
+              !repeatPassword.isEmpty else {
+            showAlert(of: .fieldsNotFilled)
+            return
+        }
+        guard password == repeatPassword else {
+            showAlert(of: .passwordsNotEqual)
+            return
+        }
         showActivityIndicatory()
         handler(email, password)
     }

@@ -22,6 +22,7 @@ enum AuthResult: Equatable {
     case serverError
     case tooManyRequests
     case undefinedError
+    case passwordsNotEqual
     
     var title: String {
         switch self {
@@ -53,6 +54,8 @@ enum AuthResult: Equatable {
             return "Много запросов"
         case .undefinedError:
             return "Непредвиденная ошибка"
+        case .passwordsNotEqual:
+            return "Пароли не совпадают"
         }
     }
     
@@ -86,6 +89,8 @@ enum AuthResult: Equatable {
             return "Доступ к этому аккаунту временно заблокирован. Вы можете сбросить пароль или повторить попытку позже."
         case .undefinedError:
             return "Приносим свои извинение. Исправим в ближайшее время."
+        case .passwordsNotEqual:
+            return "Пожалуйста проверьте введенные данные"
         }
     }
     
