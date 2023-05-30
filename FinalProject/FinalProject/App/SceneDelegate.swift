@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController.init()
         appCoordinator = AppCoordinator(navigationController: navigationController)
-        appCoordinator?.startAuthFlow()
+        //appCoordinator?.startAuthFlow()
+        appCoordinator?.startSignedInFlow()
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
     }

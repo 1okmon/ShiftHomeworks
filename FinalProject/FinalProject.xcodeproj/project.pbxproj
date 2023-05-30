@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E27E6582A24BC9A0010C571 /* Theme.swift */; };
+		0E27E66A2A25D9340010C571 /* SignedInTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E27E6692A25D9340010C571 /* SignedInTabBarController.swift */; };
+		0E27E6712A25DCF80010C571 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E27E6702A25DCF80010C571 /* FavouritesViewController.swift */; };
+		0E27E6732A25DD310010C571 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E27E6722A25DD310010C571 /* LocationViewController.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		0E27E6582A24BC9A0010C571 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0E27E6692A25D9340010C571 /* SignedInTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedInTabBarController.swift; sourceTree = "<group>"; };
+		0E27E6702A25DCF80010C571 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		0E27E6722A25DD310010C571 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +114,129 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		0E27E65E2A25D33B0010C571 /* RickAndMortyApi */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6682A25D8880010C571 /* Coordinator */,
+				0E27E6602A25D3740010C571 /* Character */,
+				0E27E65F2A25D34D0010C571 /* Location */,
+			);
+			path = RickAndMortyApi;
+			sourceTree = "<group>";
+		};
+		0E27E65F2A25D34D0010C571 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6632A25D7DD0010C571 /* Model */,
+				0E27E6622A25D7D80010C571 /* View */,
+				0E27E6612A25D7BE0010C571 /* ViewModel */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		0E27E6602A25D3740010C571 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6672A25D81C0010C571 /* Model */,
+				0E27E6662A25D8160010C571 /* View */,
+				0E27E6642A25D8060010C571 /* ViewModel */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		0E27E6612A25D7BE0010C571 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E27E6622A25D7D80010C571 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6722A25DD310010C571 /* LocationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E27E6632A25D7DD0010C571 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E27E6642A25D8060010C571 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E27E6662A25D8160010C571 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E27E6672A25D81C0010C571 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E27E6682A25D8880010C571 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0E27E66B2A25DC630010C571 /* SignedIn */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6692A25D9340010C571 /* SignedInTabBarController.swift */,
+				0EEA04342A1DA74700B1EA9C /* UserProfile */,
+				0E27E65E2A25D33B0010C571 /* RickAndMortyApi */,
+				0E27E66C2A25DCA10010C571 /* Favourites */,
+			);
+			path = SignedIn;
+			sourceTree = "<group>";
+		};
+		0E27E66C2A25DCA10010C571 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E66F2A25DCD50010C571 /* Model */,
+				0E27E66E2A25DCCC0010C571 /* View */,
+				0E27E66D2A25DCB80010C571 /* ViewModel */,
+			);
+			path = Favourites;
+			sourceTree = "<group>";
+		};
+		0E27E66D2A25DCB80010C571 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E27E66E2A25DCCC0010C571 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6702A25DCF80010C571 /* FavouritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E27E66F2A25DCD50010C571 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0EEA03C52A1724C300B1EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +283,8 @@
 				0E27E6542A24BC3B0010C571 /* Theme */,
 				0EF1604E2A1EFCD50026A628 /* Additions */,
 				0EEA043C2A1DAAF200B1EA9C /* AppCoordinator */,
-				0EEA04342A1DA74700B1EA9C /* UserProfile */,
 				0EEA03E82A17261100B1EA9C /* Authentication */,
+				0E27E66B2A25DC630010C571 /* SignedIn */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -560,6 +689,7 @@
 				0EF160372A1E199F0026A628 /* SignInViewController.swift in Sources */,
 				0EEA040D2A17261100B1EA9C /* AuthDesignSystem+TextFields.swift in Sources */,
 				0EEA04092A17261100B1EA9C /* IAuthCoordinator.swift in Sources */,
+				0E27E6712A25DCF80010C571 /* FavouritesViewController.swift in Sources */,
 				0EEA043E2A1DAB0900B1EA9C /* AppCoordinator.swift in Sources */,
 				0EEA040F2A17261100B1EA9C /* AuthView.swift in Sources */,
 				0EF160402A1E3C320026A628 /* SignUpViewController.swift in Sources */,
@@ -577,12 +707,14 @@
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* ResetPasswordViewModel.swift in Sources */,
+				0E27E6732A25DD310010C571 /* LocationViewController.swift in Sources */,
 				0EEA043B2A1DA81800B1EA9C /* ProfileView.swift in Sources */,
 				0EF1604D2A1EFCBC0026A628 /* Observing.swift in Sources */,
 				0EF1603E2A1E3C240026A628 /* SignUpView.swift in Sources */,
 				0EEA040A2A17261100B1EA9C /* AuthViewController.swift in Sources */,
 				0EEA04062A17261100B1EA9C /* IAuthViewModel.swift in Sources */,
 				0EF160542A1F88100026A628 /* IFirebase.swift in Sources */,
+				0E27E66A2A25D9340010C571 /* SignedInTabBarController.swift in Sources */,
 				0EF160582A207D850026A628 /* ErrorParser.swift in Sources */,
 				0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */,
 				0EF160462A1E3E940026A628 /* ResetPasswordView.swift in Sources */,

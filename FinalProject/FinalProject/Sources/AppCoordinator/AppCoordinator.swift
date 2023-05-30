@@ -12,9 +12,6 @@ final class AppCoordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-//        let navigationController = UINavigationController.init()
-//        let appCoordinator = AuthCoordinator(navigationController: navigationController)
-//        appCoordinator?.start()
     }
     
     func startAuthFlow() {
@@ -22,12 +19,13 @@ final class AppCoordinator {
         appCoordinator.start()
     }
     
-    func startProfileFlow() {
-        let profileViewController = ProfileViewController()
-        self.navigationController.viewControllers = [profileViewController]
+    func startSignedInFlow() {
+        let tabBarViewController = SignedInTabBarController()
+        //let profileViewController = ProfileViewController()
+        self.navigationController.viewControllers = [tabBarViewController]
     }
     
     func signInConfirmed() {
-        startProfileFlow()
+        startSignedInFlow()
     }
 }
