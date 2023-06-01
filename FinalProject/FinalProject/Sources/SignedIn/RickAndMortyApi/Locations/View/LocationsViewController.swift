@@ -50,4 +50,16 @@ private extension LocationsViewController {
         }
         configureLocationViewTapHandlers()
     }
+    
+    func configureLocationViewTapHandlers() {
+        self.locationView.nextPageTapHandler = { [weak self] in
+            self?.viewModel.loadNextPage()
+        }
+        self.locationView.previousPageTapHandler = { [weak self] in
+            self?.viewModel.loadPreviousPage()
+        }
+        self.locationView.cellTapHandler = { [weak self] locationId in
+            self?.viewModel.openLocation(with: locationId)
+        }
+    }
 }
