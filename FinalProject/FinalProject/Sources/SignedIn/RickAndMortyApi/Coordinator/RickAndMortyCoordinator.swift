@@ -44,6 +44,7 @@ final class RickAndMortyCoordinator {
         let characterDetailsViewModel = CharacterDetailsViewModel(coordinator: self)
         let characterDetailsViewController = CharacterDetailsViewController(viewModel: characterDetailsViewModel)
         characterDetailsViewModel.subscribe(observer: characterDetailsViewController)
+        characterDetailsViewModel.loadCharacter(with: id)
         self.navigationController.navigationBar.backItem?.title = Title.backButton
         self.navigationController.present(characterDetailsViewController, animated: true)
     }
