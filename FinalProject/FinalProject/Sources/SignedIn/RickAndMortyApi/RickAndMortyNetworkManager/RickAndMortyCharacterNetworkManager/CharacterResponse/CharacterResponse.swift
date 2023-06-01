@@ -10,9 +10,9 @@ import Foundation
 struct CharacterResponse: Decodable {
     let id: Int
     let name: String
-    let status: CharacterStatus
+    let status: String
     let species: String
     let type: String
-    let gender: CharacterGender
+    let gender: String
     let image: String
 }
