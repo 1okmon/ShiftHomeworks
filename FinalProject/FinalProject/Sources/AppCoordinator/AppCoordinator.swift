@@ -8,24 +8,19 @@
 import UIKit
 
 final class AppCoordinator {
-    private var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    func startAuthFlow() {
-        let appCoordinator = AuthCoordinator(navigationController: navigationController, appCoordinator: self)
+    func authFlow() -> UINavigationController {
+        let navigationController = UINavigationController()
+        let appCoordinator = AuthCoordinator(navigationController: navigationController,
+                                             appCoordinator: self)
         appCoordinator.start()
+        return navigationController
     }
     
-    func startSignedInFlow() {
-        let tabBarViewController = SignedInTabBarController()
-        //let profileViewController = ProfileViewController()
-        self.navigationController.viewControllers = [tabBarViewController]
+    func signedInFlow() -> UITabBarController {
+        return SignedInTabBarController()
     }
     
     func signInConfirmed() {
-        startSignedInFlow()
+        //firstAtSignedInFlow()
     }
 }
