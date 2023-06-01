@@ -27,6 +27,11 @@ import Foundation
              self.notify(newValue: self.value)
          }
      }
+     
+     init(_ value: T? = nil) {
+         self.value = value
+     }
+     
      var observers = [IObserver]()
 
      func subscribe(observer: IObserver) {

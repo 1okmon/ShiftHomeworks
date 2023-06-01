@@ -55,4 +55,10 @@ private extension LocationDetailsViewController {
         }
         configureLocationDetailsViewHandlers()
     }
+    
+    func configureLocationDetailsViewHandlers() {
+        self.locationDetailsView.cellTapHandler = { [weak self] id in
+            self?.viewModel.openCharacter(with: id)
+        }
+    }
 }

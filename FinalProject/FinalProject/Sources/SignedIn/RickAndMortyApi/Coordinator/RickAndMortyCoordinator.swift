@@ -35,6 +35,7 @@ final class RickAndMortyCoordinator {
         let locationViewModel = LocationDetailsViewModel(coordinator: self)
         let locationViewController = LocationDetailsViewController(viewModel: locationViewModel)
         locationViewModel.subscribe(observer: locationViewController)
+        locationViewModel.loadLocation(with: id)
         self.navigationController.navigationBar.backItem?.title = Title.backButton
         self.navigationController.pushViewController(locationViewController, animated: true)
     }
