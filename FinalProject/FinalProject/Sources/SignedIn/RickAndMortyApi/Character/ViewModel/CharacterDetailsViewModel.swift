@@ -26,23 +26,15 @@ final class CharacterDetailsViewModel {
         self.charactersNetworkManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails) in
             DispatchQueue.main.async {
                 self?.character.value = character
+                self?.loadImage(by: character.imageUrl)
             }
-            self?.loadImage(by: character.imageUrl)
+
         }
     }
     
     func loadImage(by url: String) {
-        self.charactersNetworkManager.completion = { [weak self] location, _ in
-            do {
-                let data = try Data(contentsOf: location)
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    self?.character.value?.image = image
-                }
-            } catch {
-                print(2)
-            }
+        self.charactersNetworkManager.loadImage(from: url) { [weak self] image, _ in
+            self?.character.value?.image = image
         }
-        self.charactersNetworkManager.loadImage(from: url)
     }
 }

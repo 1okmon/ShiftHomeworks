@@ -55,17 +55,8 @@ private extension LocationDetailsViewModel {
     }
     
     func loadImage(by url: String) {
-        self.charactersNetworkManager.completion = { [weak self] location, urlString in
-            do {
-                let data = try Data(contentsOf: location)
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    self?.residentsImages.value?.updateValue(image, forKey: urlString)
-                }
-            } catch {
-                print(2)
-            }
+        self.charactersNetworkManager.loadImage(from: url) { [weak self] image, urlString in
+            self?.residentsImages.value?.updateValue(image, forKey: urlString)
         }
-        self.charactersNetworkManager.loadImage(from: url)
     }
 }
