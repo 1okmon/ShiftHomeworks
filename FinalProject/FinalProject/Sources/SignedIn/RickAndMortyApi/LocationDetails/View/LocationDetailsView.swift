@@ -50,6 +50,7 @@ private enum Metrics {
 
 final class LocationDetailsView: UIView {
     var cellTapHandler: ((Int) -> Void)?
+    var residentsButtonTapHandler: (() -> Void)?
     private let nameLabel: UILabel
     private let typeLabel: UILabel
     private let dimensionLabel: UILabel
@@ -141,7 +142,7 @@ private extension LocationDetailsView {
         residentsButton.backgroundColor = Metrics.Button.backgroundColor
         residentsButton.titleLabel?.font = Metrics.font
         residentsButton.setTitle(Metrics.Button.Prefix.open, for: .normal)
-        residentsButton.addTarget(self, action: #selector(residentsButtonTapped), for: .touchUpInside)
+        residentsButton.addTarget(self, action: #selector(residentsButtonTapped(_:)), for: .touchUpInside)
         self.residentsButton = residentsButton
     }
     
@@ -164,7 +165,7 @@ private extension LocationDetailsView {
 }
 
 private extension LocationDetailsView {
-    @objc func residentsButtonTapped() {
+    @objc func residentsButtonTapped(_ sender: UIButton) {
         UIView.animate(withDuration: Metrics.animationDuration) {
             guard let charactersView = self.charactersView,
                   let residentsButton = self.residentsButton else { return }
@@ -183,5 +184,9 @@ private extension LocationDetailsView {
             }
             self.layoutIfNeeded()
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            self.residentsButtonTapHandler?()
+        })
+
     }
 }

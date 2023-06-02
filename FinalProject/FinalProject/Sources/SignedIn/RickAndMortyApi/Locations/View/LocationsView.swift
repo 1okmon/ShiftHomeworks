@@ -120,13 +120,13 @@ private extension LocationsView {
     }
     
     func configureNextPageButton() {
-        self.nextPageButton.addTarget(self, action: #selector(nextPageTapped), for: .touchUpInside)
+        self.nextPageButton.addTarget(self, action: #selector(nextPageTapped(_:)), for: .touchUpInside)
         configure(pageButton: self.nextPageButton, place: .right)
     }
     
     func configurePreviousPageButton() {
         configure(pageButton: self.previousPageButton, place: .left)
-        self.previousPageButton.addTarget(self, action: #selector(previousPageTapped), for: .touchUpInside)
+        self.previousPageButton.addTarget(self, action: #selector(previousPageTapped(_:)), for: .touchUpInside)
     }
     
     func configure(pageButton: UIButton, place: PageButton.Place) {
@@ -173,12 +173,12 @@ private extension LocationsView {
 
 // MARK: method extension
 private extension LocationsView {
-    @objc func nextPageTapped() {
+    @objc func nextPageTapped(_ sender: UIButton) {
         showActivityIndicator()
         nextPageTapHandler?()
     }
     
-    @objc func previousPageTapped() {
+    @objc func previousPageTapped(_ sender: UIButton) {
         showActivityIndicator()
         previousPageTapHandler?()
     }
