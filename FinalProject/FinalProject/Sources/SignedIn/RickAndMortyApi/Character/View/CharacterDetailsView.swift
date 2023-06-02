@@ -60,13 +60,15 @@ final class CharacterDetailsView: UIView {
     }
     
     func update(with character: CharacterDetails) {
-        self.characterImageView.image = character.image ?? Metrics.ImageView.defaultImage
-        self.characterNameLabel.text = Metrics.Label.Prefix.name + character.name
-        self.characterGenderLabel.text = Metrics.Label.Prefix.gender + character.gender
-        self.characterStatusLabel.text = Metrics.Label.Prefix.status + character.status
-        self.characterSpeciesLabel.text = Metrics.Label.Prefix.species + character.species
-        self.characterTypeLabel.isHidden = character.type.isEmpty
-        self.characterTypeLabel.text = Metrics.Label.Prefix.type + character.type
+        DispatchQueue.main.async {
+            self.characterImageView.image = character.image ?? Metrics.ImageView.defaultImage
+            self.characterNameLabel.text = Metrics.Label.Prefix.name + character.name
+            self.characterGenderLabel.text = Metrics.Label.Prefix.gender + character.gender
+            self.characterStatusLabel.text = Metrics.Label.Prefix.status + character.status
+            self.characterSpeciesLabel.text = Metrics.Label.Prefix.species + character.species
+            self.characterTypeLabel.isHidden = character.type.isEmpty
+            self.characterTypeLabel.text = Metrics.Label.Prefix.type + character.type
+        }
     }
 }
 

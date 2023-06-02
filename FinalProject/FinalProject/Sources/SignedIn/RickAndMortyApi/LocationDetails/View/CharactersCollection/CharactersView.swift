@@ -19,13 +19,16 @@ private enum Metrics {
 final class CharactersView: UIView {
     var cellTapHandler: ((Int) -> Void)?
     private let collectionView: UICollectionView
-    private var characters: [Character]
+    private var characters: [Int: Character]
+    private var charactersIndexPath: [Int: IndexPath]
+    private var imagesUrls: [String: Int]
     private var images: [String: UIImage?]
     
     init() {
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout:
-                .init())
-        self.characters = []
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        self.charactersIndexPath = [:]
+        self.characters = [:]
+        self.imagesUrls = [:]
         self.images = [:]
         self.collectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.className)
         super.init(frame: .zero)
@@ -46,13 +49,37 @@ final class CharactersView: UIView {
     }
     
     func update(with characters: [Character]) {
-        self.characters = characters
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            characters.forEach { character in
+                guard self.characters[character.id] == nil else { return }
+                self.characters.updateValue(character, forKey: character.id)
+                let characterIndexPath = IndexPath(row: self.charactersIndexPath.keys.count, section: 0)
+                self.charactersIndexPath.updateValue(characterIndexPath, forKey: character.id)
+                self.collectionView.insertItems(at: [characterIndexPath])
+                self.imagesUrls.updateValue(character.id, forKey: character.image)
+            }
+        }
     }
     
     func update(with images: [String: UIImage?]) {
-        self.images = images
-        collectionView.reloadData()
+        print(999)
+        DispatchQueue.main.async {
+            images.forEach { (url, image) in
+//                <#code#>
+//            }
+//            for (url, image) in images {
+                guard self.images[url] == nil,
+                      let image = image else { return }
+                self.images.updateValue(image, forKey: url)
+                guard let characterId = self.imagesUrls[url],
+                      let indexPath = self.charactersIndexPath[characterId] else { return }
+                self.collectionView.reloadItems(at: [indexPath])
+            }
+            print(1999)
+        }
+        
+        // self.images = images
+        //collectionView.reloadData()
     }
 }
 
@@ -78,22 +105,30 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard (0 ..< characters.count).contains(indexPath.row) else { return }
-        let characterId = self.characters[indexPath.row].id
+        guard let characterId = self.charactersIndexPath.first(where: { $1 == indexPath })?.key else { return }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else { return }
+        
         self.cellTapHandler?(characterId)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else {
+        guard let characterId = self.charactersIndexPath.first(where: { $1 == indexPath })?.key,
+              let character =  self.characters[characterId],
+              let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let character = self.characters[indexPath.row]
+        //guard let character =  self.characters[characterId] else { return }
+        
+        //let character = self.characters[indexPath.row]
+        //print(201)
         cell.update(with: character)
+        //cell.isUserInteractionEnabled = true
         guard let image = self.images[character.image],
               let image = image else {
             return cell
         }
         cell.update(with: image)
+        print(202)
         return cell
     }
 }
