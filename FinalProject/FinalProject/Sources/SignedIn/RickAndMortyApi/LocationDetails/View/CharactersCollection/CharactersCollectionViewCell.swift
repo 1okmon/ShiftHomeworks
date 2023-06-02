@@ -35,6 +35,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
         self.characterImageView = UIImageView()
         self.characterName = UILabel()
         super.init(frame: frame)
+        //self.isUserInteractionEnabled = false
         configure()
     }
     
@@ -51,7 +52,8 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        self.characterImageView.image = nil
+        //self.isUserInteractionEnabled = false
+        self.characterImageView.image = Metrics.ImageView.defaultImage
     }
 }
 
