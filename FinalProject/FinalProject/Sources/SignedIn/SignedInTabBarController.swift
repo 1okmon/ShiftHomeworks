@@ -9,7 +9,7 @@ import UIKit
 enum TabBarItemType: Int {
     case profileInfo
     case richAndMortyWiki
-    case favourites
+    case favorites
     
     var item: UITabBarItem {
         switch self {
@@ -17,7 +17,7 @@ enum TabBarItemType: Int {
             return UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.crop.circle"), tag: self.rawValue)
         case .richAndMortyWiki:
             return UITabBarItem(title: "Рик и Морти Wiki", image: UIImage(systemName: "brain.head.profile"), tag: self.rawValue)
-        case .favourites:
+        case .favorites:
             return UITabBarItem(title: "Избранное", image: UIImage(systemName: "star"), tag: self.rawValue)
         }
     }
@@ -31,7 +31,7 @@ private enum Metrics {
 final class SignedInTabBarController: UITabBarController {
     private var profileViewController: ProfileViewController?
     private var rickAndMortyNavigationController: UINavigationController
-    private var favouritesViewController: FavouritesViewController?
+    private var favoritesViewController: FavoritesViewController?
     
     init() {
         self.rickAndMortyNavigationController = UINavigationController()
@@ -56,13 +56,13 @@ private extension SignedInTabBarController {
         profileViewController = ProfileViewController()
         rickAndMortyNavigationController = UINavigationController()
         let rickAndMortyCoordinator = RickAndMortyCoordinator(navigationController: rickAndMortyNavigationController)
-        favouritesViewController = FavouritesViewController()
+        favoritesViewController = FavoritesViewController()
     }
     
     func configureTabBarItems() {
         profileViewController?.tabBarItem = TabBarItemType.profileInfo.item
         rickAndMortyNavigationController.tabBarItem = TabBarItemType.richAndMortyWiki.item
-        favouritesViewController?.tabBarItem = TabBarItemType.favourites.item
+        favoritesViewController?.tabBarItem = TabBarItemType.favorites.item
     }
     
     func configure(tabBar: UITabBar) {
@@ -72,7 +72,7 @@ private extension SignedInTabBarController {
     
     func appendViewControllers() {
         guard let profileViewController = profileViewController,
-              let favouritesViewController = favouritesViewController else { return }
-        self.viewControllers = [profileViewController, rickAndMortyNavigationController, favouritesViewController]
+              let favoritesViewController = favoritesViewController else { return }
+        self.viewControllers = [profileViewController, rickAndMortyNavigationController, favoritesViewController]
     }
 }
