@@ -13,6 +13,7 @@ private enum Metrics {
 }
 
 final class CacheManager {
+    private let queue = DispatchQueue(label: "CacheManagerQueue", attributes: .concurrent)
     private var imageDictionary: [String: UIImage]
     
     init() {
@@ -20,12 +21,16 @@ final class CacheManager {
     }
     
     func append(image: UIImage, with key: String) {
-        self.cleanImageDictionaryIfNeeded()
-        self.imageDictionary.updateValue(image, forKey: key)
+        self.queue.async(flags: .barrier) {
+            self.cleanImageDictionaryIfNeeded()
+            self.imageDictionary.updateValue(image, forKey: key)
+        }
     }
     
     func image(by key: String) -> UIImage? {
-        return self.imageDictionary[key]
+        self.queue.sync {
+            return self.imageDictionary[key]
+        }
     }
 }
 
