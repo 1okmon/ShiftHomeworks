@@ -13,7 +13,7 @@ import CoreData
 public class ImageEntity: NSManagedObject {}
 
 extension ImageEntity {
-    @NSManaged public var url: String?
+    @NSManaged public var id: UUID?
     @NSManaged public var imageData: Data?
 }
 

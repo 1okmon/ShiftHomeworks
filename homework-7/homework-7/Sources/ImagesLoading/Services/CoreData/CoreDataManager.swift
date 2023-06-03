@@ -28,13 +28,16 @@ final class CoreDataManager: NSObject {
         self.appDelegate.persistentContainer.viewContext
     }
     
-    func createImage(_ image: UIImage, from url: String) {
+    func create(_ image: UIImage, with id: UUID) {
         guard let imageEntityDescription = NSEntityDescription
             .entity(forEntityName: EntityName.image,
                     in: self.context) else { return }
-        
+        let existedImage = fetchImages().first { imageEntity in
+            imageEntity.id == id
+        }
+        guard existedImage == nil else { return }
         let imageEntity = ImageEntity(entity: imageEntityDescription, insertInto: self.context)
-        imageEntity.url = url
+        imageEntity.id = id
         imageEntity.imageData = image.jpegData(compressionQuality: 1.0)
         self.appDelegate.saveContext()
     }
@@ -46,11 +49,11 @@ final class CoreDataManager: NSObject {
         }
     }
     
-    func fetchImage(with url: String) -> ImageEntity? {
+    func fetchImage(with id: UUID) -> ImageEntity? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.image)
         do {
             let images = try? context.fetch(fetchRequest) as? [ImageEntity]
-            return images?.first(where: { $0.url == url })
+            return images?.first(where: { $0.id == id })
         }
     }
     
@@ -65,11 +68,11 @@ final class CoreDataManager: NSObject {
         self.appDelegate.saveContext()
     }
     
-    func deleteImage(with url: String) {
+    func deleteImage(with id: UUID) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.image)
         do {
             guard let images = try? context.fetch(fetchRequest) as? [ImageEntity],
-                  let image = images.first(where: { $0.url == url }) else { return }
+                  let image = images.first(where: { $0.id == id }) else { return }
             self.context.delete(image)
         }
         self.appDelegate.saveContext()
