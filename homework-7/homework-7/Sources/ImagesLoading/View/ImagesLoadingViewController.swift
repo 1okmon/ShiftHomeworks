@@ -14,10 +14,31 @@ private enum Metrics {
         static let message = "Выберете действие"
     }
     
-    enum WrongUrlAlert {
-        static let title = "Url не существует"
-        static let message = "Кажется вы неверно ввели ссылку"
-        static let buttonTitle = "Закрыть"
+    enum UrlFieldAlert {
+        case emptyUrlField
+        case wrongUrl
+        
+        var title: String {
+            switch self {
+            case .emptyUrlField:
+                return "Ссылка не была указана"
+            case .wrongUrl:
+                return "Url не существует"
+            }
+        }
+        
+        var message: String {
+            switch self {
+            case .emptyUrlField:
+                return "Пожалуйста укажите ссылку"
+            case .wrongUrl:
+                return "Кажется вы неверно ввели ссылку"
+            }
+        }
+        
+        var buttonTitle: String {
+            "Закрыть"
+        }
     }
 }
 
@@ -44,11 +65,17 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
         super.viewDidLoad()
         self.view.backgroundColor = Metrics.backgroundColor
         configure()
+        self.viewModel?.launch()
     }
     
     func update<T>(with value: T) {
+        if let isUrlCreated = value as? Bool {
+            if !isUrlCreated {
+                showAlert(.wrongUrl)
+            }
+        }
         guard let value = value as? [UUID: LoadingState] else { return }
-        viewWithTable.update(to: value)
+        self.viewWithTable.update(to: value)
     }
 }
 
@@ -59,23 +86,27 @@ private extension ImagesLoadingViewController {
     
     func configureView() {
         self.view.addSubview(viewWithTable)
-        viewWithTable.snp.makeConstraints { make in
+        self.viewWithTable.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions in
+        self.viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions in
             self?.showAlertSheetForTableViewCell(with: alertActions)
         }
-        viewWithTable.wrongUrlAlertHandler = { [weak self] in
-            self?.showAlert()
-        }
-        viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
+        self.viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
+            guard !url.isEmpty else {
+                self?.showAlert(.emptyUrlField)
+                return
+            }
             self?.viewModel?.load(from: url, imageId: imageId)
         }
-        viewWithTable.pauseTapHandler = { [weak self] imageId in
+        self.viewWithTable.pauseTapHandler = { [weak self] imageId in
             self?.viewModel?.switchPause(with: imageId)
         }
-        viewWithTable.deleteTapHandler = { [weak self] imageId in
+        self.viewWithTable.deleteTapHandler = { [weak self] imageId in
             self?.viewModel?.delete(with: imageId)
+        }
+        self.viewWithTable.saveTapHandler = { [weak self] imageId in
+            self?.viewModel?.saveImage(with: imageId)
         }
     }
     
@@ -87,11 +118,11 @@ private extension ImagesLoadingViewController {
         self.present(alert, animated: true)
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: Metrics.WrongUrlAlert.title,
-                                      message: Metrics.WrongUrlAlert.message,
+    func showAlert(_ type: Metrics.UrlFieldAlert) {
+        let alert = UIAlertController(title: type.title,
+                                      message: type.message,
                                       preferredStyle: .alert)
-        let action = UIAlertAction(title: Metrics.WrongUrlAlert.buttonTitle, style: .cancel)
+        let action = UIAlertAction(title: type.buttonTitle, style: .cancel)
         alert.addAction(action)
         self.present(alert, animated: true)
     }

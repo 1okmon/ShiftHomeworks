@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Metrics.imagesDB)
-        container.loadPersistentStores { description, error in
+        container.loadPersistentStores { _, error in
             guard error == nil else { return }
         }
         return container

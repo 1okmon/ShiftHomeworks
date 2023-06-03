@@ -38,7 +38,6 @@ private enum Metrics {
 final class ImageLoadingTableViewCell: UITableViewCell {
     var state: LoadingState {
         didSet {
-            self.isUserInteractionEnabled = true
             loadedImageView.image = nil
             switch state {
             case .loaded(let image):
@@ -170,7 +169,6 @@ private extension ImageLoadingTableViewCell {
     }
     
     func setImage(image: UIImage) {
-        self.isUserInteractionEnabled = false
         self.loadedImageView.image = image
         makeActivityAndProgressVisible(false)
     }

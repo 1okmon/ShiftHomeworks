@@ -38,16 +38,17 @@ private enum Metrics {
     
     enum Alert {
         static let deleteActionTitleText = "Удалить"
+        static let saveActionTitleText = "Сохранить"
         static let closeActionTitleText = "Закрыть"
     }
 }
 
 final class ImagesLoadingView: UIView {
     var tableViewCellAlertHandler: (([UIAlertAction]) -> Void)?
-    var wrongUrlAlertHandler: (() -> Void)?
-    var loadButtonTapHandler: ((UUID, URL) -> Void)?
+    var loadButtonTapHandler: ((UUID, String) -> Void)?
     var pauseTapHandler: ((UUID) -> Void)?
     var deleteTapHandler: ((UUID) -> Void)?
+    var saveTapHandler: ((UUID) -> Void)?
     private let urlTextField: UITextField
     private let addButton: UIButton
     private let tableView: UITableView
@@ -70,8 +71,8 @@ final class ImagesLoadingView: UIView {
     
     func update(to newImagesState: [UUID: LoadingState]) {
         DispatchQueue.main.async {
-            for imageId in self.cellsState.keys {
-                self.updateCell(with: imageId, to: newImagesState[imageId])
+            for (imageId, state) in newImagesState {
+                self.updateCell(with: imageId, to: state)
             }
         }
     }
@@ -122,7 +123,7 @@ private extension ImagesLoadingView {
         addButton.layer.cornerRadius = Metrics.Button.cornerRadius
         addButton.setTitleColor(Metrics.Button.titleColor, for: .normal)
         addButton.setTitle(Metrics.Button.titleText, for: .normal)
-        addButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(loadButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureTableView() {
@@ -139,7 +140,7 @@ private extension ImagesLoadingView {
 
 // MARK: methods extension
 private extension ImagesLoadingView {
-    @objc func loadButtonTapped() {
+    @objc func loadButtonTapped(_ sender: UIButton) {
         load()
     }
     
@@ -148,31 +149,40 @@ private extension ImagesLoadingView {
     }
     
     func load() {
-        guard let text = urlTextField.text,
-              let url = URL(string: text) else {
-            wrongUrlAlertHandler?()
-            return
-        }
-        let imageId = UUID()
-        createNewCell(with: imageId)
-        loadButtonTapHandler?(imageId, url)
+        loadButtonTapHandler?(UUID(), urlTextField.text ?? "")
     }
     
     func createNewCell(with imageId: UUID) {
         self.imageIds.append(imageId)
-        tableView.reloadData()
         self.cellsState.updateValue(.loading(progress: 0), forKey: imageId)
+        self.tableView.insertRows(at: [indexPath(by: imageId)], with: .automatic)
     }
     
     func showAlert(_ imageId: UUID) {
+        var alertActions: [UIAlertAction] = []
         let delete = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .destructive) { [weak self] _ in
+            guard let index = self?.imageIds.firstIndex(of: imageId) else { return }
+            self?.cellsState.removeValue(forKey: imageId)
+            self?.imageIds.remove(at: index)
+            self?.tableView.reloadData()
             self?.deleteTapHandler?(imageId)
         }
-        let close = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .cancel)
-        tableViewCellAlertHandler?([delete, close])
+        alertActions.append(delete)
+        if case .loaded = cellsState[imageId] {
+            let save = UIAlertAction(title: Metrics.Alert.saveActionTitleText, style: .default) { [weak self] _ in
+                self?.saveTapHandler?(imageId)
+            }
+            alertActions.append(save)
+        }
+        let close = UIAlertAction(title: Metrics.Alert.closeActionTitleText, style: .cancel)
+        alertActions.append(close)
+        tableViewCellAlertHandler?(alertActions)
     }
     
     func updateCell(with imageId: UUID, to newState: LoadingState?) {
+        if self.cellsState[imageId] == nil {
+            createNewCell(with: imageId)
+        }
         guard let newState = newState else {
             self.delete(at: imageId)
             return
@@ -214,11 +224,9 @@ extension ImagesLoadingView: UITableViewDelegate, UITableViewDataSource {
         switch state {
         case .loading, .paused:
             pauseTapHandler?(imageIds[indexPath.row])
-        case .error:
+        case .error, .loaded:
             let imageId = imageIds[indexPath.row]
             showAlert(imageId)
-        default:
-            break
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
