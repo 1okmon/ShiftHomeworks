@@ -44,7 +44,7 @@ private enum Metrics {
 }
 
 final class ImagesLoadingView: UIView {
-    var tableViewCellAlertHandler: (([UIAlertAction]) -> Void)?
+    var tableViewCellAlertHandler: (([UIAlertAction], LoadingState?) -> Void)?
     var loadButtonTapHandler: ((UUID, String) -> Void)?
     var pauseTapHandler: ((UUID) -> Void)?
     var deleteTapHandler: ((UUID) -> Void)?
@@ -176,7 +176,7 @@ private extension ImagesLoadingView {
         }
         let close = UIAlertAction(title: Metrics.Alert.closeActionTitleText, style: .cancel)
         alertActions.append(close)
-        tableViewCellAlertHandler?(alertActions)
+        tableViewCellAlertHandler?(alertActions, cellsState[imageId])
     }
     
     func updateCell(with imageId: UUID, to newState: LoadingState?) {

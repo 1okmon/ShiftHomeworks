@@ -10,7 +10,8 @@ import UIKit
 private enum Metrics {
     static let backgroundColor = UIColor.white
     enum TableViewCellAlert {
-        static let title = "Не удалось загрузить картинку"
+        static let titleForLoaded = "Картинка успешно загружена"
+        static let titleForFailed = "Не удалось загрузить картинку"
         static let message = "Выберете действие"
     }
     
@@ -89,8 +90,8 @@ private extension ImagesLoadingViewController {
         self.viewWithTable.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        self.viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions in
-            self?.showAlertSheetForTableViewCell(with: alertActions)
+        self.viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions, state in
+            self?.showAlertSheetForTableViewCell(with: alertActions, for: state)
         }
         self.viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
             guard !url.isEmpty else {
@@ -110,8 +111,12 @@ private extension ImagesLoadingViewController {
         }
     }
     
-    func showAlertSheetForTableViewCell(with actions: [UIAlertAction]) {
-        let alert = UIAlertController(title: Metrics.TableViewCellAlert.title,
+    func showAlertSheetForTableViewCell(with actions: [UIAlertAction], for state: LoadingState?) {
+        var title = Metrics.TableViewCellAlert.titleForLoaded
+        if case .error = state {
+            title = Metrics.TableViewCellAlert.titleForFailed
+        }
+        let alert = UIAlertController(title: title,
                                       message: Metrics.TableViewCellAlert.message,
                                       preferredStyle: .actionSheet)
         actions.forEach { alert.addAction($0) }

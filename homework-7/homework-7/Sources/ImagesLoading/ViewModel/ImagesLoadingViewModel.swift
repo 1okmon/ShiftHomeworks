@@ -38,6 +38,7 @@ final class ImagesLoadingViewModel: IImagesLoadingViewModel {
             self.isUrlRequestCreated.value = false
             return
         }
+        self.isUrlRequestCreated.value = true
         self.imagesLoadingStates.value.updateValue(.loading(progress: 0), forKey: imageId)
         dataProvider.download(with: imageId, from: url)
     }
