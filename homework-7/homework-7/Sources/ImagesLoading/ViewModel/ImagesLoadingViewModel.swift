@@ -10,18 +10,21 @@ import UIKit
 final class ImagesLoadingViewModel: IImagesLoadingViewModel {
     private var imagesLoadingStates: Observable<[UUID: LoadingState]>
     private var isUrlRequestCreated: Observable<Bool>
+    private var selectedImageSaveStatus: Observable<ImageStatusInCoreData>
     private var dataProvider = ImagesProvider.shared
     private var coreDataManager = CoreDataManager.shared
     
     init() {
         self.imagesLoadingStates = Observable<[UUID: LoadingState]>(value: [:])
         self.isUrlRequestCreated = Observable<Bool>(value: true)
+        self.selectedImageSaveStatus = Observable<ImageStatusInCoreData>(value: .notSaved)
         configureHandlers()
     }
     
     func subscribe(observer: IObserver) {
         self.imagesLoadingStates.subscribe(observer: observer)
         self.isUrlRequestCreated.subscribe(observer: observer)
+        self.selectedImageSaveStatus.subscribe(observer: observer)
     }
     
     func launch() {
@@ -58,8 +61,16 @@ final class ImagesLoadingViewModel: IImagesLoadingViewModel {
         self.coreDataManager.create(image, with: id)
     }
     
+    func detectSaveStatusForImage(by id: UUID) {
+        self.selectedImageSaveStatus.value = self.coreDataManager.fetchImage(with: id) == nil ? .notSaved : .saved
+    }
+    
     func delete(with imageId: UUID) {
         imagesLoadingStates.value[imageId] = nil
+        deleteFromDB(with: imageId)
+    }
+    
+    func deleteFromDB(with imageId: UUID) {
         if .error != imagesLoadingStates.value[imageId] {
             self.coreDataManager.deleteImage(with: imageId)
         }

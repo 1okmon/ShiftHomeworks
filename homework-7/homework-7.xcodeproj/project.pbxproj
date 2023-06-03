@@ -25,6 +25,7 @@
 		0E6541A12A24665D007E10AD /* ImagesLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541962A24665D007E10AD /* ImagesLoadingView.swift */; };
 		0E6541A22A24665D007E10AD /* IImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541982A24665D007E10AD /* IImagesProvider.swift */; };
 		0E6541A32A24665D007E10AD /* ImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541992A24665D007E10AD /* ImagesProvider.swift */; };
+		0EEFAF5A2A2BC51700EA8A80 /* ImageStatusInCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF592A2BC51700EA8A80 /* ImageStatusInCoreData.swift */; };
 		66E41B506892CC26913195C2 /* Pods_homework_7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D6ED17A21BF84B7B688747 /* Pods_homework_7.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		0E6541962A24665D007E10AD /* ImagesLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesLoadingView.swift; sourceTree = "<group>"; };
 		0E6541982A24665D007E10AD /* IImagesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagesProvider.swift; sourceTree = "<group>"; };
 		0E6541992A24665D007E10AD /* ImagesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesProvider.swift; sourceTree = "<group>"; };
+		0EEFAF592A2BC51700EA8A80 /* ImageStatusInCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatusInCoreData.swift; sourceTree = "<group>"; };
 		50B1D95E639806E8B987C729 /* Pods-homework-7.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homework-7.release.xcconfig"; path = "Target Support Files/Pods-homework-7/Pods-homework-7.release.xcconfig"; sourceTree = "<group>"; };
 		A9D6ED17A21BF84B7B688747 /* Pods_homework_7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_homework_7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF643B5ECE11D5C2DF9CF457 /* Pods-homework-7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homework-7.debug.xcconfig"; path = "Target Support Files/Pods-homework-7/Pods-homework-7.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				0E2906F82A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift */,
 				0E2906F32A2A09D2005C20A8 /* ImagesData.xcdatamodeld */,
 				0E2906F62A2A0AF3005C20A8 /* CoreDataManager.swift */,
+				0EEFAF592A2BC51700EA8A80 /* ImageStatusInCoreData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				0E6541A12A24665D007E10AD /* ImagesLoadingView.swift in Sources */,
 				0E6541A32A24665D007E10AD /* ImagesProvider.swift in Sources */,
 				0E6541752A24660B007E10AD /* AppDelegate.swift in Sources */,
+				0EEFAF5A2A2BC51700EA8A80 /* ImageStatusInCoreData.swift in Sources */,
 				0E65419B2A24665D007E10AD /* Observing.swift in Sources */,
 				0E6541A22A24665D007E10AD /* IImagesProvider.swift in Sources */,
 				0E65419D2A24665D007E10AD /* ImagesLoadingViewModel.swift in Sources */,
