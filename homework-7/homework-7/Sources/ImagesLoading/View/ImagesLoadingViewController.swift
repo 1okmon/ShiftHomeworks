@@ -54,7 +54,7 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
     var id: UUID
     private let viewWithTable: ImagesLoadingView
     private var viewModel: IImagesLoadingViewModel?
-    private var selectedImageSaveStatus: ImageStatusInCoreData?
+    private var isSelectedImageSaved: Bool?
     
     init() {
         self.id = UUID()
@@ -78,13 +78,15 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
     }
     
     func update<T>(with value: T) {
-        if let isUrlCreated = value as? Bool {
-            if !isUrlCreated {
-                showAlert(.wrongUrl)
+        if let stateForAlert = value as? StateForAlert {
+            switch stateForAlert {
+            case .url(let created):
+                if !created {
+                    showAlert(.wrongUrl)
+                }
+            case .image(let saved):
+                self.isSelectedImageSaved = saved
             }
-        }
-        if let saveStatus = value as? ImageStatusInCoreData {
-            self.selectedImageSaveStatus = saveStatus
         }
         guard let value = value as? [UUID: LoadingState] else { return }
         self.viewWithTable.update(to: value)
@@ -150,7 +152,7 @@ private extension ImagesLoadingViewController {
             var save = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.save, style: .default) { [weak self] _ in
                 self?.viewModel?.saveImage(with: imageId)
             }
-            if case .saved = self.selectedImageSaveStatus {
+            if self.isSelectedImageSaved ?? false {
                 save = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.unSave, style: .default) { [weak self] _ in
                     self?.viewModel?.deleteFromDB(with: imageId)
                 }

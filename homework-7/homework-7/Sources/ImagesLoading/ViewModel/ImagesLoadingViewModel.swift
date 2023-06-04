@@ -9,22 +9,19 @@ import UIKit
 
 final class ImagesLoadingViewModel: IImagesLoadingViewModel {
     private var imagesLoadingStates: Observable<[UUID: LoadingState]>
-    private var isUrlRequestCreated: Observable<Bool>
-    private var selectedImageSaveStatus: Observable<ImageStatusInCoreData>
+    private var stateForAlert: Observable<StateForAlert>
     private var dataProvider = ImagesProvider.shared
     private var coreDataManager = CoreDataManager.shared
     
     init() {
         self.imagesLoadingStates = Observable<[UUID: LoadingState]>(value: [:])
-        self.isUrlRequestCreated = Observable<Bool>(value: true)
-        self.selectedImageSaveStatus = Observable<ImageStatusInCoreData>(value: .notSaved)
+        self.stateForAlert = Observable<StateForAlert>(value: .url(created: false))
         configureHandlers()
     }
     
     func subscribe(observer: IObserver) {
         self.imagesLoadingStates.subscribe(observer: observer)
-        self.isUrlRequestCreated.subscribe(observer: observer)
-        self.selectedImageSaveStatus.subscribe(observer: observer)
+        self.stateForAlert.subscribe(observer: observer)
     }
     
     func launch() {
@@ -38,10 +35,10 @@ final class ImagesLoadingViewModel: IImagesLoadingViewModel {
     
     func load(from url: String, imageId: UUID) {
         guard let url = URL(string: url) else {
-            self.isUrlRequestCreated.value = false
+            self.stateForAlert.value = .url(created: false)
             return
         }
-        self.isUrlRequestCreated.value = true
+        self.stateForAlert.value = .url(created: true)
         self.imagesLoadingStates.value.updateValue(.loading(progress: 0), forKey: imageId)
         dataProvider.download(with: imageId, from: url)
     }
@@ -62,7 +59,7 @@ final class ImagesLoadingViewModel: IImagesLoadingViewModel {
     }
     
     func detectSaveStatusForImage(by id: UUID) {
-        self.selectedImageSaveStatus.value = self.coreDataManager.fetchImage(with: id) == nil ? .notSaved : .saved
+        self.stateForAlert.value = .image(saved: self.coreDataManager.fetchImage(with: id) != nil)
     }
     
     func delete(with imageId: UUID) {
