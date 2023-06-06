@@ -16,7 +16,7 @@ private enum Metrics {
     }
 }
 
-final class CharactersView: UIView {
+class CharactersView: UIView {
     var cellTapHandler: ((Int) -> Void)?
     private let collectionView: UICollectionView
     private var characters: [Int: Character]
@@ -50,24 +50,30 @@ final class CharactersView: UIView {
     
     func update(with characters: [Character]) {
         DispatchQueue.main.async {
-            characters.forEach { character in
-                guard self.characters[character.id] == nil else { return }
+            var charactersCopy = self.characters
+            for character in characters {
+                charactersCopy[character.id] = nil
+                guard self.characters[character.id] == nil else { continue }
                 self.characters.updateValue(character, forKey: character.id)
                 let characterIndexPath = IndexPath(row: self.charactersIndexPath.keys.count, section: 0)
                 self.charactersIndexPath.updateValue(characterIndexPath, forKey: character.id)
                 self.collectionView.insertItems(at: [characterIndexPath])
                 self.imagesUrls.updateValue(character.id, forKey: character.image)
             }
+            for (characterId, character) in charactersCopy {
+                self.imagesUrls[character.image] = nil
+                self.images[character.image] = nil
+                self.characters[characterId] = nil
+                guard let indexPath = self.charactersIndexPath[characterId] else { continue }
+                self.collectionView.deleteItems(at: [indexPath])
+                self.charactersIndexPath[characterId] = nil
+            }
         }
     }
     
     func update(with images: [String: UIImage?]) {
-        print(999)
         DispatchQueue.main.async {
             images.forEach { (url, image) in
-//                <#code#>
-//            }
-//            for (url, image) in images {
                 guard self.images[url] == nil,
                       let image = image else { return }
                 self.images.updateValue(image, forKey: url)
@@ -75,11 +81,7 @@ final class CharactersView: UIView {
                       let indexPath = self.charactersIndexPath[characterId] else { return }
                 self.collectionView.reloadItems(at: [indexPath])
             }
-            print(1999)
         }
-        
-        // self.images = images
-        //collectionView.reloadData()
     }
 }
 
@@ -120,7 +122,6 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
         //guard let character =  self.characters[characterId] else { return }
         
         //let character = self.characters[indexPath.row]
-        //print(201)
         cell.update(with: character)
         //cell.isUserInteractionEnabled = true
         guard let image = self.images[character.image],
@@ -128,7 +129,6 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         }
         cell.update(with: image)
-        print(202)
         return cell
     }
 }
