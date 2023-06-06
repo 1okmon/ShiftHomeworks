@@ -9,18 +9,6 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
-    
-    enum FavoritesIcon {
-        private static let added = UIImage(systemName: "star.fill")
-        private static let notAdded = UIImage(systemName: "star")
-        
-        static func image(_ isFavorite: Bool = false) -> UIImage? {
-            if isFavorite {
-                return added
-            }
-            return notAdded
-        }
-    }
 }
 
 final class LocationDetailsViewController: UIViewController, IObserver {
@@ -43,7 +31,7 @@ final class LocationDetailsViewController: UIViewController, IObserver {
     func update<T>(with value: T) {
         DispatchQueue.main.async {
             if let isFavorite = value as? Bool {
-                self.navigationItem.rightBarButtonItem?.image = Metrics.FavoritesIcon.image(isFavorite)
+                self.navigationItem.rightBarButtonItem?.image = Icon.Favorite.image(isFavorite)
             }
             if let characters = value as? [Character] {
                 self.locationDetailsView.update(with: characters)
@@ -60,7 +48,7 @@ final class LocationDetailsViewController: UIViewController, IObserver {
 private extension LocationDetailsViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        let favoriteButton = UIBarButtonItem(image: Metrics.FavoritesIcon.image(),
+        let favoriteButton = UIBarButtonItem(image: Icon.Favorite.image(),
                                              style: .plain,
                                              target: self,
                                              action: #selector(favoritesButtonTapped(_:)))

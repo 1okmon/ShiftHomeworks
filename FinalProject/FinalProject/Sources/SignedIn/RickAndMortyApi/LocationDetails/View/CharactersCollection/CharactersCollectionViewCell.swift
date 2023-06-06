@@ -20,7 +20,7 @@ private enum Metrics {
     }
     
     enum ImageView {
-        static let height = 100
+        static let bottomInset = 50
         static let tintColor = Theme.tintColor
         static let cornerRadius: CGFloat = 10
         static let defaultImage = UIImage(systemName: "person")
@@ -35,7 +35,6 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
         self.characterImageView = UIImageView()
         self.characterName = UILabel()
         super.init(frame: frame)
-        //self.isUserInteractionEnabled = false
         configure()
     }
     
@@ -52,7 +51,6 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        //self.isUserInteractionEnabled = false
         self.characterImageView.image = Metrics.ImageView.defaultImage
     }
 }
@@ -70,7 +68,7 @@ private extension CharactersCollectionViewCell {
         self.characterImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Metrics.verticalOffset)
             make.trailing.leading.equalToSuperview().inset(Metrics.horizontalInset)
-            make.height.equalTo(Metrics.ImageView.height)
+            make.bottom.equalToSuperview().inset(Metrics.ImageView.bottomInset)
         }
         self.characterImageView.layer.cornerRadius = Metrics.ImageView.cornerRadius
         self.characterImageView.tintColor = Metrics.ImageView.tintColor

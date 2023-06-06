@@ -5,10 +5,10 @@
 //  Created by 1okmon on 30.05.2023.
 //
 
-final class LocationsViewModel {
+class LocationsViewModel {
+    var locations: Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>
     private var previousPage: String?
     private var nextPage: String?
-    private var locations: Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>
     private var coordinator: RickAndMortyCoordinator
     private let locationsNetworkManager: RickAndMortyLocationNetworkManager
     
@@ -18,8 +18,13 @@ final class LocationsViewModel {
         self.coordinator = coordinator
     }
     
-    func suscribe(observer: IObserver) {
+    func subscribe(observer: IObserver) {
         self.locations.subscribe(observer: observer)
+        launch()
+    }
+    
+    func launch() {
+        loadLocations()
     }
     
     func loadNextPage() {
@@ -31,7 +36,7 @@ final class LocationsViewModel {
     }
     
     func openLocation(with id: Int) {
-        self.coordinator.openLocations(with: id)
+        self.coordinator.openLocation(with: id)
     }
 }
 

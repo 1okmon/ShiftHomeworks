@@ -11,7 +11,7 @@ private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
 }
 
-final class LocationsViewController: UIViewController, IObserver {
+class LocationsViewController: UIViewController, IObserver {
     let id: UUID
     private let viewModel: LocationsViewModel
     private let locationView: LocationsView
@@ -21,7 +21,6 @@ final class LocationsViewController: UIViewController, IObserver {
         self.locationView = LocationsView()
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        viewModel.loadNextPage()
         configure()
     }
     

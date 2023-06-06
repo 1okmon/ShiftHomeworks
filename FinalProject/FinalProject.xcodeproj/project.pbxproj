@@ -60,6 +60,19 @@
 		0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA04382A1DA7F300B1EA9C /* ProfileViewController.swift */; };
 		0EEA043B2A1DA81800B1EA9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA043A2A1DA81800B1EA9C /* ProfileView.swift */; };
 		0EEA043E2A1DAB0900B1EA9C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA043D2A1DAB0900B1EA9C /* AppCoordinator.swift */; };
+		0EEFAF622A2E27D800EA8A80 /* CharacterEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF612A2E27D800EA8A80 /* CharacterEntity+CoreDataProperties.swift */; };
+		0EEFAF662A2E29F400EA8A80 /* ICharacterCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF652A2E29F400EA8A80 /* ICharacterCoreDataManager.swift */; };
+		0EEFAF682A2E2A0400EA8A80 /* ILocationCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF672A2E2A0400EA8A80 /* ILocationCoreDataManager.swift */; };
+		0EEFAF6C2A2E3DE900EA8A80 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF6B2A2E3DE900EA8A80 /* FavoritesViewModel.swift */; };
+		0EEFAF6E2A2E400D00EA8A80 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF6D2A2E400D00EA8A80 /* FavoritesCoordinator.swift */; };
+		0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF702A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift */; };
+		0EEFAF732A2E492700EA8A80 /* Location+initFromLocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF722A2E492700EA8A80 /* Location+initFromLocationEntity.swift */; };
+		0EEFAF752A2E565E00EA8A80 /* FavoriteLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF742A2E565E00EA8A80 /* FavoriteLocationsViewController.swift */; };
+		0EEFAF782A2EC50800EA8A80 /* FavoriteCharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF772A2EC50800EA8A80 /* FavoriteCharactersViewController.swift */; };
+		0EEFAF7A2A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF792A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift */; };
+		0EEFAF7C2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF7B2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift */; };
+		0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF802A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift */; };
+		0EEFAF862A2F2C5F00EA8A80 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF852A2F2C5F00EA8A80 /* Icon.swift */; };
 		0EF160202A1DC92E0026A628 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EF1601F2A1DC92D0026A628 /* GoogleService-Info.plist */; };
 		0EF1602F2A1E08AF0026A628 /* AuthResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1602E2A1E08AF0026A628 /* AuthResult.swift */; };
 		0EF160352A1E19910026A628 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF160342A1E19910026A628 /* SignInView.swift */; };
@@ -133,6 +146,19 @@
 		0EEA04382A1DA7F300B1EA9C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0EEA043A2A1DA81800B1EA9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0EEA043D2A1DAB0900B1EA9C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0EEFAF612A2E27D800EA8A80 /* CharacterEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CharacterEntity+CoreDataProperties.swift"; path = "/Users/1okmon/Desktop/Xcode projects/ShiftHomeworks/ShiftHomeworks/FinalProject/FinalProject/CoreData/CharacterEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		0EEFAF652A2E29F400EA8A80 /* ICharacterCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICharacterCoreDataManager.swift; sourceTree = "<group>"; };
+		0EEFAF672A2E2A0400EA8A80 /* ILocationCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILocationCoreDataManager.swift; sourceTree = "<group>"; };
+		0EEFAF6B2A2E3DE900EA8A80 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF6D2A2E400D00EA8A80 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		0EEFAF702A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationsViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF722A2E492700EA8A80 /* Location+initFromLocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+initFromLocationEntity.swift"; sourceTree = "<group>"; };
+		0EEFAF742A2E565E00EA8A80 /* FavoriteLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLocationsViewController.swift; sourceTree = "<group>"; };
+		0EEFAF772A2EC50800EA8A80 /* FavoriteCharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharactersViewController.swift; sourceTree = "<group>"; };
+		0EEFAF792A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharactersPresenter.swift; sourceTree = "<group>"; };
+		0EEFAF7B2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+initFromCharacterEntity.swift"; sourceTree = "<group>"; };
+		0EEFAF802A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterDetails+initFromCharacterEntity.swift"; sourceTree = "<group>"; };
+		0EEFAF852A2F2C5F00EA8A80 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		0EF1601F2A1DC92D0026A628 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0EF1602E2A1E08AF0026A628 /* AuthResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResult.swift; sourceTree = "<group>"; };
 		0EF160342A1E19910026A628 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -166,14 +192,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E27E6542A24BC3B0010C571 /* Theme */ = {
-			isa = PBXGroup;
-			children = (
-				0E27E6582A24BC9A0010C571 /* Theme.swift */,
-			);
-			path = Theme;
-			sourceTree = "<group>";
-		};
 		0E27E65E2A25D33B0010C571 /* RickAndMortyApi */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,7 +298,9 @@
 		0E27E66C2A25DCA10010C571 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				0E27E66F2A25DCD50010C571 /* Model */,
+				0EEFAF892A2F2D6400EA8A80 /* Coordinator */,
+				0EEFAF762A2EC4DE00EA8A80 /* FavoriteCharacters */,
+				0EEFAF6F2A2E44FB00EA8A80 /* FavoriteLocations */,
 				0E27E66E2A25DCCC0010C571 /* View */,
 				0E27E66D2A25DCB80010C571 /* ViewModel */,
 			);
@@ -290,6 +310,7 @@
 		0E27E66D2A25DCB80010C571 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0EEFAF6B2A2E3DE900EA8A80 /* FavoritesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -306,6 +327,7 @@
 		0E27E66F2A25DCD50010C571 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0EEFAF722A2E492700EA8A80 /* Location+initFromLocationEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,9 +452,12 @@
 		0E27E6BF2A2919AB0010C571 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				0EEFAF612A2E27D800EA8A80 /* CharacterEntity+CoreDataProperties.swift */,
 				0E27E6D52A2998530010C571 /* LocationEntity+CoreDataProperties.swift */,
 				0E27E6C22A2919FB0010C571 /* CoreDataManager.swift */,
 				0E27E6D22A2998250010C571 /* RickAndMortyData.xcdatamodeld */,
+				0EEFAF652A2E29F400EA8A80 /* ICharacterCoreDataManager.swift */,
+				0EEFAF672A2E2A0400EA8A80 /* ILocationCoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -481,7 +506,7 @@
 		0EEA03E62A1725AE00B1EA9C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0E27E6542A24BC3B0010C571 /* Theme */,
+				0EEFAF842A2F2C4700EA8A80 /* Design */,
 				0EF1604E2A1EFCD50026A628 /* Additions */,
 				0EEA043C2A1DAAF200B1EA9C /* AppCoordinator */,
 				0EEA03E82A17261100B1EA9C /* Authentication */,
@@ -597,6 +622,84 @@
 				0EEA043D2A1DAB0900B1EA9C /* AppCoordinator.swift */,
 			);
 			path = AppCoordinator;
+			sourceTree = "<group>";
+		};
+		0EEFAF6F2A2E44FB00EA8A80 /* FavoriteLocations */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF882A2F2D4800EA8A80 /* ViewModel */,
+				0EEFAF872A2F2D3300EA8A80 /* View */,
+				0E27E66F2A25DCD50010C571 /* Model */,
+			);
+			path = FavoriteLocations;
+			sourceTree = "<group>";
+		};
+		0EEFAF762A2EC4DE00EA8A80 /* FavoriteCharacters */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF7F2A2ECC3100EA8A80 /* Presenter */,
+				0EEFAF7E2A2ECC2800EA8A80 /* View */,
+				0EEFAF7D2A2ECC1C00EA8A80 /* Model */,
+			);
+			path = FavoriteCharacters;
+			sourceTree = "<group>";
+		};
+		0EEFAF7D2A2ECC1C00EA8A80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF7B2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift */,
+				0EEFAF802A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0EEFAF7E2A2ECC2800EA8A80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF772A2EC50800EA8A80 /* FavoriteCharactersViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EEFAF7F2A2ECC3100EA8A80 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF792A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0EEFAF842A2F2C4700EA8A80 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				0E27E6582A24BC9A0010C571 /* Theme.swift */,
+				0EEFAF852A2F2C5F00EA8A80 /* Icon.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		0EEFAF872A2F2D3300EA8A80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF742A2E565E00EA8A80 /* FavoriteLocationsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EEFAF882A2F2D4800EA8A80 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF702A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EEFAF892A2F2D6400EA8A80 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0EEFAF6D2A2E400D00EA8A80 /* FavoritesCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		0EF1602D2A1E088F0026A628 /* AuthResult */ = {
@@ -890,6 +993,7 @@
 			files = (
 				0EF160372A1E199F0026A628 /* SignInViewController.swift in Sources */,
 				0EEA040D2A17261100B1EA9C /* AuthDesignSystem+TextFields.swift in Sources */,
+				0EEFAF7A2A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift in Sources */,
 				0E27E67A2A25E39B0010C571 /* NSObject+className.swift in Sources */,
 				0EEA04092A17261100B1EA9C /* IAuthCoordinator.swift in Sources */,
 				0E27E68A2A26027E0010C571 /* LocationsViewModel.swift in Sources */,
@@ -901,6 +1005,7 @@
 				0EF160402A1E3C320026A628 /* SignUpViewController.swift in Sources */,
 				0EF160522A1F87750026A628 /* FirebaseNetworkManager.swift in Sources */,
 				0E27E6842A25F4440010C571 /* RickAndMortyLocationNetworkManager.swift in Sources */,
+				0EEFAF6E2A2E400D00EA8A80 /* FavoritesCoordinator.swift in Sources */,
 				0E27E68C2A2605FE0010C571 /* RickAndMortyCoordinator.swift in Sources */,
 				0EEA04082A17261100B1EA9C /* AuthCoordinator.swift in Sources */,
 				0E27E67C2A25EFE80010C571 /* LocationResponse.swift in Sources */,
@@ -913,17 +1018,25 @@
 				0EF160422A1E3C710026A628 /* SignUpViewModel.swift in Sources */,
 				0E27E6AB2A274C0D0010C571 /* RickAndMortyCharacterNetworkManager.swift in Sources */,
 				0E27E6B32A277D950010C571 /* CharacterDetailsView.swift in Sources */,
+				0EEFAF682A2E2A0400EA8A80 /* ILocationCoreDataManager.swift in Sources */,
 				0EEA040B2A17261100B1EA9C /* AuthDesignSystem.swift in Sources */,
+				0EEFAF732A2E492700EA8A80 /* Location+initFromLocationEntity.swift in Sources */,
 				0EEA04192A17261100B1EA9C /* AuthBuilder.swift in Sources */,
 				0E27E67E2A25F0170010C571 /* LocationsResponse.swift in Sources */,
 				0EEA040E2A17261100B1EA9C /* AuthDesignSystem+Buttons.swift in Sources */,
 				0EEA04072A17261100B1EA9C /* AuthViewModel.swift in Sources */,
+				0EEFAF622A2E27D800EA8A80 /* CharacterEntity+CoreDataProperties.swift in Sources */,
+				0EEFAF7C2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift in Sources */,
 				0E27E6BB2A283BA30010C571 /* CacheManager.swift in Sources */,
+				0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */,
 				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0E27E69E2A26F2E00010C571 /* CharactersCollectionViewCell.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
 				0E27E69C2A26F2C50010C571 /* CharactersView.swift in Sources */,
 				0E27E6802A25F03F0010C571 /* LocationsResponseInfo.swift in Sources */,
+				0EEFAF752A2E565E00EA8A80 /* FavoriteLocationsViewController.swift in Sources */,
+				0EEFAF782A2EC50800EA8A80 /* FavoriteCharactersViewController.swift in Sources */,
+				0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* ResetPasswordViewModel.swift in Sources */,
 				0E27E6732A25DD310010C571 /* LocationsViewController.swift in Sources */,
@@ -939,10 +1052,13 @@
 				0EF160542A1F88100026A628 /* IFirebase.swift in Sources */,
 				0E27E66A2A25D9340010C571 /* SignedInTabBarController.swift in Sources */,
 				0E27E6882A2600E10010C571 /* Location.swift in Sources */,
+				0EEFAF662A2E29F400EA8A80 /* ICharacterCoreDataManager.swift in Sources */,
 				0EF160582A207D850026A628 /* ErrorParser.swift in Sources */,
 				0E27E6B12A277D2C0010C571 /* CharacterDetailsViewController.swift in Sources */,
 				0E27E6782A25E34E0010C571 /* LocationTableViewCell.swift in Sources */,
+				0EEFAF862A2F2C5F00EA8A80 /* Icon.swift in Sources */,
 				0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */,
+				0EEFAF6C2A2E3DE900EA8A80 /* FavoritesViewModel.swift in Sources */,
 				0EF160462A1E3E940026A628 /* ResetPasswordView.swift in Sources */,
 				0E27E6752A25E0AE0010C571 /* LocationsView.swift in Sources */,
 				0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */,
