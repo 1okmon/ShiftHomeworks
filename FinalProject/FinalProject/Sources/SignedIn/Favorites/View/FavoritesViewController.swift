@@ -13,8 +13,10 @@ private enum Metrics {
 
 final class FavoritesViewController: UIViewController {
     private let favoriteView: FavoritesView
+    private let viewModel: FavoritesViewModel
     
-    init() {
+    init(viewModel: FavoritesViewModel) {
+        self.viewModel = viewModel
         self.favoriteView = FavoritesView()
         super.init(nibName: nil, bundle: nil)
         configure()
@@ -35,6 +37,16 @@ private extension FavoritesViewController {
         self.view.addSubview(self.favoriteView)
         self.favoriteView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
+        }
+        configureFavoriteViewHandlers()
+    }
+    
+    func configureFavoriteViewHandlers() {
+        self.favoriteView.locationsTapHandler = {
+            self.viewModel.goToLocations()
+        }
+        self.favoriteView.charactersTapHandler = {
+            self.viewModel.goToCharacters()
         }
     }
 }
