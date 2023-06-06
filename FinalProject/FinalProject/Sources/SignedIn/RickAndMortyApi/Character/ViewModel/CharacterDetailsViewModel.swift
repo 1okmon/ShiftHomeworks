@@ -7,15 +7,13 @@
 
 import UIKit
 
-final class CharacterDetailsViewModel {
-    private var coordinator: RickAndMortyCoordinator?
+final class CharacterDetailsViewModel: ICharacterDetailsViewModel {
     private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
     private var character: Observable<CharacterDetails>
     private let coreDataManager: CoreDataManager
     private var isFavorite: Observable<Bool>
     
     init(coordinator: RickAndMortyCoordinator) {
-        self.coordinator = coordinator
         self.coreDataManager = CoreDataManager.shared
         self.isFavorite = Observable<Bool>(false)
         self.charactersNetworkManager = RickAndMortyCharacterNetworkManager.shared

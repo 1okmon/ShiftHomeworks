@@ -13,10 +13,10 @@ private enum Metrics {
 
 final class LocationDetailsViewController: UIViewController, IObserver {
     var id: UUID
-    private let viewModel: LocationDetailsViewModel
+    private let viewModel: ILocationDetailsViewModel
     private let locationDetailsView: LocationDetailsView
     
-    init(viewModel: LocationDetailsViewModel) {
+    init(viewModel: ILocationDetailsViewModel) {
         self.viewModel = viewModel
         self.locationDetailsView = LocationDetailsView()
         self.id = UUID()

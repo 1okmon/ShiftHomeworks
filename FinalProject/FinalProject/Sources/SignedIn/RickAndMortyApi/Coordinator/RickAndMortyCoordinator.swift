@@ -10,7 +10,7 @@ import UIKit
 private enum Title {
     static let forLocationViewController = "Локации"
 }
-class RickAndMortyCoordinator {
+class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ICharacterRickAndMortyCoordinator {
     private var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {

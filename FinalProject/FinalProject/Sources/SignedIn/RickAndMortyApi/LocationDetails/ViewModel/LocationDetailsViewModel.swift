@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class LocationDetailsViewModel {
-    private var coordinator: RickAndMortyCoordinator?
+final class LocationDetailsViewModel: ILocationDetailsViewModel {
+    private var coordinator: ICharacterRickAndMortyCoordinator?
     private let locationsNetworkManager: RickAndMortyLocationNetworkManager
     private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
     private let coreDataManager: CoreDataManager
@@ -17,7 +17,7 @@ final class LocationDetailsViewModel {
     private var isFavorite: Observable<Bool>
     private var residentsImages: Observable<[String: UIImage?]>
     
-    init(coordinator: RickAndMortyCoordinator) {
+    init(coordinator: ICharacterRickAndMortyCoordinator) {
         self.coordinator = coordinator
         self.locationsNetworkManager = RickAndMortyLocationNetworkManager()
         self.charactersNetworkManager = RickAndMortyCharacterNetworkManager.shared

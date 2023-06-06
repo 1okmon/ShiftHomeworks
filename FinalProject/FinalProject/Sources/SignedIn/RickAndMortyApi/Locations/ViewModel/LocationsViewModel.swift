@@ -5,14 +5,14 @@
 //  Created by 1okmon on 30.05.2023.
 //
 
-class LocationsViewModel {
+class LocationsViewModel: ILocationsViewModel {
     var locations: Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>
     private var previousPage: String?
     private var nextPage: String?
-    private var coordinator: RickAndMortyCoordinator
+    private var coordinator: ILocationsRickAndMortyCoordinator
     private let locationsNetworkManager: RickAndMortyLocationNetworkManager
     
-    init(coordinator: RickAndMortyCoordinator) {
+    init(coordinator: ILocationsRickAndMortyCoordinator) {
         self.locations = Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>()
         self.locationsNetworkManager = RickAndMortyLocationNetworkManager()
         self.coordinator = coordinator

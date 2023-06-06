@@ -15,11 +15,11 @@ private enum Metrics {
 final class CharacterDetailsViewController: UIViewController, IObserver {
     var id: UUID
     var dismissCompletion: (() -> Void)?
-    private let viewModel: CharacterDetailsViewModel
+    private let viewModel: ICharacterDetailsViewModel
     private let characterDetailsView: CharacterDetailsView
     private let favoriteButton: UIButton
     
-    init(viewModel: CharacterDetailsViewModel) {
+    init(viewModel: ICharacterDetailsViewModel) {
         self.id = UUID()
         self.viewModel = viewModel
         self.favoriteButton = UIButton(type: .system)
