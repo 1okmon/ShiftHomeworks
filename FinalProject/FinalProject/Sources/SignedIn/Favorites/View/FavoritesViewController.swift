@@ -13,9 +13,9 @@ private enum Metrics {
 
 final class FavoritesViewController: UIViewController {
     private let favoriteView: FavoritesView
-    private let viewModel: FavoritesViewModel
+    private let viewModel: IFavoritesViewModel
     
-    init(viewModel: FavoritesViewModel) {
+    init(viewModel: IFavoritesViewModel) {
         self.viewModel = viewModel
         self.favoriteView = FavoritesView()
         super.init(nibName: nil, bundle: nil)

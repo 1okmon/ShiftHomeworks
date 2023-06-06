@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FavoriteLocationsViewModel: LocationsViewModel {
+final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsViewModel {
     private var coreDataManager: CoreDataManager
     
     override func launch() {
@@ -23,7 +23,7 @@ final class FavoriteLocationsViewModel: LocationsViewModel {
         self.locations.value = (locations: locations, isFirstPage: true, isLastPage: true)
     }
     
-    override init(coordinator: RickAndMortyCoordinator) {
+    override init(coordinator: ILocationsRickAndMortyCoordinator) {
         self.coreDataManager = CoreDataManager.shared
         super.init(coordinator: coordinator)
     }

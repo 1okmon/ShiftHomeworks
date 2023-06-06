@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class FavoritesViewModel {
-    private var coordinator: FavoritesCoordinator?
+final class FavoritesViewModel: IFavoritesViewModel {
+    private var coordinator: IFavoritesCoordinator?
     
-    init(coordinator: FavoritesCoordinator) {
+    init(coordinator: IFavoritesCoordinator) {
         self.coordinator = coordinator
     }
     

@@ -13,7 +13,7 @@ private enum Metrics {
 
 final class FavoriteCharactersViewController: UIViewController {
     let charactersView: CharactersView
-    var presenter: FavoriteCharactersPresenter?
+    var presenter: IFavoriteCharactersPresenter?
     
     init() {
         self.charactersView = CharactersView()
@@ -21,7 +21,7 @@ final class FavoriteCharactersViewController: UIViewController {
         configure()
     }
     
-    func setPresenter(_ presenter: FavoriteCharactersPresenter) {
+    func setPresenter(_ presenter: IFavoriteCharactersPresenter) {
         self.presenter = presenter
     }
     

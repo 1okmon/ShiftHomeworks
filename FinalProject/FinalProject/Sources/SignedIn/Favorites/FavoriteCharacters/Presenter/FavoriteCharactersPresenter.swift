@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class FavoriteCharactersPresenter {
+final class FavoriteCharactersPresenter: IFavoriteCharactersPresenter {
     private unowned var viewController: FavoriteCharactersViewController
     private var characters: [Int: Character]
     private var charactersImages: [String: UIImage?]
     private var coreDataManager: CoreDataManager
-    private var coordinator: FavoritesCoordinator?
+    private var coordinator: ICharacterFavoritesCoordinator?
     
-    init(viewController: FavoriteCharactersViewController, coordinator: FavoritesCoordinator) {
+    init(viewController: FavoriteCharactersViewController, coordinator: ICharacterFavoritesCoordinator) {
         self.viewController = viewController
         self.charactersImages = [:]
         self.coreDataManager = CoreDataManager.shared

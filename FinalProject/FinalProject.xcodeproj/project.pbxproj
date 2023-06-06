@@ -73,6 +73,14 @@
 		0EEFAF7C2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF7B2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift */; };
 		0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF802A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift */; };
 		0EEFAF862A2F2C5F00EA8A80 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF852A2F2C5F00EA8A80 /* Icon.swift */; };
+		0EEFAF8B2A2F498500EA8A80 /* IFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF8A2A2F498500EA8A80 /* IFavoritesViewModel.swift */; };
+		0EEFAF8D2A2F4A1300EA8A80 /* IFavoriteLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF8C2A2F4A1300EA8A80 /* IFavoriteLocationsViewModel.swift */; };
+		0EEFAF8F2A2F4AC500EA8A80 /* ILocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF8E2A2F4AC500EA8A80 /* ILocationsViewModel.swift */; };
+		0EEFAF912A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF902A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift */; };
+		0EEFAF932A2F4CB600EA8A80 /* IFavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF922A2F4CB600EA8A80 /* IFavoritesCoordinator.swift */; };
+		0EEFAF952A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF942A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift */; };
+		0EEFAF972A2F520300EA8A80 /* ILocationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF962A2F520300EA8A80 /* ILocationDetailsViewModel.swift */; };
+		0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF982A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift */; };
 		0EF160202A1DC92E0026A628 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EF1601F2A1DC92D0026A628 /* GoogleService-Info.plist */; };
 		0EF1602F2A1E08AF0026A628 /* AuthResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1602E2A1E08AF0026A628 /* AuthResult.swift */; };
 		0EF160352A1E19910026A628 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF160342A1E19910026A628 /* SignInView.swift */; };
@@ -159,6 +167,14 @@
 		0EEFAF7B2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+initFromCharacterEntity.swift"; sourceTree = "<group>"; };
 		0EEFAF802A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterDetails+initFromCharacterEntity.swift"; sourceTree = "<group>"; };
 		0EEFAF852A2F2C5F00EA8A80 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		0EEFAF8A2A2F498500EA8A80 /* IFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoritesViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF8C2A2F4A1300EA8A80 /* IFavoriteLocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteLocationsViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF8E2A2F4AC500EA8A80 /* ILocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILocationsViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF902A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoriteCharactersPresenter.swift; sourceTree = "<group>"; };
+		0EEFAF922A2F4CB600EA8A80 /* IFavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFavoritesCoordinator.swift; sourceTree = "<group>"; };
+		0EEFAF942A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICharacterDetailsViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF962A2F520300EA8A80 /* ILocationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILocationDetailsViewModel.swift; sourceTree = "<group>"; };
+		0EEFAF982A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRickAndMortyCoordinator.swift; sourceTree = "<group>"; };
 		0EF1601F2A1DC92D0026A628 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0EF1602E2A1E08AF0026A628 /* AuthResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResult.swift; sourceTree = "<group>"; };
 		0EF160342A1E19910026A628 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -229,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				0E27E6892A26027E0010C571 /* LocationsViewModel.swift */,
+				0EEFAF8E2A2F4AC500EA8A80 /* ILocationsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -255,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				0E27E6B42A277DB70010C571 /* CharacterDetailsViewModel.swift */,
+				0EEFAF942A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -280,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				0E27E68B2A2605FE0010C571 /* RickAndMortyCoordinator.swift */,
+				0EEFAF982A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -311,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEFAF6B2A2E3DE900EA8A80 /* FavoritesViewModel.swift */,
+				0EEFAF8A2A2F498500EA8A80 /* IFavoritesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -391,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				0E27E6992A26EEA30010C571 /* LocationDetailsViewModel.swift */,
+				0EEFAF962A2F520300EA8A80 /* ILocationDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -665,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEFAF792A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift */,
+				0EEFAF902A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -690,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEFAF702A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift */,
+				0EEFAF8C2A2F4A1300EA8A80 /* IFavoriteLocationsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -698,6 +721,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEFAF6D2A2E400D00EA8A80 /* FavoritesCoordinator.swift */,
+				0EEFAF922A2F4CB600EA8A80 /* IFavoritesCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -999,6 +1023,7 @@
 				0E27E68A2A26027E0010C571 /* LocationsViewModel.swift in Sources */,
 				0E27E6712A25DCF80010C571 /* FavoritesViewController.swift in Sources */,
 				0EEA043E2A1DAB0900B1EA9C /* AppCoordinator.swift in Sources */,
+				0EEFAF912A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift in Sources */,
 				0EEA040F2A17261100B1EA9C /* AuthView.swift in Sources */,
 				0E27E6B52A277DB70010C571 /* CharacterDetailsViewModel.swift in Sources */,
 				0E27E6A12A2736DC0010C571 /* RowFlowLayout.swift in Sources */,
@@ -1006,6 +1031,7 @@
 				0EF160522A1F87750026A628 /* FirebaseNetworkManager.swift in Sources */,
 				0E27E6842A25F4440010C571 /* RickAndMortyLocationNetworkManager.swift in Sources */,
 				0EEFAF6E2A2E400D00EA8A80 /* FavoritesCoordinator.swift in Sources */,
+				0EEFAF932A2F4CB600EA8A80 /* IFavoritesCoordinator.swift in Sources */,
 				0E27E68C2A2605FE0010C571 /* RickAndMortyCoordinator.swift in Sources */,
 				0EEA04082A17261100B1EA9C /* AuthCoordinator.swift in Sources */,
 				0E27E67C2A25EFE80010C571 /* LocationResponse.swift in Sources */,
@@ -1029,6 +1055,7 @@
 				0EEFAF7C2A2ECC1800EA8A80 /* Character+initFromCharacterEntity.swift in Sources */,
 				0E27E6BB2A283BA30010C571 /* CacheManager.swift in Sources */,
 				0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */,
+				0EEFAF8B2A2F498500EA8A80 /* IFavoritesViewModel.swift in Sources */,
 				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0E27E69E2A26F2E00010C571 /* CharactersCollectionViewCell.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
@@ -1042,7 +1069,9 @@
 				0E27E6732A25DD310010C571 /* LocationsViewController.swift in Sources */,
 				0E27E69A2A26EEA30010C571 /* LocationDetailsViewModel.swift in Sources */,
 				0EEA043B2A1DA81800B1EA9C /* ProfileView.swift in Sources */,
+				0EEFAF972A2F520300EA8A80 /* ILocationDetailsViewModel.swift in Sources */,
 				0EF1604D2A1EFCBC0026A628 /* Observing.swift in Sources */,
+				0EEFAF8F2A2F4AC500EA8A80 /* ILocationsViewModel.swift in Sources */,
 				0EF1603E2A1E3C240026A628 /* SignUpView.swift in Sources */,
 				0E27E6AF2A277BFE0010C571 /* CharacterDetails.swift in Sources */,
 				0E27E6C32A2919FB0010C571 /* CoreDataManager.swift in Sources */,
@@ -1063,9 +1092,12 @@
 				0E27E6752A25E0AE0010C571 /* LocationsView.swift in Sources */,
 				0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */,
 				0E27E6902A26E7240010C571 /* LocationDetails.swift in Sources */,
+				0EEFAF8D2A2F4A1300EA8A80 /* IFavoriteLocationsViewModel.swift in Sources */,
 				0E27E6982A26EE560010C571 /* LocationDetailsView.swift in Sources */,
+				0EEFAF952A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift in Sources */,
 				0E27E6DA2A29F67D0010C571 /* FavoritesView.swift in Sources */,
 				0E27E6D42A2998250010C571 /* RickAndMortyData.xcdatamodeld in Sources */,
+				0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */,
 				0EEA040C2A17261100B1EA9C /* AuthDesignSystem+Labels.swift in Sources */,
 				0E27E6B72A27828A0010C571 /* ICharacter.swift in Sources */,
 			);

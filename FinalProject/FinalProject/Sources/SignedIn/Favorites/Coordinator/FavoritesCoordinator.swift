@@ -13,7 +13,7 @@ private enum Metrics {
     static let favoriteCharactersTitle = "Избранные персонажи"
 }
 
-final class FavoritesCoordinator: RickAndMortyCoordinator {
+final class FavoritesCoordinator: RickAndMortyCoordinator, IFavoritesCoordinator, ICharacterFavoritesCoordinator {
     private var navigationController: UINavigationController
     
     override init(navigationController: UINavigationController) {
@@ -26,7 +26,7 @@ final class FavoritesCoordinator: RickAndMortyCoordinator {
         goToFavorites()
     }
     
-    func goToFavorites() {
+    private func goToFavorites() {
         let favoritesViewModel = FavoritesViewModel(coordinator: self)
         let favoritesViewController = FavoritesViewController(viewModel: favoritesViewModel)
         favoritesViewController.title = Metrics.navigationControllerTitle
@@ -49,7 +49,7 @@ final class FavoritesCoordinator: RickAndMortyCoordinator {
         self.navigationController.pushViewController(favoriteCharactersViewController, animated: true)
     }
     
-    func openCharacter(with id: Int, with completion: (() -> Void)? = nil) {
+    func openCharacter(with id: Int, with completion: (() -> Void)?) {
         let characterDetailsViewModel = CharacterDetailsViewModel(coordinator: self)
         let characterDetailsViewController = CharacterDetailsViewController(viewModel: characterDetailsViewModel)
         characterDetailsViewModel.subscribe(observer: characterDetailsViewController)

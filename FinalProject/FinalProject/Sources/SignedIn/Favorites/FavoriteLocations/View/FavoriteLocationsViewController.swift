@@ -8,9 +8,9 @@
 import Foundation
 
 final class FavoriteLocationsViewController: LocationsViewController {
-    private let viewModel: FavoriteLocationsViewModel
+    private let viewModel: IFavoriteLocationsViewModel
     
-    init(viewModel: FavoriteLocationsViewModel) {
+    init(viewModel: IFavoriteLocationsViewModel) {
         self.viewModel = viewModel
         super.init(viewModel: viewModel)
     }
