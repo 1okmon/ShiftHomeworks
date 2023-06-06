@@ -31,10 +31,12 @@ private enum Metrics {
 final class SignedInTabBarController: UITabBarController {
     private var profileViewController: ProfileViewController?
     private var rickAndMortyNavigationController: UINavigationController
-    private var favoritesViewController: FavoritesViewController?
+    private var favoritesNavigationController: UINavigationController
+   // private var favoritesViewController: FavoritesViewController?
     
     init() {
         self.rickAndMortyNavigationController = UINavigationController()
+        self.favoritesNavigationController = UINavigationController()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,13 +58,14 @@ private extension SignedInTabBarController {
         profileViewController = ProfileViewController()
         rickAndMortyNavigationController = UINavigationController()
         let rickAndMortyCoordinator = RickAndMortyCoordinator(navigationController: rickAndMortyNavigationController)
-        favoritesViewController = FavoritesViewController()
+      FavoritesCoordinator(navigationController: favoritesNavigationController)
+        //favoritesViewController = FavoritesViewController()
     }
     
     func configureTabBarItems() {
         profileViewController?.tabBarItem = TabBarItemType.profileInfo.item
         rickAndMortyNavigationController.tabBarItem = TabBarItemType.richAndMortyWiki.item
-        favoritesViewController?.tabBarItem = TabBarItemType.favorites.item
+        favoritesNavigationController.tabBarItem = TabBarItemType.favorites.item
     }
     
     func configure(tabBar: UITabBar) {
@@ -71,8 +74,7 @@ private extension SignedInTabBarController {
     }
     
     func appendViewControllers() {
-        guard let profileViewController = profileViewController,
-              let favoritesViewController = favoritesViewController else { return }
-        self.viewControllers = [profileViewController, rickAndMortyNavigationController, favoritesViewController]
+        guard let profileViewController = profileViewController else { return }
+        self.viewControllers = [profileViewController, rickAndMortyNavigationController, favoritesNavigationController]
     }
 }
