@@ -7,6 +7,10 @@
 
 import UIKit
 
+private enum Metrics {
+    static let maxWidth = UIScreen.main.bounds.width - 70
+}
+
  final class RowFlowLayout: UICollectionViewFlowLayout {
      private let cellsPerCol: Int
      private let heightOfCollectionView: CGFloat
@@ -29,9 +33,10 @@ import UIKit
                                  sectionInset.right +
                                  collectionView.safeAreaInsets.left +
                                  collectionView.safeAreaInsets.right +
-                                 minimumLineSpacing * CGFloat(cellsPerCol - 1)
-         let itemHeight = ((heightOfCollectionView - marginsAndInsets) /
+                                 minimumLineSpacing * CGFloat(cellsPerCol)
+         var itemHeight = ((heightOfCollectionView - marginsAndInsets) /
                           CGFloat(cellsPerCol)).rounded(.down)
+         itemHeight = itemHeight > Metrics.maxWidth ? Metrics.maxWidth : itemHeight
          itemSize = CGSize(width: itemHeight, height: itemHeight)
      }
  }
