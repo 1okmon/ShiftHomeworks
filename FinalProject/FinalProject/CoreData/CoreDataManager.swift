@@ -10,7 +10,7 @@ import CoreData
 
 private enum EntityName {
     static let location = "LocationEntity"
-    static let character = "Character"
+    static let character = "CharacterEntity"
 }
 
 final class CoreDataManager: NSObject {
@@ -28,7 +28,10 @@ final class CoreDataManager: NSObject {
     private var context: NSManagedObjectContext {
         self.appDelegate.persistentContainer.viewContext
     }
-    
+}
+
+// MARK: LocationEntity extension
+extension CoreDataManager: ILocationCoreDataManager {
     func createLocation(_ locationDetails: LocationDetails) {
         guard let locationEntityDescription = NSEntityDescription
             .entity(forEntityName: EntityName.location,
@@ -39,6 +42,7 @@ final class CoreDataManager: NSObject {
         location.name = locationDetails.name
         location.type = locationDetails.type
         location.dimension = locationDetails.dimension
+        location.residents = try? JSONSerialization.data(withJSONObject: locationDetails.residents, options: [])
         self.appDelegate.saveContext()
     }
     
@@ -74,6 +78,62 @@ final class CoreDataManager: NSObject {
             guard let locations = try? context.fetch(fetchRequest) as? [LocationEntity],
                   let location = locations.first(where: { $0.id == id }) else { return }
             self.context.delete(location)
+        }
+        self.appDelegate.saveContext()
+    }
+}
+
+// MARK: CharacterEntity extension
+extension CoreDataManager: ICharacterCoreDataManager {
+    func createCharacter(_ characterDetails: CharacterDetails) {
+        guard let characterEntityDescription = NSEntityDescription
+            .entity(forEntityName: EntityName.character,
+                    in: self.context) else { return }
+        
+        let character = CharacterEntity(entity: characterEntityDescription, insertInto: self.context)
+        character.id = Int32(characterDetails.id)
+        character.name = characterDetails.name
+        character.status = characterDetails.status
+        character.species = characterDetails.species
+        character.type = characterDetails.type
+        character.gender = characterDetails.gender
+        character.imageUrl = characterDetails.imageUrl
+        character.image = characterDetails.image?.jpegData(compressionQuality: 1.0)
+        self.appDelegate.saveContext()
+    }
+    
+    func fetchCharacters() -> [CharacterEntity] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
+        do {
+            return (try? self.context.fetch(fetchRequest) as? [CharacterEntity]) ?? []
+        }
+    }
+    
+    func fetchCharacter(with id: Int) -> CharacterEntity? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
+        do {
+            let characters = try? context.fetch(fetchRequest) as? [CharacterEntity]
+            return characters?.first(where: { $0.id == id })
+        }
+    }
+    
+    func deleteAllCharacters() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
+        do {
+            let characters = try? context.fetch(fetchRequest) as? [CharacterEntity]
+            characters?.forEach({ [weak self] character in
+                self?.context.delete(character)
+            })
+        }
+        self.appDelegate.saveContext()
+    }
+    
+    func deleteCharacter(with id: Int) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
+        do {
+            guard let characters = try? context.fetch(fetchRequest) as? [CharacterEntity],
+                  let character = characters.first(where: { $0.id == id }) else { return }
+            self.context.delete(character)
         }
         self.appDelegate.saveContext()
     }
