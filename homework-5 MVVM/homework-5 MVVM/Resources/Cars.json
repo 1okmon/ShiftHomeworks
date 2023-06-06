@@ -1,0 +1,66 @@
+{
+    "cars": [
+        {
+            "id": 1,
+            "manufacturer": "Nissan",
+            "model": "GT-R r34",
+            "images": ["skylineR34-1", "skylineR34-2", "skylineR34-3"],
+            "yearOfIssue": 2000
+        },
+        {
+            "id": 2,
+            "manufacturer": "Nissan",
+            "model": "GT-R r35",
+            "images": ["skylineR35-1", "skylineR35-2"]
+        },
+        {
+            "id": 3,
+            "manufacturer": "Toyota",
+            "model": "Supra A80",
+            "images": ["supraA80-1"]
+        },
+        {
+            "id": 4,
+            "manufacturer": "Toyota",
+            "model": "Supra A90",
+            "images": ["supraA90-1"]
+        },
+        {
+            "id": 5,
+            "manufacturer": "Nissan",
+            "model": "Silvia S13",
+            "images": ["silviaS13-1", "silviaS13-2"]
+        },
+        {
+            "id": 6,
+            "manufacturer": "Nissan",
+            "model": "Silvia S14",
+            "images": ["silviaS14-1"]
+        },
+        {
+            "id": 7,
+            "manufacturer": "Nissan",
+            "model": "Silvia S15",
+            "images": ["silviaS15-1", "silviaS15-2"]
+        },
+        {
+            "id": 8,
+            "manufacturer": "Nissan",
+            "model": "Silvia S15 rocket bunny boss",
+            "images": ["silviaS15Boss-1", "silviaS15Boss-2"]
+        },
+        {
+            "id": 9,
+            "manufacturer": "Nissan",
+            "model": "370Z BadAss VR-Z",
+            "images": ["z370BadAssVRZ-1", "z370BadAssVRZ-2"]
+        },
+        {
+            "id": 10,
+            "manufacturer": "Mazda",
+            "model": "MX-5 miata",
+            "images": ["miata-1", "miata-2", "miata-3"],
+            "yearOfIssue": 1998
+        },
+    ]
+}
