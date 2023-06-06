@@ -31,7 +31,6 @@ final class CharacterDetailsViewModel {
         if let characterEntity = coreDataManager.fetchCharacter(with: id) {
             self.character.value = CharacterDetails(characterEntity: characterEntity)
             self.isFavorite.value = true
-            print("from core data")
             return
         }
         self.charactersNetworkManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails) in

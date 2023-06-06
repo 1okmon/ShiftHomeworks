@@ -30,8 +30,6 @@ final class FavoriteCharactersPresenter {
             charactersCopy[characterId] = nil
             guard self.characters[characterId] == nil else { continue }
             self.characters.updateValue(Character(characterEntity: characterEntity), forKey: characterId)
-            print(self.characters)
-            print()
             if let imageData = characterEntity.image,
                let imageUrl = characterEntity.imageUrl {
                 let image = UIImage(data: imageData)
