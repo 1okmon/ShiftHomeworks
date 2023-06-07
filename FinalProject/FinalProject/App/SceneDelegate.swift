@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         self.appCoordinator = AppCoordinator(window: self.window)
         if let currentUser = Auth.auth().currentUser {
-            currentUser.getIDTokenForcingRefresh(true) { error, _  in
+            currentUser.getIDToken { error, _  in
                 if let error = error {
                     do {
                         try Auth.auth().signOut()

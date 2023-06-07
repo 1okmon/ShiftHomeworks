@@ -19,31 +19,32 @@ final class RealtimeDatabaseManager {
     
     func createNewUser(with id: String, email: String, completion: @escaping (AuthResult) -> Void) {
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(id)
-        let userData = UserDataRequest.userData(email: email,
-                                         name: "",
-                                         favoriteLocations: [],
-                                         favoriteCharacters: [])
-        ref.setValue(userData) { error, _ in
+        let value = UserDataRequestBuilder().setEmail(email).build()
+        ref.setValue(value) { error, _ in
             guard let error = error else { return }
             completion(ErrorParser().parse(error: error))
         }
     }
     
-    func updateUserInfo() {
+    func updateUserData(to userData: UserData) {
+        let value = UserDataRequestBuilder().setFirstName(userData.firstName).setLastName(userData.lastName).build()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        ref.updateChildValues(value)
     }
     
     func updateFavoriteLocations(locationsIds: [Int]) {
-        let userData = UserDataRequest.favoriteLocations(locationsIds: locationsIds)
+        let value = UserDataRequestBuilder().setFavoriteLocations(locationsIds).build()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
-        ref.updateChildValues(userData.value)
+        ref.updateChildValues(value)
     }
     
     func updateFavoriteCharacters(charactersIds: [Int]) {
-        let userData = UserDataRequest.favoriteCharacters(charactersIds: charactersIds)
+        let value = UserDataRequestBuilder().setFavoriteCharacters(charactersIds).build()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
-        ref.updateChildValues(userData.value)
+        ref.updateChildValues(value)
     }
     
     func loadUserData(completion: ((UserDataResponse) -> Void)?) {
