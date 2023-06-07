@@ -11,7 +11,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     private var coordinator: ICharacterRickAndMortyCoordinator?
     private let locationsNetworkManager: RickAndMortyLocationNetworkManager
     private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
-    private let coreDataManager: CoreDataManager
+    private let coreDataManager: ILocationCoreDataManager
     private var locationDetails: Observable<LocationDetails>
     private var residents: Observable<[Character]>
     private var isFavorite: Observable<Bool>
@@ -19,7 +19,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     
     init(coordinator: ICharacterRickAndMortyCoordinator) {
         self.coordinator = coordinator
-        self.locationsNetworkManager = RickAndMortyLocationNetworkManager()
+        self.locationsNetworkManager = RickAndMortyLocationNetworkManager.shared
         self.charactersNetworkManager = RickAndMortyCharacterNetworkManager.shared
         self.coreDataManager = CoreDataManager.shared
         self.locationDetails = Observable<LocationDetails>()

@@ -15,17 +15,53 @@ private enum EntityName {
 
 final class CoreDataManager: NSObject {
     static let shared = CoreDataManager()
+    private let realtimeDatabaseManager: RealtimeDatabaseManager
     
-    private override init() {}
+    func clean() {
+        deleteAllLocations()
+        deleteAllCharacters()
+    }
     
-    private var appDelegate: AppDelegate {
+    func loadUserData() {
+        let characterLoadManager = RickAndMortyCharacterNetworkManager.shared
+        let locationLoadManager = RickAndMortyLocationNetworkManager.shared
+        realtimeDatabaseManager.loadUserData { userData in
+            print(userData)
+            userData.favoriteCharacters?.forEach({ [weak self] id in
+                characterLoadManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails) in
+                    characterLoadManager.loadImage(from: character.imageUrl) { image, _ in
+                        DispatchQueue.main.async {
+                            var characterCopy = character
+                            characterCopy.image = image
+                            self?.createCharacter(characterCopy)
+                        }
+                    }
+                }
+            })
+            userData.favoriteLocations?.forEach({ [weak self] id in
+                locationLoadManager.loadLocation(with: id) { location in
+                    DispatchQueue.main.async {
+                        self?.createLocation(location)
+                    }
+                }
+            })
+        }
+    }
+    
+    private override init() {
+        self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
+    }
+}
+
+private extension CoreDataManager {
+    var appDelegate: AppDelegate {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("AppDelegate doesn't exist")
         }
         return appDelegate
     }
     
-    private var context: NSManagedObjectContext {
+    var context: NSManagedObjectContext {
         self.appDelegate.persistentContainer.viewContext
     }
 }
@@ -36,7 +72,6 @@ extension CoreDataManager: ILocationCoreDataManager {
         guard let locationEntityDescription = NSEntityDescription
             .entity(forEntityName: EntityName.location,
                     in: self.context) else { return }
-        
         let location = LocationEntity(entity: locationEntityDescription, insertInto: self.context)
         location.id = Int32(locationDetails.id)
         location.name = locationDetails.name
@@ -44,6 +79,7 @@ extension CoreDataManager: ILocationCoreDataManager {
         location.dimension = locationDetails.dimension
         location.residents = try? JSONSerialization.data(withJSONObject: locationDetails.residents, options: [])
         self.appDelegate.saveContext()
+        self.updateRealtimeDatabase(.locations)
     }
     
     func fetchLocations() -> [LocationEntity] {
@@ -69,6 +105,7 @@ extension CoreDataManager: ILocationCoreDataManager {
                 self?.context.delete(location)
             })
         }
+        self.updateRealtimeDatabase(.locations)
         self.appDelegate.saveContext()
     }
     
@@ -80,6 +117,7 @@ extension CoreDataManager: ILocationCoreDataManager {
             self.context.delete(location)
         }
         self.appDelegate.saveContext()
+        self.updateRealtimeDatabase(.locations)
     }
 }
 
@@ -100,6 +138,7 @@ extension CoreDataManager: ICharacterCoreDataManager {
         character.imageUrl = characterDetails.imageUrl
         character.image = characterDetails.image?.jpegData(compressionQuality: 1.0)
         self.appDelegate.saveContext()
+        self.updateRealtimeDatabase(.characters)
     }
     
     func fetchCharacters() -> [CharacterEntity] {
@@ -126,6 +165,7 @@ extension CoreDataManager: ICharacterCoreDataManager {
             })
         }
         self.appDelegate.saveContext()
+        self.updateRealtimeDatabase(.characters)
     }
     
     func deleteCharacter(with id: Int) {
@@ -136,5 +176,33 @@ extension CoreDataManager: ICharacterCoreDataManager {
             self.context.delete(character)
         }
         self.appDelegate.saveContext()
+        self.updateRealtimeDatabase(.characters)
+    }
+}
+
+private extension CoreDataManager {
+    enum UpdateType {
+        case characters
+        case locations
+    }
+    
+    func updateRealtimeDatabase(_ type: UpdateType) {
+        var entities: [IEntity]
+        switch type {
+        case .characters:
+            entities = fetchCharacters()
+        case .locations:
+            entities = fetchLocations()
+        }
+        var favoriteIds = [Int]()
+        entities.forEach { entity in
+            favoriteIds.append(Int(entity.id))
+        }
+        switch type {
+        case .characters:
+            self.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: favoriteIds)
+        case .locations:
+            self.realtimeDatabaseManager.updateFavoriteLocations(locationsIds: favoriteIds)
+        }
     }
 }

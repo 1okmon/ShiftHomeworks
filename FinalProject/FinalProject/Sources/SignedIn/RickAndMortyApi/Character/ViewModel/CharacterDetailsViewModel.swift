@@ -10,7 +10,7 @@ import UIKit
 final class CharacterDetailsViewModel: ICharacterDetailsViewModel {
     private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
     private var character: Observable<CharacterDetails>
-    private let coreDataManager: CoreDataManager
+    private let coreDataManager: ICharacterCoreDataManager
     private var isFavorite: Observable<Bool>
     
     init(coordinator: RickAndMortyCoordinator) {
