@@ -22,7 +22,6 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
                 return
             }
             completion(.successSignIn)
-            self.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: [1, 2])
         }
     }
     

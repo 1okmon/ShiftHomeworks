@@ -35,7 +35,7 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func signInConfirmed() {
-        appCoordinator?.startSignedInFlow()
+        appCoordinator?.signInSuccess()
     }
     
     func goBack() {

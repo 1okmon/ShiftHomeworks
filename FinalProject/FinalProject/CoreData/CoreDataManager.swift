@@ -26,7 +26,6 @@ final class CoreDataManager: NSObject {
         let characterLoadManager = RickAndMortyCharacterNetworkManager.shared
         let locationLoadManager = RickAndMortyLocationNetworkManager.shared
         realtimeDatabaseManager.loadUserData { userData in
-            print(userData)
             userData.favoriteCharacters?.forEach({ [weak self] id in
                 characterLoadManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails) in
                     characterLoadManager.loadImage(from: character.imageUrl) { image, _ in
@@ -69,6 +68,7 @@ private extension CoreDataManager {
 // MARK: LocationEntity extension
 extension CoreDataManager: ILocationCoreDataManager {
     func createLocation(_ locationDetails: LocationDetails) {
+        guard fetchLocation(with: locationDetails.id) == nil else { return }
         guard let locationEntityDescription = NSEntityDescription
             .entity(forEntityName: EntityName.location,
                     in: self.context) else { return }
@@ -124,6 +124,7 @@ extension CoreDataManager: ILocationCoreDataManager {
 // MARK: CharacterEntity extension
 extension CoreDataManager: ICharacterCoreDataManager {
     func createCharacter(_ characterDetails: CharacterDetails) {
+        guard fetchCharacter(with: characterDetails.id) == nil else { return }
         guard let characterEntityDescription = NSEntityDescription
             .entity(forEntityName: EntityName.character,
                     in: self.context) else { return }

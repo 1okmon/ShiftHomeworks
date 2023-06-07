@@ -25,8 +25,12 @@ final class AppCoordinator {
         self.window?.rootViewController = navigationController
     }
     
-    func startSignedInFlow() {
+    func signInSuccess() {
         coreDataManager.loadUserData()
+        startSignedInFlow()
+    }
+    
+    func startSignedInFlow() {
         self.window?.rootViewController = SignedInTabBarController()
     }
 }

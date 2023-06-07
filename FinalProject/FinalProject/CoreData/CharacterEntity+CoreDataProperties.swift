@@ -12,12 +12,7 @@ import CoreData
 @objc(CharacterEntity)
 public class CharacterEntity: NSManagedObject {}
 
-extension CharacterEntity {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CharacterEntity> {
-        return NSFetchRequest<CharacterEntity>(entityName: "CharacterEntity")
-    }
-
+extension CharacterEntity: IEntity {
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
     @NSManaged public var status: String?
@@ -26,5 +21,4 @@ extension CharacterEntity {
     @NSManaged public var gender: String?
     @NSManaged public var imageUrl: String?
     @NSManaged public var image: Data?
-
 }
