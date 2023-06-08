@@ -48,6 +48,8 @@
 		0E73D8552A308C4500CCD271 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8542A308C4500CCD271 /* ProfilePresenter.swift */; };
 		0E73D8582A308D1800CCD271 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8572A308D1800CCD271 /* ProfileCoordinator.swift */; };
 		0E73D85A2A3094EE00CCD271 /* UserDataRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8592A3094EE00CCD271 /* UserDataRequestBuilder.swift */; };
+		0E73D85D2A31D7AB00CCD271 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D85C2A31D7AB00CCD271 /* ActivityView.swift */; };
+		0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8602A31E29500CCD271 /* AlertBuilder.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -148,6 +150,8 @@
 		0E73D8542A308C4500CCD271 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		0E73D8572A308D1800CCD271 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		0E73D8592A3094EE00CCD271 /* UserDataRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRequestBuilder.swift; sourceTree = "<group>"; };
+		0E73D85C2A31D7AB00CCD271 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		0E73D8602A31E29500CCD271 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -506,6 +510,22 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		0E73D85B2A31D75000CCD271 /* ActivityView */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D85C2A31D7AB00CCD271 /* ActivityView.swift */,
+			);
+			path = ActivityView;
+			sourceTree = "<group>";
+		};
+		0E73D85F2A31E25500CCD271 /* AlertBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8602A31E29500CCD271 /* AlertBuilder.swift */,
+			);
+			path = AlertBuilder;
+			sourceTree = "<group>";
+		};
 		0EEA03C52A1724C300B1EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +871,8 @@
 		0EF1604E2A1EFCD50026A628 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E73D85F2A31E25500CCD271 /* AlertBuilder */,
+				0E73D85B2A31D75000CCD271 /* ActivityView */,
 				0EF1604C2A1EFCBC0026A628 /* Observing.swift */,
 				0E27E6792A25E39B0010C571 /* NSObject+className.swift */,
 			);
@@ -1070,6 +1092,7 @@
 				0EF160482A1E3EA90026A628 /* ResetPasswordViewController.swift in Sources */,
 				0E27E6AD2A274DBA0010C571 /* Character.swift in Sources */,
 				0E27E6D62A2998530010C571 /* LocationEntity+CoreDataProperties.swift in Sources */,
+				0E73D85D2A31D7AB00CCD271 /* ActivityView.swift in Sources */,
 				0EF1602F2A1E08AF0026A628 /* AuthResult.swift in Sources */,
 				0E27E6962A26EE400010C571 /* LocationDetailsViewController.swift in Sources */,
 				0EF160422A1E3C710026A628 /* SignUpViewModel.swift in Sources */,
@@ -1099,6 +1122,7 @@
 				0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* ResetPasswordViewModel.swift in Sources */,
+				0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */,
 				0E73D84F2A2FF28C00CCD271 /* UserDataResponse.swift in Sources */,
 				0E27E6732A25DD310010C571 /* LocationsViewController.swift in Sources */,
 				0E27E69A2A26EEA30010C571 /* LocationDetailsViewModel.swift in Sources */,
