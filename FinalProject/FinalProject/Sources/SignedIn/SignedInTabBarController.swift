@@ -29,6 +29,7 @@ private enum Metrics {
 }
 
 final class SignedInTabBarController: UITabBarController {
+    var signOutHandler: (() -> Void)?
     private var profileNavigationController: UINavigationController
     private var rickAndMortyNavigationController: UINavigationController
     private var favoritesNavigationController: UINavigationController
@@ -55,7 +56,10 @@ final class SignedInTabBarController: UITabBarController {
 
 private extension SignedInTabBarController {
     func initViewControllers() {
-        _ = ProfileCoordinator(navigationController: self.profileNavigationController)
+        let profileCoordinator = ProfileCoordinator(navigationController: self.profileNavigationController)
+        profileCoordinator.signOutHandler = { [weak self] in
+            self?.signOutHandler?()
+        }
         _ = RickAndMortyCoordinator(navigationController: self.rickAndMortyNavigationController)
         _ = FavoritesCoordinator(navigationController: self.favoritesNavigationController)
     }

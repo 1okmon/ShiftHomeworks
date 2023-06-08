@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileCoordinator {
+    var signOutHandler: (() -> Void)?
     private var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -23,6 +24,6 @@ class ProfileCoordinator {
     }
     
     func signOut() {
-        
+        self.signOutHandler?()
     }
 }

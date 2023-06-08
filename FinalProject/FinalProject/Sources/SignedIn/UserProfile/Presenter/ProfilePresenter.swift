@@ -27,4 +27,8 @@ class ProfilePresenter {
             self?.viewController.update(with: UserData(userDataResponse: userDataResponse))
         }
     }
+    
+    func signOut() {
+        self.coordinator?.signOut()
+    }
 }

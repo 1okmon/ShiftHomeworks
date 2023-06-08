@@ -47,5 +47,8 @@ private extension ProfileViewController {
         self.profileView.saveTapHandler = { [weak self] userData in
             self?.presenter?.save(userData: userData)
         }
+        self.profileView.signOutTapHandler = { [weak self] in
+            self?.presenter?.signOut()
+        }
     }
 }

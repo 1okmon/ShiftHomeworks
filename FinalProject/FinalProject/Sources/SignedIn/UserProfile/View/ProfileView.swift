@@ -8,11 +8,16 @@
 import UIKit
 
 private enum Metrics {
+    static let font = UIFont.systemFont(ofSize: 22)
+    
     enum Button {
         static let normalImage = UIImage(systemName: "pencil.circle")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
         static let editingImage = UIImage(systemName: "checkmark.circle")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
         static let edgeInset = 15
         static let height = 35
+        static let width = 80
+        static let signOutTitle = "Выйти"
+        static let textColor = UIColor.systemBlue
     }
     
     enum Row {
@@ -21,7 +26,6 @@ private enum Metrics {
         static let inSectionOffset = 10
         static let height = 50
         static let labelWidth = 120
-        static let font = UIFont.systemFont(ofSize: 22)
         static let cornerRadius: CGFloat = 10
         static let normalBackgroundColor = Theme.backgroundColor
         static let editingBackgroundColor = Theme.collectionViewBackgroundColor
@@ -38,16 +42,19 @@ private enum Metrics {
 fileprivate typealias Row = (label: UILabel, textField: UITextField)
 
 final class ProfileView: UIView {
+    var signOutTapHandler: (() -> Void)?
     var saveTapHandler: ((UserData) -> Void)?
-    private var firstNameRow: Row
-    private var lastNameRow: Row
-    private var editButton: UIButton
+    private let firstNameRow: Row
+    private let lastNameRow: Row
+    private let editButton: UIButton
+    private let signOutButton: UIButton
     private var isEditing: Bool
     
     override init(frame: CGRect) {
         self.editButton = UIButton(type: .system)
         self.firstNameRow = (UILabel(), UITextField())
         self.lastNameRow = (UILabel(), UITextField())
+        self.signOutButton = UIButton(type: .system)
         self.isEditing = false
         super.init(frame: .zero)
         configure()
@@ -70,6 +77,25 @@ private extension ProfileView {
         configureEditButton()
         configureFirstName()
         configureLastName()
+        configureSignOutButton()
+    }
+    
+    func configureSignOutButton() {
+        self.addSubview(self.signOutButton)
+        self.signOutButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(Metrics.Button.edgeInset)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(Metrics.Button.width)
+            make.height.equalTo(Metrics.Button.height)
+        }
+        self.signOutButton.setTitle(Metrics.Button.signOutTitle, for: .normal)
+        self.signOutButton.titleLabel?.font = Metrics.font
+        self.signOutButton.setTitleColor(Metrics.Button.textColor, for: .normal)
+        self.signOutButton.addTarget(self, action: #selector(signOutButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func signOutButtonTapped(_ sender: UIButton) {
+        self.signOutTapHandler?()
     }
     
     func configureEditButton() {
@@ -139,7 +165,7 @@ private extension ProfileView {
         row.textField.layer.cornerRadius = Metrics.Row.cornerRadius
         row.textField.backgroundColor = Metrics.Row.normalBackgroundColor
         row.textField.isUserInteractionEnabled = false
-        row.label.font = Metrics.Row.font
-        row.textField.font = Metrics.Row.font
+        row.label.font = Metrics.font
+        row.textField.font = Metrics.font
     }
 }
