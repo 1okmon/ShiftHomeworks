@@ -36,7 +36,7 @@ private extension ResetPasswordView {
     @objc func submitResetPasswordButtonTapped() {
         guard let handler = submitResetPasswordTapHandler else { return }
         guard let email = emailTextField.text else { return }
-        showActivityIndicatory()
+        showActivityIndicator()
         handler(email)
     }
 }

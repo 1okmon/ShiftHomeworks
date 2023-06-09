@@ -63,7 +63,8 @@ private extension SignInView {
             showAlert(of: .fieldsNotFilled)
             return
         }
-        showActivityIndicatory()
+        showActivityIndicator()
+        //showActivityIndicatory()
         handler(email, password)
     }
     

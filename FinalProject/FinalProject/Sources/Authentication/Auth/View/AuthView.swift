@@ -22,7 +22,7 @@ private enum Metrics {
 
 class AuthView: UIView {
     var alertHandler: ((String, String, String) -> Void)?
-    private var activityView: UIView?
+    private var activityView: ActivityView?
     private var scrollView = UIScrollView()
     private var titleLabel: UILabel
     private var firsResponderTextField: UITextField?
@@ -53,20 +53,12 @@ class AuthView: UIView {
         scrollView.contentInset.bottom = keyboardHeight
     }
     
-    func showActivityIndicatory() {
-        let activityView = UIView()
-        activityView.backgroundColor = Metrics.activityViewBackgroundColor
-        self.addSubview(activityView)
-        activityView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        configureActivityIndicatorView(for: activityView)
-        self.activityView = activityView
+    func showActivityIndicator() {
+        self.activityView?.startAnimating()
     }
     
-    func closeActivityIndicatory() {
-        self.activityView?.subviews.forEach({ $0.removeFromSuperview() })
-        self.activityView?.removeFromSuperview()
+    func closeActivityIndicator() {
+        self.activityView?.stopAnimating()
     }
     
     func keyboardWillHide() {
@@ -87,6 +79,7 @@ private extension AuthView {
         configureTextFields()
         configureButtons()
         configureContentViewBottomConstraint(at: scrollView, bottomView: buttons.last)
+        self.activityView = ActivityView(superview: self)
     }
     
     func configureScrollView() {
@@ -183,16 +176,6 @@ private extension AuthView {
     func showAlert(with alertTitle: String, _ alertMessage: String, buttonTitle: String) {
         guard let alertHandler = alertHandler else { return }
         alertHandler(alertTitle, alertMessage, buttonTitle)
-    }
-    
-    private func configureActivityIndicatorView(for view: UIView) {
-        let activityIndicatorView = UIActivityIndicatorView(style: .large)
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(Metrics.activityIndicatorVerticalOffset)
-        }
-        activityIndicatorView.startAnimating()
     }
 }
 

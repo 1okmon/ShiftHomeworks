@@ -52,7 +52,8 @@ private extension SignUpView {
             showAlert(of: .passwordsNotEqual)
             return
         }
-        showActivityIndicatory()
+        showActivityIndicator()
+        //showActivityIndicatory()
         handler(email, password)
     }
 }

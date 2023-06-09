@@ -55,7 +55,7 @@ final class RickAndMortyCharacterNetworkManager: NSObject {
                 let character = T(characterResponse: result)
                 completion?(character)
             } catch {
-                print(1)
+                print(error)
             }
         }
         task.resume()

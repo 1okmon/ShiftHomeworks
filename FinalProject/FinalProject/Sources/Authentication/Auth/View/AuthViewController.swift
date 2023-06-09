@@ -45,7 +45,7 @@ class AuthViewController: UIViewController, IObserver {
     
     func update<T>(with value: T) {
         guard let result = value as? AuthResult else { return }
-        authView.closeActivityIndicatory()
+        self.authView.closeActivityIndicator()
         presentAlert(of: result)
     }
     

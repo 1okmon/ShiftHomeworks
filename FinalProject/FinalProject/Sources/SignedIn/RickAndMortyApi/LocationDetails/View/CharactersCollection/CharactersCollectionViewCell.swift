@@ -30,6 +30,7 @@ private enum Metrics {
 final class CharactersCollectionViewCell: UICollectionViewCell {
     private let characterImageView: UIImageView
     private let characterName: UILabel
+    private var activityView: ActivityView?
     
     override init(frame: CGRect) {
         self.characterImageView = UIImageView()
@@ -48,6 +49,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
     
     func update(with image: UIImage) {
         self.characterImageView.image = image
+        self.activityView?.stopAnimating()
     }
     
     override func prepareForReuse() {
@@ -60,6 +62,8 @@ private extension CharactersCollectionViewCell {
         self.backgroundColor = Metrics.backgroundColor
         self.layer.cornerRadius = Metrics.cornerRadius
         configureCharacterImageView()
+        self.activityView = ActivityView(superview: self.characterImageView)
+        self.activityView?.startAnimating()
         configureCharacterName()
     }
     

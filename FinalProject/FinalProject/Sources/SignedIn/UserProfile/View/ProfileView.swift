@@ -39,11 +39,12 @@ private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
 }
 
-fileprivate typealias Row = (label: UILabel, textField: UITextField)
+private typealias Row = (label: UILabel, textField: UITextField)
 
 final class ProfileView: UIView {
     var signOutTapHandler: (() -> Void)?
     var saveTapHandler: ((UserData) -> Void)?
+    private var activityView: ActivityView?
     private let firstNameRow: Row
     private let lastNameRow: Row
     private let editButton: UIButton
@@ -67,8 +68,8 @@ final class ProfileView: UIView {
     func update(with userData: UserData) {
         self.firstNameRow.textField.text = userData.firstName
         self.lastNameRow.textField.text = userData.lastName
+        self.activityView?.stopAnimating()
     }
-    
 }
 
 private extension ProfileView {
@@ -78,6 +79,8 @@ private extension ProfileView {
         configureFirstName()
         configureLastName()
         configureSignOutButton()
+        self.activityView = ActivityView(superview: self)
+        self.activityView?.startAnimating()
     }
     
     func configureSignOutButton() {

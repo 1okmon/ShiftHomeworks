@@ -39,6 +39,7 @@ private enum Metrics {
 final class CharacterDetailsView: UIView {
     private let characterImageView: UIImageView
     private let characterNameLabel: UILabel
+    private var activityView: ActivityView?
     private let characterGenderLabel: UILabel
     private let characterStatusLabel: UILabel
     private let characterSpeciesLabel: UILabel
@@ -68,6 +69,7 @@ final class CharacterDetailsView: UIView {
             self.characterSpeciesLabel.text = Metrics.Label.Prefix.species + character.species
             self.characterTypeLabel.isHidden = character.type.isEmpty
             self.characterTypeLabel.text = Metrics.Label.Prefix.type + character.type
+            self.activityView?.stopAnimating()
         }
     }
 }
@@ -81,6 +83,8 @@ private extension CharacterDetailsView {
         configure(label: self.characterStatusLabel, under: self.characterGenderLabel)
         configure(label: self.characterSpeciesLabel, under: self.characterStatusLabel)
         configure(label: self.characterTypeLabel, under: self.characterSpeciesLabel)
+        self.activityView = ActivityView(superview: self)
+        self.activityView?.startAnimating()
     }
     
     func configure(label: UILabel, under view: UIView? = nil) {

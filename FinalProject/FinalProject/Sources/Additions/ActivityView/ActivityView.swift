@@ -28,9 +28,11 @@ final class ActivityView: UIView {
     
     func startAnimating() {
         self.activityIndicatorView.startAnimating()
+        self.isHidden = false
     }
     
     func stopAnimating() {
+        self.isHidden = true
         self.activityIndicatorView.stopAnimating()
     }
     
@@ -42,6 +44,7 @@ final class ActivityView: UIView {
 
 private extension ActivityView {
     func configure() {
+        self.isHidden = true
         self.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -53,7 +56,7 @@ private extension ActivityView {
         self.addSubview(self.activityIndicatorView)
         self.activityIndicatorView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(Metrics.activityIndicatorVerticalOffset)
+            make.centerY.equalToSuperview()//.offset(Metrics.activityIndicatorVerticalOffset)
         }
     }
 }

@@ -18,6 +18,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        presenter?.fetchRemoteData()
     }
     
     func setPresenter(_ presenter: ProfilePresenter) {
