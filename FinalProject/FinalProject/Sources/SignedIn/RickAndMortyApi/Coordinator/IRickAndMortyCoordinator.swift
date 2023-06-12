@@ -11,6 +11,11 @@ protocol ILocationsRickAndMortyCoordinator {
     func openLocation(with id: Int)
 }
 
-protocol ICharacterRickAndMortyCoordinator {
+protocol ILocationDetailsRickAndMortyCoordinator {
     func openCharacter(with id: Int)
+    func goBack()
+}
+
+protocol ICharacterDetailsRickAndMortyCoordinator {
+    func closePresentedController()
 }

@@ -10,7 +10,7 @@ import UIKit
 private enum Title {
     static let forLocationViewController = "Локации"
 }
-class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ICharacterRickAndMortyCoordinator {
+class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ILocationDetailsRickAndMortyCoordinator, ICharacterDetailsRickAndMortyCoordinator {
     private var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -44,5 +44,13 @@ class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ICharacterRick
         characterDetailsViewModel.subscribe(observer: characterDetailsViewController)
         characterDetailsViewModel.loadCharacter(with: id)
         self.navigationController.present(characterDetailsViewController, animated: true)
+    }
+    
+    func goBack() {
+        self.navigationController.popViewController(animated: true)
+    }
+    
+    func closePresentedController() {
+        self.navigationController.dismiss(animated: true)
     }
 }

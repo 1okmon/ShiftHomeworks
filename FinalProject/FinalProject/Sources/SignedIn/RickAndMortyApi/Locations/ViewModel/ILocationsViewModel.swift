@@ -11,4 +11,5 @@ protocol ILocationsViewModel {
     func loadNextPage()
     func loadPreviousPage()
     func openLocation(with id: Int)
+    func reload()
 }

@@ -23,37 +23,44 @@ final class RickAndMortyCharacterNetworkManager: NSObject {
         self.imagesManager = CacheManager()
         self.completions = [:]
         super.init()
-        let config = URLSessionConfiguration.background(withIdentifier: Metrics.sessionIdentifier)
     }
     
-    func loadImage(from urlString: String, completion: ((UIImage, String) -> Void)?) {
+    func loadImage(from urlString: String, completion: ((UIImage?, String?, IAlertRepresentable?) -> Void)?) {
         self.updateDownloadTasksQueue.async {
             if let image = self.imagesManager.image(by: urlString) {
-                completion?(image, urlString)
+                completion?(image, urlString, nil)
             } else {
                 let task = self.dataTask(by: urlString) { data, _, error in
+                    if let error = error {
+                        let errorCode = ResponseErrorCodeParser().parse(error: error)
+                        completion?(nil, nil, errorCode)
+                    }
                     guard let data = data, error == nil else { return }
                     guard let image = UIImage(data: data) else { return }
                     self.imagesManager.append(image: image, with: urlString)
-                    completion?(image, urlString)
+                    completion?(image, urlString, nil)
                 }
                 task.resume()
             }
         }
     }
     
-    func loadCharacter<T: ICharacter>(with id: Int, completion: ((T) -> Void)?) {
+    func loadCharacter<T: ICharacter>(with id: Int, completion: ((T?, IAlertRepresentable?) -> Void)?) {
         let urlString = Metrics.charactersLink + "\(id)"
         self.loadCharacter(by: urlString, completion: completion)
     }
     
-    func loadCharacter<T: ICharacter>(by urlString: String, completion: ((T) -> Void)?) {
+    func loadCharacter<T: ICharacter>(by urlString: String, completion: ((T?, IAlertRepresentable?) -> Void)?) {
         let task = dataTask(by: urlString) { data, _, error in
+            if let error = error {
+                let errorCode = ResponseErrorCodeParser().parse(error: error)
+                completion?(nil, errorCode)
+            }
             guard let data = data, error == nil else { return }
             do {
                 let result: CharacterResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
                 let character = T(characterResponse: result)
-                completion?(character)
+                completion?(character, nil)
             } catch {
                 print(error)
             }

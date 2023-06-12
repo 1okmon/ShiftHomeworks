@@ -38,11 +38,27 @@ final class CharacterDetailsViewController: UIViewController, IObserver {
     }
     
     func update<T>(with value: T) {
+        if let errorCode = value as? ResponseErrorCode {
+            let alert = AlertBuilder()
+                .setFieldsToShowAlert(of: errorCode)
+//                .setTitle(errorCode.title)
+//                .setMessage(errorCode.message)
+                .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
+                    self?.viewModel.close()
+                })).build()
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
+            return
+        }
         if let isFavorite = value as? Bool {
             self.favoriteButton.setImage(Icon.Favorite.image(isFavorite), for: .normal)
         }
         guard let character = value as? CharacterDetails else { return }
         self.characterDetailsView.update(with: character)
+        DispatchQueue.main.async {
+            self.favoriteButton.isHidden = false
+        }
     }
 }
 
@@ -63,6 +79,7 @@ private extension CharacterDetailsViewController {
         }
         self.favoriteButton.setImage(Icon.Favorite.image(), for: .normal)
         self.favoriteButton.addTarget(self, action: #selector(favoritesButtonTapped(_:)), for: .touchUpInside)
+        self.favoriteButton.isHidden = true
     }
     
     @objc func favoritesButtonTapped(_ sender: UIBarButtonItem) {
