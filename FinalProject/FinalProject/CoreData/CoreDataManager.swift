@@ -25,10 +25,11 @@ final class CoreDataManager: NSObject {
     func loadUserData() {
         let characterLoadManager = RickAndMortyCharacterNetworkManager.shared
         let locationLoadManager = RickAndMortyLocationNetworkManager.shared
-        realtimeDatabaseManager.loadUserData { userData in
+        self.realtimeDatabaseManager.loadUserData { userData in
             userData.favoriteCharacters?.forEach({ [weak self] id in
-                characterLoadManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails) in
-                    characterLoadManager.loadImage(from: character.imageUrl) { image, _ in
+                characterLoadManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails?, _) in
+                    guard let character = character else { return }
+                    characterLoadManager.loadImage(from: character.imageUrl) { image, _, _ in
                         DispatchQueue.main.async {
                             var characterCopy = character
                             characterCopy.image = image
@@ -38,7 +39,8 @@ final class CoreDataManager: NSObject {
                 }
             })
             userData.favoriteLocations?.forEach({ [weak self] id in
-                locationLoadManager.loadLocation(with: id) { location in
+                locationLoadManager.loadLocation(with: id) { location, _ in
+                    guard let location = location else { return }
                     DispatchQueue.main.async {
                         self?.createLocation(location)
                     }

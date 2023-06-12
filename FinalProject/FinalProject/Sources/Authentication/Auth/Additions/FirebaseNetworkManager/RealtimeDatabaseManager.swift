@@ -17,7 +17,7 @@ final class RealtimeDatabaseManager {
     
     private init() {}
     
-    func createNewUser(with id: String, email: String, completion: @escaping (AuthResult) -> Void) {
+    func createNewUser(with id: String, email: String, completion: @escaping (IAlertRepresentable) -> Void) {
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(id)
         let value = UserDataRequestBuilder().setEmail(email).build()
         ref.setValue(value) { error, _ in

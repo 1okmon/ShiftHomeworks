@@ -7,8 +7,8 @@
 
 import Firebase
 protocol IFirebaseNetworkManager {
-    func signIn(with email: String, _ password: String, completion: @escaping (AuthResult) -> Void)
-    func submitSignUp(with email: String, _ password: String, completion: @escaping (AuthResult) -> Void)
-    func submitResetPassword(with email: String, completion: @escaping (AuthResult) -> Void)
-    func sendEmailConfirmation(to user: User, completion: @escaping (AuthResult) -> Void)
+    func signIn(with email: String, _ password: String, completion: @escaping (IAlertRepresentable) -> Void)
+    func submitSignUp(with email: String, _ password: String, completion: @escaping (IAlertRepresentable) -> Void)
+    func submitResetPassword(with email: String, completion: @escaping (IAlertRepresentable) -> Void)
+    func sendEmailConfirmation(to user: User, completion: @escaping (IAlertRepresentable) -> Void)
 }

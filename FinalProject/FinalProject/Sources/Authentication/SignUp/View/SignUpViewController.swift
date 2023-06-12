@@ -5,7 +5,7 @@
 //  Created by 1okmon on 24.05.2023.
 //
 
-import Foundation
+import UIKit
 final class SignUpViewController: AuthViewController {
     private var signUpViewModel: ISignUpViewModel
     private var signUpView: SignUpView
@@ -24,27 +24,37 @@ final class SignUpViewController: AuthViewController {
         super.viewDidLoad()
         configure()
     }
-    
-    override func presentAlert(of type: AuthResult) {
-        if case .emailVerificationSent = type {
-            let authDesignSystem = AuthDesignSystem()
-            let alert = authDesignSystem.alert(
-                title: type.title,
-                message: type.message,
-                buttonTitles: [ type.buttonTitle ],
-                buttonActions: [ { [weak self] _ in
-                    self?.signUpViewModel.goBack()
-                } ])
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            super.presentAlert(of: type)
+    override func update<T>(with value: T) {
+        if let error = value as? IAlertRepresentable {
+            presentAlert(of: error)
         }
+        super.update(with: value)
+    }
+    
+    func presentAlert(of errorCode: IAlertRepresentable) {
+        guard case AuthResult.emailVerificationSent = errorCode else { return }
+        let alert = AlertBuilder()
+            .setFieldsToShowAlert(of: errorCode)
+            .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
+                self?.signUpViewModel.goBack()
+            })).build()
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
 private extension SignUpViewController {
     func configure() {
-        signUpView.submitSignUpTapHandler = {[weak self] email, password in
+        signUpView.submitSignUpTapHandler = {[weak self] email, password, repeatPassword in
+            guard !email.isEmpty,
+                  !password.isEmpty,
+                  !repeatPassword.isEmpty else {
+                self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
+                return
+            }
+            guard password == repeatPassword else {
+                self?.showInfoAlert(of: AuthResult.passwordsNotEqual)
+                return
+            }
             self?.signUpViewModel.submitSignUp(with: email, password)
         }
     }

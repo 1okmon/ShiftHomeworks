@@ -7,7 +7,7 @@
 
 import UIKit
 final class SignUpView: AuthView {
-    var submitSignUpTapHandler: ((String, String) -> Void)?
+    var submitSignUpTapHandler: ((String, String, String) -> Void)?
     private let titleLabel: UILabel
     private let emailTextField: UITextField
     private let passwordTextField: UITextField
@@ -38,22 +38,13 @@ private extension SignUpView {
     }
     
     @objc func submitSignUpButtonTapped() {
-        guard let handler = submitSignUpTapHandler else { return }
-        guard let email = emailTextField.text,
+        guard let handler = submitSignUpTapHandler,
+              let email = emailTextField.text,
               let password = passwordTextField.text,
-              let repeatPassword = repeatPasswordTextField.text,
-              !email.isEmpty,
-              !password.isEmpty,
-              !repeatPassword.isEmpty else {
-            showAlert(of: .fieldsNotFilled)
-            return
-        }
-        guard password == repeatPassword else {
-            showAlert(of: .passwordsNotEqual)
+              let repeatPassword = repeatPasswordTextField.text else {
             return
         }
         showActivityIndicator()
-        //showActivityIndicatory()
-        handler(email, password)
+        handler(email, password, repeatPassword)
     }
 }

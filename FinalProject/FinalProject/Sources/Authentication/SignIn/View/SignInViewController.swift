@@ -25,34 +25,39 @@ final class SignInViewController: AuthViewController {
         configure()
     }
     
-    override func presentAlert(of type: AuthResult) {
-        let authDesignSystem = AuthDesignSystem()
-        if case let .emailNotVerified(user) = type {
-            let alert = authDesignSystem.alert(
-                title: type.title,
-                message: type.message,
-                buttonTitles: [ "Да", "Нет" ],
-                buttonActions: [ { [weak self] _ in
-                    self?.signInViewModel.sendEmailVerificationLink(to: user)
-                } ])
-            self.present(alert, animated: true, completion: nil)
+    override func update<T>(with value: T) {
+        if let error = value as? IAlertRepresentable {
+            presentAlert(of: error)
         }
-        if case .userNotFound = type {
-            let alert = authDesignSystem.alert(
-                title: type.title,
-                message: type.message,
-                buttonTitles: ["Да", "Нет"],
-                buttonActions: [ { [weak self] _ in
-                    self?.signInViewModel.signUp()
-                } ])
-            self.present(alert, animated: true, completion: nil)
-        }
-        if type == .wrongPassword || type == .tooManyRequests {
-            self.signInView.showResetPasswordButton()
-        }
-        guard case .successSignIn = type else {
-            super.presentAlert(of: type)
+        super.update(with: value)
+    }
+    
+    func presentAlert(of result: IAlertRepresentable) {
+        let alertBuilder = AlertBuilder().setFieldsToShowAlert(of: result)
+        guard let authResult = result as? AuthResult else {
             return
+        }
+        if case let AuthResult.emailNotVerified(user) = authResult {
+            let alert = alertBuilder
+                .addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                    self?.signInViewModel.sendEmailVerificationLink(to: user)
+                }))
+                .addAction(UIAlertAction(title: "Нет", style: .default))
+                .build()
+            self.present(alert, animated: true, completion: nil)
+        }
+        if case AuthResult.userNotFound = authResult {
+            let alert = alertBuilder
+                .addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                    self?.signInViewModel.signUp()
+                }))
+                .addAction(UIAlertAction(title: "Нет", style: .default))
+                .build()
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        if authResult == AuthResult.wrongPassword || authResult == AuthResult.tooManyRequests {
+            self.signInView.showResetPasswordButton()
         }
     }
 }
@@ -60,6 +65,11 @@ final class SignInViewController: AuthViewController {
 private extension SignInViewController {
     func configure() {
         signInView.signInTapHandler = { [weak self] email, password in
+            guard !email.isEmpty,
+                  !password.isEmpty else {
+                self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
+                return
+            }
             self?.signInViewModel.signIn(with: email, password)
         }
         signInView.signUpTapHandler = { [weak self] in

@@ -55,16 +55,12 @@ private extension SignInView {
     }
     
     @objc func signInButtonTapped() {
-        guard let handler = signInTapHandler else { return }
-        guard let email = emailTextField.text,
-              let password = passwordTextField.text,
-              !email.isEmpty,
-              !password.isEmpty else {
-            showAlert(of: .fieldsNotFilled)
+        guard let handler = self.signInTapHandler else { return }
+        guard let email = self.emailTextField.text,
+              let password = self.passwordTextField.text else {
             return
         }
         showActivityIndicator()
-        //showActivityIndicatory()
         handler(email, password)
     }
     

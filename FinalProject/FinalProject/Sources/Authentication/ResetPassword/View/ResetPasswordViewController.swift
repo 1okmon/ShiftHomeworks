@@ -25,20 +25,23 @@ final class ResetPasswordViewController: AuthViewController {
         configure()
     }
     
-    override func presentAlert(of type: AuthResult) {
-        if case .resetPasswordLinkSent = type {
-            let authDesignSystem = AuthDesignSystem()
-            let alert = authDesignSystem.alert(
-                title: type.title,
-                message: type.message,
-                buttonTitles: [ type.buttonTitle ],
-                buttonActions: [ { [weak self] _ in
-                    self?.resetPasswordViewModel.goBack()
-                } ])
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            super.presentAlert(of: type)
+    override func update<T>(with value: T) {
+        if let error = value as? IAlertRepresentable {
+            presentAlert(of: error)
         }
+        super.update(with: value)
+    }
+    
+    func presentAlert(of errorCode: IAlertRepresentable) {
+        guard case AuthResult.resetPasswordLinkSent = errorCode else { return }
+        let alert = AlertBuilder()
+            .setFieldsToShowAlert(of: errorCode)
+//            .setTitle(errorCode.title)
+//            .setMessage(errorCode.message)
+            .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
+                self?.resetPasswordViewModel.goBack()
+            })).build()
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

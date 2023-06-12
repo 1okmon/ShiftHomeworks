@@ -21,7 +21,6 @@ private enum Metrics {
 }
 
 class AuthView: UIView {
-    var alertHandler: ((String, String, String) -> Void)?
     private var activityView: ActivityView?
     private var scrollView = UIScrollView()
     private var titleLabel: UILabel
@@ -64,10 +63,6 @@ class AuthView: UIView {
     func keyboardWillHide() {
         scrollView.contentInset = .zero
         scrollView.contentOffset = .zero
-    }
-    
-    func showAlert(of type: AuthResult) {
-        showAlert(with: type.title, type.message, buttonTitle: type.buttonTitle)
     }
 }
 
@@ -172,11 +167,6 @@ private extension AuthView {
             button.layer.borderColor = Theme.borderCgColor
         }
     }
-    
-    func showAlert(with alertTitle: String, _ alertMessage: String, buttonTitle: String) {
-        guard let alertHandler = alertHandler else { return }
-        alertHandler(alertTitle, alertMessage, buttonTitle)
-    }
 }
 
 extension AuthView: UITextFieldDelegate {
@@ -189,7 +179,7 @@ extension AuthView: UITextFieldDelegate {
         if let index = textFields.firstIndex(where: { field in
             field == textField
         }) {
-            textFields[index+1].becomeFirstResponder()
+            textFields[index + 1].becomeFirstResponder()
         }
         return true
     }
