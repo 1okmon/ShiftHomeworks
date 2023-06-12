@@ -7,7 +7,7 @@
 
 import Firebase
 
-enum AuthResult: Equatable {
+enum AuthResult: Equatable, IAlertRepresentable {
     case successSignIn
     case fieldsNotFilled
     case emailVerificationSent

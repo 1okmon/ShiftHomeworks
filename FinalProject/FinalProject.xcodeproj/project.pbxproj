@@ -50,6 +50,10 @@
 		0E73D85A2A3094EE00CCD271 /* UserDataRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8592A3094EE00CCD271 /* UserDataRequestBuilder.swift */; };
 		0E73D85D2A31D7AB00CCD271 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D85C2A31D7AB00CCD271 /* ActivityView.swift */; };
 		0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8602A31E29500CCD271 /* AlertBuilder.swift */; };
+		0E73D8642A32E96700CCD271 /* ResponseErrorCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8632A32E96700CCD271 /* ResponseErrorCodeParser.swift */; };
+		0E73D8672A3306D500CCD271 /* ResponseErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8662A3306D500CCD271 /* ResponseErrorCode.swift */; };
+		0E73D8692A332D6E00CCD271 /* IAlertRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8682A332D6E00CCD271 /* IAlertRepresentable.swift */; };
+		0E73D86B2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D86A2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -152,6 +156,10 @@
 		0E73D8592A3094EE00CCD271 /* UserDataRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRequestBuilder.swift; sourceTree = "<group>"; };
 		0E73D85C2A31D7AB00CCD271 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0E73D8602A31E29500CCD271 /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		0E73D8632A32E96700CCD271 /* ResponseErrorCodeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseErrorCodeParser.swift; sourceTree = "<group>"; };
+		0E73D8662A3306D500CCD271 /* ResponseErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseErrorCode.swift; sourceTree = "<group>"; };
+		0E73D8682A332D6E00CCD271 /* IAlertRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAlertRepresentable.swift; sourceTree = "<group>"; };
+		0E73D86A2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+showInfoAlert.swift"; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -526,6 +534,23 @@
 			path = AlertBuilder;
 			sourceTree = "<group>";
 		};
+		0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8652A3306BB00CCD271 /* ResponseResult */,
+				0E73D8632A32E96700CCD271 /* ResponseErrorCodeParser.swift */,
+			);
+			path = ResponseStatusCodeParser;
+			sourceTree = "<group>";
+		};
+		0E73D8652A3306BB00CCD271 /* ResponseResult */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8662A3306D500CCD271 /* ResponseErrorCode.swift */,
+			);
+			path = ResponseResult;
+			sourceTree = "<group>";
+		};
 		0EEA03C52A1724C300B1EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -776,6 +801,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF1602E2A1E08AF0026A628 /* AuthResult.swift */,
+				0E73D8682A332D6E00CCD271 /* IAlertRepresentable.swift */,
 			);
 			path = AuthResult;
 			sourceTree = "<group>";
@@ -871,10 +897,12 @@
 		0EF1604E2A1EFCD50026A628 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */,
 				0E73D85F2A31E25500CCD271 /* AlertBuilder */,
 				0E73D85B2A31D75000CCD271 /* ActivityView */,
 				0EF1604C2A1EFCBC0026A628 /* Observing.swift */,
 				0E27E6792A25E39B0010C571 /* NSObject+className.swift */,
+				0E73D86A2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1094,6 +1122,7 @@
 				0E27E6D62A2998530010C571 /* LocationEntity+CoreDataProperties.swift in Sources */,
 				0E73D85D2A31D7AB00CCD271 /* ActivityView.swift in Sources */,
 				0EF1602F2A1E08AF0026A628 /* AuthResult.swift in Sources */,
+				0E73D86B2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift in Sources */,
 				0E27E6962A26EE400010C571 /* LocationDetailsViewController.swift in Sources */,
 				0EF160422A1E3C710026A628 /* SignUpViewModel.swift in Sources */,
 				0E27E6AB2A274C0D0010C571 /* RickAndMortyCharacterNetworkManager.swift in Sources */,
@@ -1112,6 +1141,7 @@
 				0E27E6BB2A283BA30010C571 /* CacheManager.swift in Sources */,
 				0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */,
 				0EEFAF8B2A2F498500EA8A80 /* IFavoritesViewModel.swift in Sources */,
+				0E73D8692A332D6E00CCD271 /* IAlertRepresentable.swift in Sources */,
 				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0E27E69E2A26F2E00010C571 /* CharactersCollectionViewCell.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
@@ -1121,6 +1151,7 @@
 				0EEFAF782A2EC50800EA8A80 /* FavoriteCharactersViewController.swift in Sources */,
 				0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
+				0E73D8642A32E96700CCD271 /* ResponseErrorCodeParser.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* ResetPasswordViewModel.swift in Sources */,
 				0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */,
 				0E73D84F2A2FF28C00CCD271 /* UserDataResponse.swift in Sources */,
@@ -1158,6 +1189,7 @@
 				0E27E6DA2A29F67D0010C571 /* FavoritesView.swift in Sources */,
 				0E27E6D42A2998250010C571 /* RickAndMortyData.xcdatamodeld in Sources */,
 				0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */,
+				0E73D8672A3306D500CCD271 /* ResponseErrorCode.swift in Sources */,
 				0EEA040C2A17261100B1EA9C /* AuthDesignSystem+Labels.swift in Sources */,
 				0E27E6B72A27828A0010C571 /* ICharacter.swift in Sources */,
 			);
