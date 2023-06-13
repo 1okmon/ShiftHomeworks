@@ -59,7 +59,7 @@ extension AuthViewModel: IAuthViewModel {
         })
     }
     
-    func goBack() {
-        self.coordinator.goBack()
+    func goBackToSignIn() {
+        self.coordinator.goBackToSignIn()
     }
 }

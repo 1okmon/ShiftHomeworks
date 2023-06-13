@@ -34,7 +34,6 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
             }
             guard let result = result else { return }
             self?.realtimeDatabaseManager.createNewUser(with: result.user.uid, email: email, completion: completion)
-            //self?.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: [])
             self?.sendEmailConfirmation(to: result.user, completion: { result in
                 try? Auth.auth().signOut()
                 completion(result)

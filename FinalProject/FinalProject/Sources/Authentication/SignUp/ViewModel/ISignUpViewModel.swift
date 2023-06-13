@@ -8,5 +8,5 @@
 import Foundation
 protocol ISignUpViewModel {
     func submitSignUp(with email: String, _ password: String)
-    func goBack()
+    func goBackToSignIn()
 }

@@ -13,6 +13,7 @@ private enum Metrics {
         static let declineAction = "Нет"
     }
 }
+
 final class SignInViewController: AuthViewController {
     private var signInViewModel: ISignInViewModel
     private var signInView: SignInView
@@ -81,6 +82,7 @@ private extension SignInViewController {
                 self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
                 return
             }
+            self?.signInView.showActivityIndicator()
             self?.signInViewModel.signIn(with: email, password)
         }
         signInView.signUpTapHandler = { [weak self] in

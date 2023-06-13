@@ -44,7 +44,6 @@ private extension SignUpView {
               let repeatPassword = repeatPasswordTextField.text else {
             return
         }
-        showActivityIndicator()
         handler(email, password, repeatPassword)
     }
 }

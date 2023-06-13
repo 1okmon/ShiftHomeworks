@@ -37,6 +37,6 @@ enum NetworkResponseCode: IAlertRepresentable {
     }
     
     var buttonTitle: String {
-        return "Повторить"
+        return "ОК"
     }
 }

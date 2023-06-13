@@ -36,7 +36,7 @@ final class SignUpViewController: AuthViewController {
         let alert = AlertBuilder()
             .setFieldsToShowAlert(of: errorCode)
             .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
-                self?.signUpViewModel.goBack()
+                self?.signUpViewModel.goBackToSignIn()
             })).build()
         self.present(alert, animated: true, completion: nil)
     }
@@ -55,6 +55,7 @@ private extension SignUpViewController {
                 self?.showInfoAlert(of: AuthResult.passwordsNotEqual)
                 return
             }
+            self?.signUpView.showActivityIndicator()
             self?.signUpViewModel.submitSignUp(with: email, password)
         }
     }

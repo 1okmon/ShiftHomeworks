@@ -6,8 +6,9 @@
 //
 
 import UIKit
+
 final class ResetPasswordView: AuthView {
-    var submitResetPasswordTapHandler: ((String) -> Void)?
+    var submitResetPasswordTapHandler: ((String?) -> Void)?
     private let titleLabel: UILabel
     private let emailTextField: UITextField
     private let submitResetPasswordButton: UIButton
@@ -35,8 +36,6 @@ private extension ResetPasswordView {
     
     @objc func submitResetPasswordButtonTapped() {
         guard let handler = submitResetPasswordTapHandler else { return }
-        guard let email = emailTextField.text else { return }
-        showActivityIndicator()
-        handler(email)
+        handler(emailTextField.text)
     }
 }

@@ -38,7 +38,7 @@ final class AuthCoordinator: IAuthCoordinator {
         appCoordinator?.signInSuccess()
     }
     
-    func goBack() {
-        self.navigationController.popViewController(animated: true)
+    func goBackToSignIn() {
+        self.navigationController.popToRootViewController(animated: true)
     }
 }

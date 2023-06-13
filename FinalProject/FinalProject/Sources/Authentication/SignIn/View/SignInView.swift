@@ -60,7 +60,6 @@ private extension SignInView {
               let password = self.passwordTextField.text else {
             return
         }
-        showActivityIndicator()
         handler(email, password)
     }
     

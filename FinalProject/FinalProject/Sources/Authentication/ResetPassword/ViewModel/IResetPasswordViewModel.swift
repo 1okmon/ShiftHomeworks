@@ -8,5 +8,6 @@
 import Foundation
 protocol IResetPasswordViewModel {
     func submitResetPassword(with email: String)
-    func goBack()
+    func goBackToSignIn()
+    func signUp()
 }
