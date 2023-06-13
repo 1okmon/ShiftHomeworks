@@ -13,7 +13,7 @@ private enum Metrics {
     static let favoriteCharactersTitle = "Избранные персонажи"
 }
 
-final class FavoritesCoordinator: RickAndMortyCoordinator, IFavoritesCoordinator, ICharacterFavoritesCoordinator {
+final class FavoritesCoordinator: RickAndMortyCoordinator, IFavoritesCoordinator, IFavoriteCharactersCoordinator {
     private var navigationController: UINavigationController
     
     override init(navigationController: UINavigationController) {

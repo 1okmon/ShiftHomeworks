@@ -29,11 +29,9 @@ class LocationsViewController: UIViewController, IObserver {
     }
     
     func update<T>(with value: T) {
-        if let errorCode = value as? ResponseErrorCode {
+        if let errorCode = value as? NetworkResponseCode {
             let alert = AlertBuilder()
                 .setFieldsToShowAlert(of: errorCode)
-//                .setTitle(errorCode.title)
-//                .setMessage(errorCode.message)
                 .addAction(UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
                     self?.viewModel.reload()
                 })).build()

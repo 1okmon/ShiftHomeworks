@@ -1,12 +1,12 @@
 //
-//  ResponseErrorCode.swift
+//  NetworkResponseCode.swift
 //  FinalProject
 //
 //  Created by 1okmon on 09.06.2023.
 //
 
 import Foundation
-enum ResponseErrorCode: IAlertRepresentable {
+enum NetworkResponseCode: IAlertRepresentable {
     case timedOut
     case networkConnectionLost
     case notConnectedToInternet
@@ -37,6 +37,6 @@ enum ResponseErrorCode: IAlertRepresentable {
     }
     
     var buttonTitle: String {
-        return "ОК"
+        return "Повторить"
     }
 }

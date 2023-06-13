@@ -9,8 +9,6 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
-    //static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
-    //static let activityIndicatorBackgroundColor = Theme.backgroundColor.withAlphaComponent(0)
     static let separatorColor = Theme.tableViewSeparatorColor
     static let cellHeight: CGFloat = 80
     static let footerHeight = CGFloat(PageButton.height + PageButton.verticalOffset)

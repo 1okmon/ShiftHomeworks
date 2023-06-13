@@ -18,7 +18,6 @@ final class LocationDetailsViewController: UIViewController, IObserver {
     private let locationDetailsView: LocationDetailsView
     
     init(viewModel: ILocationDetailsViewModel) {
-        //self.favoriteButton = UIBarButtonItem()
         self.viewModel = viewModel
         self.locationDetailsView = LocationDetailsView()
         self.id = UUID()
@@ -31,11 +30,9 @@ final class LocationDetailsViewController: UIViewController, IObserver {
     }
     
     func update<T>(with value: T) {
-        if let errorCode = value as? ResponseErrorCode {
+        if let errorCode = value as? NetworkResponseCode {
             let alert = AlertBuilder()
                 .setFieldsToShowAlert(of: errorCode)
-//                .setTitle(errorCode.title)
-//                .setMessage(errorCode.message)
                 .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
                     self?.viewModel.goBack()
                 })).build()

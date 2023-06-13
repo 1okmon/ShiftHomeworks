@@ -13,7 +13,7 @@ private enum Metrics {
 
 final class ProfileViewController: UIViewController {
     private var profileView = ProfileView()
-    private var presenter: ProfilePresenter?
+    private var presenter: IProfilePresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ final class ProfileViewController: UIViewController {
         presenter?.fetchRemoteData()
     }
     
-    func setPresenter(_ presenter: ProfilePresenter) {
+    func setPresenter(_ presenter: IProfilePresenter) {
         self.presenter = presenter
     }
     

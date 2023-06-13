@@ -6,13 +6,13 @@
 //
 
 import Firebase
-final class ErrorParser {
+final class AuthResponseParser {
     func parse(error: Error) -> IAlertRepresentable {
         if let error = error as? URLError {
-            return ResponseErrorCodeParser().parse(error: error)
+            return NetworkResponseCodeParser().parse(error: error)
         }
-        if let errCode = AuthErrorCode.Code(rawValue: error._code) {
-            switch errCode {
+        if let responseCode = AuthErrorCode.Code(rawValue: error._code) {
+            switch responseCode {
             case .wrongPassword:
                 return AuthResult.wrongPassword
             case .userNotFound:

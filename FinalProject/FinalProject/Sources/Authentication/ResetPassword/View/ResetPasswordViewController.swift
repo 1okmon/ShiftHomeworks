@@ -36,8 +36,6 @@ final class ResetPasswordViewController: AuthViewController {
         guard case AuthResult.resetPasswordLinkSent = errorCode else { return }
         let alert = AlertBuilder()
             .setFieldsToShowAlert(of: errorCode)
-//            .setTitle(errorCode.title)
-//            .setMessage(errorCode.message)
             .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
                 self?.resetPasswordViewModel.goBack()
             })).build()

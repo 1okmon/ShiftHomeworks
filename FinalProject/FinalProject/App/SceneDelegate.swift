@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.appCoordinator = AppCoordinator(window: self.window)
         if let currentUser = Auth.auth().currentUser {
             currentUser.getIDToken { error, _  in
-                if let error = error {
+                if error != nil {
                     do {
                         try Auth.auth().signOut()
                     } catch {

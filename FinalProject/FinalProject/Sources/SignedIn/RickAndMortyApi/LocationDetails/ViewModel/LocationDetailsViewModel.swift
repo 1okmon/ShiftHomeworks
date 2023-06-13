@@ -9,8 +9,8 @@ import UIKit
 
 final class LocationDetailsViewModel: ILocationDetailsViewModel {
     private var coordinator: ILocationDetailsRickAndMortyCoordinator?
-    private let locationsNetworkManager: RickAndMortyLocationNetworkManager
-    private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
+    private let locationNetworkManager: ILocationNetworkManagerLocationDetails
+    private let charactersNetworkManager: ICharacterNetworkManagerLocationsDetails
     private let coreDataManager: ILocationCoreDataManager
     private var locationDetails: Observable<LocationDetails>
     private var errorCode: Observable<IAlertRepresentable>
@@ -21,7 +21,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     init(coordinator: ILocationDetailsRickAndMortyCoordinator) {
         self.coordinator = coordinator
         self.errorCode = Observable<IAlertRepresentable>()
-        self.locationsNetworkManager = RickAndMortyLocationNetworkManager.shared
+        self.locationNetworkManager = RickAndMortyLocationNetworkManager.shared
         self.charactersNetworkManager = RickAndMortyCharacterNetworkManager.shared
         self.coreDataManager = CoreDataManager.shared
         self.locationDetails = Observable<LocationDetails>()
@@ -39,7 +39,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     }
     
     func loadLocation(with id: Int) {
-        self.locationsNetworkManager.loadLocation(with: id) { [weak self] location, responseErrorCode in
+        self.locationNetworkManager.loadLocation(with: id) { [weak self] location, responseErrorCode in
             guard responseErrorCode == nil else {
                 self?.errorCode.value = responseErrorCode
                 return

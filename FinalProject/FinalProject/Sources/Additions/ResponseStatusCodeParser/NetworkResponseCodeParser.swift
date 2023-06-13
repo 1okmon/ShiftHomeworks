@@ -1,25 +1,25 @@
 //
-//  ResponseErrorCodeParser.swift
+//  NetworkResponseCodeParser.swift
 //  FinalProject
 //
 //  Created by 1okmon on 09.06.2023.
 //
 
 import Foundation
-final class ResponseErrorCodeParser {
+final class NetworkResponseCodeParser {
     func parse(error: Error) -> IAlertRepresentable {
         guard let error = error as? URLError else {
-            return ResponseErrorCode.unknown
+            return NetworkResponseCode.unknown
         }
         switch error.code {
         case .timedOut:
-            return ResponseErrorCode.timedOut
+            return NetworkResponseCode.timedOut
         case .networkConnectionLost:
-            return ResponseErrorCode.networkConnectionLost
+            return NetworkResponseCode.networkConnectionLost
         case .notConnectedToInternet:
-            return ResponseErrorCode.notConnectedToInternet
+            return NetworkResponseCode.notConnectedToInternet
         default:
-            return ResponseErrorCode.unknown
+            return NetworkResponseCode.unknown
         }
     }
 }

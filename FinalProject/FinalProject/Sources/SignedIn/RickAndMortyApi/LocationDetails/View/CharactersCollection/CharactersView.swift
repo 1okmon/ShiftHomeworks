@@ -117,8 +117,6 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let characterId = self.charactersIndexPath.first(where: { $1 == indexPath })?.key else { return }
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else { return }
-//
         self.cellTapHandler?(characterId)
     }
     
@@ -128,11 +126,7 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //guard let character =  self.characters[characterId] else { return }
-        
-        //let character = self.characters[indexPath.row]
         cell.update(with: character)
-        //cell.isUserInteractionEnabled = true
         guard let image = self.images[character.image],
               let image = image else {
             return cell

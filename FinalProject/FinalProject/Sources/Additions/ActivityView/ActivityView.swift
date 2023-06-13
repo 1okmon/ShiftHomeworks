@@ -56,7 +56,7 @@ private extension ActivityView {
         self.addSubview(self.activityIndicatorView)
         self.activityIndicatorView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()//.offset(Metrics.activityIndicatorVerticalOffset)
+            make.centerY.equalToSuperview()
         }
     }
 }

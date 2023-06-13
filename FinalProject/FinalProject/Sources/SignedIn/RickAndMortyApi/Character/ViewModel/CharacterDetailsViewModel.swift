@@ -9,7 +9,7 @@ import UIKit
 
 final class CharacterDetailsViewModel: ICharacterDetailsViewModel {
     private var coordinator: ICharacterDetailsRickAndMortyCoordinator
-    private let charactersNetworkManager: RickAndMortyCharacterNetworkManager
+    private let charactersNetworkManager: ICharacterNetworkManagerCharacterDetails
     private var character: Observable<CharacterDetails>
     private var errorCode: Observable<IAlertRepresentable>
     private let coreDataManager: ICharacterCoreDataManager
@@ -65,7 +65,7 @@ final class CharacterDetailsViewModel: ICharacterDetailsViewModel {
     }
     
     func loadImage(by url: String) {
-        self.charactersNetworkManager.loadImage(from: url) { [weak self] image, _, responseErrorCode in
+        self.charactersNetworkManager.loadImage(from: url) { [weak self] image, _, _ in
             self?.character.value?.image = image
         }
     }

@@ -12,7 +12,7 @@ private enum Metrics {
     static let usersDirectory = "users"
 }
 
-final class RealtimeDatabaseManager {
+final class RealtimeDatabaseManager: INewUserRealtimeDatabaseManager, IUserDataRealtimeDatabaseManager {
     static let shared = RealtimeDatabaseManager()
     
     private init() {}
@@ -22,7 +22,7 @@ final class RealtimeDatabaseManager {
         let value = UserDataRequestBuilder().setEmail(email).build()
         ref.setValue(value) { error, _ in
             guard let error = error else { return }
-            completion(ErrorParser().parse(error: error))
+            completion(AuthResponseParser().parse(error: error))
         }
     }
     

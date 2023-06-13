@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ProfilePresenter {
+class ProfilePresenter: IProfilePresenter {
     private unowned var viewController: ProfileViewController
-    private var realtimeDatabaseManager: RealtimeDatabaseManager
-    private var coordinator: ProfileCoordinator?
+    private var realtimeDatabaseManager: IUserDataRealtimeDatabaseManager
+    private var coordinator: IProfileCoordinator?
     
-    init(viewController: ProfileViewController, coordinator: ProfileCoordinator) {
+    init(viewController: ProfileViewController, coordinator: IProfileCoordinator) {
         self.viewController = viewController
         self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
         self.coordinator = coordinator

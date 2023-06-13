@@ -12,7 +12,7 @@ class LocationsViewModel: ILocationsViewModel {
     private var nextPage: String?
     private var reloadPage: String?
     private var coordinator: ILocationsRickAndMortyCoordinator
-    private let locationsNetworkManager: RickAndMortyLocationNetworkManager
+    private let locationsNetworkManager: ILocationNetworkManagerLocations
     
     init(coordinator: ILocationsRickAndMortyCoordinator) {
         self.locations = Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>()

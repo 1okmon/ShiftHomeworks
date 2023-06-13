@@ -10,7 +10,7 @@ private enum URLS {
     static let locationsLink = "https://rickandmortyapi.com/api/location/"
 }
 
-final class RickAndMortyLocationNetworkManager {
+final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations, ILocationNetworkManagerLocationDetails {
     static let shared = RickAndMortyLocationNetworkManager()
     private init() {}
     
@@ -18,7 +18,7 @@ final class RickAndMortyLocationNetworkManager {
         let url: String = link ?? URLS.locationsLink
         let task = dataTask(by: url) { data, _, error in
             if let error = error {
-                let errorCode = ResponseErrorCodeParser().parse(error: error)
+                let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?([], nil, nil, errorCode)
             }
             guard let data = data, error == nil else { return }
@@ -40,7 +40,7 @@ final class RickAndMortyLocationNetworkManager {
         let url = URLS.locationsLink + "\(id)"
         let task = dataTask(by: url) { data, _, error in
             if let error = error {
-                let errorCode = ResponseErrorCodeParser().parse(error: error)
+                let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?(nil, errorCode)
             }
             guard let data = data, error == nil else { return }

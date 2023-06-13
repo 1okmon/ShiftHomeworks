@@ -7,13 +7,13 @@
 import Firebase
 
 final class FirebaseNetworkManager: IFirebaseNetworkManager {
-    private var realtimeDatabaseManager = RealtimeDatabaseManager.shared
+    private var realtimeDatabaseManager: INewUserRealtimeDatabaseManager = RealtimeDatabaseManager.shared
     
     func signIn(with email: String, _ password: String, completion: @escaping (IAlertRepresentable) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             guard let result = result, error == nil else {
                 guard let error = error else { return }
-                completion(ErrorParser().parse(error: error))
+                completion(AuthResponseParser().parse(error: error))
                 return
             }
             guard result.user.isEmailVerified else {
@@ -29,12 +29,12 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             guard error == nil else {
                 guard let error = error else { return }
-                completion(ErrorParser().parse(error: error))
+                completion(AuthResponseParser().parse(error: error))
                 return
             }
             guard let result = result else { return }
             self?.realtimeDatabaseManager.createNewUser(with: result.user.uid, email: email, completion: completion)
-            self?.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: [])
+            //self?.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: [])
             self?.sendEmailConfirmation(to: result.user, completion: { result in
                 try? Auth.auth().signOut()
                 completion(result)
@@ -47,7 +47,7 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             guard error == nil else {
                 guard let error = error else { return }
-                completion(ErrorParser().parse(error: error))
+                completion(AuthResponseParser().parse(error: error))
                 return
             }
             completion(AuthResult.resetPasswordLinkSent)
@@ -58,7 +58,7 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
         user.sendEmailVerification { error in
             guard error == nil else {
                 guard let error = error else { return }
-                completion(ErrorParser().parse(error: error))
+                completion(AuthResponseParser().parse(error: error))
                 return }
             completion(AuthResult.emailVerificationSent)
         }

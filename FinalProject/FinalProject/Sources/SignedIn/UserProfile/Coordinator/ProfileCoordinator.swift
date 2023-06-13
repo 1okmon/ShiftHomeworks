@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileCoordinator {
+class ProfileCoordinator: IProfileCoordinator {
     var signOutHandler: (() -> Void)?
     private var navigationController: UINavigationController
     
@@ -16,14 +16,16 @@ class ProfileCoordinator {
         start()
     }
     
+    func signOut() {
+        self.signOutHandler?()
+    }
+}
+
+private extension ProfileCoordinator {
     func start() {
         let profileViewController = ProfileViewController()
         let profilePresenter = ProfilePresenter(viewController: profileViewController, coordinator: self)
         profileViewController.setPresenter(profilePresenter)
         self.navigationController.pushViewController(profileViewController, animated: true)
-    }
-    
-    func signOut() {
-        self.signOutHandler?()
     }
 }

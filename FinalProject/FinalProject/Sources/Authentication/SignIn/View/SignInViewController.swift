@@ -6,6 +6,13 @@
 //
 
 import UIKit
+
+private enum Metrics {
+    enum AlertButtonTitle {
+        static let confirmAction = "Да"
+        static let declineAction = "Нет"
+    }
+}
 final class SignInViewController: AuthViewController {
     private var signInViewModel: ISignInViewModel
     private var signInView: SignInView
@@ -39,19 +46,23 @@ final class SignInViewController: AuthViewController {
         }
         if case let AuthResult.emailNotVerified(user) = authResult {
             let alert = alertBuilder
-                .addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.confirmAction,
+                                         style: .default,
+                                         handler: { [weak self] _ in
                     self?.signInViewModel.sendEmailVerificationLink(to: user)
                 }))
-                .addAction(UIAlertAction(title: "Нет", style: .default))
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.declineAction, style: .default))
                 .build()
             self.present(alert, animated: true, completion: nil)
         }
         if case AuthResult.userNotFound = authResult {
             let alert = alertBuilder
-                .addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.confirmAction,
+                                         style: .default,
+                                         handler: { [weak self] _ in
                     self?.signInViewModel.signUp()
                 }))
-                .addAction(UIAlertAction(title: "Нет", style: .default))
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.declineAction, style: .default))
                 .build()
             self.present(alert, animated: true, completion: nil)
         }
