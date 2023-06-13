@@ -170,9 +170,7 @@ private extension LocationsView {
     }
     
     func closeActivityIndicator() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Metrics.animationDelay) {
-            self.activityView?.stopAnimating()
-        }
+        self.activityView?.stopAnimating()
     }
 }
 

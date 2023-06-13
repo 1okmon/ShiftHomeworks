@@ -9,6 +9,7 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
+    static let reloadActionTitle = "Повторить"
 }
 
 class LocationsViewController: UIViewController, IObserver {
@@ -32,7 +33,9 @@ class LocationsViewController: UIViewController, IObserver {
         if let errorCode = value as? NetworkResponseCode {
             let alert = AlertBuilder()
                 .setFieldsToShowAlert(of: errorCode)
-                .addAction(UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
+                .addAction(UIAlertAction(title: Metrics.reloadActionTitle,
+                                         style: .default,
+                                         handler: { [weak self] _ in
                     self?.viewModel.reload()
                 })).build()
             DispatchQueue.main.async {

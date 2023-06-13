@@ -189,9 +189,8 @@ private extension LocationDetailsView {
             self.layoutIfNeeded()
             self.charactersView?.showActivityIndicator()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+        DispatchQueue.main.async {
             self.residentsButtonTapHandler?()
-        })
-
+        }
     }
 }

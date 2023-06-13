@@ -12,21 +12,19 @@ private enum Metrics {
     static let charactersLink = "https://rickandmortyapi.com/api/character/"
 }
 
-final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkManagerCharacterDetails, ICharacterNetworkManagerLocationsDetails  {
+final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkManagerCharacterDetails, ICharacterNetworkManagerLocationsDetails {
     static let shared: RickAndMortyCharacterNetworkManager = RickAndMortyCharacterNetworkManager()
-    var completions: [String: [((UIImage, String) -> Void)?]]
     private var imagesManager: ICacheManager
-    private let updateDownloadTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
+    private let dataTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
     let queue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
     
     private override init() {
         self.imagesManager = CacheManager()
-        self.completions = [:]
         super.init()
     }
     
     func loadImage(from urlString: String, completion: ((UIImage?, String?, IAlertRepresentable?) -> Void)?) {
-        self.updateDownloadTasksQueue.async {
+        self.dataTasksQueue.async {
             if let image = self.imagesManager.image(by: urlString) {
                 completion?(image, urlString, nil)
             } else {
