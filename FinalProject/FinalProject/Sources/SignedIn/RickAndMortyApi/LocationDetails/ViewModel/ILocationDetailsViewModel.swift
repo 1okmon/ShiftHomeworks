@@ -12,4 +12,5 @@ protocol ILocationDetailsViewModel {
     func loadCharacters()
     func openCharacter(with id: Int)
     func goBack()
+    func fetchIsFavorite()
 }

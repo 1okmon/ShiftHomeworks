@@ -17,6 +17,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     private var residents: Observable<[Character]>
     private var isFavorite: Observable<Bool>
     private var residentsImages: Observable<[String: UIImage?]>
+    private var isOffline: Bool?
     
     init(coordinator: ILocationDetailsRickAndMortyCoordinator) {
         self.coordinator = coordinator
@@ -44,10 +45,16 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
                 self?.errorCode.value = responseErrorCode
                 return
             }
-            DispatchQueue.main.async {
-                self?.isFavorite.value = self?.coreDataManager.fetchLocation(with: id) != nil
-            }
+            self?.fetchIsFavorite()
             self?.locationDetails.value = location
+        }
+    }
+    
+    func fetchIsFavorite() {
+        DispatchQueue.main.async {
+            guard let id = self.locationDetails.value?.id else { return }
+            self.isFavorite.value = self.coreDataManager.fetchLocation(with:
+                                                                        id) != nil
         }
     }
     
@@ -81,7 +88,10 @@ private extension LocationDetailsViewModel {
     func loadCharacter(by url: String) {
         self.charactersNetworkManager.loadCharacter(by: url) { [weak self] (character: Character?, responseErrorCode) in
             guard let character = character, responseErrorCode == nil else {
-                self?.errorCode.value = responseErrorCode
+                if self?.isOffline == nil {
+                    self?.errorCode.value = responseErrorCode
+                    self?.isOffline = true
+                }
                 return
             }
             DispatchQueue.main.async {

@@ -9,14 +9,19 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
+    static let charactersEmptyTitle = "Избранные персонажи отсутствуют"
+    static let charactersEmptyTitleEdgeInset = 50
+    static let font = UIFont.systemFont(ofSize: 24)
 }
 
 final class FavoriteCharactersViewController: UIViewController {
-    let charactersView: CharactersView
-    var presenter: IFavoriteCharactersPresenter?
+    private let charactersView: CharactersView
+    private var charactersCountLabel: UILabel
+    private var presenter: IFavoriteCharactersPresenter?
     
     init() {
         self.charactersView = CharactersView()
+        self.charactersCountLabel = UILabel()
         super.init(nibName: nil, bundle: nil)
         configure()
     }
@@ -36,6 +41,7 @@ final class FavoriteCharactersViewController: UIViewController {
     
     func update(with characters: [Character]) {
         self.charactersView.update(with: characters)
+        self.charactersCountLabel.isHidden = !characters.isEmpty
     }
     
     func update(with images: [String: UIImage?]) {
@@ -47,6 +53,7 @@ private extension FavoriteCharactersViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
         configureCharactersView()
+        configureLocationsCountLabel()
     }
     
     func configureCharactersView() {
@@ -62,5 +69,17 @@ private extension FavoriteCharactersViewController {
         self.charactersView.cellTapHandler = { [weak self] characterId in
             self?.presenter?.openCharacter(with: characterId)
         }
+    }
+    
+    func configureLocationsCountLabel() {
+        self.view.addSubview(self.charactersCountLabel)
+        self.charactersCountLabel.snp.makeConstraints({ make in
+            make.edges.equalToSuperview().inset(Metrics.charactersEmptyTitleEdgeInset)
+        })
+        self.charactersCountLabel.isHidden = true
+        self.charactersCountLabel.textAlignment = .center
+        self.charactersCountLabel.numberOfLines = 0
+        self.charactersCountLabel.text = Metrics.charactersEmptyTitle
+        self.charactersCountLabel.font = Metrics.font
     }
 }
