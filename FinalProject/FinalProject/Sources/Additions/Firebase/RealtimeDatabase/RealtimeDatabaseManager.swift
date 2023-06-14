@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseStorage
 
 private enum Metrics {
     static let databaseUrl = "https://shift-b3cf6-default-rtdb.europe-west1.firebasedatabase.app"
@@ -28,6 +29,13 @@ final class RealtimeDatabaseManager: INewUserRealtimeDatabaseManager, IUserDataR
     
     func updateUserData(to userData: UserData) {
         let value = UserDataRequestBuilder().setFirstName(userData.firstName).setLastName(userData.lastName).build()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        ref.updateChildValues(value)
+    }
+    
+    func updateUserImageUrl(_ imageUrl: String) {
+        let value = UserDataRequestBuilder().setImageUrl(imageUrl).build()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
         ref.updateChildValues(value)

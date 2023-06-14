@@ -60,6 +60,10 @@
 		0E73D8762A380BC000CCD271 /* ICacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8752A380BC000CCD271 /* ICacheManager.swift */; };
 		0E73D8782A380D4100CCD271 /* ICharacterNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */; };
 		0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */; };
+		0E73D8842A384F3000CCD271 /* KeyboardSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */; };
+		0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */; };
+		0E73D8882A385C4700CCD271 /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */; };
+		0E73D88D2A3891B100CCD271 /* FirebaseStorageManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -172,6 +176,10 @@
 		0E73D8752A380BC000CCD271 /* ICacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICacheManager.swift; sourceTree = "<group>"; };
 		0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICharacterNetworkManager.swift; sourceTree = "<group>"; };
 		0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRickAndMortyLocationNetworkManager.swift; sourceTree = "<group>"; };
+		0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSupportedViewController.swift; sourceTree = "<group>"; };
+		0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeyboardSupportedView.swift; sourceTree = "<group>"; };
+		0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
+		0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManger.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -585,6 +593,7 @@
 		0E73D8702A38090000CCD271 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				0E73D88B2A38918D00CCD271 /* Storage */,
 				0E73D86D2A3803C000CCD271 /* UserData */,
 				0E73D86C2A3803AC00CCD271 /* RealtimeDatabase */,
 			);
@@ -617,6 +626,23 @@
 				0E27E6C22A2919FB0010C571 /* CoreDataManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		0E73D8822A384E9B00CCD271 /* KeyboardSupportedView */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */,
+				0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */,
+			);
+			path = KeyboardSupportedView;
+			sourceTree = "<group>";
+		};
+		0E73D88B2A38918D00CCD271 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		0EEA03C52A1724C300B1EA9C = {
@@ -764,6 +790,7 @@
 			children = (
 				0EEA04382A1DA7F300B1EA9C /* ProfileViewController.swift */,
 				0EEA043A2A1DA81800B1EA9C /* ProfileView.swift */,
+				0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -966,6 +993,7 @@
 		0EF1604E2A1EFCD50026A628 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E73D8822A384E9B00CCD271 /* KeyboardSupportedView */,
 				0E73D8702A38090000CCD271 /* Firebase */,
 				0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */,
 				0E73D85F2A31E25500CCD271 /* AlertBuilder */,
@@ -1019,8 +1047,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EEA03E22A1724C400B1EA9C /* Build configuration list for PBXNativeTarget "FinalProject" */;
 			buildPhases = (
-				0EEA043F2A1DB1F900B1EA9C /* ShellScript */,
 				7DD1437D4DD2C0B154DB5C1F /* [CP] Check Pods Manifest.lock */,
+				0EEA043F2A1DB1F900B1EA9C /* ShellScript */,
 				0EEA03CA2A1724C300B1EA9C /* Sources */,
 				0EEA03CB2A1724C300B1EA9C /* Frameworks */,
 				0EEA03CC2A1724C300B1EA9C /* Resources */,
@@ -1174,6 +1202,7 @@
 				0E27E68C2A2605FE0010C571 /* RickAndMortyCoordinator.swift in Sources */,
 				0EEA04082A17261100B1EA9C /* AuthCoordinator.swift in Sources */,
 				0E27E67C2A25EFE80010C571 /* LocationResponse.swift in Sources */,
+				0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */,
 				0EF1603A2A1E3B5E0026A628 /* ISignInViewModel.swift in Sources */,
 				0EF160482A1E3EA90026A628 /* ResetPasswordViewController.swift in Sources */,
 				0E27E6AD2A274DBA0010C571 /* Character.swift in Sources */,
@@ -1230,6 +1259,7 @@
 				0E73D84D2A2FEECB00CCD271 /* RealtimeDatabaseManager.swift in Sources */,
 				0EF160542A1F88100026A628 /* IFirebase.swift in Sources */,
 				0E73D8552A308C4500CCD271 /* ProfilePresenter.swift in Sources */,
+				0E73D8882A385C4700CCD271 /* ProfilePhotoView.swift in Sources */,
 				0E27E66A2A25D9340010C571 /* SignedInTabBarController.swift in Sources */,
 				0E27E6882A2600E10010C571 /* Location.swift in Sources */,
 				0EEFAF662A2E29F400EA8A80 /* ICharacterCoreDataManager.swift in Sources */,
@@ -1252,9 +1282,11 @@
 				0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */,
 				0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */,
 				0E73D8672A3306D500CCD271 /* NetworkResponseCode.swift in Sources */,
+				0E73D8842A384F3000CCD271 /* KeyboardSupportedViewController.swift in Sources */,
 				0EEA040C2A17261100B1EA9C /* AuthDesignSystem+Labels.swift in Sources */,
 				0E73D8722A380A2C00CCD271 /* IProfileCoordinator.swift in Sources */,
 				0E73D8762A380BC000CCD271 /* ICacheManager.swift in Sources */,
+				0E73D88D2A3891B100CCD271 /* FirebaseStorageManger.swift in Sources */,
 				0E27E6B72A27828A0010C571 /* ICharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
