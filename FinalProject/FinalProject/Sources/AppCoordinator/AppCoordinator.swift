@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-final class AppCoordinator {
+final class AppCoordinator: ISignInAppCoordinator, ISignedInAppCoordinator {
     private var window: UIWindow?
     private let coreDataManager: CoreDataManager
     
@@ -28,10 +28,6 @@ final class AppCoordinator {
     
     func signInSuccess() {
         self.coreDataManager.loadUserData()
-        startSignedInFlow()
-    }
-    
-    private func startSignedInFlow() {
         let signedInTabBarController = SignedInTabBarController()
         signedInTabBarController.signOutHandler = { [weak self] in
             try? Auth.auth().signOut()

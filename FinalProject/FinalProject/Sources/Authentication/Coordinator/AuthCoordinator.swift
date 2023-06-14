@@ -8,9 +8,9 @@
 import UIKit
 
 final class AuthCoordinator: IAuthCoordinator {
-    private weak var appCoordinator: AppCoordinator?
+    private var appCoordinator: ISignedInAppCoordinator
     private var navigationController: UINavigationController
-    init(navigationController: UINavigationController, appCoordinator: AppCoordinator) {
+    init(navigationController: UINavigationController, appCoordinator: ISignedInAppCoordinator) {
         self.navigationController = navigationController
         self.appCoordinator = appCoordinator
     }
@@ -35,7 +35,7 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func signInConfirmed() {
-        appCoordinator?.signInSuccess()
+        appCoordinator.signInSuccess()
     }
     
     func goBackToSignIn() {
