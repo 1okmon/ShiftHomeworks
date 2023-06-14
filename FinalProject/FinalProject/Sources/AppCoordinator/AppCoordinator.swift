@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 final class AppCoordinator {
     private var window: UIWindow?
@@ -31,6 +32,11 @@ final class AppCoordinator {
     }
     
     func startSignedInFlow() {
-        self.window?.rootViewController = SignedInTabBarController()
+        let signedInTabBarController = SignedInTabBarController()
+        signedInTabBarController.signOutHandler = { [weak self] in
+            try? Auth.auth().signOut()
+            self?.startAuthFlow()
+        }
+        self.window?.rootViewController = signedInTabBarController
     }
 }

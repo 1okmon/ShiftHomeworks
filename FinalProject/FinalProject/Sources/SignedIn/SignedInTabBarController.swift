@@ -29,12 +29,13 @@ private enum Metrics {
 }
 
 final class SignedInTabBarController: UITabBarController {
-    private var profileViewController: ProfileViewController?
+    var signOutHandler: (() -> Void)?
+    private var profileNavigationController: UINavigationController
     private var rickAndMortyNavigationController: UINavigationController
     private var favoritesNavigationController: UINavigationController
-   // private var favoritesViewController: FavoritesViewController?
     
     init() {
+        self.profileNavigationController = UINavigationController()
         self.rickAndMortyNavigationController = UINavigationController()
         self.favoritesNavigationController = UINavigationController()
         super.init(nibName: nil, bundle: nil)
@@ -55,17 +56,18 @@ final class SignedInTabBarController: UITabBarController {
 
 private extension SignedInTabBarController {
     func initViewControllers() {
-        profileViewController = ProfileViewController()
-        rickAndMortyNavigationController = UINavigationController()
-        let rickAndMortyCoordinator = RickAndMortyCoordinator(navigationController: rickAndMortyNavigationController)
-      FavoritesCoordinator(navigationController: favoritesNavigationController)
-        //favoritesViewController = FavoritesViewController()
+        let profileCoordinator = ProfileCoordinator(navigationController: self.profileNavigationController)
+        profileCoordinator.signOutHandler = { [weak self] in
+            self?.signOutHandler?()
+        }
+        _ = RickAndMortyCoordinator(navigationController: self.rickAndMortyNavigationController)
+        _ = FavoritesCoordinator(navigationController: self.favoritesNavigationController)
     }
     
     func configureTabBarItems() {
-        profileViewController?.tabBarItem = TabBarItemType.profileInfo.item
-        rickAndMortyNavigationController.tabBarItem = TabBarItemType.richAndMortyWiki.item
-        favoritesNavigationController.tabBarItem = TabBarItemType.favorites.item
+        self.profileNavigationController.tabBarItem = TabBarItemType.profileInfo.item
+        self.rickAndMortyNavigationController.tabBarItem = TabBarItemType.richAndMortyWiki.item
+        self.favoritesNavigationController.tabBarItem = TabBarItemType.favorites.item
     }
     
     func configure(tabBar: UITabBar) {
@@ -74,7 +76,6 @@ private extension SignedInTabBarController {
     }
     
     func appendViewControllers() {
-        guard let profileViewController = profileViewController else { return }
-        self.viewControllers = [profileViewController, rickAndMortyNavigationController, favoritesNavigationController]
+        self.viewControllers = [self.profileNavigationController, self.rickAndMortyNavigationController, self.favoritesNavigationController]
     }
 }
