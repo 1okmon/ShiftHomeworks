@@ -8,10 +8,11 @@
 import UIKit
 
 final class AuthCoordinator: IAuthCoordinator {
+    private weak var appCoordinator: AppCoordinator?
     private var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, appCoordinator: AppCoordinator) {
         self.navigationController = navigationController
+        self.appCoordinator = appCoordinator
     }
     
     func start() {
@@ -19,20 +20,25 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func goToSignIn() {
-        let viewModel = AuthViewModel(coordinator: self)
-        let signInViewController = AuthViewControllerBuilder().setAuthType(.singIn).setViewModel(viewModel).build()
+        let signInViewController = AuthBuilder().setCoordinator(self).buildSignInViewController()
         self.navigationController.viewControllers = [signInViewController]
     }
     
     func goToSignUp() {
-        let viewModel = AuthViewModel(coordinator: self)
-        let signUpViewController = AuthViewControllerBuilder().setAuthType(.signUp).setViewModel(viewModel).build()
+        let signUpViewController = AuthBuilder().setCoordinator(self).buildSignUpViewController()
         self.navigationController.pushViewController(signUpViewController, animated: true)
     }
     
     func goToResetPassword() {
-        let viewModel = AuthViewModel(coordinator: self)
-        let resetPasswordViewController = AuthViewControllerBuilder().setAuthType(.resetPassword).setViewModel(viewModel).build()
+        let resetPasswordViewController = AuthBuilder().setCoordinator(self).buildResetPasswordViewController()
         self.navigationController.pushViewController(resetPasswordViewController, animated: true)
+    }
+    
+    func signInConfirmed() {
+        appCoordinator?.signInConfirmed()
+    }
+    
+    func goBack() {
+        self.navigationController.popViewController(animated: true)
     }
 }

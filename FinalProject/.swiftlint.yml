@@ -1,0 +1,11 @@
+included:
+  - FinalProject
+excluded:
+  - Pods
+line_length:
+- 200 # warning
+- 300 # error
+disabled_rules:
+- trailing_whitespace
+- nesting
+- notification_center_detachment
