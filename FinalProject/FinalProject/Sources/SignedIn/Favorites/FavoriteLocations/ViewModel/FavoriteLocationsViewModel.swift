@@ -11,7 +11,7 @@ final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsVi
     private var coreDataManager: ILocationCoreDataManager
     
     override func launch() {
-        reloadLocations()
+        self.reloadLocations()
     }
     
     func reloadLocations() {

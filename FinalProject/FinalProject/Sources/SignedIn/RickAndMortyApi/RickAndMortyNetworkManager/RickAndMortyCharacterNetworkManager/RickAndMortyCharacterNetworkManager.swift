@@ -28,14 +28,14 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
             if let image = self.imagesManager.image(by: urlString) {
                 completion?(image, urlString, nil)
             } else {
-                let task = self.dataTask(by: urlString) { data, _, error in
+                let task = self.dataTask(by: urlString) { [weak self] data, _, error in
                     if let error = error {
                         let errorCode = NetworkResponseCodeParser().parse(error: error)
                         completion?(nil, nil, errorCode)
                     }
                     guard let data = data, error == nil else { return }
                     guard let image = UIImage(data: data) else { return }
-                    self.imagesManager.append(image: image, with: urlString)
+                    self?.imagesManager.append(image: image, with: urlString)
                     completion?(image, urlString, nil)
                 }
                 task.resume()
@@ -70,7 +70,7 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
 private extension RickAndMortyCharacterNetworkManager {
     func dataTask(by urlString: String, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) -> URLSessionDataTask {
         let session = URLSession(configuration: .default)
-        return session.dataTask(with: request(with: urlString),
+        return session.dataTask(with: self.request(with: urlString),
                                 completionHandler: completionHandler)
     }
     

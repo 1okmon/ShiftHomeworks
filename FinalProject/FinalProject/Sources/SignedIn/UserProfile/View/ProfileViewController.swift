@@ -35,8 +35,8 @@ final class ProfileViewController: KeyboardSupportedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        presenter?.fetchRemoteData()
+        self.configure()
+        self.presenter?.fetchRemoteData()
     }
     
     func setPresenter(_ presenter: IProfilePresenter) {
@@ -56,7 +56,7 @@ private extension ProfileViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
         self.imagePicker.delegate = self
-        configureProfileView()
+        self.configureProfileView()
     }
     
     func configureProfileView() {
@@ -64,7 +64,7 @@ private extension ProfileViewController {
         self.profileView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        configureProfileViewHandlers()
+        self.configureProfileViewHandlers()
     }
     
     func configureProfileViewHandlers() {

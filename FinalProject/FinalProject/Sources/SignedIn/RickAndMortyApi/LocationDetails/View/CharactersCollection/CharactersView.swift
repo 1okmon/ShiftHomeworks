@@ -33,7 +33,7 @@ class CharactersView: UIView {
         self.images = [:]
         self.collectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.className)
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -87,7 +87,7 @@ class CharactersView: UIView {
     }
     
     func showActivityIndicator() {
-        if characters.isEmpty {
+        if self.characters.isEmpty {
             self.activityView?.startAnimating()
         }
     }
@@ -95,7 +95,7 @@ class CharactersView: UIView {
 
 private extension CharactersView {
     func configure() {
-        configureCollectionView()
+        self.configureCollectionView()
         self.activityView = ActivityView(superview: self)
     }
     

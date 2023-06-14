@@ -13,7 +13,7 @@ class ProfileCoordinator: IProfileCoordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        start()
+        self.start()
     }
     
     func signOut() {

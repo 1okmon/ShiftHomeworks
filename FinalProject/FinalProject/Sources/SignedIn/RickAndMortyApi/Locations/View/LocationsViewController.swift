@@ -22,7 +22,7 @@ class LocationsViewController: UIViewController, IObserver {
         self.locationView = LocationsView()
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -45,16 +45,16 @@ class LocationsViewController: UIViewController, IObserver {
             return
         }
         guard let result = value as? (locations: [Location], isFirstPage: Bool, isLastPage: Bool) else { return }
-        locationView.update(with: result.locations,
-                            isFirstPage: result.isFirstPage,
-                            isLastPage: result.isLastPage)
+        self.locationView.update(with: result.locations,
+                                 isFirstPage: result.isFirstPage,
+                                 isLastPage: result.isLastPage)
     }
 }
 
 private extension LocationsViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        configureLocationView()
+        self.configureLocationView()
     }
     
     func configureLocationView() {
@@ -62,7 +62,7 @@ private extension LocationsViewController {
         self.locationView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        configureLocationViewTapHandlers()
+        self.configureLocationViewTapHandlers()
     }
     
     func configureLocationViewTapHandlers() {

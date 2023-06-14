@@ -63,7 +63,7 @@ final class ProfileView: KeyboardSupportedView {
         self.isEditing = false
         super.init(textFields: [self.firstNameRow.textField,
                                 self.lastNameRow.textField])
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -128,12 +128,12 @@ private extension ProfileView {
 private extension ProfileView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureEditButton()
-        configureProfilePhotoView()
-        configureFirstName()
-        configureLastName()
-        configureSignOutButton()
-        configureContentViewBottomConstraint(bottomView: self.signOutButton)
+        self.configureEditButton()
+        self.configureProfilePhotoView()
+        self.configureFirstName()
+        self.configureLastName()
+        self.configureSignOutButton()
+        self.configureContentViewBottomConstraint(bottomView: self.signOutButton)
         self.activityView = ActivityView(superview: self)
         self.activityView?.startAnimating()
     }
@@ -161,7 +161,7 @@ private extension ProfileView {
         self.signOutButton.setTitle(Metrics.Button.signOutTitle, for: .normal)
         self.signOutButton.titleLabel?.font = Metrics.font
         self.signOutButton.setTitleColor(Metrics.Button.textColor, for: .normal)
-        self.signOutButton.addTarget(self, action: #selector(signOutButtonTapped(_:)), for: .touchUpInside)
+        self.signOutButton.addTarget(self, action: #selector(self.signOutButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureEditButton() {
@@ -174,16 +174,16 @@ private extension ProfileView {
         self.editButton.setImage(Metrics.Button.normalImage, for: .normal)
         self.editButton.contentHorizontalAlignment = .fill
         self.editButton.contentVerticalAlignment = .fill
-        self.editButton.addTarget(self, action: #selector(editButtonTapped(_:)), for: .touchUpInside)
+        self.editButton.addTarget(self, action: #selector(self.editButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureFirstName() {
-        configure(self.firstNameRow, under: self.profilePhotoView)
+        self.configure(self.firstNameRow, under: self.profilePhotoView)
         self.firstNameRow.label.text = Metrics.Row.Title.firstName
     }
     
     func configureLastName() {
-        configure(self.lastNameRow, under: self.firstNameRow.label)
+        self.configure(self.lastNameRow, under: self.firstNameRow.label)
         self.lastNameRow.label.text = Metrics.Row.Title.lastName
     }
     

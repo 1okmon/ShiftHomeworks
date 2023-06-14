@@ -24,7 +24,7 @@ final class ProfilePhotoView: UIView {
         self.editingCurtainImageView = UIImageView()
         self.photoImageView = UIImageView()
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -50,8 +50,8 @@ final class ProfilePhotoView: UIView {
 
 private extension ProfilePhotoView {
     func configure() {
-        configurePhotoImageView()
-        configureEditingCurtainView()
+        self.configurePhotoImageView()
+        self.configureEditingCurtainView()
         self.activityView = ActivityView(superview: self.photoImageView)
         self.activityView?.startAnimating()
     }
@@ -64,7 +64,7 @@ private extension ProfilePhotoView {
         self.photoImageView.clipsToBounds = true
         self.photoImageView.layer.cornerRadius = Metrics.cornerRadius
         self.photoImageView.isUserInteractionEnabled = true
-        update(with: Metrics.defaultProfileImage)
+        self.update(with: Metrics.defaultProfileImage)
         self.photoImageView.contentMode = .scaleAspectFill
     }
     

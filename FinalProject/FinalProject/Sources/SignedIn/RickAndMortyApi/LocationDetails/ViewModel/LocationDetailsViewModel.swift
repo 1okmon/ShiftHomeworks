@@ -53,8 +53,7 @@ final class LocationDetailsViewModel: ILocationDetailsViewModel {
     func fetchIsFavorite() {
         DispatchQueue.main.async {
             guard let id = self.locationDetails.value?.id else { return }
-            self.isFavorite.value = self.coreDataManager.fetchLocation(with:
-                                                                        id) != nil
+            self.isFavorite.value = self.coreDataManager.fetchLocation(with: id) != nil
         }
     }
     

@@ -15,11 +15,11 @@ class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ILocationDetai
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        start()
+        self.start()
     }
     
     func start() {
-        goToLocations()
+        self.goToLocations()
     }
     
     func goToLocations() {

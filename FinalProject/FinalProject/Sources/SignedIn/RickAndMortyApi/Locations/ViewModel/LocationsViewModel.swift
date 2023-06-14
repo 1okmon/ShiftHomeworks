@@ -24,23 +24,23 @@ class LocationsViewModel: ILocationsViewModel {
     func subscribe(observer: IObserver) {
         self.locations.subscribe(observer: observer)
         self.errorCode.subscribe(observer: observer)
-        launch()
+        self.launch()
     }
     
     func launch() {
-        loadLocations()
+        self.loadLocations()
     }
     
     func reload() {
-        loadLocations(from: self.reloadPage)
+        self.loadLocations(from: self.reloadPage)
     }
     
     func loadNextPage() {
-        loadLocations(from: nextPage)
+        self.loadLocations(from: self.nextPage)
     }
     
     func loadPreviousPage() {
-        loadLocations(from: previousPage)
+        self.loadLocations(from: self.previousPage)
     }
     
     func openLocation(with id: Int) {

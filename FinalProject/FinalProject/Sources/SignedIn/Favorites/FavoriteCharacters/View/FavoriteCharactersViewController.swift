@@ -23,7 +23,7 @@ final class FavoriteCharactersViewController: UIViewController {
         self.charactersView = CharactersView()
         self.charactersCountLabel = UILabel()
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     func setPresenter(_ presenter: IFavoriteCharactersPresenter) {
@@ -52,8 +52,8 @@ final class FavoriteCharactersViewController: UIViewController {
 private extension FavoriteCharactersViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        configureCharactersView()
-        configureLocationsCountLabel()
+        self.configureCharactersView()
+        self.configureLocationsCountLabel()
     }
     
     func configureCharactersView() {
@@ -62,7 +62,7 @@ private extension FavoriteCharactersViewController {
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
         self.charactersView.configureLayout(with: self.view.frame.height)
-        configureCharactersViewHandlers()
+        self.configureCharactersViewHandlers()
     }
     
     func configureCharactersViewHandlers() {

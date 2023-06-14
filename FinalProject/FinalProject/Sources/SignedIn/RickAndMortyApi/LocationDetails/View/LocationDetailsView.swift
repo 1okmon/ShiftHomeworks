@@ -29,10 +29,10 @@ private enum Metrics {
     
     enum Button {
         static let verticalOffset = 15
+        static let borderWidth: CGFloat = 2
         static let horizontalInset = -borderWidth
         static let height = 60
         static let textColor = Theme.textColor
-        static let borderWidth: CGFloat = 2
         static let backgroundColor = Theme.itemsBackgroundColor
         static var borderColor: CGColor { Theme.borderCgColor }
         
@@ -66,7 +66,7 @@ final class LocationDetailsView: UIView {
         self.dimensionLabel = UILabel()
         self.residentsCountLabel = UILabel()
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -84,8 +84,8 @@ final class LocationDetailsView: UIView {
         self.dimensionLabel.text = Metrics.Label.Prefix.dimension + location.dimension
         self.residentsCountLabel.text = Metrics.Label.Prefix.residentsCount + "\(location.residents.count)"
         if location.residents.count != 0 {
-            configureResidentsButton()
-            configureCharactersCollectionView()
+            self.configureResidentsButton()
+            self.configureCharactersCollectionView()
         }
         self.activityView?.stopAnimating()
     }
@@ -104,10 +104,10 @@ final class LocationDetailsView: UIView {
 private extension LocationDetailsView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configure(label: self.nameLabel)
-        configure(label: self.typeLabel, under: self.nameLabel)
-        configure(label: self.dimensionLabel, under: self.typeLabel)
-        configure(label: self.residentsCountLabel, under: self.dimensionLabel)
+        self.configure(label: self.nameLabel)
+        self.configure(label: self.typeLabel, under: self.nameLabel)
+        self.configure(label: self.dimensionLabel, under: self.typeLabel)
+        self.configure(label: self.residentsCountLabel, under: self.dimensionLabel)
         self.activityView = ActivityView(superview: self)
         self.activityView?.startAnimating()
     }
@@ -128,9 +128,9 @@ private extension LocationDetailsView {
         label.font = Metrics.font
     }
     
-    func configureTypeLabel() {
-        self.addSubview(self.typeLabel)
-    }
+//    func configureTypeLabel() {
+//        self.addSubview(self.typeLabel)
+//    }
     
     func configureResidentsButton() {
         let residentsButton = UIButton(type: .system)
@@ -146,7 +146,7 @@ private extension LocationDetailsView {
         residentsButton.backgroundColor = Metrics.Button.backgroundColor
         residentsButton.titleLabel?.font = Metrics.font
         residentsButton.setTitle(Metrics.Button.Prefix.open, for: .normal)
-        residentsButton.addTarget(self, action: #selector(residentsButtonTapped(_:)), for: .touchUpInside)
+        residentsButton.addTarget(self, action: #selector(self.residentsButtonTapped(_:)), for: .touchUpInside)
         self.residentsButton = residentsButton
     }
     

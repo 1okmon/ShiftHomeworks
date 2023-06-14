@@ -30,7 +30,7 @@ final class LocationTableViewCell: UITableViewCell {
         self.locationNameLabel = UILabel()
         self.residentsLabel = UILabel()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -46,12 +46,12 @@ final class LocationTableViewCell: UITableViewCell {
 private extension LocationTableViewCell {
     func configure() {
         self.accessoryType = .disclosureIndicator
-        configureLocationNameLabel()
-        configureResidentsLabel()
+        self.configureLocationNameLabel()
+        self.configureResidentsLabel()
     }
     
     func configureLocationNameLabel() {
-        self.addSubview(locationNameLabel)
+        self.addSubview(self.locationNameLabel)
         self.locationNameLabel.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview().offset(Metrics.horizontalOffset)
             make.top.equalToSuperview().offset(Metrics.verticalOffset)
@@ -61,9 +61,9 @@ private extension LocationTableViewCell {
     }
     
     func configureResidentsLabel() {
-        self.addSubview(residentsLabel)
+        self.addSubview(self.residentsLabel)
         self.residentsLabel.snp.makeConstraints { make in
-            make.top.equalTo(locationNameLabel.snp.bottom).offset(Metrics.verticalOffset)
+            make.top.equalTo(self.locationNameLabel.snp.bottom).offset(Metrics.verticalOffset)
             make.height.equalTo(Metrics.labelHeight)
             make.trailing.leading.equalToSuperview().offset(Metrics.horizontalOffset)
         }

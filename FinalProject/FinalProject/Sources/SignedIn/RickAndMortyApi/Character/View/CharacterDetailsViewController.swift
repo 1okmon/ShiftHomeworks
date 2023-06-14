@@ -25,7 +25,7 @@ final class CharacterDetailsViewController: UIViewController, IObserver {
         self.favoriteButton = UIButton(type: .system)
         self.characterDetailsView = CharacterDetailsView()
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,7 +67,7 @@ private extension CharacterDetailsViewController {
         self.characterDetailsView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        configureFavoriteButton()
+        self.configureFavoriteButton()
     }
     
     func configureFavoriteButton() {
@@ -77,7 +77,7 @@ private extension CharacterDetailsViewController {
             make.height.width.equalTo(Metrics.favoriteButtonHeight)
         }
         self.favoriteButton.setImage(Icon.Favorite.image(), for: .normal)
-        self.favoriteButton.addTarget(self, action: #selector(favoritesButtonTapped(_:)), for: .touchUpInside)
+        self.favoriteButton.addTarget(self, action: #selector(self.favoritesButtonTapped(_:)), for: .touchUpInside)
         self.favoriteButton.isHidden = true
     }
     

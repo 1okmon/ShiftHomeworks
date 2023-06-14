@@ -23,7 +23,7 @@ final class FavoriteCharactersPresenter: IFavoriteCharactersPresenter {
     }
     
     func loadFavoritesCharacters() {
-        let charactersEntity = coreDataManager.fetchCharacters()
+        let charactersEntity = self.coreDataManager.fetchCharacters()
         var charactersCopy = self.characters
         for characterEntity in charactersEntity {
             let characterId = Int(characterEntity.id)

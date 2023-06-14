@@ -19,11 +19,11 @@ final class FavoritesCoordinator: RickAndMortyCoordinator, IFavoritesCoordinator
     override init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         super.init(navigationController: self.navigationController)
-        start()
+        self.start()
     }
     
     override func start() {
-        goToFavorites()
+        self.goToFavorites()
     }
     
     private func goToFavorites() {

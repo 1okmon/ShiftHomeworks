@@ -12,7 +12,6 @@ private enum Metrics {
     static let separatorColor = Theme.tableViewSeparatorColor
     static let cellHeight: CGFloat = 80
     static let footerHeight = CGFloat(PageButton.height + PageButton.verticalOffset)
-    static let animationDelay = 0.5
 }
 
 private enum PageButton {
@@ -69,7 +68,7 @@ final class LocationsView: UIView {
         self.previousPageButton = UIButton(type: .system)
         self.locations = []
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -97,10 +96,10 @@ final class LocationsView: UIView {
 private extension LocationsView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureTableView()
-        configureTableFooterView()
+        self.configureTableView()
+        self.configureTableFooterView()
         self.activityView = ActivityView(superview: self)
-        showActivityIndicator()
+        self.showActivityIndicator()
     }
     
     func configureTableFooterView() {
@@ -110,19 +109,19 @@ private extension LocationsView {
                                                    height: Metrics.footerHeight))
         tableFooterView.addSubview(self.nextPageButton)
         tableFooterView.addSubview(self.previousPageButton)
-        configureNextPageButton()
-        configurePreviousPageButton()
+        self.configureNextPageButton()
+        self.configurePreviousPageButton()
         self.tableView.tableFooterView = tableFooterView
     }
     
     func configureNextPageButton() {
-        self.nextPageButton.addTarget(self, action: #selector(nextPageTapped(_:)), for: .touchUpInside)
-        configure(pageButton: self.nextPageButton, place: .right)
+        self.nextPageButton.addTarget(self, action: #selector(self.nextPageTapped(_:)), for: .touchUpInside)
+        self.configure(pageButton: self.nextPageButton, place: .right)
     }
     
     func configurePreviousPageButton() {
-        configure(pageButton: self.previousPageButton, place: .left)
-        self.previousPageButton.addTarget(self, action: #selector(previousPageTapped(_:)), for: .touchUpInside)
+        self.configure(pageButton: self.previousPageButton, place: .left)
+        self.previousPageButton.addTarget(self, action: #selector(self.previousPageTapped(_:)), for: .touchUpInside)
     }
     
     func configure(pageButton: UIButton, place: PageButton.Place) {
@@ -142,7 +141,7 @@ private extension LocationsView {
     }
     
     func configureTableView() {
-        self.addSubview(tableView)
+        self.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -156,13 +155,13 @@ private extension LocationsView {
 // MARK: method extension
 private extension LocationsView {
     @objc func nextPageTapped(_ sender: UIButton) {
-        showActivityIndicator()
-        nextPageTapHandler?()
+        self.showActivityIndicator()
+        self.nextPageTapHandler?()
     }
     
     @objc func previousPageTapped(_ sender: UIButton) {
-        showActivityIndicator()
-        previousPageTapHandler?()
+        self.showActivityIndicator()
+        self.previousPageTapHandler?()
     }
     
     func showActivityIndicator() {
@@ -181,12 +180,12 @@ extension LocationsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        locations.count
+        self.locations.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard (0 ..< locations.count).contains(indexPath.row) else { return }
-        cellTapHandler?(locations[indexPath.row].id)
+        guard (0 ..< self.locations.count).contains(indexPath.row) else { return }
+        self.cellTapHandler?(self.locations[indexPath.row].id)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
