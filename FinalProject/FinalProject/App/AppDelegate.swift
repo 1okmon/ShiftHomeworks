@@ -31,11 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
-
-    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Metrics.rickAndMortyDBName)
-        container.loadPersistentStores { description, error in
+        container.loadPersistentStores { _, error in
             guard error == nil else { return }
         }
         return container

@@ -11,6 +11,10 @@ private enum URLS {
 }
 
 final class RickAndMortyLocationNetworkManager {
+    static let shared = RickAndMortyLocationNetworkManager()
+    
+    private init() {}
+    
     func loadLocations(from link: String?, completion: (([Location], String?, String?) -> Void)?) {
         let url: String = link ?? URLS.locationsLink
         let task = dataTask(by: url) { data, _, error in

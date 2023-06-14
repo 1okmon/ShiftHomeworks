@@ -12,7 +12,7 @@ import CoreData
 @objc(LocationEntity)
 public class LocationEntity: NSManagedObject {}
 
-extension LocationEntity {
+extension LocationEntity: IEntity {
     @NSManaged public var id: Int32
     @NSManaged public var name: String
     @NSManaged public var type: String

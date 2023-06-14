@@ -8,7 +8,7 @@
 import Foundation
 
 final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsViewModel {
-    private var coreDataManager: CoreDataManager
+    private var coreDataManager: ILocationCoreDataManager
     
     override func launch() {
         reloadLocations()

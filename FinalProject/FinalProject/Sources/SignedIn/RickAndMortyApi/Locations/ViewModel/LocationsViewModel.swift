@@ -14,7 +14,7 @@ class LocationsViewModel: ILocationsViewModel {
     
     init(coordinator: ILocationsRickAndMortyCoordinator) {
         self.locations = Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>()
-        self.locationsNetworkManager = RickAndMortyLocationNetworkManager()
+        self.locationsNetworkManager = RickAndMortyLocationNetworkManager.shared
         self.coordinator = coordinator
     }
     

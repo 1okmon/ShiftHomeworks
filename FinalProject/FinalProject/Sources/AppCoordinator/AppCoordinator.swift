@@ -8,19 +8,29 @@
 import UIKit
 
 final class AppCoordinator {
-    func authFlow() -> UINavigationController {
+    private var window: UIWindow?
+    private let coreDataManager: CoreDataManager
+    
+    init (window: UIWindow?) {
+        self.window = window
+        self.coreDataManager = CoreDataManager.shared
+    }
+    
+    func startAuthFlow() {
+        coreDataManager.clean()
         let navigationController = UINavigationController()
-        let appCoordinator = AuthCoordinator(navigationController: navigationController,
+        let authCoordinator = AuthCoordinator(navigationController: navigationController,
                                              appCoordinator: self)
-        appCoordinator.start()
-        return navigationController
+        authCoordinator.start()
+        self.window?.rootViewController = navigationController
     }
     
-    func signedInFlow() -> UITabBarController {
-        return SignedInTabBarController()
+    func signInSuccess() {
+        coreDataManager.loadUserData()
+        startSignedInFlow()
     }
     
-    func signInConfirmed() {
-        //firstAtSignedInFlow()
+    func startSignedInFlow() {
+        self.window?.rootViewController = SignedInTabBarController()
     }
 }

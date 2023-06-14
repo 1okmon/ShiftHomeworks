@@ -6,26 +6,9 @@
 //
 import Firebase
 
-private enum Metrics {
-    static let databaseUrl = "https://shift-b3cf6-default-rtdb.europe-west1.firebasedatabase.app"
-    static let usersDirectory = "users"
-    
-    struct UserData {
-        enum UserFields: String {
-            case email
-            case name
-        }
-        
-        var email: String
-        var array: [String: Any] {
-            var array = [String: Any]()
-            array.updateValue(email, forKey: UserFields.email.rawValue)
-            return(array)
-        }
-    }
-}
-
 final class FirebaseNetworkManager: IFirebaseNetworkManager {
+    private var realtimeDatabaseManager = RealtimeDatabaseManager.shared
+    
     func signIn(with email: String, _ password: String, completion: @escaping (AuthResult) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             guard let result = result, error == nil else {
@@ -35,6 +18,7 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
             }
             guard result.user.isEmailVerified else {
                 completion(.emailNotVerified(user: result.user))
+                try? Auth.auth().signOut()
                 return
             }
             completion(.successSignIn)
@@ -49,15 +33,14 @@ final class FirebaseNetworkManager: IFirebaseNetworkManager {
                 return
             }
             guard let result = result else { return }
-            let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(result.user.uid)
-            ref.setValue(Metrics.UserData(email: email).array) { error, _ in
-                guard let error = error else { return }
-                completion(ErrorParser().parse(error: error))
-            }
+            self?.realtimeDatabaseManager.createNewUser(with: result.user.uid, email: email, completion: completion)
+            self?.realtimeDatabaseManager.updateFavoriteCharacters(charactersIds: [])
             self?.sendEmailConfirmation(to: result.user, completion: { result in
+                try? Auth.auth().signOut()
                 completion(result)
             })
         }
+        
     }
     
     func submitResetPassword(with email: String, completion: @escaping (AuthResult) -> Void) {
