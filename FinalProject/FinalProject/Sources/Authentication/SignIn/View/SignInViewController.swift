@@ -31,11 +31,19 @@ final class SignInViewController: AuthViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        start()
+    }
+    
+    func start() {
+        self.signInViewModel.trySignInByUserDetailsFromKeychain()
     }
     
     override func update<T>(with value: T) {
         if let error = value as? IAlertRepresentable {
             presentAlert(of: error)
+        }
+        if let userSignInDetails = value as? UserSignInDetails {
+            self.signInView.update(with: userSignInDetails)
         }
         super.update(with: value)
     }

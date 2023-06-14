@@ -11,31 +11,52 @@ final class AuthViewModel {
     private var coordinator: IAuthCoordinator
     private var firebaseNetworkManager: IFirebaseNetworkManager
     private var result: Observable<IAlertRepresentable>
+    private var userSignInDetails: Observable<UserSignInDetails>
+    private var keychainManager: IKeychainManager
     
     init(coordinator: IAuthCoordinator, firebaseNetworkManager: IFirebaseNetworkManager) {
         self.coordinator = coordinator
+        self.keychainManager = KeychainManager()
+        self.userSignInDetails = Observable<UserSignInDetails>()
         self.firebaseNetworkManager = firebaseNetworkManager
         self.result = Observable<IAlertRepresentable>()
     }
     
     func subscribe(observer: IObserver) {
+        self.userSignInDetails.subscribe(observer: observer)
         self.result.subscribe(observer: observer)
     }
 }
 
 extension AuthViewModel: IAuthViewModel {
     func sendEmailVerificationLink(to user: User) {
-        firebaseNetworkManager.sendEmailConfirmation(to: user, completion: { [weak self] result in
+        self.firebaseNetworkManager.sendEmailConfirmation(to: user, completion: { [weak self] result in
             self?.result.value = result
         })
     }
     
+    func trySignInByUserDetailsFromKeychain() {
+        if let userSignInDetails = self.keychainManager.loadSingInDetails() {
+            self.userSignInDetails.value = userSignInDetails
+            self.firebaseNetworkManager.signIn(with: userSignInDetails.email, userSignInDetails.password, completion: { [weak self] result in
+                if case AuthResult.successSignIn = result {
+                    self?.coordinator.signInConfirmed()
+                } else {
+                    self?.keychainManager.deleteSingInDetails()
+                    self?.result.value = result
+                }
+            })
+        }
+    }
+    
     func signIn(with email: String, _ password: String) {
-        firebaseNetworkManager.signIn(with: email, password, completion: { [weak self] result in
-            self?.result.value = result
-            if case AuthResult.successSignIn = result {
-                self?.coordinator.signInConfirmed()
+        self.firebaseNetworkManager.signIn(with: email, password, completion: { [weak self] result in
+            guard case AuthResult.successSignIn = result  else {
+                self?.result.value = result
+                return
             }
+            self?.keychainManager.update(email: email, password: password)
+            self?.coordinator.signInConfirmed()
         })
     }
     

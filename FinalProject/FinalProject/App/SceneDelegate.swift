@@ -17,22 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         self.appCoordinator = AppCoordinator(window: self.window)
-        if let currentUser = Auth.auth().currentUser {
-            currentUser.getIDToken { error, _  in
-                if error != nil {
-                    do {
-                        try Auth.auth().signOut()
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-        }
-        if Auth.auth().currentUser == nil {
-            self.appCoordinator?.startAuthFlow()
-        } else {
-            self.appCoordinator?.startSignedInFlow()
-        }
+        self.appCoordinator?.startAuthFlow()
         self.window?.makeKeyAndVisible()
     }
     

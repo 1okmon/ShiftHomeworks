@@ -39,6 +39,12 @@ final class SignInView: AuthView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(with userSignInDetails: UserSignInDetails) {
+        self.showActivityIndicator()
+        self.emailTextField.text = userSignInDetails.email
+        self.passwordTextField.text = userSignInDetails.password
+    }
+    
     func showResetPasswordButton() {
         UIView.animate(withDuration: Metrics.animationDuration) {
             self.resetPasswordButton.isHidden = false

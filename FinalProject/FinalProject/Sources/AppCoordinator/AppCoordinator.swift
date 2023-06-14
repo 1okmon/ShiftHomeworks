@@ -31,7 +31,7 @@ final class AppCoordinator {
         startSignedInFlow()
     }
     
-    func startSignedInFlow() {
+    private func startSignedInFlow() {
         let signedInTabBarController = SignedInTabBarController()
         signedInTabBarController.signOutHandler = { [weak self] in
             try? Auth.auth().signOut()
