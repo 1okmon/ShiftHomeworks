@@ -18,7 +18,7 @@ final class ProfilePhotoView: UIView {
     var profileImageTapped: (() -> Void)?
     private var photoImageView: UIImageView
     private var editingCurtainImageView: UIImageView
-    private var activityView : ActivityView?
+    private var activityView: ActivityView?
     
     init() {
         self.editingCurtainImageView = UIImageView()
