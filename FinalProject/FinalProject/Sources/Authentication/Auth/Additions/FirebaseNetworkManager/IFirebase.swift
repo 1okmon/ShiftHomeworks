@@ -6,6 +6,7 @@
 //
 
 import Firebase
+
 protocol IFirebaseNetworkManager {
     func signIn(with email: String, _ password: String, completion: @escaping (IAlertRepresentable) -> Void)
     func submitSignUp(with email: String, _ password: String, completion: @escaping (IAlertRepresentable) -> Void)

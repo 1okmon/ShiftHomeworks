@@ -17,6 +17,10 @@ final class CoreDataManager: NSObject {
     static let shared = CoreDataManager()
     private let realtimeDatabaseManager: RealtimeDatabaseManager
     
+    private override init() {
+        self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
+    }
+    
     func clean() {
         deleteAllLocations()
         deleteAllCharacters()
@@ -47,10 +51,6 @@ final class CoreDataManager: NSObject {
                 }
             })
         }
-    }
-    
-    private override init() {
-        self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
     }
 }
 
@@ -102,7 +102,7 @@ extension CoreDataManager: ILocationCoreDataManager {
     func deleteAllLocations() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.location)
         do {
-            let locations = try? context.fetch(fetchRequest) as? [LocationEntity]
+            let locations = try? self.context.fetch(fetchRequest) as? [LocationEntity]
             locations?.forEach({ [weak self] location in
                 self?.context.delete(location)
             })
@@ -162,7 +162,7 @@ extension CoreDataManager: ICharacterCoreDataManager {
     func deleteAllCharacters() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
         do {
-            let characters = try? context.fetch(fetchRequest) as? [CharacterEntity]
+            let characters = try? self.context.fetch(fetchRequest) as? [CharacterEntity]
             characters?.forEach({ [weak self] character in
                 self?.context.delete(character)
             })
