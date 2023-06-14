@@ -14,17 +14,13 @@ private enum Metrics {
     static let beforeSectionTopOffset = 150
     static let inSectionTopOffset = 10
     static let horizontalInset = 50
-    static let animateDuration = 0.2
-    static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
-    static let activityIndicatorVerticalOffset = -50
     static let backgroundColor = Theme.backgroundColor
 }
 
-class AuthView: UIView {
+class AuthView: KeyboardSupportedView {
     private var activityView: ActivityView?
-    private var scrollView = UIScrollView()
     private var titleLabel: UILabel
-    private var firsResponderTextField: UITextField?
+    //private var firsResponderTextField: UITextField?
     private var textFields: [UITextField]
     private var buttons: [UIButton]
     
@@ -32,7 +28,7 @@ class AuthView: UIView {
         self.titleLabel = titleLabel
         self.textFields = textFields
         self.buttons = buttons
-        super.init(frame: .zero)
+        super.init(textFields: textFields)
         configure()
     }
     
@@ -45,13 +41,6 @@ class AuthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func keyboardWillShow(keyboardHeight: CGFloat) {
-        UIView.animate(withDuration: Metrics.animateDuration) {
-            self.scrollView.contentOffset.y = self.verticalOffset(with: keyboardHeight)
-        }
-        scrollView.contentInset.bottom = keyboardHeight
-    }
-    
     func showActivityIndicator() {
         self.activityView?.startAnimating()
     }
@@ -59,40 +48,16 @@ class AuthView: UIView {
     func closeActivityIndicator() {
         self.activityView?.stopAnimating()
     }
-    
-    func keyboardWillHide() {
-        scrollView.contentInset = .zero
-        scrollView.contentOffset = .zero
-    }
 }
 
 private extension AuthView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureScrollView()
         configureTitleLabel()
         configureTextFields()
         configureButtons()
-        configureContentViewBottomConstraint(at: scrollView, bottomView: buttons.last)
+        configureContentViewBottomConstraint(bottomView: buttons.last)
         self.activityView = ActivityView(superview: self)
-    }
-    
-    func configureScrollView() {
-        self.addSubview(scrollView)
-        configureScrollViewConstraints()
-    }
-    
-    func configureScrollViewConstraints() {
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 0)
-    }
-    
-    func configureContentViewBottomConstraint(at scrollView: UIScrollView, bottomView: UIView?) {
-        bottomView?.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-        }
     }
     
     func configureTitleLabel() {
@@ -112,12 +77,7 @@ private extension AuthView {
             let topOffset = textFieldId == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
             let upperView = textFieldId == 0 ? titleLabel : textFields[textFieldId - 1]
             configure(textFields[textFieldId], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
-            configureDelegate(at: textFields[textFieldId])
         }
-    }
-    
-    func configureDelegate(at textField: UITextField) {
-        textField.delegate = self
     }
     
     func configureButtons() {
@@ -145,20 +105,6 @@ private extension AuthView {
         }
     }
     
-    func verticalOffset(with keyboardHeight: CGFloat) -> CGFloat {
-        let viewHeight = self.frame.height
-        let halfHeightOfVisibleView = Int((viewHeight - keyboardHeight)/2)
-        textFields.forEach {
-            if $0.isEditing {
-                firsResponderTextField = $0
-            }
-        }
-        guard let firsResponderTextField = firsResponderTextField else { return 0 }
-        let textFieldY = Int((firsResponderTextField.frame.origin.y))
-        let offset = textFieldY > halfHeightOfVisibleView ? textFieldY - halfHeightOfVisibleView : halfHeightOfVisibleView - textFieldY
-        return CGFloat(offset)
-    }
-    
     func updateCgColors() {
         for textField in textFields {
             textField.layer.borderColor = Theme.borderCgColor
@@ -166,24 +112,5 @@ private extension AuthView {
         for button in buttons {
             button.layer.borderColor = Theme.borderCgColor
         }
-    }
-}
-
-extension AuthView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textFields.last == textField {
-            textField.resignFirstResponder()
-            keyboardWillHide()
-            return true
-        }
-        if let index = textFields.firstIndex(where: { field in
-            field == textField
-        }) {
-            textFields[index + 1].becomeFirstResponder()
-        }
-        return true
-    }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.becomeFirstResponder()
     }
 }
