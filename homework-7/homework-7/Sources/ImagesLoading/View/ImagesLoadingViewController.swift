@@ -10,14 +10,43 @@ import UIKit
 private enum Metrics {
     static let backgroundColor = UIColor.white
     enum TableViewCellAlert {
-        static let title = "Не удалось загрузить картинку"
+        static let titleForLoaded = "Картинка успешно загружена"
+        static let titleForFailed = "Не удалось загрузить картинку"
         static let message = "Выберете действие"
+        
+        enum ActionTitle {
+            static let delete = "Удалить"
+            static let save = "Сохранить"
+            static let unSave = "Убрать из сохраненных"
+            static let close = "Закрыть"
+        }
     }
     
-    enum WrongUrlAlert {
-        static let title = "Url не существует"
-        static let message = "Кажется вы неверно ввели ссылку"
-        static let buttonTitle = "Закрыть"
+    enum UrlFieldAlert {
+        case emptyUrlField
+        case wrongUrl
+        
+        var title: String {
+            switch self {
+            case .emptyUrlField:
+                return "Ссылка не была указана"
+            case .wrongUrl:
+                return "Url не существует"
+            }
+        }
+        
+        var message: String {
+            switch self {
+            case .emptyUrlField:
+                return "Пожалуйста укажите ссылку"
+            case .wrongUrl:
+                return "Кажется вы неверно ввели ссылку"
+            }
+        }
+        
+        var buttonTitle: String {
+            "Закрыть"
+        }
     }
 }
 
@@ -25,6 +54,7 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
     var id: UUID
     private let viewWithTable: ImagesLoadingView
     private var viewModel: IImagesLoadingViewModel?
+    private var isSelectedImageSaved: Bool?
     
     init() {
         self.id = UUID()
@@ -44,11 +74,22 @@ final class ImagesLoadingViewController: UIViewController, IObserver {
         super.viewDidLoad()
         self.view.backgroundColor = Metrics.backgroundColor
         configure()
+        self.viewModel?.launch()
     }
     
     func update<T>(with value: T) {
+        if let stateForAlert = value as? StateForAlert {
+            switch stateForAlert {
+            case .url(let created):
+                if !created {
+                    showAlert(.wrongUrl)
+                }
+            case .image(let saved):
+                self.isSelectedImageSaved = saved
+            }
+        }
         guard let value = value as? [UUID: LoadingState] else { return }
-        viewWithTable.update(to: value)
+        self.viewWithTable.update(to: value)
     }
 }
 
@@ -59,40 +100,67 @@ private extension ImagesLoadingViewController {
     
     func configureView() {
         self.view.addSubview(viewWithTable)
-        viewWithTable.snp.makeConstraints { make in
+        self.viewWithTable.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        viewWithTable.tableViewCellAlertHandler = { [weak self] alertActions in
-            self?.showAlertSheetForTableViewCell(with: alertActions)
+        self.viewWithTable.tableViewCellAlertHandler = { [weak self] imageId, state in
+            self?.viewModel?.detectSaveStatusForImage(by: imageId)
+            self?.showAlertSheetForTableViewCell(with: imageId, for: state)
         }
-        viewWithTable.wrongUrlAlertHandler = { [weak self] in
-            self?.showAlert()
-        }
-        viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
+        self.viewWithTable.loadButtonTapHandler = { [weak self] imageId, url in
+            guard !url.isEmpty else {
+                self?.showAlert(.emptyUrlField)
+                return
+            }
             self?.viewModel?.load(from: url, imageId: imageId)
         }
-        viewWithTable.pauseTapHandler = { [weak self] imageId in
+        self.viewWithTable.pauseTapHandler = { [weak self] imageId in
             self?.viewModel?.switchPause(with: imageId)
         }
-        viewWithTable.deleteTapHandler = { [weak self] imageId in
-            self?.viewModel?.delete(with: imageId)
-        }
     }
     
-    func showAlertSheetForTableViewCell(with actions: [UIAlertAction]) {
-        let alert = UIAlertController(title: Metrics.TableViewCellAlert.title,
+    func showAlertSheetForTableViewCell(with imageId: UUID, for state: LoadingState?) {
+        let alertActions = alertActionsForCell(with: imageId, for: state)
+        var title = Metrics.TableViewCellAlert.titleForLoaded
+        if case .error = state {
+            title = Metrics.TableViewCellAlert.titleForFailed
+        }
+        let alert = UIAlertController(title: title,
                                       message: Metrics.TableViewCellAlert.message,
                                       preferredStyle: .actionSheet)
-        actions.forEach { alert.addAction($0) }
+        alertActions.forEach { alert.addAction($0) }
         self.present(alert, animated: true)
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: Metrics.WrongUrlAlert.title,
-                                      message: Metrics.WrongUrlAlert.message,
+    func showAlert(_ type: Metrics.UrlFieldAlert) {
+        let alert = UIAlertController(title: type.title,
+                                      message: type.message,
                                       preferredStyle: .alert)
-        let action = UIAlertAction(title: Metrics.WrongUrlAlert.buttonTitle, style: .cancel)
+        let action = UIAlertAction(title: type.buttonTitle, style: .cancel)
         alert.addAction(action)
         self.present(alert, animated: true)
+    }
+    
+    func alertActionsForCell(with imageId: UUID, for state: LoadingState?) -> [UIAlertAction] {
+        var alertActions: [UIAlertAction] = []
+        let delete = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.delete, style: .destructive) { [weak self] _ in
+            self?.viewModel?.delete(with: imageId)
+        }
+        alertActions.append(delete)
+        
+        if case .loaded = state {
+            var save = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.save, style: .default) { [weak self] _ in
+                self?.viewModel?.saveImage(with: imageId)
+            }
+            if self.isSelectedImageSaved ?? false {
+                save = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.unSave, style: .default) { [weak self] _ in
+                    self?.viewModel?.deleteFromDB(with: imageId)
+                }
+            }
+            alertActions.append(save)
+        }
+        let close = UIAlertAction(title: Metrics.TableViewCellAlert.ActionTitle.close, style: .cancel)
+        alertActions.append(close)
+        return alertActions
     }
 }

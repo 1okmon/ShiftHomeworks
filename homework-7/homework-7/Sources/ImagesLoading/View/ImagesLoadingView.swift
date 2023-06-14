@@ -35,19 +35,12 @@ private enum Metrics {
         static let topOffset = 40
         static let cellHeight: CGFloat = 170
     }
-    
-    enum Alert {
-        static let deleteActionTitleText = "Удалить"
-        static let closeActionTitleText = "Закрыть"
-    }
 }
 
 final class ImagesLoadingView: UIView {
-    var tableViewCellAlertHandler: (([UIAlertAction]) -> Void)?
-    var wrongUrlAlertHandler: (() -> Void)?
-    var loadButtonTapHandler: ((UUID, URL) -> Void)?
+    var tableViewCellAlertHandler: ((UUID, LoadingState?) -> Void)?
+    var loadButtonTapHandler: ((UUID, String) -> Void)?
     var pauseTapHandler: ((UUID) -> Void)?
-    var deleteTapHandler: ((UUID) -> Void)?
     private let urlTextField: UITextField
     private let addButton: UIButton
     private let tableView: UITableView
@@ -70,17 +63,15 @@ final class ImagesLoadingView: UIView {
     
     func update(to newImagesState: [UUID: LoadingState]) {
         DispatchQueue.main.async {
-            for imageId in self.cellsState.keys {
-                self.updateCell(with: imageId, to: newImagesState[imageId])
+            for (imageId, state) in newImagesState {
+                self.updateCell(with: imageId, to: state)
+            }
+            self.imageIds.forEach { [weak self] imageId in
+                if newImagesState[imageId] == nil {
+                    self?.delete(at: imageId)
+                }
             }
         }
-    }
-    
-    func delete(at imageId: UUID) {
-        let indexPath = self.indexPath(by: imageId)
-        self.cellsState[imageId] = nil
-        self.imageIds.removeAll { $0 == imageId }
-        self.tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -122,7 +113,7 @@ private extension ImagesLoadingView {
         addButton.layer.cornerRadius = Metrics.Button.cornerRadius
         addButton.setTitleColor(Metrics.Button.titleColor, for: .normal)
         addButton.setTitle(Metrics.Button.titleText, for: .normal)
-        addButton.addTarget(self, action: #selector(loadButtonTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(loadButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureTableView() {
@@ -139,40 +130,35 @@ private extension ImagesLoadingView {
 
 // MARK: methods extension
 private extension ImagesLoadingView {
-    @objc func loadButtonTapped() {
-        load()
+    @objc func loadButtonTapped(_ sender: UIButton) {
+        loadButtonTapHandler?(UUID(), urlTextField.text ?? "")
     }
     
     func indexPath(by imageId: UUID) -> IndexPath {
         return IndexPath(row: imageIds.firstIndex(of: imageId) ?? 0, section: 0)
     }
     
-    func load() {
-        guard let text = urlTextField.text,
-              let url = URL(string: text) else {
-            wrongUrlAlertHandler?()
-            return
-        }
-        let imageId = UUID()
-        createNewCell(with: imageId)
-        loadButtonTapHandler?(imageId, url)
-    }
-    
     func createNewCell(with imageId: UUID) {
         self.imageIds.append(imageId)
-        tableView.reloadData()
         self.cellsState.updateValue(.loading(progress: 0), forKey: imageId)
+        self.tableView.insertRows(at: [indexPath(by: imageId)], with: .automatic)
+    }
+    
+    func delete(at imageId: UUID) {
+        let indexPath = self.indexPath(by: imageId)
+        self.cellsState[imageId] = nil
+        self.imageIds.removeAll { $0 == imageId }
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func showAlert(_ imageId: UUID) {
-        let delete = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .destructive) { [weak self] _ in
-            self?.deleteTapHandler?(imageId)
-        }
-        let close = UIAlertAction(title: Metrics.Alert.deleteActionTitleText, style: .cancel)
-        tableViewCellAlertHandler?([delete, close])
+        tableViewCellAlertHandler?(imageId, cellsState[imageId])
     }
     
     func updateCell(with imageId: UUID, to newState: LoadingState?) {
+        if self.cellsState[imageId] == nil {
+            createNewCell(with: imageId)
+        }
         guard let newState = newState else {
             self.delete(at: imageId)
             return
@@ -214,11 +200,9 @@ extension ImagesLoadingView: UITableViewDelegate, UITableViewDataSource {
         switch state {
         case .loading, .paused:
             pauseTapHandler?(imageIds[indexPath.row])
-        case .error:
+        case .error, .loaded:
             let imageId = imageIds[indexPath.row]
             showAlert(imageId)
-        default:
-            break
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

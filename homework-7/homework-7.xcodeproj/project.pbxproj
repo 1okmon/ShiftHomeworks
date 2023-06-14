@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2906F52A2A09D2005C20A8 /* ImagesData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0E2906F32A2A09D2005C20A8 /* ImagesData.xcdatamodeld */; };
+		0E2906F72A2A0AF3005C20A8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2906F62A2A0AF3005C20A8 /* CoreDataManager.swift */; };
+		0E2906F92A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2906F82A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift */; };
 		0E62D7AF2A2467020024F4DD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E62D7AE2A2467020024F4DD /* SnapKit */; };
 		0E6541752A24660B007E10AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541742A24660B007E10AD /* AppDelegate.swift */; };
 		0E6541772A24660B007E10AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541762A24660B007E10AD /* SceneDelegate.swift */; };
@@ -22,10 +25,14 @@
 		0E6541A12A24665D007E10AD /* ImagesLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541962A24665D007E10AD /* ImagesLoadingView.swift */; };
 		0E6541A22A24665D007E10AD /* IImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541982A24665D007E10AD /* IImagesProvider.swift */; };
 		0E6541A32A24665D007E10AD /* ImagesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6541992A24665D007E10AD /* ImagesProvider.swift */; };
+		0EEFAF5C2A2CEF6A00EA8A80 /* StateForAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEFAF5B2A2CEF6A00EA8A80 /* StateForAlert.swift */; };
 		66E41B506892CC26913195C2 /* Pods_homework_7.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D6ED17A21BF84B7B688747 /* Pods_homework_7.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E2906F42A2A09D2005C20A8 /* ImagesData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImagesData.xcdatamodel; sourceTree = "<group>"; };
+		0E2906F62A2A0AF3005C20A8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		0E2906F82A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ImageEntity+CoreDataProperties.swift"; path = "/Users/1okmon/Desktop/Xcode projects/ShiftHomeworks/ShiftHomeworks/homework-7/homework-7/Sources/ImagesLoading/Services/CoreData/ImageEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		0E6541712A24660B007E10AD /* homework-7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "homework-7.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E6541742A24660B007E10AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E6541762A24660B007E10AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +49,7 @@
 		0E6541962A24665D007E10AD /* ImagesLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesLoadingView.swift; sourceTree = "<group>"; };
 		0E6541982A24665D007E10AD /* IImagesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImagesProvider.swift; sourceTree = "<group>"; };
 		0E6541992A24665D007E10AD /* ImagesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesProvider.swift; sourceTree = "<group>"; };
+		0EEFAF5B2A2CEF6A00EA8A80 /* StateForAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateForAlert.swift; sourceTree = "<group>"; };
 		50B1D95E639806E8B987C729 /* Pods-homework-7.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homework-7.release.xcconfig"; path = "Target Support Files/Pods-homework-7/Pods-homework-7.release.xcconfig"; sourceTree = "<group>"; };
 		A9D6ED17A21BF84B7B688747 /* Pods_homework_7.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_homework_7.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF643B5ECE11D5C2DF9CF457 /* Pods-homework-7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-homework-7.debug.xcconfig"; path = "Target Support Files/Pods-homework-7/Pods-homework-7.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +68,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E2906F22A2A09B6005C20A8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0E2906F82A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift */,
+				0E2906F32A2A09D2005C20A8 /* ImagesData.xcdatamodeld */,
+				0E2906F62A2A0AF3005C20A8 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		0E6541682A24660B007E10AD = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +142,7 @@
 			children = (
 				0E65418E2A24665D007E10AD /* IImagesLoadingViewModel.swift */,
 				0E65418F2A24665D007E10AD /* ImagesLoadingViewModel.swift */,
+				0EEFAF5B2A2CEF6A00EA8A80 /* StateForAlert.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -157,6 +176,7 @@
 		0E6541972A24665D007E10AD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0E2906F22A2A09B6005C20A8 /* CoreData */,
 				0E6541982A24665D007E10AD /* IImagesProvider.swift */,
 				0E6541992A24665D007E10AD /* ImagesProvider.swift */,
 			);
@@ -319,6 +339,7 @@
 			files = (
 				0E65419C2A24665D007E10AD /* IImagesLoadingViewModel.swift in Sources */,
 				0E65419E2A24665D007E10AD /* LoadingState.swift in Sources */,
+				0E2906F92A2A0BE7005C20A8 /* ImageEntity+CoreDataProperties.swift in Sources */,
 				0E6541A02A24665D007E10AD /* ImageLoadingTableViewCell.swift in Sources */,
 				0E6541A12A24665D007E10AD /* ImagesLoadingView.swift in Sources */,
 				0E6541A32A24665D007E10AD /* ImagesProvider.swift in Sources */,
@@ -329,6 +350,9 @@
 				0E65419F2A24665D007E10AD /* ImagesLoadingViewController.swift in Sources */,
 				0E65419A2A24665D007E10AD /* NSObject+className.swift in Sources */,
 				0E6541772A24660B007E10AD /* SceneDelegate.swift in Sources */,
+				0E2906F72A2A0AF3005C20A8 /* CoreDataManager.swift in Sources */,
+				0EEFAF5C2A2CEF6A00EA8A80 /* StateForAlert.swift in Sources */,
+				0E2906F52A2A09D2005C20A8 /* ImagesData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +581,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		0E2906F32A2A09D2005C20A8 /* ImagesData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0E2906F42A2A09D2005C20A8 /* ImagesData.xcdatamodel */,
+			);
+			currentVersion = 0E2906F42A2A09D2005C20A8 /* ImagesData.xcdatamodel */;
+			path = ImagesData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0E6541692A24660B007E10AD /* Project object */;
 }
