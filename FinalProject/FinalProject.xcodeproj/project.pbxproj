@@ -61,7 +61,7 @@
 		0E73D8782A380D4100CCD271 /* ICharacterNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */; };
 		0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */; };
 		0E73D8842A384F3000CCD271 /* KeyboardSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */; };
-		0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */; };
+		0E73D8862A38505400CCD271 /* KeyboardSupportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */; };
 		0E73D8882A385C4700CCD271 /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */; };
 		0E73D88D2A3891B100CCD271 /* FirebaseStorageManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */; };
 		0E7C1F142A39CADC000D71BB /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F132A39CADC000D71BB /* KeychainManager.swift */; };
@@ -182,7 +182,7 @@
 		0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICharacterNetworkManager.swift; sourceTree = "<group>"; };
 		0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRickAndMortyLocationNetworkManager.swift; sourceTree = "<group>"; };
 		0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSupportedViewController.swift; sourceTree = "<group>"; };
-		0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeyboardSupportedView.swift; sourceTree = "<group>"; };
+		0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSupportedView.swift; sourceTree = "<group>"; };
 		0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
 		0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManger.swift; sourceTree = "<group>"; };
 		0E7C1F132A39CADC000D71BB /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
@@ -642,7 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */,
-				0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */,
+				0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */,
 			);
 			path = KeyboardSupportedView;
 			sourceTree = "<group>";
@@ -731,7 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF1604B2A1E434C0026A628 /* Auth */,
-				0EEA04042A17261100B1EA9C /* Builder */,
+				0EEA04042A17261100B1EA9C /* AuthViewControllersFactory */,
 				0EEA03EC2A17261100B1EA9C /* Coordinator */,
 				0EF160322A1E19450026A628 /* ResetPassword */,
 				0EF160312A1E19350026A628 /* SignUp */,
@@ -779,12 +779,12 @@
 			path = AuthDesignSystem;
 			sourceTree = "<group>";
 		};
-		0EEA04042A17261100B1EA9C /* Builder */ = {
+		0EEA04042A17261100B1EA9C /* AuthViewControllersFactory */ = {
 			isa = PBXGroup;
 			children = (
 				0EEA04052A17261100B1EA9C /* AuthViewControllersFactory.swift */,
 			);
-			path = Builder;
+			path = AuthViewControllersFactory;
 			sourceTree = "<group>";
 		};
 		0EEA04342A1DA74700B1EA9C /* UserProfile */ = {
@@ -1228,7 +1228,7 @@
 				0E27E68C2A2605FE0010C571 /* RickAndMortyCoordinator.swift in Sources */,
 				0EEA04082A17261100B1EA9C /* AuthCoordinator.swift in Sources */,
 				0E27E67C2A25EFE80010C571 /* LocationResponse.swift in Sources */,
-				0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */,
+				0E73D8862A38505400CCD271 /* KeyboardSupportedView.swift in Sources */,
 				0EF1603A2A1E3B5E0026A628 /* ISignInViewModel.swift in Sources */,
 				0EF160482A1E3EA90026A628 /* ResetPasswordViewController.swift in Sources */,
 				0E27E6AD2A274DBA0010C571 /* Character.swift in Sources */,

@@ -37,7 +37,8 @@ class LocationsViewController: UIViewController, IObserver {
                                          style: .default,
                                          handler: { [weak self] _ in
                     self?.viewModel.reload()
-                })).build()
+                }))
+                .build()
             DispatchQueue.main.async {
                 self.present(alert, animated: true)
             }

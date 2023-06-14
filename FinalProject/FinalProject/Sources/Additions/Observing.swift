@@ -43,7 +43,7 @@ import Foundation
      }
 
      func notify<T>(newValue: T) {
-         observers.forEach { observer in
+         self.observers.forEach { observer in
              observer.update(with: newValue)
          }
      }

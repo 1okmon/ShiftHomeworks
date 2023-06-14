@@ -29,9 +29,12 @@ final class SignInView: AuthView {
         self.signInButton = authDesignSystem.signInButton
         self.signUpButton = authDesignSystem.signUpButton
         self.resetPasswordButton = authDesignSystem.resetPasswordButton
-        super.init(titleLabel: titleLabel,
-                   textFields: [emailTextField, passwordTextField],
-                   buttons: [signInButton, signUpButton, resetPasswordButton])
+        super.init(titleLabel: self.titleLabel,
+                   textFields: [self.emailTextField,
+                                self.passwordTextField],
+                   buttons: [self.signInButton,
+                             self.signUpButton,
+                             self.resetPasswordButton])
         configure()
     }
     
@@ -54,13 +57,13 @@ final class SignInView: AuthView {
 
 private extension SignInView {
     func configure() {
-        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
-        signUpButton.addTarget(self, action: #selector(signUnButtonTapped), for: .touchUpInside)
-        resetPasswordButton.addTarget(self, action: #selector(resetPasswordButtonTapped), for: .touchUpInside)
-        resetPasswordButton.isHidden = true
+        self.signInButton.addTarget(self, action: #selector(self.signInButtonTapped(_:)), for: .touchUpInside)
+        self.signUpButton.addTarget(self, action: #selector(self.signUnButtonTapped(_:)), for: .touchUpInside)
+        self.resetPasswordButton.addTarget(self, action: #selector(self.resetPasswordButtonTapped(_:)), for: .touchUpInside)
+        self.resetPasswordButton.isHidden = true
     }
     
-    @objc func signInButtonTapped() {
+    @objc func signInButtonTapped(_ sender: UIButton) {
         guard let handler = self.signInTapHandler else { return }
         guard let email = self.emailTextField.text,
               let password = self.passwordTextField.text else {
@@ -69,13 +72,13 @@ private extension SignInView {
         handler(email, password)
     }
     
-    @objc func signUnButtonTapped() {
-        guard let handler = signUpTapHandler else { return }
+    @objc func signUnButtonTapped(_ sender: UIButton) {
+        guard let handler = self.signUpTapHandler else { return }
         handler()
     }
     
-    @objc func resetPasswordButtonTapped() {
-        guard let handler = resetPasswordTapHandler else { return }
+    @objc func resetPasswordButtonTapped(_ sender: UIButton) {
+        guard let handler = self.resetPasswordTapHandler else { return }
         handler()
     }
 }

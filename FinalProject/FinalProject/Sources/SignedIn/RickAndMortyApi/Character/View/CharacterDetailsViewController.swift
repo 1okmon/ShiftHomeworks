@@ -43,7 +43,8 @@ final class CharacterDetailsViewController: UIViewController, IObserver {
                 .setFieldsToShowAlert(of: errorCode)
                 .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
                     self?.viewModel.close()
-                })).build()
+                }))
+                .build()
             DispatchQueue.main.async {
                 self.present(alert, animated: true)
             }

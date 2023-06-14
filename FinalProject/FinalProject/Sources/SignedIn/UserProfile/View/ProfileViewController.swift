@@ -99,7 +99,8 @@ private extension ProfileViewController {
                 guard let imagePicker = self?.imagePicker else { return }
                 self?.present(imagePicker, animated: true, completion: nil)
             }))
-            .addAction(UIAlertAction(title: Metrics.ImagePickerAlert.cancel, style: .cancel)).build()
+            .addAction(UIAlertAction(title: Metrics.ImagePickerAlert.cancel, style: .cancel))
+            .build()
         self.present(alert, animated: true, completion: nil)
     }
 }

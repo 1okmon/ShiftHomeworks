@@ -61,21 +61,21 @@ extension AuthViewModel: IAuthViewModel {
     }
     
     func signUp() {
-        coordinator.goToSignUp()
+        self.coordinator.goToSignUp()
     }
     
     func resetPassword() {
-        coordinator.goToResetPassword()
+        self.coordinator.goToResetPassword()
     }
     
     func submitSignUp(with email: String, _ password: String) {
-        firebaseNetworkManager.submitSignUp(with: email, password, completion: { [weak self] result in
+        self.firebaseNetworkManager.submitSignUp(with: email, password, completion: { [weak self] result in
             self?.result.value = result
         })
     }
     
     func submitResetPassword(with email: String) {
-        firebaseNetworkManager.submitResetPassword(with: email, completion: { [weak self] result in
+        self.firebaseNetworkManager.submitResetPassword(with: email, completion: { [weak self] result in
             self?.result.value = result
         })
     }

@@ -30,8 +30,8 @@ final class SignInViewController: AuthViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        start()
+        self.configure()
+        self.start()
     }
     
     func start() {
@@ -40,7 +40,7 @@ final class SignInViewController: AuthViewController {
     
     override func update<T>(with value: T) {
         if let error = value as? IAlertRepresentable {
-            presentAlert(of: error)
+            self.presentAlert(of: error)
         }
         if let userSignInDetails = value as? UserSignInDetails {
             self.signInView.update(with: userSignInDetails)
@@ -84,7 +84,7 @@ final class SignInViewController: AuthViewController {
 
 private extension SignInViewController {
     func configure() {
-        signInView.signInTapHandler = { [weak self] email, password in
+        self.signInView.signInTapHandler = { [weak self] email, password in
             guard !email.isEmpty,
                   !password.isEmpty else {
                 self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
@@ -93,10 +93,10 @@ private extension SignInViewController {
             self?.signInView.showActivityIndicator()
             self?.signInViewModel.signIn(with: email, password)
         }
-        signInView.signUpTapHandler = { [weak self] in
+        self.signInView.signUpTapHandler = { [weak self] in
             self?.signInViewModel.signUp()
         }
-        signInView.resetPasswordTapHandler = {[weak self] in
+        self.signInView.resetPasswordTapHandler = { [weak self] in
             self?.signInViewModel.resetPassword()
         }
     }

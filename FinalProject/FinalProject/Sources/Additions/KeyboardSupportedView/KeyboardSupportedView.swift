@@ -1,5 +1,5 @@
 //
-//  IKeyboardSupportedView.swift
+//  KeyboardSupportedView.swift
 //  FinalProject
 //
 //  Created by 1okmon on 13.06.2023.
@@ -19,7 +19,7 @@ class KeyboardSupportedView: UIView {
     init(textFields: [UITextField]) {
         self.textFields = textFields
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -34,8 +34,8 @@ class KeyboardSupportedView: UIView {
     }
     
     func keyboardWillHide() {
-        scrollView.contentInset = .zero
-        scrollView.contentOffset = .zero
+        self.scrollView.contentInset = .zero
+        self.scrollView.contentOffset = .zero
     }
     
     func configureContentViewBottomConstraint(bottomView: UIView?) {
@@ -48,20 +48,20 @@ class KeyboardSupportedView: UIView {
 private extension KeyboardSupportedView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureScrollView()
-        textFields.forEach { self.configureDelegate(at: $0) }
+        self.configureScrollView()
+        self.textFields.forEach { self.configureDelegate(at: $0) }
     }
     
     func configureScrollView() {
-        self.addSubview(scrollView)
-        configureScrollViewConstraints()
+        self.addSubview(self.scrollView)
+        self.configureScrollViewConstraints()
     }
     
     func configureScrollViewConstraints() {
-        scrollView.snp.makeConstraints { make in
+        self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 0)
+        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 0)
     }
     
     func configureDelegate(at textField: UITextField) {
@@ -85,15 +85,15 @@ private extension KeyboardSupportedView {
 
 extension KeyboardSupportedView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textFields.last == textField {
+        if self.textFields.last == textField {
             textField.resignFirstResponder()
-            keyboardWillHide()
+            self.keyboardWillHide()
             return true
         }
-        if let index = textFields.firstIndex(where: { field in
+        if let index = self.textFields.firstIndex(where: { field in
             field == textField
         }) {
-            textFields[index + 1].becomeFirstResponder()
+            self.textFields[index + 1].becomeFirstResponder()
         }
         return true
     }

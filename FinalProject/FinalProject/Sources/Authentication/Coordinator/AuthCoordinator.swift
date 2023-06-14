@@ -16,7 +16,7 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func start() {
-        goToSignIn()
+        self.goToSignIn()
     }
     
     func goToSignIn() {
@@ -35,7 +35,7 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func signInConfirmed() {
-        appCoordinator.signInSuccess()
+        self.appCoordinator.signInSuccess()
     }
     
     func goBackToSignIn() {

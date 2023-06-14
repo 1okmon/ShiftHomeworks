@@ -30,7 +30,7 @@ final class ResetPasswordViewController: AuthViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        self.configure()
     }
     
     override func update<T>(with value: T) {
@@ -42,15 +42,15 @@ final class ResetPasswordViewController: AuthViewController {
                     self?.viewModel.signUp()
                 }))
                 .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.declineAction,
-                                         style: .default)).build()
+                                         style: .default))
+                .build()
             self.present(alert, animated: true)
             self.resetPasswordView.closeActivityIndicator()
             return
         }
         if let error = value as? IAlertRepresentable {
-            presentAlert(of: error)
+            self.presentAlert(of: error)
         }
-        
         super.update(with: value)
     }
     
@@ -62,14 +62,15 @@ final class ResetPasswordViewController: AuthViewController {
                                      style: .default,
                                      handler: { [weak self] _ in
                 self?.viewModel.goBackToSignIn()
-            })).build()
+            }))
+            .build()
         self.present(alert, animated: true, completion: nil)
     }
 }
 
 private extension ResetPasswordViewController {
     func configure() {
-        resetPasswordView.submitResetPasswordTapHandler = {[weak self] email in
+        self.resetPasswordView.submitResetPasswordTapHandler = { [weak self] email in
             guard let email = email, !email.isEmpty else {
                 self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
                 return

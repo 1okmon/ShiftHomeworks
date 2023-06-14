@@ -19,7 +19,7 @@ final class ActivityView: UIView {
         self.activityIndicatorView = UIActivityIndicatorView(style: .large)
         super.init(frame: .zero)
         superview.addSubview(self)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +49,7 @@ private extension ActivityView {
             make.edges.equalToSuperview()
         }
         self.backgroundColor = Metrics.activityViewBackgroundColor
-        configureActivityIndicatorView()
+        self.configureActivityIndicatorView()
     }
     
     func configureActivityIndicatorView() {

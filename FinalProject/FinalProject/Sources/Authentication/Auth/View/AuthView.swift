@@ -28,7 +28,7 @@ class AuthView: KeyboardSupportedView {
         self.textFields = textFields
         self.buttons = buttons
         super.init(textFields: textFields)
-        configure()
+        self.configure()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -52,48 +52,48 @@ class AuthView: KeyboardSupportedView {
 private extension AuthView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureTitleLabel()
-        configureTextFields()
-        configureButtons()
-        configureContentViewBottomConstraint(bottomView: buttons.last)
+        self.configureTitleLabel()
+        self.configureTextFields()
+        self.configureButtons()
+        self.configureContentViewBottomConstraint(bottomView: self.buttons.last)
         self.activityView = ActivityView(superview: self)
     }
     
     func configureTitleLabel() {
-        self.scrollView.addSubview(titleLabel)
-        configureTitleLabelConstraints()
+        self.scrollView.addSubview(self.titleLabel)
+        self.configureTitleLabelConstraints()
     }
     
     func configureTitleLabelConstraints() {
-        titleLabel.snp.makeConstraints { make in
+        self.titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(Metrics.titleTopOffset)
             make.horizontalEdges.equalTo(self)
         }
     }
     
     func configureTextFields() {
-        for textFieldId in 0..<textFields.count {
+        for textFieldId in 0..<self.textFields.count {
             let topOffset = textFieldId == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
-            let upperView = textFieldId == 0 ? titleLabel : textFields[textFieldId - 1]
-            configure(textFields[textFieldId], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
+            let upperView = textFieldId == 0 ? self.titleLabel : self.textFields[textFieldId - 1]
+            self.configure(self.textFields[textFieldId], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
         }
     }
     
     func configureButtons() {
-        for buttonId in 0..<buttons.count {
+        for buttonId in 0..<self.buttons.count {
             let topOffset = buttonId == 0 ? Metrics.beforeSectionTopOffset : Metrics.inSectionTopOffset
-            guard let upperView = buttonId == 0 ? textFields.last : buttons[buttonId - 1] else { return }
-            configure(buttons[buttonId], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
+            guard let upperView = buttonId == 0 ? self.textFields.last : self.buttons[buttonId - 1] else { return }
+            self.configure(buttons[buttonId], under: upperView, with: Metrics.height, with: topOffset, with: Metrics.horizontalInset)
         }
     }
     
     func configure(_ view: UIView, under upperView: UIView, with height: Int, with topOffset: Int, with horizontalInset: Int) {
         self.scrollView.addSubview(view)
-        configureConstraints(at: view,
-                             under: upperView,
-                             with: height,
-                             with: topOffset,
-                             with: horizontalInset)
+        self.configureConstraints(at: view,
+                                  under: upperView,
+                                  with: height,
+                                  with: topOffset,
+                                  with: horizontalInset)
     }
     
     func configureConstraints(at view: UIView, under upperView: UIView, with height: Int, with topOffset: Int, with horizontalInset: Int) {
@@ -105,10 +105,10 @@ private extension AuthView {
     }
     
     func updateCgColors() {
-        for textField in textFields {
+        for textField in self.textFields {
             textField.layer.borderColor = Theme.borderCgColor
         }
-        for button in buttons {
+        for button in self.buttons {
             button.layer.borderColor = Theme.borderCgColor
         }
     }

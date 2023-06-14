@@ -18,10 +18,10 @@ final class ResetPasswordView: AuthView {
         self.titleLabel = authDesignSystem.resetPasswordTitleLabel
         self.emailTextField = authDesignSystem.loginTextField
         self.submitResetPasswordButton = authDesignSystem.submitResetPasswordButton
-        super.init(titleLabel: titleLabel,
-                   textFields: [emailTextField],
-                   buttons: [submitResetPasswordButton])
-        configure()
+        super.init(titleLabel: self.titleLabel,
+                   textFields: [self.emailTextField],
+                   buttons: [self.submitResetPasswordButton])
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -31,11 +31,11 @@ final class ResetPasswordView: AuthView {
 
 private extension ResetPasswordView {
     func configure() {
-        submitResetPasswordButton.addTarget(self, action: #selector(submitResetPasswordButtonTapped), for: .touchUpInside)
+        self.submitResetPasswordButton.addTarget(self, action: #selector(self.submitResetPasswordButtonTapped(_:)), for: .touchUpInside)
     }
     
-    @objc func submitResetPasswordButtonTapped() {
-        guard let handler = submitResetPasswordTapHandler else { return }
-        handler(emailTextField.text)
+    @objc func submitResetPasswordButtonTapped(_ sender: UIButton) {
+        guard let handler = self.submitResetPasswordTapHandler else { return }
+        handler(self.emailTextField.text)
     }
 }
