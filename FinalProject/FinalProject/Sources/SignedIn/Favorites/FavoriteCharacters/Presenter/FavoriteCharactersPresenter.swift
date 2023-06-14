@@ -12,9 +12,9 @@ final class FavoriteCharactersPresenter: IFavoriteCharactersPresenter {
     private var characters: [Int: Character]
     private var charactersImages: [String: UIImage?]
     private var coreDataManager: ICharacterCoreDataManager
-    private var coordinator: ICharacterFavoritesCoordinator?
+    private var coordinator: IFavoriteCharactersCoordinator?
     
-    init(viewController: FavoriteCharactersViewController, coordinator: ICharacterFavoritesCoordinator) {
+    init(viewController: FavoriteCharactersViewController, coordinator: IFavoriteCharactersCoordinator) {
         self.viewController = viewController
         self.charactersImages = [:]
         self.coreDataManager = CoreDataManager.shared

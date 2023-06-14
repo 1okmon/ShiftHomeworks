@@ -20,17 +20,17 @@ final class AuthCoordinator: IAuthCoordinator {
     }
     
     func goToSignIn() {
-        let signInViewController = AuthBuilder().setCoordinator(self).buildSignInViewController()
+        let signInViewController = AuthViewControllersFactory().setCoordinator(self).signInViewController()
         self.navigationController.viewControllers = [signInViewController]
     }
     
     func goToSignUp() {
-        let signUpViewController = AuthBuilder().setCoordinator(self).buildSignUpViewController()
+        let signUpViewController = AuthViewControllersFactory().setCoordinator(self).signUpViewController()
         self.navigationController.pushViewController(signUpViewController, animated: true)
     }
     
     func goToResetPassword() {
-        let resetPasswordViewController = AuthBuilder().setCoordinator(self).buildResetPasswordViewController()
+        let resetPasswordViewController = AuthViewControllersFactory().setCoordinator(self).resetPasswordViewController()
         self.navigationController.pushViewController(resetPasswordViewController, animated: true)
     }
     
@@ -38,7 +38,7 @@ final class AuthCoordinator: IAuthCoordinator {
         appCoordinator?.signInSuccess()
     }
     
-    func goBack() {
-        self.navigationController.popViewController(animated: true)
+    func goBackToSignIn() {
+        self.navigationController.popToRootViewController(animated: true)
     }
 }

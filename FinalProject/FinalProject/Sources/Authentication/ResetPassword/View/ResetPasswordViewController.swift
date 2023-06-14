@@ -6,13 +6,21 @@
 //
 
 import UIKit
+
+private enum Metrics {
+    enum AlertButtonTitle {
+        static let confirmAction = "Да"
+        static let declineAction = "Нет"
+    }
+}
+
 final class ResetPasswordViewController: AuthViewController {
-    private var resetPasswordViewModel: IResetPasswordViewModel
+    private var viewModel: IResetPasswordViewModel
     private var resetPasswordView: ResetPasswordView
     
     init(resetPasswordView: ResetPasswordView, resetPasswordViewModel: IResetPasswordViewModel) {
         self.resetPasswordView = resetPasswordView
-        self.resetPasswordViewModel = resetPasswordViewModel
+        self.viewModel = resetPasswordViewModel
         super.init(authView: resetPasswordView)
     }
     
@@ -25,27 +33,49 @@ final class ResetPasswordViewController: AuthViewController {
         configure()
     }
     
-    override func presentAlert(of type: AuthResult) {
-        if case .resetPasswordLinkSent = type {
-            let authDesignSystem = AuthDesignSystem()
-            let alert = authDesignSystem.alert(
-                title: type.title,
-                message: type.message,
-                buttonTitles: [ type.buttonTitle ],
-                buttonActions: [ { [weak self] _ in
-                    self?.resetPasswordViewModel.goBack()
-                } ])
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            super.presentAlert(of: type)
+    override func update<T>(with value: T) {
+        if let error = value as? AuthResult, error == .userNotFound {
+            let alert = AlertBuilder().setFieldsToShowAlert(of: error)
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.confirmAction,
+                                         style: .default,
+                                         handler: { [weak self] _ in
+                    self?.viewModel.signUp()
+                }))
+                .addAction(UIAlertAction(title: Metrics.AlertButtonTitle.declineAction,
+                                         style: .default)).build()
+            self.present(alert, animated: true)
+            self.resetPasswordView.closeActivityIndicator()
+            return
         }
+        if let error = value as? IAlertRepresentable {
+            presentAlert(of: error)
+        }
+        
+        super.update(with: value)
+    }
+    
+    func presentAlert(of errorCode: IAlertRepresentable) {
+        guard case AuthResult.resetPasswordLinkSent = errorCode else { return }
+        let alert = AlertBuilder()
+            .setFieldsToShowAlert(of: errorCode)
+            .addAction(UIAlertAction(title: errorCode.buttonTitle,
+                                     style: .default,
+                                     handler: { [weak self] _ in
+                self?.viewModel.goBackToSignIn()
+            })).build()
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
 private extension ResetPasswordViewController {
     func configure() {
         resetPasswordView.submitResetPasswordTapHandler = {[weak self] email in
-            self?.resetPasswordViewModel.submitResetPassword(with: email)
+            guard let email = email, !email.isEmpty else {
+                self?.showInfoAlert(of: AuthResult.fieldsNotFilled)
+                return
+            }
+            self?.resetPasswordView.showActivityIndicator()
+            self?.viewModel.submitResetPassword(with: email)
         }
     }
 }

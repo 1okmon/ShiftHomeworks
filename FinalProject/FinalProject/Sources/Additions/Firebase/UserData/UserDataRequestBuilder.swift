@@ -11,19 +11,26 @@ private enum FieldTitle: String {
     case email
     case firstName
     case lastName
+    case imageUrl
     case favoriteLocations
     case favoriteCharacters
 }
 
 final class UserDataRequestBuilder {
-    var  email: String?
-    var  firstName: String?
+    var email: String?
+    var firstName: String?
     var lastName: String?
+    var imageUrl: String?
     var favoriteLocations: [Int]?
     var favoriteCharacters: [Int]?
     
     func setEmail(_ email: String) -> UserDataRequestBuilder {
         self.email = email
+        return self
+    }
+    
+    func setImageUrl(_ imageUrl: String) -> UserDataRequestBuilder {
+        self.imageUrl = imageUrl
         return self
     }
     
@@ -57,6 +64,9 @@ final class UserDataRequestBuilder {
         }
         if let lastName = self.lastName {
             array.updateValue(lastName, forKey: FieldTitle.lastName.rawValue)
+        }
+        if let imageUrl = self.imageUrl {
+            array.updateValue(imageUrl, forKey: FieldTitle.imageUrl.rawValue)
         }
         if let favoriteLocations = self.favoriteLocations {
             array.updateValue(favoriteLocations, forKey: FieldTitle.favoriteLocations.rawValue)

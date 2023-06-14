@@ -10,14 +10,17 @@ private enum URLS {
     static let locationsLink = "https://rickandmortyapi.com/api/location/"
 }
 
-final class RickAndMortyLocationNetworkManager {
+final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations, ILocationNetworkManagerLocationDetails {
     static let shared = RickAndMortyLocationNetworkManager()
-    
     private init() {}
     
-    func loadLocations(from link: String?, completion: (([Location], String?, String?) -> Void)?) {
+    func loadLocations(from link: String?, completion: (([Location], String?, String?, IAlertRepresentable?) -> Void)?) {
         let url: String = link ?? URLS.locationsLink
         let task = dataTask(by: url) { data, _, error in
+            if let error = error {
+                let errorCode = NetworkResponseCodeParser().parse(error: error)
+                completion?([], nil, nil, errorCode)
+            }
             guard let data = data, error == nil else { return }
             do {
                 let result: LocationsResponse = try JSONDecoder().decode(LocationsResponse.self, from: data)
@@ -25,7 +28,7 @@ final class RickAndMortyLocationNetworkManager {
                 result.results.forEach { location in
                     locations.append(Location(locationResponse: location))
                 }
-                completion?(locations, result.info.prev, result.info.next)
+                completion?(locations, result.info.prev, result.info.next, nil)
             } catch {
                 print(1)
             }
@@ -33,14 +36,18 @@ final class RickAndMortyLocationNetworkManager {
         task.resume()
     }
     
-    func loadLocation(with id: Int, completion: ((LocationDetails) -> Void)?) {
+    func loadLocation(with id: Int, completion: ((LocationDetails?, IAlertRepresentable?) -> Void)?) {
         let url = URLS.locationsLink + "\(id)"
         let task = dataTask(by: url) { data, _, error in
+            if let error = error {
+                let errorCode = NetworkResponseCodeParser().parse(error: error)
+                completion?(nil, errorCode)
+            }
             guard let data = data, error == nil else { return }
             do {
                 let result: LocationResponse = try JSONDecoder().decode(LocationResponse.self, from: data)
                 let locationDetailed = LocationDetails(locationResponse: result)
-                completion?(locationDetailed)
+                completion?(locationDetailed, nil)
             } catch {
                 print(1)
             }

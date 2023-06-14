@@ -1,5 +1,5 @@
 //
-//  AuthViewBuilder.swift
+//  AuthViewControllersFactory.swift
 //  RickAndMortyWiki
 //
 //  Created by 1okmon on 17.05.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AuthBuilder {
+final class AuthViewControllersFactory {
     private var coordinator: AuthCoordinator?
     private var viewModel: AuthViewModel {
         guard let coordinator = self.coordinator else {
@@ -17,26 +17,26 @@ final class AuthBuilder {
                              firebaseNetworkManager: FirebaseNetworkManager())
     }
     
-    func setCoordinator(_ coordinator: AuthCoordinator) -> AuthBuilder {
+    func setCoordinator(_ coordinator: AuthCoordinator) -> AuthViewControllersFactory {
         self.coordinator = coordinator
         return self
     }
     
-    func buildSignInViewController() -> SignInViewController {
+    func signInViewController() -> SignInViewController {
         let viewModel = viewModel
         let signInViewController = SignInViewController(signInView: SignInView(), signInViewModel: viewModel)
         viewModel.subscribe(observer: signInViewController)
         return signInViewController
     }
     
-    func buildSignUpViewController() -> SignUpViewController {
+    func signUpViewController() -> SignUpViewController {
         let viewModel = viewModel
         let signUpViewController = SignUpViewController(signUpView: SignUpView(), signUpViewModel: viewModel)
         viewModel.subscribe(observer: signUpViewController)
         return signUpViewController
     }
     
-    func buildResetPasswordViewController() -> ResetPasswordViewController {
+    func resetPasswordViewController() -> ResetPasswordViewController {
         let viewModel = viewModel
         let resetPasswordViewController = ResetPasswordViewController(resetPasswordView: ResetPasswordView(), resetPasswordViewModel: viewModel)
         viewModel.subscribe(observer: resetPasswordViewController)

@@ -57,6 +57,7 @@ final class LocationDetailsView: UIView {
     private var residentsCountLabel: UILabel
     private var residentsButton: UIButton?
     private var charactersView: CharactersView?
+    private var activityView: ActivityView?
     private var charactersViewBottomConstraint: Constraint?
     
     init() {
@@ -86,6 +87,7 @@ final class LocationDetailsView: UIView {
             configureResidentsButton()
             configureCharactersCollectionView()
         }
+        self.activityView?.stopAnimating()
     }
     
     func update(with characters: [Character]) {
@@ -106,6 +108,8 @@ private extension LocationDetailsView {
         configure(label: self.typeLabel, under: self.nameLabel)
         configure(label: self.dimensionLabel, under: self.typeLabel)
         configure(label: self.residentsCountLabel, under: self.dimensionLabel)
+        self.activityView = ActivityView(superview: self)
+        self.activityView?.startAnimating()
     }
     
     func configure(label: UILabel, under view: UIView? = nil) {
@@ -183,10 +187,10 @@ private extension LocationDetailsView {
                 residentsButton.setTitle(Metrics.Button.Prefix.open, for: .normal)
             }
             self.layoutIfNeeded()
+            self.charactersView?.showActivityIndicator()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+        DispatchQueue.main.async {
             self.residentsButtonTapHandler?()
-        })
-
+        }
     }
 }

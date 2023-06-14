@@ -9,6 +9,8 @@ import UIKit
 
 private enum Metrics {
     static let font = UIFont.systemFont(ofSize: 22)
+    static let profileImageHeight = 200
+    static let backgroundColor = Theme.backgroundColor
     
     enum Button {
         static let normalImage = UIImage(systemName: "pencil.circle")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
@@ -22,7 +24,6 @@ private enum Metrics {
     
     enum Row {
         static let horizontalInset = 15
-        static let beforeSectionOffset = 120
         static let inSectionOffset = 10
         static let height = 50
         static let labelWidth = 120
@@ -36,27 +37,32 @@ private enum Metrics {
             static let lastName = "Фамилия:"
         }
     }
-    static let backgroundColor = Theme.backgroundColor
 }
 
-fileprivate typealias Row = (label: UILabel, textField: UITextField)
+private typealias Row = (label: UILabel, textField: UITextField)
 
-final class ProfileView: UIView {
+final class ProfileView: KeyboardSupportedView {
+    var profileImageTapped: (() -> Void)?
     var signOutTapHandler: (() -> Void)?
     var saveTapHandler: ((UserData) -> Void)?
+    private var activityView: ActivityView?
     private let firstNameRow: Row
     private let lastNameRow: Row
     private let editButton: UIButton
     private let signOutButton: UIButton
     private var isEditing: Bool
+    private var profilePhotoView: ProfilePhotoView
+    private var userData: UserData?
     
-    override init(frame: CGRect) {
+    init() {
+        self.profilePhotoView = ProfilePhotoView()
         self.editButton = UIButton(type: .system)
         self.firstNameRow = (UILabel(), UITextField())
         self.lastNameRow = (UILabel(), UITextField())
         self.signOutButton = UIButton(type: .system)
         self.isEditing = false
-        super.init(frame: .zero)
+        super.init(textFields: [self.firstNameRow.textField,
+                                self.lastNameRow.textField])
         configure()
     }
     
@@ -67,47 +73,18 @@ final class ProfileView: UIView {
     func update(with userData: UserData) {
         self.firstNameRow.textField.text = userData.firstName
         self.lastNameRow.textField.text = userData.lastName
+        self.activityView?.stopAnimating()
     }
     
+    func update(with image: UIImage?) {
+        self.profilePhotoView.update(with: image)
+    }
 }
 
+// MARK: methods extension
 private extension ProfileView {
-    func configure() {
-        self.backgroundColor = Metrics.backgroundColor
-        configureEditButton()
-        configureFirstName()
-        configureLastName()
-        configureSignOutButton()
-    }
-    
-    func configureSignOutButton() {
-        self.addSubview(self.signOutButton)
-        self.signOutButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(Metrics.Button.edgeInset)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(Metrics.Button.width)
-            make.height.equalTo(Metrics.Button.height)
-        }
-        self.signOutButton.setTitle(Metrics.Button.signOutTitle, for: .normal)
-        self.signOutButton.titleLabel?.font = Metrics.font
-        self.signOutButton.setTitleColor(Metrics.Button.textColor, for: .normal)
-        self.signOutButton.addTarget(self, action: #selector(signOutButtonTapped(_:)), for: .touchUpInside)
-    }
-    
     @objc func signOutButtonTapped(_ sender: UIButton) {
         self.signOutTapHandler?()
-    }
-    
-    func configureEditButton() {
-        self.addSubview(self.editButton)
-        self.editButton.snp.makeConstraints { make in
-            make.trailing.top.equalToSuperview().inset(Metrics.Button.edgeInset)
-            make.height.width.equalTo(Metrics.Button.height)
-        }
-        self.editButton.setImage(Metrics.Button.normalImage, for: .normal)
-        self.editButton.contentHorizontalAlignment = .fill
-        self.editButton.contentVerticalAlignment = .fill
-        self.editButton.addTarget(self, action: #selector(editButtonTapped(_:)), for: .touchUpInside)
     }
     
     @objc func editButtonTapped(_ sender: UIButton) {
@@ -118,20 +95,90 @@ private extension ProfileView {
                 self.editButton.setImage(Metrics.Button.normalImage, for: .normal)
                 self.firstNameRow.textField.backgroundColor = Metrics.Row.normalBackgroundColor
                 self.lastNameRow.textField.backgroundColor = Metrics.Row.normalBackgroundColor
-                let userData = UserData(firstName: self.firstNameRow.textField.text,
-                                        lastName: self.lastNameRow.textField.text)
-                self.saveTapHandler?(userData)
+                self.saveIfChanged(userData: self.currentUserData())
             } else {
                 self.editButton.setImage(Metrics.Button.editingImage, for: .normal)
                 self.firstNameRow.textField.backgroundColor = Metrics.Row.editingBackgroundColor
                 self.lastNameRow.textField.backgroundColor = Metrics.Row.editingBackgroundColor
+                self.userData = self.currentUserData()
             }
             self.isEditing = !self.isEditing
+            self.profilePhotoView.setEditing(self.isEditing)
         }
     }
     
+    func currentUserData() -> UserData {
+        UserData(firstName: self.firstNameRow.textField.text,
+                 lastName: self.lastNameRow.textField.text,
+                 image: self.profilePhotoView.image())
+    }
+    
+    func saveIfChanged(userData: UserData) {
+        guard self.userData?.firstName == userData.firstName,
+              self.userData?.lastName == userData.lastName,
+              self.userData?.image == userData.image else {
+            self.userData = userData
+            self.saveTapHandler?(userData)
+            return
+        }
+    }
+}
+
+// MARK: configure extension
+private extension ProfileView {
+    func configure() {
+        self.backgroundColor = Metrics.backgroundColor
+        configureEditButton()
+        configureProfilePhotoView()
+        configureFirstName()
+        configureLastName()
+        configureSignOutButton()
+        configureContentViewBottomConstraint(bottomView: self.signOutButton)
+        self.activityView = ActivityView(superview: self)
+        self.activityView?.startAnimating()
+    }
+    
+    func configureProfilePhotoView() {
+        self.scrollView.addSubview(self.profilePhotoView)
+        self.profilePhotoView.snp.makeConstraints { make in
+            make.top.equalTo(self.editButton.snp.bottom).offset(Metrics.Row.inSectionOffset)
+            make.centerX.equalTo(self)
+            make.height.width.equalTo(Metrics.profileImageHeight)
+        }
+        self.profilePhotoView.profileImageTapped = { [weak self] in
+            self?.profileImageTapped?()
+        }
+    }
+    
+    func configureSignOutButton() {
+        self.scrollView.addSubview(self.signOutButton)
+        self.signOutButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self).inset(Metrics.Button.edgeInset)
+            make.centerX.equalTo(self)
+            make.width.equalTo(Metrics.Button.width)
+            make.height.equalTo(Metrics.Button.height)
+        }
+        self.signOutButton.setTitle(Metrics.Button.signOutTitle, for: .normal)
+        self.signOutButton.titleLabel?.font = Metrics.font
+        self.signOutButton.setTitleColor(Metrics.Button.textColor, for: .normal)
+        self.signOutButton.addTarget(self, action: #selector(signOutButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    func configureEditButton() {
+        self.scrollView.addSubview(self.editButton)
+        self.editButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(Metrics.Button.edgeInset)
+            make.trailing.equalTo(self).inset(Metrics.Button.edgeInset)
+            make.height.width.equalTo(Metrics.Button.height)
+        }
+        self.editButton.setImage(Metrics.Button.normalImage, for: .normal)
+        self.editButton.contentHorizontalAlignment = .fill
+        self.editButton.contentVerticalAlignment = .fill
+        self.editButton.addTarget(self, action: #selector(editButtonTapped(_:)), for: .touchUpInside)
+    }
+    
     func configureFirstName() {
-        configure(self.firstNameRow)
+        configure(self.firstNameRow, under: self.profilePhotoView)
         self.firstNameRow.label.text = Metrics.Row.Title.firstName
     }
     
@@ -140,22 +187,18 @@ private extension ProfileView {
         self.lastNameRow.label.text = Metrics.Row.Title.lastName
     }
     
-    func configure(_ row: Row, under upperView: UIView? = nil) {
-        self.addSubview(row.label)
-        self.addSubview(row.textField)
+    func configure(_ row: Row, under upperView: UIView) {
+        self.scrollView.addSubview(row.label)
+        self.scrollView.addSubview(row.textField)
         row.label.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(Metrics.Row.horizontalInset)
-            if let upperView = upperView {
-                make.top.equalTo(upperView.snp.bottom).offset(Metrics.Row.inSectionOffset)
-            } else {
-                make.top.equalToSuperview().offset(Metrics.Row.beforeSectionOffset)
-            }
+            make.leading.equalTo(self).inset(Metrics.Row.horizontalInset)
+            make.top.equalTo(upperView.snp.bottom).offset(Metrics.Row.inSectionOffset)
             make.height.equalTo(Metrics.Row.height)
             make.width.equalTo(Metrics.Row.labelWidth)
         }
         row.textField.snp.makeConstraints { make in
             make.leading.equalTo(row.label.snp.trailing).inset(Metrics.Row.horizontalInset)
-            make.trailing.equalToSuperview().inset(Metrics.Row.horizontalInset)
+            make.trailing.equalTo(self).inset(Metrics.Row.horizontalInset)
             make.top.equalTo(row.label.snp.top)
             make.height.equalTo(Metrics.Row.height)
         }

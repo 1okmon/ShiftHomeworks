@@ -12,50 +12,55 @@ private enum Metrics {
     static let charactersLink = "https://rickandmortyapi.com/api/character/"
 }
 
-final class RickAndMortyCharacterNetworkManager: NSObject {
+final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkManagerCharacterDetails, ICharacterNetworkManagerLocationsDetails {
     static let shared: RickAndMortyCharacterNetworkManager = RickAndMortyCharacterNetworkManager()
-    var completions: [String: [((UIImage, String) -> Void)?]]
-    private var imagesManager: CacheManager
-    private let updateDownloadTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
+    private var imagesManager: ICacheManager
+    private let dataTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
     let queue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
     
     private override init() {
         self.imagesManager = CacheManager()
-        self.completions = [:]
         super.init()
-        let config = URLSessionConfiguration.background(withIdentifier: Metrics.sessionIdentifier)
     }
     
-    func loadImage(from urlString: String, completion: ((UIImage, String) -> Void)?) {
-        self.updateDownloadTasksQueue.async {
+    func loadImage(from urlString: String, completion: ((UIImage?, String?, IAlertRepresentable?) -> Void)?) {
+        self.dataTasksQueue.async {
             if let image = self.imagesManager.image(by: urlString) {
-                completion?(image, urlString)
+                completion?(image, urlString, nil)
             } else {
                 let task = self.dataTask(by: urlString) { data, _, error in
+                    if let error = error {
+                        let errorCode = NetworkResponseCodeParser().parse(error: error)
+                        completion?(nil, nil, errorCode)
+                    }
                     guard let data = data, error == nil else { return }
                     guard let image = UIImage(data: data) else { return }
                     self.imagesManager.append(image: image, with: urlString)
-                    completion?(image, urlString)
+                    completion?(image, urlString, nil)
                 }
                 task.resume()
             }
         }
     }
     
-    func loadCharacter<T: ICharacter>(with id: Int, completion: ((T) -> Void)?) {
+    func loadCharacter<T: ICharacter>(with id: Int, completion: ((T?, IAlertRepresentable?) -> Void)?) {
         let urlString = Metrics.charactersLink + "\(id)"
         self.loadCharacter(by: urlString, completion: completion)
     }
     
-    func loadCharacter<T: ICharacter>(by urlString: String, completion: ((T) -> Void)?) {
+    func loadCharacter<T: ICharacter>(by urlString: String, completion: ((T?, IAlertRepresentable?) -> Void)?) {
         let task = dataTask(by: urlString) { data, _, error in
+            if let error = error {
+                let errorCode = NetworkResponseCodeParser().parse(error: error)
+                completion?(nil, errorCode)
+            }
             guard let data = data, error == nil else { return }
             do {
                 let result: CharacterResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
                 let character = T(characterResponse: result)
-                completion?(character)
+                completion?(character, nil)
             } catch {
-                print(1)
+                print(error)
             }
         }
         task.resume()

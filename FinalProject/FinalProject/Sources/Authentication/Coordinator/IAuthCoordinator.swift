@@ -11,5 +11,5 @@ protocol IAuthCoordinator {
     func goToSignUp()
     func goToResetPassword()
     func signInConfirmed()
-    func goBack()
+    func goBackToSignIn()
 }

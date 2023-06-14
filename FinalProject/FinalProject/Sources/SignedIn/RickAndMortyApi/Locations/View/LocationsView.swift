@@ -9,8 +9,6 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
-    static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
-    static let activityIndicatorBackgroundColor = Theme.backgroundColor.withAlphaComponent(0)
     static let separatorColor = Theme.tableViewSeparatorColor
     static let cellHeight: CGFloat = 80
     static let footerHeight = CGFloat(PageButton.height + PageButton.verticalOffset)
@@ -59,8 +57,7 @@ final class LocationsView: UIView {
     var nextPageTapHandler: (() -> Void)?
     var previousPageTapHandler: (() -> Void)?
     var cellTapHandler: ((Int) -> Void)?
-    private let activityView: UIView
-    private let activityIndicatorView: UIActivityIndicatorView
+    private var activityView: ActivityView?
     private let tableView: UITableView
     private var locations: [Location]
     private let nextPageButton: UIButton
@@ -70,8 +67,6 @@ final class LocationsView: UIView {
         self.tableView = UITableView()
         self.nextPageButton = UIButton(type: .system)
         self.previousPageButton = UIButton(type: .system)
-        self.activityView = UIView()
-        self.activityIndicatorView = UIActivityIndicatorView(style: .large)
         self.locations = []
         super.init(frame: .zero)
         configure()
@@ -104,7 +99,8 @@ private extension LocationsView {
         self.backgroundColor = Metrics.backgroundColor
         configureTableView()
         configureTableFooterView()
-        configureActivityIndicatorView()
+        self.activityView = ActivityView(superview: self)
+        showActivityIndicator()
     }
     
     func configureTableFooterView() {
@@ -155,20 +151,6 @@ private extension LocationsView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
-    
-    func configureActivityIndicatorView() {
-        self.addSubview(self.activityView)
-        self.activityView.addSubview(activityIndicatorView)
-        self.activityView.backgroundColor = Metrics.activityViewBackgroundColor
-        self.activityIndicatorView.backgroundColor = Metrics.activityIndicatorBackgroundColor
-        self.activityView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        self.activityIndicatorView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
-        self.activityView.isHidden = true
-    }
 }
 
 // MARK: method extension
@@ -184,15 +166,11 @@ private extension LocationsView {
     }
     
     func showActivityIndicator() {
-        self.activityIndicatorView.startAnimating()
-        self.activityView.isHidden = false
+        self.activityView?.startAnimating()
     }
     
     func closeActivityIndicator() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Metrics.animationDelay) {
-            self.activityIndicatorView.stopAnimating()
-            self.activityView.isHidden = true
-        }
+        self.activityView?.stopAnimating()
     }
 }
 

@@ -9,4 +9,5 @@ import Foundation
 
 protocol ICharacterDetailsViewModel {
     func switchAddedInFavourites()
+    func close()
 }

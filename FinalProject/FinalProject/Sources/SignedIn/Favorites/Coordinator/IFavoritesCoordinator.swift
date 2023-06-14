@@ -12,6 +12,6 @@ protocol IFavoritesCoordinator {
     func goToLocations()
 }
 
-protocol ICharacterFavoritesCoordinator {
+protocol IFavoriteCharactersCoordinator {
     func openCharacter(with id: Int, with completion: (() -> Void)?)
 }

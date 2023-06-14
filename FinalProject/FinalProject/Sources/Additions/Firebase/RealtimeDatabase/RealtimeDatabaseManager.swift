@@ -6,28 +6,36 @@
 //
 
 import Firebase
+import FirebaseStorage
 
 private enum Metrics {
     static let databaseUrl = "https://shift-b3cf6-default-rtdb.europe-west1.firebasedatabase.app"
     static let usersDirectory = "users"
 }
 
-final class RealtimeDatabaseManager {
+final class RealtimeDatabaseManager: INewUserRealtimeDatabaseManager, IUserDataRealtimeDatabaseManager {
     static let shared = RealtimeDatabaseManager()
     
     private init() {}
     
-    func createNewUser(with id: String, email: String, completion: @escaping (AuthResult) -> Void) {
+    func createNewUser(with id: String, email: String, completion: @escaping (IAlertRepresentable) -> Void) {
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(id)
         let value = UserDataRequestBuilder().setEmail(email).build()
         ref.setValue(value) { error, _ in
             guard let error = error else { return }
-            completion(ErrorParser().parse(error: error))
+            completion(AuthResponseParser().parse(error: error))
         }
     }
     
     func updateUserData(to userData: UserData) {
         let value = UserDataRequestBuilder().setFirstName(userData.firstName).setLastName(userData.lastName).build()
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        ref.updateChildValues(value)
+    }
+    
+    func updateUserImageUrl(_ imageUrl: String) {
+        let value = UserDataRequestBuilder().setImageUrl(imageUrl).build()
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
         ref.updateChildValues(value)

@@ -8,11 +8,11 @@
 import UIKit
 
 private enum Metrics {
-    static let maxImagesCountInCache = 20
-    static let countOfImagesToCleanIfNeeded = 10
+    static let maxImagesCountInCache = 300
+    static let countOfImagesToCleanIfNeeded = 20
 }
 
-final class CacheManager {
+final class CacheManager: ICacheManager {
     private let queue = DispatchQueue(label: "CacheManagerQueue", attributes: .concurrent)
     private var imageDictionary: [String: UIImage]
     

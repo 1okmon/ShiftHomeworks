@@ -10,12 +10,12 @@ import Firebase
 final class AuthViewModel {
     private var coordinator: IAuthCoordinator
     private var firebaseNetworkManager: IFirebaseNetworkManager
-    private var result: Observable<AuthResult>
+    private var result: Observable<IAlertRepresentable>
     
     init(coordinator: IAuthCoordinator, firebaseNetworkManager: IFirebaseNetworkManager) {
         self.coordinator = coordinator
         self.firebaseNetworkManager = firebaseNetworkManager
-        self.result = Observable<AuthResult>()
+        self.result = Observable<IAlertRepresentable>()
     }
     
     func subscribe(observer: IObserver) {
@@ -33,7 +33,7 @@ extension AuthViewModel: IAuthViewModel {
     func signIn(with email: String, _ password: String) {
         firebaseNetworkManager.signIn(with: email, password, completion: { [weak self] result in
             self?.result.value = result
-            if case .successSignIn = result {
+            if case AuthResult.successSignIn = result {
                 self?.coordinator.signInConfirmed()
             }
         })
@@ -59,7 +59,7 @@ extension AuthViewModel: IAuthViewModel {
         })
     }
     
-    func goBack() {
-        self.coordinator.goBack()
+    func goBackToSignIn() {
+        self.coordinator.goBackToSignIn()
     }
 }

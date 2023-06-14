@@ -20,6 +20,7 @@ class CharactersView: UIView {
     var cellTapHandler: ((Int) -> Void)?
     private let collectionView: UICollectionView
     private var characters: [Int: Character]
+    private var activityView: ActivityView?
     private var charactersIndexPath: [Int: IndexPath]
     private var imagesUrls: [String: Int]
     private var images: [String: UIImage?]
@@ -81,6 +82,13 @@ class CharactersView: UIView {
                       let indexPath = self.charactersIndexPath[characterId] else { return }
                 self.collectionView.reloadItems(at: [indexPath])
             }
+            self.activityView?.stopAnimating()
+        }
+    }
+    
+    func showActivityIndicator() {
+        if characters.isEmpty {
+            self.activityView?.startAnimating()
         }
     }
 }
@@ -88,6 +96,7 @@ class CharactersView: UIView {
 private extension CharactersView {
     func configure() {
         configureCollectionView()
+        self.activityView = ActivityView(superview: self)
     }
     
     func configureCollectionView() {
@@ -108,8 +117,6 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let characterId = self.charactersIndexPath.first(where: { $1 == indexPath })?.key else { return }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else { return }
-        
         self.cellTapHandler?(characterId)
     }
     
@@ -119,11 +126,7 @@ extension CharactersView: UICollectionViewDelegate, UICollectionViewDataSource {
               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.className, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //guard let character =  self.characters[characterId] else { return }
-        
-        //let character = self.characters[indexPath.row]
         cell.update(with: character)
-        //cell.isUserInteractionEnabled = true
         guard let image = self.images[character.image],
               let image = image else {
             return cell

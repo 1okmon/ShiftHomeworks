@@ -18,7 +18,7 @@ final class AppCoordinator {
     }
     
     func startAuthFlow() {
-        coreDataManager.clean()
+        self.coreDataManager.clean()
         let navigationController = UINavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController,
                                              appCoordinator: self)
@@ -27,7 +27,7 @@ final class AppCoordinator {
     }
     
     func signInSuccess() {
-        coreDataManager.loadUserData()
+        self.coreDataManager.loadUserData()
         startSignedInFlow()
     }
     
