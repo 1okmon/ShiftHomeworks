@@ -34,6 +34,10 @@ final class AlertBuilder {
         }
         return alertController
     }
+    func setTitle(_ title: String) -> AlertBuilder {
+        self.alertTitle = title
+        return self
+    }
     
     func setFieldsToShowAlert(of errorCode: IAlertRepresentable) -> AlertBuilder {
         self.alertTitle = errorCode.title
