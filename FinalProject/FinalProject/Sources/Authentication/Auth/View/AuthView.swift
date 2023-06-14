@@ -20,7 +20,6 @@ private enum Metrics {
 class AuthView: KeyboardSupportedView {
     private var activityView: ActivityView?
     private var titleLabel: UILabel
-    //private var firsResponderTextField: UITextField?
     private var textFields: [UITextField]
     private var buttons: [UIButton]
     

@@ -167,7 +167,8 @@ private extension ProfileView {
     func configureEditButton() {
         self.scrollView.addSubview(self.editButton)
         self.editButton.snp.makeConstraints { make in
-            make.trailing.top.equalTo(self).inset(Metrics.Button.edgeInset)
+            make.top.equalToSuperview().inset(Metrics.Button.edgeInset)
+            make.trailing.equalTo(self).inset(Metrics.Button.edgeInset)
             make.height.width.equalTo(Metrics.Button.height)
         }
         self.editButton.setImage(Metrics.Button.normalImage, for: .normal)
