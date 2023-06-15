@@ -5,7 +5,6 @@
 //  Created by 1okmon on 09.06.2023.
 //
 
-import Foundation
 enum NetworkResponseCode: IAlertRepresentable {
     case timedOut
     case networkConnectionLost

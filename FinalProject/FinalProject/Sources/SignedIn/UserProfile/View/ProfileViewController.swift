@@ -8,8 +8,6 @@
 import UIKit
 
 private enum Metrics {
-    static let backgroundColor = Theme.backgroundColor
-    
     enum ImagePickerAlert {
         static let title = "Загрузить фото"
         static let photoLibraryTitle = "Из галереи"
@@ -54,7 +52,6 @@ final class ProfileViewController: KeyboardSupportedViewController {
 
 private extension ProfileViewController {
     func configure() {
-        self.view.backgroundColor = Metrics.backgroundColor
         self.imagePicker.delegate = self
         self.configureProfileView()
     }

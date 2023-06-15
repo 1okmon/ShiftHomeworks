@@ -5,6 +5,8 @@
 //  Created by 1okmon on 30.05.2023.
 //
 
+typealias Page = (isFirst: Bool, isLast: Bool)
+
 class LocationsViewModel: ILocationsViewModel {
     var locations: Observable<(locations: [Location], page: Page)>
     var errorCode: Observable<IAlertRepresentable>

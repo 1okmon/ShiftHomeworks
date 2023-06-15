@@ -10,7 +10,7 @@ import UIKit
 private enum Metrics {
     static let defaultProfileImage = UIImage(systemName: "person")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
     static let editingModeImage = UIImage(systemName: "photo")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
-    static let backgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.5)
+    static let backgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.6)
     static let cornerRadius: CGFloat = 70
 }
 

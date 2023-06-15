@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 private enum URLS {
     static let locationsLink = "https://rickandmortyapi.com/api/location/"
 }

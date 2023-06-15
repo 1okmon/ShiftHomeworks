@@ -13,8 +13,6 @@ private enum Metrics {
     static let font = UIFont.systemFont(ofSize: 24)
 }
 
-typealias Page = (isFirst: Bool, isLast: Bool)
-
 final class FavoriteLocationsViewController: LocationsViewController {
     private let viewModel: IFavoriteLocationsViewModel
     private var locationsCountLabel: UILabel

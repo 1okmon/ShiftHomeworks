@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 private enum Metrics {
     static let animationDuration = 0.5
 }
@@ -35,7 +36,7 @@ final class SignInView: AuthView {
                    buttons: [self.signInButton,
                              self.signUpButton,
                              self.resetPasswordButton])
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {

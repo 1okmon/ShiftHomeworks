@@ -19,7 +19,6 @@ private enum Metrics {
     static let fontColor = Theme.textColor
     static let placeholderColor = Theme.placeholderColor
     static let forgotPasswordFontColor = #colorLiteral(red: 0.2247311473, green: 0.3063420951, blue: 0.9661539197, alpha: 1)
-    static var borderColor = { Theme.borderCgColor }
 }
 
 final class AuthDesignSystem {

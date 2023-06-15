@@ -6,6 +6,7 @@
 //
 
 import Firebase
+
 final class AuthResponseParser {
     func parse(error: Error) -> IAlertRepresentable {
         if let error = error as? URLError {

@@ -8,18 +8,12 @@
 import UIKit
 
 private enum Metrics {
-    static let cellHeight = 80
     static let verticalOffset = 5
     static let horizontalOffset = 15
     static let labelHeight = 30
     static let residentsCountPrefix = "Количество жителей: "
     static let fontForName = UIFont.systemFont(ofSize: 20)
     static let fontForResidentsCount = UIFont.systemFont(ofSize: 16)
-}
-
-private enum SeparatorPlace {
-    case top
-    case bottom
 }
 
 final class LocationTableViewCell: UITableViewCell {

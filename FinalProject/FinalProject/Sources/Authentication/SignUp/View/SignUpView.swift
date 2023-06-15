@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class SignUpView: AuthView {
     var submitSignUpTapHandler: ((String, String, String) -> Void)?
     private let titleLabel: UILabel

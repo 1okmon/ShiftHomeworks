@@ -17,15 +17,3 @@ enum Theme {
     static let separatorColor = UIColor.color(light: .gray, dark: .lightGray)
     static var borderCgColor: CGColor { UIColor.color(light: .black, dark: .lightGray).cgColor }
 }
-
-private extension UIColor {
-    static func color(light: UIColor, dark: UIColor) -> UIColor {
-        if #available(iOS 13, *) {
-            return UIColor.init { traitCollection in
-                return traitCollection.userInterfaceStyle == .dark ? dark : light
-            }
-        } else {
-            return light
-        }
-    }
-}

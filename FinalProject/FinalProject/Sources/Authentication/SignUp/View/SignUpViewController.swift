@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class SignUpViewController: AuthViewController {
     private var signUpViewModel: ISignUpViewModel
     private var signUpView: SignUpView

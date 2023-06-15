@@ -40,11 +40,6 @@ private enum Metrics {
             static let close = "Жители\t△"
         }
     }
-    
-    enum CollectionView {
-        static let verticalInset = 15
-        static let backgroundColor = Theme.itemsBackgroundColor
-    }
 }
 
 final class LocationDetailsView: UIView {
@@ -55,7 +50,6 @@ final class LocationDetailsView: UIView {
     private let dimensionLabel: UILabel
     private var residentsCountLabel: UILabel
     private var residentsButton: UIButton?
-    private var lineUnderResidentsButton: UIView?
     private var charactersView: CharactersView?
     private var activityView: ActivityView?
     private var charactersViewBottomConstraint: Constraint?
@@ -156,11 +150,7 @@ private extension LocationDetailsView {
         self.charactersView?.cellTapHandler = { [weak self] characterId in
             self?.cellTapHandler?(characterId)
         }
-        
-        self.lineUnderResidentsButton = UIView()
-        guard let lineUnderResidentsButton = self.lineUnderResidentsButton else { return }
-        self.addSubview(lineUnderResidentsButton)
-        self.configure(horizontalLine: lineUnderResidentsButton, under: charactersView)
+        self.configure(horizontalLine: UIView(), under: charactersView)
     }
     
     func configure(horizontalLine: UIView, under uppedView: UIView) {

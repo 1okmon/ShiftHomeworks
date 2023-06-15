@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class NetworkResponseCodeParser {
     func parse(error: Error) -> IAlertRepresentable {
         guard let error = error as? URLError else {

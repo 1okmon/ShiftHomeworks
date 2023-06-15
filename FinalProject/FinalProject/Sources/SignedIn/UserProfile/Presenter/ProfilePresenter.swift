@@ -20,7 +20,6 @@ final class ProfilePresenter: IProfilePresenter {
         self.firebaseStorageManager = FirebaseStorageManger()
         self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
         self.coordinator = coordinator
-        
     }
     
     func save(userData: UserData) {

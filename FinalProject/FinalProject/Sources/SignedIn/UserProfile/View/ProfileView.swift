@@ -10,7 +10,6 @@ import UIKit
 private enum Metrics {
     static let font = UIFont.systemFont(ofSize: 22)
     static let profileImageHeight = 200
-    static let backgroundColor = Theme.backgroundColor
     
     enum Button {
         static let normalImage = UIImage(systemName: "pencil.circle")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
@@ -127,7 +126,6 @@ private extension ProfileView {
 // MARK: configure extension
 private extension ProfileView {
     func configure() {
-        self.backgroundColor = Metrics.backgroundColor
         self.configureEditButton()
         self.configureProfilePhotoView()
         self.configureFirstName()

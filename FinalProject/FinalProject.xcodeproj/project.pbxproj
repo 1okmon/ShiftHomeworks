@@ -68,6 +68,7 @@
 		0E7C1F172A39CBBD000D71BB /* UserSignInDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */; };
 		0E7C1F192A39D090000D71BB /* IKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F182A39D090000D71BB /* IKeychainManager.swift */; };
 		0E7C1F1C2A39E5D0000D71BB /* IAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */; };
+		0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */; };
 		0EBE8F9C2A39BD370090941E /* IFirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
@@ -189,6 +190,7 @@
 		0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignInDetails.swift; sourceTree = "<group>"; };
 		0E7C1F182A39D090000D71BB /* IKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeychainManager.swift; sourceTree = "<group>"; };
 		0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAppCoordinator.swift; sourceTree = "<group>"; };
+		0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColor.swift"; sourceTree = "<group>"; };
 		0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirebaseStorageManager.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1032,6 +1034,7 @@
 				0EF1604C2A1EFCBC0026A628 /* Observing.swift */,
 				0E27E6792A25E39B0010C571 /* NSObject+className.swift */,
 				0E73D86A2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift */,
+				0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				0EEFAF782A2EC50800EA8A80 /* FavoriteCharactersViewController.swift in Sources */,
 				0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
+				0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */,
 				0E73D8642A32E96700CCD271 /* NetworkResponseCodeParser.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* IResetPasswordViewModel.swift in Sources */,
 				0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */,

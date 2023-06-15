@@ -5,8 +5,6 @@
 //  Created by 1okmon on 05.06.2023.
 //
 
-import Foundation
-
 final class FavoritesViewModel: IFavoritesViewModel {
     private var coordinator: IFavoritesCoordinator?
     

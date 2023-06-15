@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 enum TabBarItemType: Int {
     case profileInfo
     case richAndMortyWiki

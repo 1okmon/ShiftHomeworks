@@ -8,15 +8,14 @@
 import UIKit
 
 private enum Metrics {
-    static let sessionIdentifier = "ImagesLoadingSession"
+    static let dispatchQueueLabel = "updateDataTasksQueue"
     static let charactersLink = "https://rickandmortyapi.com/api/character/"
 }
 
 final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkManagerCharacterDetails, ICharacterNetworkManagerLocationsDetails {
     static let shared: RickAndMortyCharacterNetworkManager = RickAndMortyCharacterNetworkManager()
     private var imagesManager: ICacheManager
-    private let dataTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
-    let queue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
+    private let dataTasksQueue = DispatchQueue(label: Metrics.dispatchQueueLabel, qos: .userInitiated, attributes: .concurrent)
     
     private override init() {
         self.imagesManager = CacheManager()

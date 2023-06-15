@@ -14,7 +14,6 @@ private enum Metrics {
     static let beforeSectionTopOffset = 150
     static let inSectionTopOffset = 10
     static let horizontalInset = 50
-    static let backgroundColor = Theme.backgroundColor
 }
 
 class AuthView: KeyboardSupportedView {
@@ -51,7 +50,6 @@ class AuthView: KeyboardSupportedView {
 
 private extension AuthView {
     func configure() {
-        self.backgroundColor = Metrics.backgroundColor
         self.configureTitleLabel()
         self.configureTextFields()
         self.configureButtons()

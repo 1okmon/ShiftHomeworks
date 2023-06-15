@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 private enum Metrics {
     static let animateDuration = 0.2
     static let backgroundColor = Theme.backgroundColor

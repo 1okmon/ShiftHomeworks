@@ -8,7 +8,7 @@
 import UIKit
 
 private enum Title {
-    static let forLocationViewController = "Локации"
+    static let locationsViewController = "Локации"
 }
 class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ILocationDetailsRickAndMortyCoordinator, ICharacterDetailsRickAndMortyCoordinator {
     private var navigationController: UINavigationController
@@ -26,7 +26,7 @@ class RickAndMortyCoordinator: ILocationsRickAndMortyCoordinator, ILocationDetai
         let locationsViewModel = LocationsViewModel(coordinator: self)
         let locationsViewController = LocationsViewController(viewModel: locationsViewModel)
         locationsViewModel.subscribe(observer: locationsViewController)
-        locationsViewController.title = Title.forLocationViewController
+        locationsViewController.title = Title.locationsViewController
         self.navigationController.viewControllers = [locationsViewController]
     }
     
