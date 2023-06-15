@@ -12,7 +12,7 @@ final class ProfilePresenter: IProfilePresenter {
     private var realtimeDatabaseManager: IUserDataRealtimeDatabaseManager
     private var firebaseStorageManager: IFirebaseStorageManager
     private var coordinator: IProfileCoordinator?
-    private var keychainManager: ISignOutKeychainManager
+    private var keychainManager: ICleanKeychainManager
     
     init(viewController: ProfileViewController, coordinator: IProfileCoordinator) {
         self.viewController = viewController

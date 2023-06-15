@@ -69,6 +69,8 @@
 		0E7C1F192A39D090000D71BB /* IKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F182A39D090000D71BB /* IKeychainManager.swift */; };
 		0E7C1F1C2A39E5D0000D71BB /* IAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */; };
 		0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */; };
+		0E7C1F262A3AD813000D71BB /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */; };
+		0E7C1F282A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */; };
 		0EBE8F9C2A39BD370090941E /* IFirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
@@ -191,6 +193,8 @@
 		0E7C1F182A39D090000D71BB /* IKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeychainManager.swift; sourceTree = "<group>"; };
 		0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAppCoordinator.swift; sourceTree = "<group>"; };
 		0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColor.swift"; sourceTree = "<group>"; };
+		0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirstLaunchUserDefaultsManager.swift; sourceTree = "<group>"; };
 		0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirebaseStorageManager.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -676,6 +680,15 @@
 			path = NetworkResponse;
 			sourceTree = "<group>";
 		};
+		0E7C1F242A3AD7FD000D71BB /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */,
+				0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		0EEA03C52A1724C300B1EA9C = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1038,7 @@
 		0EF1604E2A1EFCD50026A628 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E7C1F242A3AD7FD000D71BB /* UserDefaults */,
 				0E7C1F152A39CAE4000D71BB /* Keychain */,
 				0E73D8822A384E9B00CCD271 /* KeyboardSupportedView */,
 				0E73D8702A38090000CCD271 /* Firebase */,
@@ -1290,6 +1304,7 @@
 				0EEFAF972A2F520300EA8A80 /* ILocationDetailsViewModel.swift in Sources */,
 				0EF1604D2A1EFCBC0026A628 /* Observing.swift in Sources */,
 				0EEFAF8F2A2F4AC500EA8A80 /* ILocationsViewModel.swift in Sources */,
+				0E7C1F262A3AD813000D71BB /* UserDefaultsManager.swift in Sources */,
 				0EF1603E2A1E3C240026A628 /* SignUpView.swift in Sources */,
 				0E27E6AF2A277BFE0010C571 /* CharacterDetails.swift in Sources */,
 				0E27E6C32A2919FB0010C571 /* CoreDataManager.swift in Sources */,
@@ -1319,6 +1334,7 @@
 				0EEFAF952A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift in Sources */,
 				0E27E6DA2A29F67D0010C571 /* FavoritesView.swift in Sources */,
 				0E27E6D42A2998250010C571 /* RickAndMortyData.xcdatamodeld in Sources */,
+				0E7C1F282A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift in Sources */,
 				0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */,
 				0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */,
 				0E73D8672A3306D500CCD271 /* NetworkResponseCode.swift in Sources */,

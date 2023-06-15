@@ -20,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        let firstLaunchManager: IFirstLaunchUserDefaultsManager = UserDefaultsManager()
+        let keychainManager: ICleanKeychainManager = KeychainManager()
+        if firstLaunchManager.isFirstLaunch() {
+            keychainManager.deleteSingInDetails()
+            firstLaunchManager.hasInstalled()
+        }
         return true
     }
 
