@@ -22,7 +22,7 @@ final class AppCoordinator: ISignInAppCoordinator, ISignedInAppCoordinator {
         let navigationController = UINavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController,
                                              appCoordinator: self)
-        authCoordinator.start()
+        authCoordinator.goToSignIn()
         self.window?.rootViewController = navigationController
     }
     

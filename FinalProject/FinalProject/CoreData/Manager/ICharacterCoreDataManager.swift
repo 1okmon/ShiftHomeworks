@@ -9,6 +9,5 @@ protocol ICharacterCoreDataManager {
     func createCharacter(_ characterDetails: CharacterDetails)
     func fetchCharacters() -> [CharacterEntity]
     func fetchCharacter(with id: Int) -> CharacterEntity?
-    func deleteAllCharacters()
     func deleteCharacter(with id: Int)
 }

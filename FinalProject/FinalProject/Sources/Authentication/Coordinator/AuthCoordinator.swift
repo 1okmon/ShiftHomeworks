@@ -15,10 +15,6 @@ final class AuthCoordinator: IAuthCoordinator {
         self.appCoordinator = appCoordinator
     }
     
-    func start() {
-        self.goToSignIn()
-    }
-    
     func goToSignIn() {
         let signInViewController = AuthViewControllersFactory().setCoordinator(self).signInViewController()
         self.navigationController.viewControllers = [signInViewController]

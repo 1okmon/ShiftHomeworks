@@ -9,6 +9,5 @@ protocol ILocationCoreDataManager {
     func createLocation(_ locationDetails: LocationDetails)
     func fetchLocations() -> [LocationEntity]
     func fetchLocation(with id: Int) -> LocationEntity?
-    func deleteAllLocations()
     func deleteLocation(with id: Int)
 }
