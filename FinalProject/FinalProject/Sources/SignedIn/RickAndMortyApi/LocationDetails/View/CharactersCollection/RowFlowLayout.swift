@@ -8,7 +8,7 @@
 import UIKit
 
 private enum Metrics {
-    static let maxWidth = UIScreen.main.bounds.width - 70
+    static let maxWidth = UIScreen.main.bounds.width - 80
 }
 
 final class RowFlowLayout: UICollectionViewFlowLayout {
