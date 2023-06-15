@@ -9,7 +9,7 @@ import UIKit
 
 private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
-    static let separatorColor = Theme.tableViewSeparatorColor
+    static let separatorColor = Theme.separatorColor
     static let cellHeight: CGFloat = 80
     static let footerHeight = CGFloat(PageButton.height + PageButton.verticalOffset)
 }

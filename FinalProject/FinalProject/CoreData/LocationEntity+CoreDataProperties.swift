@@ -19,5 +19,3 @@ extension LocationEntity: IEntity {
     @NSManaged public var dimension: String
     @NSManaged public var residents: Data?
 }
-
-extension LocationEntity: Identifiable {}

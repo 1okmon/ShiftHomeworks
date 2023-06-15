@@ -12,6 +12,7 @@ private enum Metrics {
     static let backgroundColor = Theme.backgroundColor
     static let font = UIFont.systemFont(ofSize: 20)
     static let animationDuration = 0.5
+    static let separatorColor = Theme.separatorColor
     
     enum Label {
         static let textColor = Theme.textColor
@@ -28,14 +29,12 @@ private enum Metrics {
     }
     
     enum Button {
-        static let verticalOffset = 15
         static let borderWidth: CGFloat = 2
         static let horizontalInset = -borderWidth
         static let height = 60
         static let textColor = Theme.textColor
         static let backgroundColor = Theme.itemsBackgroundColor
-        static var borderColor: CGColor { Theme.borderCgColor }
-        
+       
         enum Prefix {
             static let open = "Жители\t▽"
             static let close = "Жители\t△"
@@ -56,6 +55,7 @@ final class LocationDetailsView: UIView {
     private let dimensionLabel: UILabel
     private var residentsCountLabel: UILabel
     private var residentsButton: UIButton?
+    private var lineUnderResidentsButton: UIView?
     private var charactersView: CharactersView?
     private var activityView: ActivityView?
     private var charactersViewBottomConstraint: Constraint?
@@ -71,11 +71,6 @@ final class LocationDetailsView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        guard let residentsButton = self.residentsButton else { return }
-        residentsButton.layer.borderColor = Metrics.Button.borderColor
     }
     
     func update(with location: LocationDetails) {
@@ -128,20 +123,16 @@ private extension LocationDetailsView {
         label.font = Metrics.font
     }
     
-//    func configureTypeLabel() {
-//        self.addSubview(self.typeLabel)
-//    }
-    
     func configureResidentsButton() {
+        let horizontalTopLineView = UIView()
+        self.configure(horizontalLine: horizontalTopLineView, under: self.residentsCountLabel)
         let residentsButton = UIButton(type: .system)
         self.addSubview(residentsButton)
         residentsButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(Metrics.Button.horizontalInset)
-            make.top.equalTo(self.residentsCountLabel.snp.bottom).offset(Metrics.Button.verticalOffset)
+            make.top.equalTo(horizontalTopLineView.snp.bottom)
             make.height.equalTo(Metrics.Button.height)
         }
-        residentsButton.layer.borderColor = Metrics.Button.borderColor
-        residentsButton.layer.borderWidth = Metrics.Button.borderWidth
         residentsButton.setTitleColor(Metrics.Button.textColor, for: .normal)
         residentsButton.backgroundColor = Metrics.Button.backgroundColor
         residentsButton.titleLabel?.font = Metrics.font
@@ -165,6 +156,21 @@ private extension LocationDetailsView {
         self.charactersView?.cellTapHandler = { [weak self] characterId in
             self?.cellTapHandler?(characterId)
         }
+        
+        self.lineUnderResidentsButton = UIView()
+        guard let lineUnderResidentsButton = self.lineUnderResidentsButton else { return }
+        self.addSubview(lineUnderResidentsButton)
+        self.configure(horizontalLine: lineUnderResidentsButton, under: charactersView)
+    }
+    
+    func configure(horizontalLine: UIView, under uppedView: UIView) {
+        self.addSubview(horizontalLine)
+        horizontalLine.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(uppedView.snp.bottom)
+            make.height.equalTo(Metrics.Button.borderWidth)
+        }
+        horizontalLine.backgroundColor = Metrics.separatorColor
     }
 }
 
@@ -176,7 +182,7 @@ private extension LocationDetailsView {
             self.charactersViewBottomConstraint?.deactivate()
             charactersView.snp.makeConstraints { make in
                 if charactersView.frame.height == 0 {
-                    self.charactersViewBottomConstraint = make.bottom.equalToSuperview().constraint
+                    self.charactersViewBottomConstraint = make.bottom.equalToSuperview().offset(-Metrics.Button.borderWidth).constraint
                 } else {
                     self.charactersViewBottomConstraint = make.bottom.equalTo(residentsButton.snp.bottom).constraint
                 }
