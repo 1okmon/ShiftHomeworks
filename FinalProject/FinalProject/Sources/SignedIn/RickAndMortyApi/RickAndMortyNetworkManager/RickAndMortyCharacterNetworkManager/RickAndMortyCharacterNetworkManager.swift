@@ -55,13 +55,9 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
                 completion?(nil, errorCode)
             }
             guard let data = data, error == nil else { return }
-            do {
-                let result: CharacterResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
-                let character = T(characterResponse: result)
-                completion?(character, nil)
-            } catch {
-                print(error)
-            }
+            guard let result: CharacterResponse = try? JSONDecoder().decode(CharacterResponse.self, from: data) else { return }
+            let character = T(characterResponse: result)
+            completion?(character, nil)
         }
         task.resume()
     }

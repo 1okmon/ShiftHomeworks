@@ -567,8 +567,7 @@
 		0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */ = {
 			isa = PBXGroup;
 			children = (
-				0E73D8652A3306BB00CCD271 /* NetworkResponseCode */,
-				0E73D8632A32E96700CCD271 /* NetworkResponseCodeParser.swift */,
+				0E7C1F1D2A3AA74C000D71BB /* NetworkResponse */,
 				0E73D8682A332D6E00CCD271 /* IAlertRepresentable.swift */,
 			);
 			path = ResponseStatusCodeParser;
@@ -664,6 +663,15 @@
 				0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		0E7C1F1D2A3AA74C000D71BB /* NetworkResponse */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8652A3306BB00CCD271 /* NetworkResponseCode */,
+				0E73D8632A32E96700CCD271 /* NetworkResponseCodeParser.swift */,
+			);
+			path = NetworkResponse;
 			sourceTree = "<group>";
 		};
 		0EEA03C52A1724C300B1EA9C = {

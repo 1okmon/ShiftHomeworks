@@ -22,16 +22,13 @@ final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations
                 completion?([], nil, nil, errorCode)
             }
             guard let data = data, error == nil else { return }
-            do {
-                let result: LocationsResponse = try JSONDecoder().decode(LocationsResponse.self, from: data)
-                var locations: [Location] = []
-                result.results.forEach { location in
-                    locations.append(Location(locationResponse: location))
-                }
-                completion?(locations, result.info.prev, result.info.next, nil)
-            } catch {
-                print(1)
+            
+            guard let result: LocationsResponse = try? JSONDecoder().decode(LocationsResponse.self, from: data) else { return }
+            var locations: [Location] = []
+            result.results.forEach { location in
+                locations.append(Location(locationResponse: location))
             }
+            completion?(locations, result.info.prev, result.info.next, nil)
         }
         task.resume()
     }
@@ -44,13 +41,9 @@ final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations
                 completion?(nil, errorCode)
             }
             guard let data = data, error == nil else { return }
-            do {
-                let result: LocationResponse = try JSONDecoder().decode(LocationResponse.self, from: data)
-                let locationDetailed = LocationDetails(locationResponse: result)
-                completion?(locationDetailed, nil)
-            } catch {
-                print(1)
-            }
+            guard let result: LocationResponse = try? JSONDecoder().decode(LocationResponse.self, from: data) else { return }
+            let locationDetailed = LocationDetails(locationResponse: result)
+            completion?(locationDetailed, nil)
         }
         task.resume()
     }
