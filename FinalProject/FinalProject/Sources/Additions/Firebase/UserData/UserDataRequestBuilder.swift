@@ -5,8 +5,6 @@
 //  Created by 1okmon on 07.06.2023.
 //
 
-import Foundation
-
 private enum FieldTitle: String {
     case email
     case firstName

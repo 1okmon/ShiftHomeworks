@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 enum TabBarItemType: Int {
     case profileInfo
     case richAndMortyWiki
@@ -47,10 +48,10 @@ final class SignedInTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initViewControllers()
-        configureTabBarItems()
-        configure(tabBar: tabBar)
-        appendViewControllers()
+        self.initViewControllers()
+        self.configureTabBarItems()
+        self.configure(tabBar: tabBar)
+        self.appendViewControllers()
     }
 }
 
@@ -76,6 +77,8 @@ private extension SignedInTabBarController {
     }
     
     func appendViewControllers() {
-        self.viewControllers = [self.profileNavigationController, self.rickAndMortyNavigationController, self.favoritesNavigationController]
+        self.viewControllers = [self.profileNavigationController,
+                                self.rickAndMortyNavigationController,
+                                self.favoritesNavigationController]
     }
 }

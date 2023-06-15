@@ -7,10 +7,6 @@
 
 import UIKit
 
-private enum Metrics {
-    static let backgroundColor = Theme.backgroundColor
-}
-
 class AuthViewController: KeyboardSupportedViewController, IObserver {
     var id: UUID
     private var authView: AuthView

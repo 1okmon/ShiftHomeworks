@@ -36,7 +36,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell {
         self.characterImageView = UIImageView()
         self.characterName = UILabel()
         super.init(frame: frame)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -61,10 +61,10 @@ private extension CharactersCollectionViewCell {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
         self.layer.cornerRadius = Metrics.cornerRadius
-        configureCharacterImageView()
+        self.configureCharacterImageView()
         self.activityView = ActivityView(superview: self.characterImageView)
         self.activityView?.startAnimating()
-        configureCharacterName()
+        self.configureCharacterName()
     }
     
     func configureCharacterImageView() {

@@ -53,7 +53,7 @@ final class CharacterDetailsView: UIView {
         self.characterSpeciesLabel = UILabel()
         self.characterTypeLabel = UILabel()
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -77,12 +77,12 @@ final class CharacterDetailsView: UIView {
 private extension CharacterDetailsView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureCharacterImageView()
-        configure(label: self.characterNameLabel, under: self.characterImageView)
-        configure(label: self.characterGenderLabel, under: self.characterNameLabel)
-        configure(label: self.characterStatusLabel, under: self.characterGenderLabel)
-        configure(label: self.characterSpeciesLabel, under: self.characterStatusLabel)
-        configure(label: self.characterTypeLabel, under: self.characterSpeciesLabel)
+        self.configureCharacterImageView()
+        self.configure(label: self.characterNameLabel, under: self.characterImageView)
+        self.configure(label: self.characterGenderLabel, under: self.characterNameLabel)
+        self.configure(label: self.characterStatusLabel, under: self.characterGenderLabel)
+        self.configure(label: self.characterSpeciesLabel, under: self.characterStatusLabel)
+        self.configure(label: self.characterTypeLabel, under: self.characterSpeciesLabel)
         self.activityView = ActivityView(superview: self)
         self.activityView?.startAnimating()
     }

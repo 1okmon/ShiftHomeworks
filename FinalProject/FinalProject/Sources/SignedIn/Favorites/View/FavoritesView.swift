@@ -51,7 +51,7 @@ final class FavoritesView: UIView {
         self.locationsButton = UIButton(type: .system)
         self.charactersButton = UIButton(type: .system)
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -67,8 +67,8 @@ final class FavoritesView: UIView {
 private extension FavoritesView {
     func configure() {
         self.backgroundColor = Metrics.backgroundColor
-        configureLocationsButton()
-        configureCharactersButton()
+        self.configureLocationsButton()
+        self.configureCharactersButton()
     }
     
     func configureLocationsButton() {
@@ -77,8 +77,8 @@ private extension FavoritesView {
             make.leading.trailing.top.equalToSuperview().inset(Metrics.Button.edgeInset)
             make.bottom.equalTo(self.snp.centerY)
         }
-        configureLayer(at: self.locationsButton, type: .locations)
-        self.locationsButton.addTarget(self, action: #selector(locationsButtonTapped(_:)), for: .touchUpInside)
+        self.configureLayer(at: self.locationsButton, type: .locations)
+        self.locationsButton.addTarget(self, action: #selector(self.locationsButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureCharactersButton() {
@@ -87,8 +87,8 @@ private extension FavoritesView {
             make.leading.trailing.bottom.equalToSuperview().inset(Metrics.Button.edgeInset)
             make.top.equalTo(self.locationsButton.snp.bottom)
         }
-        configureLayer(at: self.charactersButton, type: .characters)
-        self.charactersButton.addTarget(self, action: #selector(charactersButtonTapped(_:)), for: .touchUpInside)
+        self.configureLayer(at: self.charactersButton, type: .characters)
+        self.charactersButton.addTarget(self, action: #selector(self.charactersButtonTapped(_:)), for: .touchUpInside)
     }
     
     func configureLayer(at button: UIButton, type: FavoriteButtonType) {

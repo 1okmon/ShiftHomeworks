@@ -10,7 +10,7 @@ import UIKit
 private enum Metrics {
     static let defaultProfileImage = UIImage(systemName: "person")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
     static let editingModeImage = UIImage(systemName: "photo")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
-    static let backgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.5)
+    static let backgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.6)
     static let cornerRadius: CGFloat = 70
 }
 
@@ -18,13 +18,13 @@ final class ProfilePhotoView: UIView {
     var profileImageTapped: (() -> Void)?
     private var photoImageView: UIImageView
     private var editingCurtainImageView: UIImageView
-    private var activityView : ActivityView?
+    private var activityView: ActivityView?
     
     init() {
         self.editingCurtainImageView = UIImageView()
         self.photoImageView = UIImageView()
         super.init(frame: .zero)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -50,8 +50,8 @@ final class ProfilePhotoView: UIView {
 
 private extension ProfilePhotoView {
     func configure() {
-        configurePhotoImageView()
-        configureEditingCurtainView()
+        self.configurePhotoImageView()
+        self.configureEditingCurtainView()
         self.activityView = ActivityView(superview: self.photoImageView)
         self.activityView?.startAnimating()
     }
@@ -64,7 +64,7 @@ private extension ProfilePhotoView {
         self.photoImageView.clipsToBounds = true
         self.photoImageView.layer.cornerRadius = Metrics.cornerRadius
         self.photoImageView.isUserInteractionEnabled = true
-        update(with: Metrics.defaultProfileImage)
+        self.update(with: Metrics.defaultProfileImage)
         self.photoImageView.contentMode = .scaleAspectFill
     }
     

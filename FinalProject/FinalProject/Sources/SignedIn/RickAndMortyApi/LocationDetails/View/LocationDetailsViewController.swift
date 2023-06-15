@@ -22,7 +22,7 @@ final class LocationDetailsViewController: UIViewController, IObserver {
         self.locationDetailsView = LocationDetailsView()
         self.id = UUID()
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +39,8 @@ final class LocationDetailsViewController: UIViewController, IObserver {
                 .setFieldsToShowAlert(of: errorCode)
                 .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
                     self?.viewModel.goBack()
-                })).build()
+                }))
+                .build()
             DispatchQueue.main.async {
                 self.present(alert, animated: true)
             }
@@ -66,12 +67,12 @@ private extension LocationDetailsViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
         self.favoriteButton = UIBarButtonItem(image: Icon.Favorite.image(),
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(favoritesButtonTapped(_:)))
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(self.favoritesButtonTapped(_:)))
         self.favoriteButton?.isHidden = true
         self.navigationItem.setRightBarButton(self.favoriteButton, animated: true)
-        configureLocationDetailsView()
+        self.configureLocationDetailsView()
     }
     
     @objc func favoritesButtonTapped(_ sender: UIBarButtonItem) {
@@ -83,7 +84,7 @@ private extension LocationDetailsViewController {
         self.locationDetailsView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        configureLocationDetailsViewHandlers()
+        self.configureLocationDetailsViewHandlers()
     }
     
     func configureLocationDetailsViewHandlers() {

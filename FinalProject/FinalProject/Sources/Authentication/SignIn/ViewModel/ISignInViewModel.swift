@@ -12,4 +12,5 @@ protocol ISignInViewModel {
     func signUp()
     func resetPassword()
     func sendEmailVerificationLink(to user: User)
+    func trySignInByUserDetailsFromKeychain()
 }

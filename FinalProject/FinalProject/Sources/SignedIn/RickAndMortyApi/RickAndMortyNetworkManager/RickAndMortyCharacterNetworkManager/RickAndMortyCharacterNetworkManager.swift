@@ -8,15 +8,14 @@
 import UIKit
 
 private enum Metrics {
-    static let sessionIdentifier = "ImagesLoadingSession"
+    static let dispatchQueueLabel = "updateDataTasksQueue"
     static let charactersLink = "https://rickandmortyapi.com/api/character/"
 }
 
 final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkManagerCharacterDetails, ICharacterNetworkManagerLocationsDetails {
     static let shared: RickAndMortyCharacterNetworkManager = RickAndMortyCharacterNetworkManager()
     private var imagesManager: ICacheManager
-    private let dataTasksQueue = DispatchQueue(label: "updateDownloadTasksQueue", qos: .userInitiated, attributes: .concurrent)
-    let queue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
+    private let dataTasksQueue = DispatchQueue(label: Metrics.dispatchQueueLabel, qos: .userInitiated, attributes: .concurrent)
     
     private override init() {
         self.imagesManager = CacheManager()
@@ -28,14 +27,15 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
             if let image = self.imagesManager.image(by: urlString) {
                 completion?(image, urlString, nil)
             } else {
-                let task = self.dataTask(by: urlString) { data, _, error in
+                let task = self.dataTask(by: urlString) { [weak self] data, _, error in
                     if let error = error {
                         let errorCode = NetworkResponseCodeParser().parse(error: error)
                         completion?(nil, nil, errorCode)
                     }
-                    guard let data = data, error == nil else { return }
-                    guard let image = UIImage(data: data) else { return }
-                    self.imagesManager.append(image: image, with: urlString)
+                    guard let data = data,
+                          error == nil,
+                          let image = UIImage(data: data) else { return }
+                    self?.imagesManager.append(image: image, with: urlString)
                     completion?(image, urlString, nil)
                 }
                 task.resume()
@@ -54,14 +54,11 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
                 let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?(nil, errorCode)
             }
-            guard let data = data, error == nil else { return }
-            do {
-                let result: CharacterResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
-                let character = T(characterResponse: result)
-                completion?(character, nil)
-            } catch {
-                print(error)
-            }
+            guard let data = data,
+                  error == nil,
+                  let result: CharacterResponse = try? JSONDecoder().decode(CharacterResponse.self, from: data) else { return }
+            let character = T(characterResponse: result)
+            completion?(character, nil)
         }
         task.resume()
     }
@@ -70,7 +67,7 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
 private extension RickAndMortyCharacterNetworkManager {
     func dataTask(by urlString: String, completionHandler: @escaping ((Data?, URLResponse?, Error?) -> Void)) -> URLSessionDataTask {
         let session = URLSession(configuration: .default)
-        return session.dataTask(with: request(with: urlString),
+        return session.dataTask(with: self.request(with: urlString),
                                 completionHandler: completionHandler)
     }
     

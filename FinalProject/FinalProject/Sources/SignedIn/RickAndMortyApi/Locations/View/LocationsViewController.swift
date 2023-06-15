@@ -22,7 +22,7 @@ class LocationsViewController: UIViewController, IObserver {
         self.locationView = LocationsView()
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -37,23 +37,24 @@ class LocationsViewController: UIViewController, IObserver {
                                          style: .default,
                                          handler: { [weak self] _ in
                     self?.viewModel.reload()
-                })).build()
+                }))
+                .build()
             DispatchQueue.main.async {
                 self.present(alert, animated: true)
             }
             return
         }
-        guard let result = value as? (locations: [Location], isFirstPage: Bool, isLastPage: Bool) else { return }
-        locationView.update(with: result.locations,
-                            isFirstPage: result.isFirstPage,
-                            isLastPage: result.isLastPage)
+        guard let result = value as? (locations: [Location], page: Page) else { return }
+        self.locationView.update(with: result.locations,
+                                 isFirstPage: result.page.isFirst,
+                                 isLastPage: result.page.isLast)
     }
 }
 
 private extension LocationsViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        configureLocationView()
+        self.configureLocationView()
     }
     
     func configureLocationView() {
@@ -61,7 +62,7 @@ private extension LocationsViewController {
         self.locationView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        configureLocationViewTapHandlers()
+        self.configureLocationViewTapHandlers()
     }
     
     func configureLocationViewTapHandlers() {

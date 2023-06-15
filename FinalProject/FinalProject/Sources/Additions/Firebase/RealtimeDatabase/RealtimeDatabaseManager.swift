@@ -29,44 +29,40 @@ final class RealtimeDatabaseManager: INewUserRealtimeDatabaseManager, IUserDataR
     
     func updateUserData(to userData: UserData) {
         let value = UserDataRequestBuilder().setFirstName(userData.firstName).setLastName(userData.lastName).build()
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        guard let ref = self.userReferenceInDatabase() else { return }
         ref.updateChildValues(value)
     }
     
     func updateUserImageUrl(_ imageUrl: String) {
         let value = UserDataRequestBuilder().setImageUrl(imageUrl).build()
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        guard let ref = self.userReferenceInDatabase() else { return }
         ref.updateChildValues(value)
     }
     
     func updateFavoriteLocations(locationsIds: [Int]) {
         let value = UserDataRequestBuilder().setFavoriteLocations(locationsIds).build()
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        guard let ref = self.userReferenceInDatabase() else { return }
         ref.updateChildValues(value)
     }
     
     func updateFavoriteCharacters(charactersIds: [Int]) {
         let value = UserDataRequestBuilder().setFavoriteCharacters(charactersIds).build()
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        guard let ref = self.userReferenceInDatabase() else { return }
         ref.updateChildValues(value)
     }
     
     func loadUserData(completion: ((UserDataResponse) -> Void)?) {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        let ref = Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
+        guard let ref = self.userReferenceInDatabase() else { return }
         ref.observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [String: Any] else { return }
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                let userData = try JSONDecoder().decode(UserDataResponse.self, from: jsonData)
-                completion?(userData)
-            } catch let error {
-                print(error)
-            }
+            guard let value = snapshot.value as? [String: Any],
+                  let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let userData = try? JSONDecoder().decode(UserDataResponse.self, from: jsonData) else { return }
+            completion?(userData)
         })
+    }
+    
+    private func userReferenceInDatabase() -> DatabaseReference? {
+        guard let userID = Auth.auth().currentUser?.uid else { return nil }
+        return Database.database(url: Metrics.databaseUrl).reference().child(Metrics.usersDirectory).child(userID)
     }
 }

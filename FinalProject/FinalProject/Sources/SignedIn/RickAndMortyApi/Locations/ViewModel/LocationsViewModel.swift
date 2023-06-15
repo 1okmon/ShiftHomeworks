@@ -5,8 +5,10 @@
 //  Created by 1okmon on 30.05.2023.
 //
 
+typealias Page = (isFirst: Bool, isLast: Bool)
+
 class LocationsViewModel: ILocationsViewModel {
-    var locations: Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>
+    var locations: Observable<(locations: [Location], page: Page)>
     var errorCode: Observable<IAlertRepresentable>
     private var previousPage: String?
     private var nextPage: String?
@@ -15,7 +17,7 @@ class LocationsViewModel: ILocationsViewModel {
     private let locationsNetworkManager: ILocationNetworkManagerLocations
     
     init(coordinator: ILocationsRickAndMortyCoordinator) {
-        self.locations = Observable<(locations: [Location], isFirstPage: Bool, isLastPage: Bool)>()
+        self.locations = Observable<(locations: [Location], page: Page)>()
         self.errorCode = Observable<IAlertRepresentable>()
         self.locationsNetworkManager = RickAndMortyLocationNetworkManager.shared
         self.coordinator = coordinator
@@ -24,23 +26,23 @@ class LocationsViewModel: ILocationsViewModel {
     func subscribe(observer: IObserver) {
         self.locations.subscribe(observer: observer)
         self.errorCode.subscribe(observer: observer)
-        launch()
+        self.launch()
     }
     
     func launch() {
-        loadLocations()
+        self.loadLocations()
     }
     
     func reload() {
-        loadLocations(from: self.reloadPage)
+        self.loadLocations(from: self.reloadPage)
     }
     
     func loadNextPage() {
-        loadLocations(from: nextPage)
+        self.loadLocations(from: self.nextPage)
     }
     
     func loadPreviousPage() {
-        loadLocations(from: previousPage)
+        self.loadLocations(from: self.previousPage)
     }
     
     func openLocation(with id: Int) {
@@ -56,7 +58,7 @@ private extension LocationsViewModel {
                 self?.errorCode.value = responseErrorCode
                 return
             }
-            self?.locations.value = (locations, previousPage == nil, nextPage == nil)
+            self?.locations.value = (locations, Page(isFirst: previousPage == nil, isLast: nextPage == nil))
             self?.previousPage = previousPage
             self?.nextPage = nextPage
         }

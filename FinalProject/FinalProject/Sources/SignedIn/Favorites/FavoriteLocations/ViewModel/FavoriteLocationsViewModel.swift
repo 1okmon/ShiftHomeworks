@@ -5,13 +5,11 @@
 //  Created by 1okmon on 05.06.2023.
 //
 
-import Foundation
-
 final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsViewModel {
     private var coreDataManager: ILocationCoreDataManager
     
     override func launch() {
-        reloadLocations()
+        self.reloadLocations()
     }
     
     func reloadLocations() {
@@ -20,7 +18,7 @@ final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsVi
         locationsEntity.forEach { locationEntity in
             locations.append(Location(locationEntity: locationEntity))
         }
-        self.locations.value = (locations: locations, isFirstPage: true, isLastPage: true)
+        self.locations.value = (locations: locations, page: Page(isFirst: true, isLast: true))
     }
     
     override init(coordinator: ILocationsRickAndMortyCoordinator) {

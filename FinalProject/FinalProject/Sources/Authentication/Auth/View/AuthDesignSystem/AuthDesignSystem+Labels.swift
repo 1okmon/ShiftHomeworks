@@ -9,7 +9,7 @@ import UIKit
 
 extension AuthDesignSystem {
     private enum Metrics {
-        static let signInText = "Авторизация"
+        static let signInText = "Вход"
         static let signUpText = "Регистрация"
         static let resetPasswordText = "Сброс пароля"
     }

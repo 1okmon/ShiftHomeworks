@@ -61,9 +61,18 @@
 		0E73D8782A380D4100CCD271 /* ICharacterNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */; };
 		0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */; };
 		0E73D8842A384F3000CCD271 /* KeyboardSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */; };
-		0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */; };
+		0E73D8862A38505400CCD271 /* KeyboardSupportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */; };
 		0E73D8882A385C4700CCD271 /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */; };
 		0E73D88D2A3891B100CCD271 /* FirebaseStorageManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */; };
+		0E7C1F142A39CADC000D71BB /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F132A39CADC000D71BB /* KeychainManager.swift */; };
+		0E7C1F172A39CBBD000D71BB /* UserSignInDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */; };
+		0E7C1F192A39D090000D71BB /* IKeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F182A39D090000D71BB /* IKeychainManager.swift */; };
+		0E7C1F1C2A39E5D0000D71BB /* IAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */; };
+		0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */; };
+		0E7C1F262A3AD813000D71BB /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */; };
+		0E7C1F282A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */; };
+		0E7C1F2A2A3B0EF9000D71BB /* INewSignInCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */; };
+		0EBE8F9C2A39BD370090941E /* IFirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
 		0EEA03DB2A1724C400B1EA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EEA03DA2A1724C400B1EA9C /* Assets.xcassets */; };
@@ -177,9 +186,18 @@
 		0E73D8772A380D4100CCD271 /* ICharacterNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICharacterNetworkManager.swift; sourceTree = "<group>"; };
 		0E73D8792A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRickAndMortyLocationNetworkManager.swift; sourceTree = "<group>"; };
 		0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSupportedViewController.swift; sourceTree = "<group>"; };
-		0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeyboardSupportedView.swift; sourceTree = "<group>"; };
+		0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSupportedView.swift; sourceTree = "<group>"; };
 		0E73D8872A385C4700CCD271 /* ProfilePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
 		0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManger.swift; sourceTree = "<group>"; };
+		0E7C1F132A39CADC000D71BB /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignInDetails.swift; sourceTree = "<group>"; };
+		0E7C1F182A39D090000D71BB /* IKeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IKeychainManager.swift; sourceTree = "<group>"; };
+		0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAppCoordinator.swift; sourceTree = "<group>"; };
+		0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColor.swift"; sourceTree = "<group>"; };
+		0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirstLaunchUserDefaultsManager.swift; sourceTree = "<group>"; };
+		0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INewSignInCoreDataManager.swift; sourceTree = "<group>"; };
+		0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirebaseStorageManager.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -557,8 +575,7 @@
 		0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */ = {
 			isa = PBXGroup;
 			children = (
-				0E73D8652A3306BB00CCD271 /* NetworkResponseCode */,
-				0E73D8632A32E96700CCD271 /* NetworkResponseCodeParser.swift */,
+				0E7C1F1D2A3AA74C000D71BB /* NetworkResponse */,
 				0E73D8682A332D6E00CCD271 /* IAlertRepresentable.swift */,
 			);
 			path = ResponseStatusCodeParser;
@@ -624,6 +641,7 @@
 				0EEFAF672A2E2A0400EA8A80 /* ILocationCoreDataManager.swift */,
 				0EEFAF652A2E29F400EA8A80 /* ICharacterCoreDataManager.swift */,
 				0E27E6C22A2919FB0010C571 /* CoreDataManager.swift */,
+				0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -632,7 +650,7 @@
 			isa = PBXGroup;
 			children = (
 				0E73D8832A384F3000CCD271 /* KeyboardSupportedViewController.swift */,
-				0E73D8852A38505400CCD271 /* IKeyboardSupportedView.swift */,
+				0E73D8852A38505400CCD271 /* KeyboardSupportedView.swift */,
 			);
 			path = KeyboardSupportedView;
 			sourceTree = "<group>";
@@ -641,8 +659,37 @@
 			isa = PBXGroup;
 			children = (
 				0E73D88C2A3891B100CCD271 /* FirebaseStorageManger.swift */,
+				0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		0E7C1F152A39CAE4000D71BB /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				0E7C1F132A39CADC000D71BB /* KeychainManager.swift */,
+				0E7C1F182A39D090000D71BB /* IKeychainManager.swift */,
+				0E7C1F162A39CBBD000D71BB /* UserSignInDetails.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		0E7C1F1D2A3AA74C000D71BB /* NetworkResponse */ = {
+			isa = PBXGroup;
+			children = (
+				0E73D8652A3306BB00CCD271 /* NetworkResponseCode */,
+				0E73D8632A32E96700CCD271 /* NetworkResponseCodeParser.swift */,
+			);
+			path = NetworkResponse;
+			sourceTree = "<group>";
+		};
+		0E7C1F242A3AD7FD000D71BB /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */,
+				0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		0EEA03C52A1724C300B1EA9C = {
@@ -710,7 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF1604B2A1E434C0026A628 /* Auth */,
-				0EEA04042A17261100B1EA9C /* Builder */,
+				0EEA04042A17261100B1EA9C /* AuthViewControllersFactory */,
 				0EEA03EC2A17261100B1EA9C /* Coordinator */,
 				0EF160322A1E19450026A628 /* ResetPassword */,
 				0EF160312A1E19350026A628 /* SignUp */,
@@ -758,12 +805,12 @@
 			path = AuthDesignSystem;
 			sourceTree = "<group>";
 		};
-		0EEA04042A17261100B1EA9C /* Builder */ = {
+		0EEA04042A17261100B1EA9C /* AuthViewControllersFactory */ = {
 			isa = PBXGroup;
 			children = (
 				0EEA04052A17261100B1EA9C /* AuthViewControllersFactory.swift */,
 			);
-			path = Builder;
+			path = AuthViewControllersFactory;
 			sourceTree = "<group>";
 		};
 		0EEA04342A1DA74700B1EA9C /* UserProfile */ = {
@@ -808,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				0EEA043D2A1DAB0900B1EA9C /* AppCoordinator.swift */,
+				0E7C1F1B2A39E5D0000D71BB /* IAppCoordinator.swift */,
 			);
 			path = AppCoordinator;
 			sourceTree = "<group>";
@@ -993,6 +1041,8 @@
 		0EF1604E2A1EFCD50026A628 /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				0E7C1F242A3AD7FD000D71BB /* UserDefaults */,
+				0E7C1F152A39CAE4000D71BB /* Keychain */,
 				0E73D8822A384E9B00CCD271 /* KeyboardSupportedView */,
 				0E73D8702A38090000CCD271 /* Firebase */,
 				0E73D8622A32E93400CCD271 /* ResponseStatusCodeParser */,
@@ -1001,6 +1051,7 @@
 				0EF1604C2A1EFCBC0026A628 /* Observing.swift */,
 				0E27E6792A25E39B0010C571 /* NSObject+className.swift */,
 				0E73D86A2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift */,
+				0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1182,6 +1233,7 @@
 			files = (
 				0EF160372A1E199F0026A628 /* SignInViewController.swift in Sources */,
 				0EEA040D2A17261100B1EA9C /* AuthDesignSystem+TextFields.swift in Sources */,
+				0E7C1F1C2A39E5D0000D71BB /* IAppCoordinator.swift in Sources */,
 				0EEFAF7A2A2ECBFB00EA8A80 /* FavoriteCharactersPresenter.swift in Sources */,
 				0E27E67A2A25E39B0010C571 /* NSObject+className.swift in Sources */,
 				0EEA04092A17261100B1EA9C /* IAuthCoordinator.swift in Sources */,
@@ -1190,6 +1242,7 @@
 				0EEA043E2A1DAB0900B1EA9C /* AppCoordinator.swift in Sources */,
 				0E73D85A2A3094EE00CCD271 /* UserDataRequestBuilder.swift in Sources */,
 				0E73D8582A308D1800CCD271 /* ProfileCoordinator.swift in Sources */,
+				0E7C1F172A39CBBD000D71BB /* UserSignInDetails.swift in Sources */,
 				0EEFAF912A2F4C2700EA8A80 /* IFavoriteCharactersPresenter.swift in Sources */,
 				0EEA040F2A17261100B1EA9C /* AuthView.swift in Sources */,
 				0E27E6B52A277DB70010C571 /* CharacterDetailsViewModel.swift in Sources */,
@@ -1199,10 +1252,11 @@
 				0E27E6842A25F4440010C571 /* RickAndMortyLocationNetworkManager.swift in Sources */,
 				0EEFAF6E2A2E400D00EA8A80 /* FavoritesCoordinator.swift in Sources */,
 				0EEFAF932A2F4CB600EA8A80 /* IFavoritesCoordinator.swift in Sources */,
+				0EBE8F9C2A39BD370090941E /* IFirebaseStorageManager.swift in Sources */,
 				0E27E68C2A2605FE0010C571 /* RickAndMortyCoordinator.swift in Sources */,
 				0EEA04082A17261100B1EA9C /* AuthCoordinator.swift in Sources */,
 				0E27E67C2A25EFE80010C571 /* LocationResponse.swift in Sources */,
-				0E73D8862A38505400CCD271 /* IKeyboardSupportedView.swift in Sources */,
+				0E73D8862A38505400CCD271 /* KeyboardSupportedView.swift in Sources */,
 				0EF1603A2A1E3B5E0026A628 /* ISignInViewModel.swift in Sources */,
 				0EF160482A1E3EA90026A628 /* ResetPasswordViewController.swift in Sources */,
 				0E27E6AD2A274DBA0010C571 /* Character.swift in Sources */,
@@ -1211,6 +1265,7 @@
 				0E73D85D2A31D7AB00CCD271 /* ActivityView.swift in Sources */,
 				0EF1602F2A1E08AF0026A628 /* AuthResult.swift in Sources */,
 				0E73D86B2A36DB4100CCD271 /* UIViewController+showInfoAlert.swift in Sources */,
+				0E7C1F192A39D090000D71BB /* IKeychainManager.swift in Sources */,
 				0E27E6962A26EE400010C571 /* LocationDetailsViewController.swift in Sources */,
 				0EF160422A1E3C710026A628 /* ISignUpViewModel.swift in Sources */,
 				0E27E6AB2A274C0D0010C571 /* RickAndMortyCharacterNetworkManager.swift in Sources */,
@@ -1218,6 +1273,7 @@
 				0EEFAF682A2E2A0400EA8A80 /* ILocationCoreDataManager.swift in Sources */,
 				0E73D8512A304DC200CCD271 /* IEntity.swift in Sources */,
 				0EEA040B2A17261100B1EA9C /* AuthDesignSystem.swift in Sources */,
+				0E7C1F142A39CADC000D71BB /* KeychainManager.swift in Sources */,
 				0EEFAF732A2E492700EA8A80 /* Location+initFromLocationEntity.swift in Sources */,
 				0E73D8532A308BC600CCD271 /* UserData.swift in Sources */,
 				0EEA04192A17261100B1EA9C /* AuthViewControllersFactory.swift in Sources */,
@@ -1231,6 +1287,7 @@
 				0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */,
 				0EEFAF8B2A2F498500EA8A80 /* IFavoritesViewModel.swift in Sources */,
 				0E73D8692A332D6E00CCD271 /* IAlertRepresentable.swift in Sources */,
+				0E7C1F2A2A3B0EF9000D71BB /* INewSignInCoreDataManager.swift in Sources */,
 				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0E27E69E2A26F2E00010C571 /* CharactersCollectionViewCell.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
@@ -1240,6 +1297,7 @@
 				0EEFAF782A2EC50800EA8A80 /* FavoriteCharactersViewController.swift in Sources */,
 				0EEFAF812A2EF46D00EA8A80 /* CharacterDetails+initFromCharacterEntity.swift in Sources */,
 				0EF160352A1E19910026A628 /* SignInView.swift in Sources */,
+				0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */,
 				0E73D8642A32E96700CCD271 /* NetworkResponseCodeParser.swift in Sources */,
 				0EF1604A2A1E3EC80026A628 /* IResetPasswordViewModel.swift in Sources */,
 				0E73D8612A31E29500CCD271 /* AlertBuilder.swift in Sources */,
@@ -1250,6 +1308,7 @@
 				0EEFAF972A2F520300EA8A80 /* ILocationDetailsViewModel.swift in Sources */,
 				0EF1604D2A1EFCBC0026A628 /* Observing.swift in Sources */,
 				0EEFAF8F2A2F4AC500EA8A80 /* ILocationsViewModel.swift in Sources */,
+				0E7C1F262A3AD813000D71BB /* UserDefaultsManager.swift in Sources */,
 				0EF1603E2A1E3C240026A628 /* SignUpView.swift in Sources */,
 				0E27E6AF2A277BFE0010C571 /* CharacterDetails.swift in Sources */,
 				0E27E6C32A2919FB0010C571 /* CoreDataManager.swift in Sources */,
@@ -1279,6 +1338,7 @@
 				0EEFAF952A2F4F0A00EA8A80 /* ICharacterDetailsViewModel.swift in Sources */,
 				0E27E6DA2A29F67D0010C571 /* FavoritesView.swift in Sources */,
 				0E27E6D42A2998250010C571 /* RickAndMortyData.xcdatamodeld in Sources */,
+				0E7C1F282A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift in Sources */,
 				0EEFAF992A2F52AC00EA8A80 /* IRickAndMortyCoordinator.swift in Sources */,
 				0E73D87A2A380F0300CCD271 /* IRickAndMortyLocationNetworkManager.swift in Sources */,
 				0E73D8672A3306D500CCD271 /* NetworkResponseCode.swift in Sources */,
@@ -1355,7 +1415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1409,7 +1469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1425,6 +1485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FinalProject/FinalProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NLAP4M3WXM;
@@ -1462,6 +1523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FinalProject/FinalProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NLAP4M3WXM;

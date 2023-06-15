@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class SignUpViewController: AuthViewController {
     private var signUpViewModel: ISignUpViewModel
     private var signUpView: SignUpView
@@ -22,11 +23,11 @@ final class SignUpViewController: AuthViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        self.configure()
     }
     override func update<T>(with value: T) {
         if let error = value as? IAlertRepresentable {
-            presentAlert(of: error)
+            self.presentAlert(of: error)
         }
         super.update(with: value)
     }
@@ -37,14 +38,15 @@ final class SignUpViewController: AuthViewController {
             .setFieldsToShowAlert(of: errorCode)
             .addAction(UIAlertAction(title: errorCode.buttonTitle, style: .default, handler: { [weak self] _ in
                 self?.signUpViewModel.goBackToSignIn()
-            })).build()
+            }))
+            .build()
         self.present(alert, animated: true, completion: nil)
     }
 }
 
 private extension SignUpViewController {
     func configure() {
-        signUpView.submitSignUpTapHandler = {[weak self] email, password, repeatPassword in
+        self.signUpView.submitSignUpTapHandler = { [weak self] email, password, repeatPassword in
             guard !email.isEmpty,
                   !password.isEmpty,
                   !repeatPassword.isEmpty else {

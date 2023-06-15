@@ -19,7 +19,7 @@ final class FavoritesViewController: UIViewController {
         self.viewModel = viewModel
         self.favoriteView = FavoritesView()
         super.init(nibName: nil, bundle: nil)
-        configure()
+        self.configure()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,7 +35,7 @@ final class FavoritesViewController: UIViewController {
 private extension FavoritesViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        configureFavoriteView()
+        self.configureFavoriteView()
     }
     
     func configureFavoriteView() {
@@ -43,7 +43,7 @@ private extension FavoritesViewController {
         self.favoriteView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide.snp.edges)
         }
-        configureFavoriteViewHandlers()
+        self.configureFavoriteViewHandlers()
     }
     
     func configureFavoriteViewHandlers() {

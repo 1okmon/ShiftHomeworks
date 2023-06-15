@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ProfileCoordinator: IProfileCoordinator {
+final class ProfileCoordinator: IProfileCoordinator {
     var signOutHandler: (() -> Void)?
     private var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        start()
+        self.start()
     }
     
     func signOut() {

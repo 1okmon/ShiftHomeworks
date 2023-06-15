@@ -9,7 +9,6 @@ import UIKit
 
 private enum Metrics {
     static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
-    static let activityIndicatorVerticalOffset = -50
 }
 
 final class ActivityView: UIView {
@@ -19,7 +18,7 @@ final class ActivityView: UIView {
         self.activityIndicatorView = UIActivityIndicatorView(style: .large)
         super.init(frame: .zero)
         superview.addSubview(self)
-        configure()
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -35,11 +34,6 @@ final class ActivityView: UIView {
         self.isHidden = true
         self.activityIndicatorView.stopAnimating()
     }
-    
-    func deleteFromSuperview() {
-        self.activityIndicatorView.removeFromSuperview()
-        self.removeFromSuperview()
-    }
 }
 
 private extension ActivityView {
@@ -49,7 +43,7 @@ private extension ActivityView {
             make.edges.equalToSuperview()
         }
         self.backgroundColor = Metrics.activityViewBackgroundColor
-        configureActivityIndicatorView()
+        self.configureActivityIndicatorView()
     }
     
     func configureActivityIndicatorView() {

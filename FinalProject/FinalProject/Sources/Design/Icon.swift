@@ -14,9 +14,9 @@ enum Icon {
         
         static func image(_ isFavorite: Bool = false) -> UIImage? {
             if isFavorite {
-                return added
+                return self.added
             }
-            return notAdded
+            return self.notAdded
         }
     }
 }

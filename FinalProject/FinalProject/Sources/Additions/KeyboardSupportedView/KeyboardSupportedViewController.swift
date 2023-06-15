@@ -27,13 +27,13 @@ class KeyboardSupportedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        self.configure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,14 +45,14 @@ class KeyboardSupportedViewController: UIViewController {
 private extension KeyboardSupportedViewController {
     func configure() {
         self.view.backgroundColor = Metrics.backgroundColor
-        configureView()
+        self.configureView()
     }
     
     func configureView() {
         self.view.addSubview(self.keyboardSupportedView)
-        configureViewHandlers()
-        addAuthGestureRecognizer()
-        configureViewConstraints()
+        self.configureViewHandlers()
+        self.addAuthGestureRecognizer()
+        self.configureViewConstraints()
     }
     
     func configureViewConstraints() {

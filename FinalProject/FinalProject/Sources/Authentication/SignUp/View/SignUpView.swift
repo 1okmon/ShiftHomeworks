@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class SignUpView: AuthView {
     var submitSignUpTapHandler: ((String, String, String) -> Void)?
     private let titleLabel: UILabel
@@ -21,10 +22,12 @@ final class SignUpView: AuthView {
         self.passwordTextField = authDesignSystem.passwordTextField
         self.repeatPasswordTextField = authDesignSystem.repeatPasswordTextField
         self.submitSignUpButton = authDesignSystem.submitSignUpButton
-        super.init(titleLabel: titleLabel,
-                   textFields: [emailTextField, passwordTextField, repeatPasswordTextField],
-                   buttons: [submitSignUpButton])
-        configure()
+        super.init(titleLabel: self.titleLabel,
+                   textFields: [self.emailTextField,
+                                self.passwordTextField,
+                                self.repeatPasswordTextField],
+                   buttons: [self.submitSignUpButton])
+        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -34,14 +37,14 @@ final class SignUpView: AuthView {
 
 private extension SignUpView {
     func configure() {
-        submitSignUpButton.addTarget(self, action: #selector(submitSignUpButtonTapped), for: .touchUpInside)
+        self.submitSignUpButton.addTarget(self, action: #selector(self.submitSignUpButtonTapped(_:)), for: .touchUpInside)
     }
     
-    @objc func submitSignUpButtonTapped() {
-        guard let handler = submitSignUpTapHandler,
-              let email = emailTextField.text,
-              let password = passwordTextField.text,
-              let repeatPassword = repeatPasswordTextField.text else {
+    @objc func submitSignUpButtonTapped(_ sender: UIButton) {
+        guard let handler = self.submitSignUpTapHandler,
+              let email = self.emailTextField.text,
+              let password = self.passwordTextField.text,
+              let repeatPassword = self.repeatPasswordTextField.text else {
             return
         }
         handler(email, password, repeatPassword)

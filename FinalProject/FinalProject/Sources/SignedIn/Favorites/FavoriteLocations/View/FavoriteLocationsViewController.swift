@@ -19,7 +19,7 @@ final class FavoriteLocationsViewController: LocationsViewController {
     
     override func update<T>(with value: T) {
         super.update(with: value)
-        guard let result = value as? (locations: [Location], Bool, Bool) else { return }
+        guard let result = value as? (locations: [Location], page: Page) else { return }
         self.locationsCountLabel.isHidden = !result.locations.isEmpty
     }
     
@@ -27,7 +27,7 @@ final class FavoriteLocationsViewController: LocationsViewController {
         self.viewModel = viewModel
         self.locationsCountLabel = UILabel()
         super.init(viewModel: viewModel)
-        configureLocationsCountLabel()
+        self.configureLocationsCountLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +35,7 @@ final class FavoriteLocationsViewController: LocationsViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.reloadLocations()
+        self.viewModel.reloadLocations()
     }
 }
 

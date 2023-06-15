@@ -20,10 +20,26 @@ final class CoreDataManager: NSObject {
     private override init() {
         self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
     }
+}
+
+private extension CoreDataManager {
+    var appDelegate: AppDelegate {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("AppDelegate doesn't exist")
+        }
+        return appDelegate
+    }
     
+    var context: NSManagedObjectContext {
+        self.appDelegate.persistentContainer.viewContext
+    }
+}
+
+// MARK: New sign in extension
+extension CoreDataManager: INewSignInCoreDataManager {
     func clean() {
-        deleteAllLocations()
-        deleteAllCharacters()
+        self.deleteAllLocations()
+        self.deleteAllCharacters()
     }
     
     func loadUserData() {
@@ -54,26 +70,13 @@ final class CoreDataManager: NSObject {
     }
 }
 
-private extension CoreDataManager {
-    var appDelegate: AppDelegate {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("AppDelegate doesn't exist")
-        }
-        return appDelegate
-    }
-    
-    var context: NSManagedObjectContext {
-        self.appDelegate.persistentContainer.viewContext
-    }
-}
-
 // MARK: LocationEntity extension
 extension CoreDataManager: ILocationCoreDataManager {
     func createLocation(_ locationDetails: LocationDetails) {
-        guard fetchLocation(with: locationDetails.id) == nil else { return }
-        guard let locationEntityDescription = NSEntityDescription
-            .entity(forEntityName: EntityName.location,
-                    in: self.context) else { return }
+        guard self.fetchLocation(with: locationDetails.id) == nil,
+              let locationEntityDescription = NSEntityDescription
+                    .entity(forEntityName: EntityName.location,
+                            in: self.context) else { return }
         let location = LocationEntity(entity: locationEntityDescription, insertInto: self.context)
         location.id = Int32(locationDetails.id)
         location.name = locationDetails.name
@@ -94,7 +97,7 @@ extension CoreDataManager: ILocationCoreDataManager {
     func fetchLocation(with id: Int) -> LocationEntity? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.location)
         do {
-            let locations = try? context.fetch(fetchRequest) as? [LocationEntity]
+            let locations = try? self.context.fetch(fetchRequest) as? [LocationEntity]
             return locations?.first(where: { $0.id == id })
         }
     }
@@ -107,14 +110,13 @@ extension CoreDataManager: ILocationCoreDataManager {
                 self?.context.delete(location)
             })
         }
-        self.updateRealtimeDatabase(.locations)
         self.appDelegate.saveContext()
     }
     
     func deleteLocation(with id: Int) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.location)
         do {
-            guard let locations = try? context.fetch(fetchRequest) as? [LocationEntity],
+            guard let locations = try? self.context.fetch(fetchRequest) as? [LocationEntity],
                   let location = locations.first(where: { $0.id == id }) else { return }
             self.context.delete(location)
         }
@@ -126,10 +128,10 @@ extension CoreDataManager: ILocationCoreDataManager {
 // MARK: CharacterEntity extension
 extension CoreDataManager: ICharacterCoreDataManager {
     func createCharacter(_ characterDetails: CharacterDetails) {
-        guard fetchCharacter(with: characterDetails.id) == nil else { return }
-        guard let characterEntityDescription = NSEntityDescription
-            .entity(forEntityName: EntityName.character,
-                    in: self.context) else { return }
+        guard self.fetchCharacter(with: characterDetails.id) == nil,
+              let characterEntityDescription = NSEntityDescription
+                    .entity(forEntityName: EntityName.character,
+                            in: self.context) else { return }
         
         let character = CharacterEntity(entity: characterEntityDescription, insertInto: self.context)
         character.id = Int32(characterDetails.id)
@@ -154,7 +156,7 @@ extension CoreDataManager: ICharacterCoreDataManager {
     func fetchCharacter(with id: Int) -> CharacterEntity? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
         do {
-            let characters = try? context.fetch(fetchRequest) as? [CharacterEntity]
+            let characters = try? self.context.fetch(fetchRequest) as? [CharacterEntity]
             return characters?.first(where: { $0.id == id })
         }
     }
@@ -168,13 +170,12 @@ extension CoreDataManager: ICharacterCoreDataManager {
             })
         }
         self.appDelegate.saveContext()
-        self.updateRealtimeDatabase(.characters)
     }
     
     func deleteCharacter(with id: Int) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: EntityName.character)
         do {
-            guard let characters = try? context.fetch(fetchRequest) as? [CharacterEntity],
+            guard let characters = try? self.context.fetch(fetchRequest) as? [CharacterEntity],
                   let character = characters.first(where: { $0.id == id }) else { return }
             self.context.delete(character)
         }
@@ -193,9 +194,9 @@ private extension CoreDataManager {
         var entities: [IEntity]
         switch type {
         case .characters:
-            entities = fetchCharacters()
+            entities = self.fetchCharacters()
         case .locations:
-            entities = fetchLocations()
+            entities = self.fetchLocations()
         }
         var favoriteIds = [Int]()
         entities.forEach { entity in
