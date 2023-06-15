@@ -70,10 +70,10 @@ private extension CoreDataManager {
 // MARK: LocationEntity extension
 extension CoreDataManager: ILocationCoreDataManager {
     func createLocation(_ locationDetails: LocationDetails) {
-        guard self.fetchLocation(with: locationDetails.id) == nil else { return }
-        guard let locationEntityDescription = NSEntityDescription
-            .entity(forEntityName: EntityName.location,
-                    in: self.context) else { return }
+        guard self.fetchLocation(with: locationDetails.id) == nil,
+              let locationEntityDescription = NSEntityDescription
+                    .entity(forEntityName: EntityName.location,
+                            in: self.context) else { return }
         let location = LocationEntity(entity: locationEntityDescription, insertInto: self.context)
         location.id = Int32(locationDetails.id)
         location.name = locationDetails.name
@@ -125,10 +125,10 @@ extension CoreDataManager: ILocationCoreDataManager {
 // MARK: CharacterEntity extension
 extension CoreDataManager: ICharacterCoreDataManager {
     func createCharacter(_ characterDetails: CharacterDetails) {
-        guard self.fetchCharacter(with: characterDetails.id) == nil else { return }
-        guard let characterEntityDescription = NSEntityDescription
-            .entity(forEntityName: EntityName.character,
-                    in: self.context) else { return }
+        guard self.fetchCharacter(with: characterDetails.id) == nil,
+              let characterEntityDescription = NSEntityDescription
+                    .entity(forEntityName: EntityName.character,
+                            in: self.context) else { return }
         
         let character = CharacterEntity(entity: characterEntityDescription, insertInto: self.context)
         character.id = Int32(characterDetails.id)

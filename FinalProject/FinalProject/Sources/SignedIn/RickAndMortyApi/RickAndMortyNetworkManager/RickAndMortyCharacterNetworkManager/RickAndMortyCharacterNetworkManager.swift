@@ -33,8 +33,9 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
                         let errorCode = NetworkResponseCodeParser().parse(error: error)
                         completion?(nil, nil, errorCode)
                     }
-                    guard let data = data, error == nil else { return }
-                    guard let image = UIImage(data: data) else { return }
+                    guard let data = data,
+                          error == nil,
+                          let image = UIImage(data: data) else { return }
                     self?.imagesManager.append(image: image, with: urlString)
                     completion?(image, urlString, nil)
                 }
@@ -54,8 +55,9 @@ final class RickAndMortyCharacterNetworkManager: NSObject, ICharacterNetworkMana
                 let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?(nil, errorCode)
             }
-            guard let data = data, error == nil else { return }
-            guard let result: CharacterResponse = try? JSONDecoder().decode(CharacterResponse.self, from: data) else { return }
+            guard let data = data,
+                  error == nil,
+                  let result: CharacterResponse = try? JSONDecoder().decode(CharacterResponse.self, from: data) else { return }
             let character = T(characterResponse: result)
             completion?(character, nil)
         }

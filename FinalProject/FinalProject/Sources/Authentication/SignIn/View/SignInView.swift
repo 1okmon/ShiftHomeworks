@@ -64,8 +64,8 @@ private extension SignInView {
     }
     
     @objc func signInButtonTapped(_ sender: UIButton) {
-        guard let handler = self.signInTapHandler else { return }
-        guard let email = self.emailTextField.text,
+        guard let handler = self.signInTapHandler,
+              let email = self.emailTextField.text,
               let password = self.passwordTextField.text else {
             return
         }

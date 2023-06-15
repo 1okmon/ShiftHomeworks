@@ -16,7 +16,7 @@ private enum Metrics {
     }
 }
 
-class CharactersView: UIView {
+final class CharactersView: UIView {
     var cellTapHandler: ((Int) -> Void)?
     private let collectionView: UICollectionView
     private var characters: [Int: Character]

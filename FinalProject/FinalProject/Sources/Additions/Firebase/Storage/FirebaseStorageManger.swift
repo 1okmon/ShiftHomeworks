@@ -11,15 +11,15 @@ import FirebaseStorage
 
 private enum Metrics {
     static let userPhotoPath = "UsersPhotos"
-    static let tenMegabytes = Int64(10*1024*1024)
+    static let tenMegabytes = Int64(10 * 1024 * 1024)
     static let compressionQuality = 0.5
 }
 
 final class FirebaseStorageManger: IFirebaseStorageManager {
     func uploadImage(_ image: UIImage, completion: ((URL?, Error?) -> Void)?) {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
+        guard let userID = Auth.auth().currentUser?.uid,
+              let imageData = image.jpegData(compressionQuality: Metrics.compressionQuality) else { return }
         let ref = Storage.storage().reference().child(Metrics.userPhotoPath).child(userID)
-        guard let imageData = image.jpegData(compressionQuality: Metrics.compressionQuality) else { return }
         ref.putData(imageData) { _, error in
             guard error == nil else {
                 completion?(nil, error)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfilePresenter: IProfilePresenter {
+final class ProfilePresenter: IProfilePresenter {
     private unowned var viewController: ProfileViewController
     private var realtimeDatabaseManager: IUserDataRealtimeDatabaseManager
     private var firebaseStorageManager: IFirebaseStorageManager

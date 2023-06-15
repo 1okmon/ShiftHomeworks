@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileCoordinator: IProfileCoordinator {
+final class ProfileCoordinator: IProfileCoordinator {
     var signOutHandler: (() -> Void)?
     private var navigationController: UINavigationController
     

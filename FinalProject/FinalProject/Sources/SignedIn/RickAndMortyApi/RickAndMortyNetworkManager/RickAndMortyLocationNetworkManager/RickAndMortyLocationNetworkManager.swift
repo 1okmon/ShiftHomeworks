@@ -21,9 +21,9 @@ final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations
                 let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?([], nil, nil, errorCode)
             }
-            guard let data = data, error == nil else { return }
-            
-            guard let result: LocationsResponse = try? JSONDecoder().decode(LocationsResponse.self, from: data) else { return }
+            guard let data = data,
+                  error == nil,
+                  let result: LocationsResponse = try? JSONDecoder().decode(LocationsResponse.self, from: data) else { return }
             var locations: [Location] = []
             result.results.forEach { location in
                 locations.append(Location(locationResponse: location))
@@ -40,8 +40,9 @@ final class RickAndMortyLocationNetworkManager: ILocationNetworkManagerLocations
                 let errorCode = NetworkResponseCodeParser().parse(error: error)
                 completion?(nil, errorCode)
             }
-            guard let data = data, error == nil else { return }
-            guard let result: LocationResponse = try? JSONDecoder().decode(LocationResponse.self, from: data) else { return }
+            guard let data = data,
+                  error == nil,
+                  let result: LocationResponse = try? JSONDecoder().decode(LocationResponse.self, from: data) else { return }
             let locationDetailed = LocationDetails(locationResponse: result)
             completion?(locationDetailed, nil)
         }

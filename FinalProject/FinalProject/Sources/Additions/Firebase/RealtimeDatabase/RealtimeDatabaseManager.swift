@@ -54,9 +54,8 @@ final class RealtimeDatabaseManager: INewUserRealtimeDatabaseManager, IUserDataR
     func loadUserData(completion: ((UserDataResponse) -> Void)?) {
         guard let ref = self.userReferenceInDatabase() else { return }
         ref.observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [String: Any] else { return }
-            
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []),
+            guard let value = snapshot.value as? [String: Any],
+                  let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []),
                   let userData = try? JSONDecoder().decode(UserDataResponse.self, from: jsonData) else { return }
             completion?(userData)
         })
