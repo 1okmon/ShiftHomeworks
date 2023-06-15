@@ -13,13 +13,15 @@ private enum Metrics {
     static let font = UIFont.systemFont(ofSize: 24)
 }
 
+typealias Page = (isFirst: Bool, isLast: Bool)
+
 final class FavoriteLocationsViewController: LocationsViewController {
     private let viewModel: IFavoriteLocationsViewModel
     private var locationsCountLabel: UILabel
     
     override func update<T>(with value: T) {
         super.update(with: value)
-        guard let result = value as? (locations: [Location], Bool, Bool) else { return }
+        guard let result = value as? (locations: [Location], page: Page) else { return }
         self.locationsCountLabel.isHidden = !result.locations.isEmpty
     }
     

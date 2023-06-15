@@ -44,10 +44,10 @@ class LocationsViewController: UIViewController, IObserver {
             }
             return
         }
-        guard let result = value as? (locations: [Location], isFirstPage: Bool, isLastPage: Bool) else { return }
+        guard let result = value as? (locations: [Location], page: Page) else { return }
         self.locationView.update(with: result.locations,
-                                 isFirstPage: result.isFirstPage,
-                                 isLastPage: result.isLastPage)
+                                 isFirstPage: result.page.isFirst,
+                                 isLastPage: result.page.isLast)
     }
 }
 

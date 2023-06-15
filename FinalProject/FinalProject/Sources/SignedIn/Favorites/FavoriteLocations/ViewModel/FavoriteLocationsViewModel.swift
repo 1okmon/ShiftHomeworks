@@ -20,7 +20,7 @@ final class FavoriteLocationsViewModel: LocationsViewModel, IFavoriteLocationsVi
         locationsEntity.forEach { locationEntity in
             locations.append(Location(locationEntity: locationEntity))
         }
-        self.locations.value = (locations: locations, isFirstPage: true, isLastPage: true)
+        self.locations.value = (locations: locations, page: Page(isFirst: true, isLast: true))
     }
     
     override init(coordinator: ILocationsRickAndMortyCoordinator) {
