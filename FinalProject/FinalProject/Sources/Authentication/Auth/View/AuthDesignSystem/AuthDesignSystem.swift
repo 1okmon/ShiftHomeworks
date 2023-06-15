@@ -76,15 +76,4 @@ final class AuthDesignSystem {
         button.isUserInteractionEnabled = true
         return button
     }
-    
-    func alert(title: String, message: String, buttonTitles: [String], buttonActions: [((UIAlertAction) -> Void)?] = []) -> UIAlertController {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        for buttonId in 0 ..< buttonTitles.count {
-            let buttonAction = buttonId < buttonActions.count ? buttonActions[buttonId] : nil
-            alert.addAction(UIAlertAction(title: buttonTitles[buttonId],
-                                          style: UIAlertAction.Style.default,
-                                          handler: buttonAction))
-        }
-        return alert
-    }
 }

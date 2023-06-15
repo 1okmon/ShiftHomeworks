@@ -12,6 +12,7 @@ target 'FinalProject' do
   pod 'Firebase/Database', :inhibit_warnings => true
   pod 'Firebase/Storage'
   pod 'Locksmith'
+  pod 'Periphery'
 end
 
 post_install do |pi|

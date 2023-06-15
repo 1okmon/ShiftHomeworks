@@ -108,6 +108,7 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - Periphery (2.13.0)
   - PromisesObjC (2.2.0)
   - SwiftLint (0.52.2)
 
@@ -117,6 +118,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - Locksmith
+  - Periphery
   - SwiftLint
 
 SPEC REPOS:
@@ -138,6 +140,7 @@ SPEC REPOS:
     - leveldb-library
     - Locksmith
     - nanopb
+    - Periphery
     - PromisesObjC
     - SwiftLint
 
@@ -159,9 +162,10 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  Periphery: e50e1c9491217504ff5d8b45a977d1ab3dc89e4d
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   SwiftLint: 1ac76dac888ca05cb0cf24d0c85887ec1209961d
 
-PODFILE CHECKSUM: 4ff80cca3b5f29c0e80284458aac8775886bb2d6
+PODFILE CHECKSUM: 5eb7a8e1d8b81d6624b21d54547e4b32ded15dbd
 
 COCOAPODS: 1.12.1

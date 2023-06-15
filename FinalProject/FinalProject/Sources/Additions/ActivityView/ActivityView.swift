@@ -9,7 +9,6 @@ import UIKit
 
 private enum Metrics {
     static let activityViewBackgroundColor = Theme.backgroundColor.withAlphaComponent(0.8)
-    static let activityIndicatorVerticalOffset = -50
 }
 
 final class ActivityView: UIView {
@@ -34,11 +33,6 @@ final class ActivityView: UIView {
     func stopAnimating() {
         self.isHidden = true
         self.activityIndicatorView.stopAnimating()
-    }
-    
-    func deleteFromSuperview() {
-        self.activityIndicatorView.removeFromSuperview()
-        self.removeFromSuperview()
     }
 }
 
