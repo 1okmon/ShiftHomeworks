@@ -13,6 +13,7 @@ final class AuthViewModel {
     private var result: Observable<IAlertRepresentable>
     private var userSignInDetails: Observable<UserSignInDetails>
     private var keychainManager: IKeychainManager
+    private let coreDataManager: INewSignInCoreDataManager
     
     init(coordinator: IAuthCoordinator, firebaseNetworkManager: IFirebaseNetworkManager) {
         self.coordinator = coordinator
@@ -20,6 +21,7 @@ final class AuthViewModel {
         self.userSignInDetails = Observable<UserSignInDetails>()
         self.firebaseNetworkManager = firebaseNetworkManager
         self.result = Observable<IAlertRepresentable>()
+        self.coreDataManager = CoreDataManager.shared
     }
     
     func subscribe(observer: IObserver) {
@@ -41,7 +43,9 @@ extension AuthViewModel: IAuthViewModel {
             self.firebaseNetworkManager.signIn(with: userSignInDetails.email, userSignInDetails.password, completion: { [weak self] result in
                 if case AuthResult.successSignIn = result {
                     self?.coordinator.signInConfirmed()
+                    self?.coreDataManager.loadUserData()
                 } else {
+                    self?.coreDataManager.clean()
                     self?.keychainManager.deleteSingInDetails()
                     self?.result.value = result
                 }
@@ -56,6 +60,8 @@ extension AuthViewModel: IAuthViewModel {
                 return
             }
             self?.keychainManager.update(email: email, password: password)
+            self?.coreDataManager.clean()
+            self?.coreDataManager.loadUserData()
             self?.coordinator.signInConfirmed()
         })
     }

@@ -20,7 +20,23 @@ final class CoreDataManager: NSObject {
     private override init() {
         self.realtimeDatabaseManager = RealtimeDatabaseManager.shared
     }
+}
+
+private extension CoreDataManager {
+    var appDelegate: AppDelegate {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("AppDelegate doesn't exist")
+        }
+        return appDelegate
+    }
     
+    var context: NSManagedObjectContext {
+        self.appDelegate.persistentContainer.viewContext
+    }
+}
+
+// MARK: New sign in extension
+extension CoreDataManager: INewSignInCoreDataManager {
     func clean() {
         self.deleteAllLocations()
         self.deleteAllCharacters()
@@ -51,19 +67,6 @@ final class CoreDataManager: NSObject {
                 }
             })
         }
-    }
-}
-
-private extension CoreDataManager {
-    var appDelegate: AppDelegate {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            fatalError("AppDelegate doesn't exist")
-        }
-        return appDelegate
-    }
-    
-    var context: NSManagedObjectContext {
-        self.appDelegate.persistentContainer.viewContext
     }
 }
 

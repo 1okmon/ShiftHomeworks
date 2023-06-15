@@ -71,6 +71,7 @@
 		0E7C1F232A3AC44B000D71BB /* UIColor+themeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */; };
 		0E7C1F262A3AD813000D71BB /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */; };
 		0E7C1F282A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */; };
+		0E7C1F2A2A3B0EF9000D71BB /* INewSignInCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */; };
 		0EBE8F9C2A39BD370090941E /* IFirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */; };
 		0EEA03D22A1724C300B1EA9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */; };
 		0EEA03D42A1724C300B1EA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEA03D32A1724C300B1EA9C /* SceneDelegate.swift */; };
@@ -195,6 +196,7 @@
 		0E7C1F222A3AC44B000D71BB /* UIColor+themeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+themeColor.swift"; sourceTree = "<group>"; };
 		0E7C1F252A3AD813000D71BB /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		0E7C1F272A3AD975000D71BB /* IFirstLaunchUserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirstLaunchUserDefaultsManager.swift; sourceTree = "<group>"; };
+		0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INewSignInCoreDataManager.swift; sourceTree = "<group>"; };
 		0EBE8F9B2A39BD370090941E /* IFirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFirebaseStorageManager.swift; sourceTree = "<group>"; };
 		0EEA03CE2A1724C300B1EA9C /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EEA03D12A1724C300B1EA9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 				0EEFAF672A2E2A0400EA8A80 /* ILocationCoreDataManager.swift */,
 				0EEFAF652A2E29F400EA8A80 /* ICharacterCoreDataManager.swift */,
 				0E27E6C22A2919FB0010C571 /* CoreDataManager.swift */,
+				0E7C1F292A3B0EF9000D71BB /* INewSignInCoreDataManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				0EEFAF712A2E451A00EA8A80 /* FavoriteLocationsViewModel.swift in Sources */,
 				0EEFAF8B2A2F498500EA8A80 /* IFavoritesViewModel.swift in Sources */,
 				0E73D8692A332D6E00CCD271 /* IAlertRepresentable.swift in Sources */,
+				0E7C1F2A2A3B0EF9000D71BB /* INewSignInCoreDataManager.swift in Sources */,
 				0E27E6592A24BC9A0010C571 /* Theme.swift in Sources */,
 				0E27E69E2A26F2E00010C571 /* CharactersCollectionViewCell.swift in Sources */,
 				0EEA04392A1DA7F300B1EA9C /* ProfileViewController.swift in Sources */,
