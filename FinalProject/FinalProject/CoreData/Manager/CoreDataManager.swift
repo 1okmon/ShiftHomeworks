@@ -46,7 +46,9 @@ extension CoreDataManager: INewSignInCoreDataManager {
         let characterLoadManager = RickAndMortyCharacterNetworkManager.shared
         let locationLoadManager = RickAndMortyLocationNetworkManager.shared
         self.realtimeDatabaseManager.loadUserData { userData in
+            var localFavoriteCharacters = self.fetchCharacters()
             userData.favoriteCharacters?.forEach({ [weak self] id in
+                localFavoriteCharacters = localFavoriteCharacters.filter({ $0.id != id })
                 characterLoadManager.loadCharacter(with: id) { [weak self] (character: CharacterDetails?, _) in
                     guard let character = character else { return }
                     characterLoadManager.loadImage(from: character.imageUrl) { image, _, _ in
@@ -58,7 +60,11 @@ extension CoreDataManager: INewSignInCoreDataManager {
                     }
                 }
             })
+            localFavoriteCharacters.forEach { self.deleteCharacter(with: Int($0.id))}
+            
+            var localFavoriteLocations = self.fetchLocations()
             userData.favoriteLocations?.forEach({ [weak self] id in
+                localFavoriteLocations = localFavoriteLocations.filter({ $0.id != id })
                 locationLoadManager.loadLocation(with: id) { location, _ in
                     guard let location = location else { return }
                     DispatchQueue.main.async {
@@ -66,6 +72,7 @@ extension CoreDataManager: INewSignInCoreDataManager {
                     }
                 }
             })
+            localFavoriteLocations.forEach { self.deleteLocation(with: Int($0.id))}
         }
     }
 }
