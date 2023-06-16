@@ -10,7 +10,8 @@ import UIKit
 private enum Metrics {
     static let defaultProfileImage = UIImage(systemName: "person")?.withTintColor(Theme.tintColor).withRenderingMode(.alwaysOriginal)
     static let editingModeImage = UIImage(systemName: "photo")?.withTintColor(.black).withRenderingMode(.alwaysOriginal)
-    static let backgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.6)
+    static let editModeBackgroundColor = Theme.itemsBackgroundColor.withAlphaComponent(0.8)
+    static let normalBackgroundColor = UIColor.color(light: .lightGray, dark: .darkGray)
     static let cornerRadius: CGFloat = 70
 }
 
@@ -43,6 +44,7 @@ final class ProfilePhotoView: UIView {
     }
     
     func update(with image: UIImage?) {
+        let image = image == nil ? Metrics.defaultProfileImage : image
         self.photoImageView.image = image?.withRenderingMode(.alwaysOriginal)
         self.activityView?.stopAnimating()
     }
@@ -66,6 +68,7 @@ private extension ProfilePhotoView {
         self.photoImageView.isUserInteractionEnabled = true
         self.update(with: Metrics.defaultProfileImage)
         self.photoImageView.contentMode = .scaleAspectFill
+        self.photoImageView.backgroundColor = Metrics.normalBackgroundColor
     }
     
     func configureEditingCurtainView() {
@@ -73,7 +76,7 @@ private extension ProfilePhotoView {
         self.editingCurtainImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.editingCurtainImageView.backgroundColor = Metrics.backgroundColor
+        self.editingCurtainImageView.backgroundColor = Metrics.editModeBackgroundColor
         self.editingCurtainImageView.image = Metrics.editingModeImage
         self.editingCurtainImageView.contentMode = .scaleAspectFit
         self.editingCurtainImageView.alpha = 0

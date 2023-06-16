@@ -37,7 +37,11 @@ final class ProfilePresenter: IProfilePresenter {
     
     func fetchRemoteData() {
         self.realtimeDatabaseManager.loadUserData { [weak self] userDataResponse in
-            guard let imageUrl = userDataResponse.imageUrl else { return }
+            self?.viewController.update(with: UserData(userDataResponse: userDataResponse))
+            guard let imageUrl = userDataResponse.imageUrl else {
+                self?.viewController.update(with: nil)
+                return
+            }
             self?.firebaseStorageManager.loadImage(from: imageUrl, completion: { [weak self] data, error in
                 if let error = error {
                     let alertRepresentableError = NetworkResponseCodeParser().parse(error: error)
@@ -46,7 +50,6 @@ final class ProfilePresenter: IProfilePresenter {
                 guard let data = data else { return }
                 self?.viewController.update(with: UIImage(data: data))
             })
-            self?.viewController.update(with: UserData(userDataResponse: userDataResponse))
         }
     }
     
