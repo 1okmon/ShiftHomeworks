@@ -151,7 +151,7 @@ private extension ProfileView {
     func configureSignOutButton() {
         self.scrollView.addSubview(self.signOutButton)
         self.signOutButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self).inset(Metrics.Button.edgeInset)
+            make.top.equalTo(self.lastNameRow.label.snp.bottom).offset(Metrics.Button.height)
             make.centerX.equalTo(self)
             make.width.equalTo(Metrics.Button.width)
             make.height.equalTo(Metrics.Button.height)
