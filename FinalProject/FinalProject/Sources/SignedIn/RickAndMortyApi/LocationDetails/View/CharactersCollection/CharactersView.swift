@@ -66,8 +66,14 @@ final class CharactersView: UIView {
                 self.images[character.image] = nil
                 self.characters[characterId] = nil
                 guard let indexPath = self.charactersIndexPath[characterId] else { continue }
-                self.collectionView.deleteItems(at: [indexPath])
                 self.charactersIndexPath[characterId] = nil
+                for key in self.charactersIndexPath.keys {
+                    guard let value = self.charactersIndexPath[key] else { continue }
+                    if value.row > indexPath.row {
+                        self.charactersIndexPath[key] = IndexPath(row: value.row - 1, section: value.section)
+                    }
+                }
+                self.collectionView.reloadData()
             }
         }
     }
